@@ -1,0 +1,7 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.pdb

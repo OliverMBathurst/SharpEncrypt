@@ -34,7 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExtensionMethods">
-      <HintPath>..\ExtensionMethodsProjects\ExtensionMethods\bin\Release\netstandard2.0\ExtensionMethods.dll</HintPath>
+      <HintPath>..\..\ExtensionMethodsProjects\ExtensionMethods\bin\Release\netstandard2.0\ExtensionMethods.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
