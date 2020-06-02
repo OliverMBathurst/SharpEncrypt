@@ -1,0 +1,7 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\bin\Release\SecureShred.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\bin\Release\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\bin\Release\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Release\SecureShred.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Release\SecureShred.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Release\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Release\SecureShred.pdb

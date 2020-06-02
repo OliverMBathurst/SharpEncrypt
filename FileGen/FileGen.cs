@@ -14,9 +14,9 @@ namespace FileGen
             var size = -1L;
             bool random = false, pause = true, postDelete = true;
 
-            if(args.Length == 1 && (args[0] == "-help" || args[0] == "-h"))
+            if(args.Length == 1 && (args[0] == Resources.HelpSwitch || args[0] == Resources.HelpShortSwitch))
             {
-                Usage();
+                Console.WriteLine(Usage);
             }
             else
             {
@@ -40,7 +40,7 @@ namespace FileGen
                             postDelete = postResult;
                             break;
                         default:
-                            throw new ArgumentException($"Invalid argument: {args[i]}\n{Usage()}");
+                            throw new ArgumentException(string.Format(Resources.InvalidArg, args[i], Usage));
                     }
                     i++;
                 }
@@ -49,12 +49,12 @@ namespace FileGen
             }
         }
 
-        private static string Usage() => "Usage: [-path] {true|false} [-size] {number} [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}";
+        private static string Usage => Resources.Usage;
 
         private static void Write(string path, long size, bool random, bool pause, bool postDelete)
         {
             if (!Directory.Exists(path))
-                throw new ArgumentException($"{path} is not a directory.");
+                throw new ArgumentException(string.Format(Resources.NotADir, path));
 
             var drive = DriveInfo.GetDrives().First(x => x.Name[0].ToLower() == path[0].ToLower());
 
@@ -62,9 +62,9 @@ namespace FileGen
                 size = drive.AvailableFreeSpace;
 
             var provider = new System.Security.Cryptography.RNGCryptoServiceProvider();
-            var genFilePath = $"{path}\\fileGen_{DateTime.Now.ToUnixTime()}.BIN";
+            var genFilePath = $"{path}\\{DateTime.Now.ToUnixTime()}.BIN";
 
-            Console.WriteLine($"Writing to: {genFilePath}");
+            Console.WriteLine(string.Format(Resources.WritingTo, genFilePath));
             using (var sw = new BinaryWriter(File.Create(genFilePath)))
             {
                 var completed = false;
@@ -79,7 +79,7 @@ namespace FileGen
                         provider.GetBytes(bytes);
                     sw.Write(bytes);
 
-                    Console.WriteLine($"Wrote {writeSize} bytes");
+                    Console.WriteLine(string.Format(Resources.WroteNBytes, writeSize));
 
                     size -= writeSize;
 
@@ -93,7 +93,7 @@ namespace FileGen
 
             if (pause)
             {
-                Console.WriteLine("The file has been generated, press enter to continue...");
+                Console.WriteLine(Resources.FileHasBeenGenerated);
                 Console.ReadLine();
             }                
         }

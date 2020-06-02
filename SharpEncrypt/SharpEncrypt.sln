@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileGen", "..\FileGen\FileG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpEncrypt", "SharpEncrypt\SharpEncrypt.csproj", "{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureShred", "..\SecureShred\SecureShred.csproj", "{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

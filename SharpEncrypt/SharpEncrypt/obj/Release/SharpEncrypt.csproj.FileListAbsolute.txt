@@ -7,3 +7,5 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.MainForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Resources.resources

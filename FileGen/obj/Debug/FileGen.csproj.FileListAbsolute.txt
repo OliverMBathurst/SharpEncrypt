@@ -8,3 +8,5 @@ C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Debug\FileGen.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Debug\ExtensionMethods.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Debug\ExtensionMethods.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Debug\FileGen.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Debug\FileGen.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Debug\FileGen.csproj.GenerateResource.cache
