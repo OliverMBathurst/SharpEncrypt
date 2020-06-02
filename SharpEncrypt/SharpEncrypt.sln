@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileGen", "..\FileGen\FileGen.csproj", "{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpEncrypt", "SharpEncrypt\SharpEncrypt.csproj", "{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4AA8522F-C484-4235-AF55-93BBDEDB06AA}
+	EndGlobalSection
+EndGlobal
