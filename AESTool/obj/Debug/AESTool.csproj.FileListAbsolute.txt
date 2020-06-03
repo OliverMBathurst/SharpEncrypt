@@ -1,0 +1,12 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\bin\Debug\AESTool.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\bin\Debug\AESTool.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\bin\Debug\AESTool.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\bin\Debug\ExtensionMethods.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\bin\Debug\ExtensionMethods.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CopyComplete

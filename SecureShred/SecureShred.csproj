@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="SecureShred.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shredder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

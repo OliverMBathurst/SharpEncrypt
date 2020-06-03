@@ -5,3 +5,12 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Debug\Sec
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Debug\SecureShred.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Debug\SecureShred.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SecureShred\obj\Debug\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\bin\Debug\SecureShred.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\bin\Debug\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\bin\Debug\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.pdb

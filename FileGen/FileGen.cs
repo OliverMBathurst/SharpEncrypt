@@ -76,7 +76,7 @@ namespace FileGen
 
                     var bytes = new byte[writeSize];
                     if (random)
-                        provider.GetBytes(bytes);
+                        provider.GetNonZeroBytes(bytes);
                     sw.Write(bytes);
 
                     Console.WriteLine(string.Format(Resources.WroteNBytes, writeSize));
