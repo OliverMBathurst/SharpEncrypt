@@ -1,0 +1,9 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Release\netstandard2.0\SecureEraseLibrary.pdb

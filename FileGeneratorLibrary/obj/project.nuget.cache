@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5Tfy/mnVh3CV5As+0D/RcjGAi8srQlb9fUkiXQ4obhWgNpu+Cum2fTZbvXy+/qfOpjYvkM99/31HHyc+g6SaqQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

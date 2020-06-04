@@ -1,0 +1,9 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\bin\Debug\netstandard2.0\AESLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\bin\Debug\netstandard2.0\AESLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\bin\Debug\netstandard2.0\AESLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.pdb

@@ -61,6 +61,24 @@ namespace SecureShred {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Directory.
+        /// </summary>
+        internal static string Directory {
+            get {
+                return ResourceManager.GetString("Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        internal static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -h.
         /// </summary>
         internal static string HelpShortSwitch {

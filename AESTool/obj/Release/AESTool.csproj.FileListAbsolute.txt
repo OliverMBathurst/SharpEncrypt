@@ -1,0 +1,4 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Release\AESTool.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Release\AESTool.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Release\AESTool.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Release\AESTool.csproj.CoreCompileInputs.cache
