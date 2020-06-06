@@ -3,12 +3,11 @@ using System;
 
 namespace SecureShred
 {
-    internal sealed class SecureShred
+    internal sealed class ArgumentsHandler
     {
-        private readonly SecureEraseInstance _secureShredInstance = new SecureEraseInstance();
         private readonly string[] _arguments;
 
-        public SecureShred(string[] args) => _arguments = args;
+        public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
@@ -20,7 +19,7 @@ namespace SecureShred
             {
                 var path = string.Empty;
                 var cipher = CipherType.OTP;
-                var shredType = Resources.File;
+                var shredType = string.Empty;
                 bool recurse = false, nameObfuscation = true, propertyObfuscation = true;
 
                 for (var i = 0; i + 1 < _arguments.Length; i++)
@@ -51,14 +50,12 @@ namespace SecureShred
                     i++;
                 }
 
-                if(shredType.ToLower() == Resources.File.ToLower())
-                {
-                    _secureShredInstance.ShredFile(path, cipher, nameObfuscation, propertyObfuscation);
-                }
+                if (shredType.ToLower() == Resources.File.ToLower())
+                    new SecureEraseInstance().ShredFile(path, cipher, nameObfuscation, propertyObfuscation);
+                else if(shredType.ToLower() == Resources.Directory.ToLower())
+                    new SecureEraseInstance().ShredDirectory(path, cipher, recurse, nameObfuscation, propertyObfuscation);
                 else
-                {
-                    _secureShredInstance.ShredDirectory(path, cipher, recurse, nameObfuscation, propertyObfuscation);
-                }
+                    throw new ArgumentException("Invalid shred type.");
             }
         }
     }

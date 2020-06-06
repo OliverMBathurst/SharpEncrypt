@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 namespace AESLibrary
 {
     [Serializable]
-    public class AESKey
+    public sealed class AESKey
     {
         public AESKey(RijndaelManaged managed)
         {

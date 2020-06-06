@@ -1,17 +1,16 @@
 ﻿using AESLibrary;
+using FileGeneratorLibrary;
 using SecureEraseLibrary;
 using System;
 using System.IO;
 
 namespace AESTool
 {
-    internal class AESTool
+    internal sealed class ArgumentsHandler
     {
         private readonly string[] _arguments;
-        private readonly AESInstance _aesInstance = new AESInstance();
-        private readonly SecureEraseInstance _secureEraseInstance = new SecureEraseInstance();
 
-        public AESTool(string[] args) => _arguments = args;
+        public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
@@ -61,25 +60,29 @@ namespace AESTool
 
                 if (genKey)
                 {
-                    _aesInstance.WriteNewKey(inputPath, keySize, blockSize);
+                    new AESInstance().WriteNewKey(inputPath, keySize, blockSize);
                 }
                 else
                 {
-                    if (_aesInstance.TryGetKey(keyPath, out var key))
+                    var aesInstance = new AESInstance();
+                    if (aesInstance.TryGetKey(keyPath, out var key))
                     {
+                        var secureEraseInstance = new SecureEraseInstance();
+                        var fileGeneratorInstance = new FileGeneratorInstance();
+
                         var fileName = Path.GetFileName(inputPath);
                         var ext = Path.GetExtension(inputPath);
 
-                        var outputPath = _secureEraseInstance.CreateUniqueFileForDirectory(Path.GetDirectoryName(inputPath), ext);
+                        var outputPath = fileGeneratorInstance.CreateUniqueFileForDirectory(Path.GetDirectoryName(inputPath), ext);
 
                         if (encrypt)
-                            _aesInstance.Encrypt(key, inputPath, outputPath);
+                            aesInstance.Encrypt(key, inputPath, outputPath);
                         else
-                            _aesInstance.Decrypt(key, inputPath, outputPath);
+                            aesInstance.Decrypt(key, inputPath, outputPath);
 
-                        _secureEraseInstance.ObfuscateFileProperties(inputPath);
-                        _secureEraseInstance.WriteRandomData(inputPath);
-                        File.Delete(_secureEraseInstance.ObfuscateFileName(inputPath));
+                        secureEraseInstance.ObfuscateFileProperties(inputPath);
+                        secureEraseInstance.WriteRandomData(inputPath);
+                        File.Delete(secureEraseInstance.ObfuscateFileName(inputPath));
                         File.Move(outputPath, fileName);
                     }
                     else

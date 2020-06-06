@@ -4,11 +4,11 @@ using System.Security.Cryptography;
 
 namespace OTPTool
 {
-    internal sealed class OTPTool
+    internal sealed class ArgumentsHandler
     {
         private readonly string[] _arguments;
 
-        public OTPTool(string[] args) => _arguments = args;
+        public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}</ProjectGuid>
+    <ProjectGuid>{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SecureShred</RootNamespace>
-    <AssemblyName>SecureShred</AssemblyName>
+    <RootNamespace>FileGen</RootNamespace>
+    <AssemblyName>FileGen</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SecureEraseLibrary">
-      <HintPath>..\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.dll</HintPath>
+    <Reference Include="ExtensionMethods">
+      <HintPath>..\..\ExtensionMethodsProjects\ExtensionMethods\bin\Release\netstandard2.0\ExtensionMethods.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,14 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="ArgumentsHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
-      <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecureShred.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -63,6 +64,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj">
+      <Project>{A6DFAE55-3665-46DE-BE7B-179C6F79CADF}</Project>
+      <Name>FileGeneratorLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

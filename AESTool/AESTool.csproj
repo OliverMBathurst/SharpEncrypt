@@ -36,12 +36,6 @@
     <Reference Include="AESLibrary">
       <HintPath>..\AESLibrary\bin\Release\netstandard2.0\AESLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="ExtensionMethods">
-      <HintPath>..\..\..\ExtensionMethodsProjects\ExtensionMethods\bin\Release\netstandard2.0\ExtensionMethods.dll</HintPath>
-    </Reference>
-    <Reference Include="SecureEraseLibrary">
-      <HintPath>..\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AESTool.cs" />
+    <Compile Include="ArgumentsHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs" />
@@ -62,6 +56,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj">
+      <Project>{A6DFAE55-3665-46DE-BE7B-179C6F79CADF}</Project>
+      <Name>FileGeneratorLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecureEraseLibrary\SecureEraseLibrary.csproj">
+      <Project>{2BEA89AC-AD4F-479A-8E97-6E93E7A3A2FD}</Project>
+      <Name>SecureEraseLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

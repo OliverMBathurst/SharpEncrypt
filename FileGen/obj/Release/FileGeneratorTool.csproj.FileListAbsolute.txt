@@ -1,0 +1,14 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGen.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\ExtensionMethods.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGeneratorLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\FileGeneratorLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\bin\Release\ExtensionMethods.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGeneratorTool.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGeneratorTool.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGeneratorTool.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGeneratorTool.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGen\obj\Release\FileGen.pdb

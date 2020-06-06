@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace AESLibrary
 {
-    public class AESInstance
+    public sealed class AESInstance
     {
         public RijndaelManaged GenerateKey(int keySize, int blockSize)
         {

@@ -4,12 +4,11 @@ using System.IO;
 
 namespace FileGen
 {
-    internal sealed class FileGen
+    internal sealed class ArgumentsHandler
     {
-        private readonly FileGeneratorInstance _fileGeneratorInstance = new FileGeneratorInstance();
         private readonly string[] _arguments;
 
-        public FileGen(string[] args) => _arguments = args;
+        public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
@@ -48,7 +47,7 @@ namespace FileGen
                     i++;
                 }
 
-                _fileGeneratorInstance.WriteNewFile(path, size, random, postDelete);
+                new FileGeneratorInstance().WriteNewFile(path, size, random, postDelete);
 
                 if (pause)
                 {
