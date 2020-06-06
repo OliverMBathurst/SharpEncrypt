@@ -1,11 +1,71 @@
-﻿using System;
+﻿using FileGeneratorLibrary;
+using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace SecureEraseLibrary
 {
     public sealed class SecureEraseInstance
     {
+        private readonly FileGeneratorInstance _fileGeneratorInstance = new FileGeneratorInstance();
+
+        public void WriteZeros(string path, int passes = 1)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("path");
+            if (!File.Exists(path))
+                throw new IOException($"{path} is not a valid path of a file");
+
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                var byteArr = CreateByteArray(1024, 0);
+                for (var i = 0; i < passes; i++)
+                {
+                    fs.Seek(0, SeekOrigin.Begin);                    
+                    var remainingLength = fs.Length;
+                    while (remainingLength > 0)
+                    {
+                        if (remainingLength < 1024)
+                            byteArr = CreateByteArray(remainingLength, 0);
+
+                        fs.Write(byteArr, 0, byteArr.Length);
+                        remainingLength -= byteArr.Length;
+                    }
+                }
+            }
+        }
+
+        public void Write255s(string path, int passes = 1)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("path");
+            if (!File.Exists(path))
+                throw new IOException($"{path} is not a valid path of a file");
+
+            using (var provider = new RNGCryptoServiceProvider())
+            {
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    var byteArr = CreateByteArray(1024, 255);
+                    for (var i = 0; i < passes; i++)
+                    {
+                        fs.Seek(0, SeekOrigin.Begin);                        
+                        var remainingLength = fs.Length;
+                        while (remainingLength > 0)
+                        {
+                            if (remainingLength < 1024)
+                                byteArr = CreateByteArray(remainingLength, 255);
+
+
+                            fs.Write(byteArr, 0, byteArr.Length);
+                            remainingLength -= byteArr.Length;
+                        }
+                    }
+                }
+            }
+        }
+
         public void WriteRandomData(string path, int passes = 1)
         {
             if (string.IsNullOrEmpty(path))
@@ -21,19 +81,54 @@ namespace SecureEraseLibrary
                     {
                         fs.Seek(0, SeekOrigin.Begin);
                         var byteArr = new byte[1024];
-                        var fullLength = fs.Length;
-                        while (fullLength > 0)
+                        var remainingLength = fs.Length;
+                        while (remainingLength > 0)
                         {
-                            if (fullLength < 1024)
-                                byteArr = new byte[fullLength];
+                            if (remainingLength < 1024)
+                                byteArr = new byte[remainingLength];
 
                             provider.GetNonZeroBytes(byteArr);
                             fs.Write(byteArr, 0, byteArr.Length);
-                            fullLength -= byteArr.Length;
+                            remainingLength -= byteArr.Length;
                         }
                     }
                 }
             }
+        }
+
+        public void SDeleteDriveWipe(char driveLetter, string tempDirectory = "", bool postDelete = true, int passes = 1)
+        {
+            var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0]) == char.ToLower(driveLetter));
+            if (!drives.Any())
+                throw new ArgumentException($"{driveLetter} is not a valid drive letter.");
+
+            var drive = drives.First();
+            if(!string.IsNullOrEmpty(tempDirectory) && Directory.Exists(tempDirectory))
+            {
+                if(char.ToLower(Path.GetPathRoot(tempDirectory)[0]) == char.ToLower(driveLetter))
+                {
+                    var tmpFile = _fileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, _fileGeneratorInstance.GetRandomExtension());
+                    _fileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
+                    WriteZeros(tmpFile, passes);
+                    Write255s(tmpFile, passes);
+                    WriteRandomData(tmpFile, passes);
+                    if(postDelete)
+                        File.Delete(tmpFile);
+                }
+                else
+                {
+                    throw new ArgumentException($"The provided directory {tempDirectory} does not exist on drive {driveLetter}");
+                }
+            }
+        }
+
+        public void SDeleteFileWipe(string filePath, bool postDelete = true)
+        {
+            WriteZeros(filePath);
+            Write255s(filePath);
+            WriteRandomData(filePath);
+            if (postDelete)
+                File.Delete(filePath);
         }
 
         public void ObfuscateFileProperties(string path)
@@ -79,9 +174,9 @@ namespace SecureEraseLibrary
             var dir = Path.GetDirectoryName(path);
             for (var i = 0; i < passes; i++)
             {
-                var rand = GetRandomName();
+                var rand = _fileGeneratorInstance.GetRandomNameWithoutExtension();
                 while (File.Exists(Path.Combine(dir, rand)))
-                    rand = GetRandomName();
+                    rand = _fileGeneratorInstance.GetRandomNameWithoutExtension();
 
                 File.Move(currentPath, rand);
                 currentPath = Path.Combine(dir, rand);
@@ -89,24 +184,7 @@ namespace SecureEraseLibrary
             return currentPath;
         }
 
-        public string CreateUniqueFileForDirectory(string directoryPath, string extension)
-        {
-            if (string.IsNullOrEmpty(directoryPath))
-                throw new ArgumentNullException("dirPath");
-            if (!Directory.Exists(directoryPath))
-                throw new IOException($"{directoryPath} is not a valid directory");
-
-            var dir = Path.GetDirectoryName(directoryPath);
-            var path = Path.Combine(dir, $"{GetRandomName()}{extension}");
-
-            while(File.Exists(path))
-                path = Path.Combine(dir, $"{GetRandomName()}{extension}");
-
-            File.Create(path);
-            return path;
-        }
-
-        public void ShredDirectory(string path, CipherType cipherType, bool recurse, bool nameObfuscation, bool propertyObfuscation)
+        public void ShredDirectory(string path, CipherType cipherType, bool recurse = false, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory)
                 throw new ArgumentException($"{path} is not a directory.");
@@ -128,16 +206,12 @@ namespace SecureEraseLibrary
                 ObfuscateDirectoryProperties(path);
 
             if (nameObfuscation)
-            {
-                var result = ObfuscateDirectoryName(path);
-                if (result != null)
-                    path = result;
-            }
+                path = ObfuscateDirectoryName(path);
 
             Directory.Delete(path);
         }
 
-        public void ShredFile(string path, CipherType cipherType, bool nameObfuscation, bool propertyObfuscation)
+        public void ShredFile(string path, CipherType cipherType, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory)
                 throw new ArgumentException($"{path} is not a file.");
@@ -158,16 +232,12 @@ namespace SecureEraseLibrary
                 ObfuscateFileProperties(path);
 
             if (nameObfuscation)
-            {
-                var result = ObfuscateFileName(path);
-                if (result != null)
-                    path = result;
-            }
+                path = ObfuscateFileName(path);
 
             File.Delete(path);
         }
 
-        public string ObfuscateDirectoryName(string path)
+        public string ObfuscateDirectoryName(string path, int passes = 8)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
@@ -175,12 +245,17 @@ namespace SecureEraseLibrary
             if (Directory.Exists(path))
             {
                 var parent = Directory.GetParent(path).FullName;
-                var randName = GetRandomName();
-                while (Directory.Exists(Path.Combine(parent, randName)))
-                    randName = GetRandomName();
+                var obfuscatedPath = path;
+                for(var i = 0; i < passes; i++)
+                {                    
+                    var randName = _fileGeneratorInstance.GetRandomNameWithoutExtension();
+                    while (Directory.Exists(Path.Combine(parent, randName)))
+                        randName = _fileGeneratorInstance.GetRandomNameWithoutExtension();
 
-                Directory.Move(path, randName);
-                return Path.Combine(parent, randName);
+                    Directory.Move(obfuscatedPath, randName);
+                    obfuscatedPath = Path.Combine(parent, randName);
+                }
+                return obfuscatedPath;
             }
             else
             {
@@ -188,15 +263,13 @@ namespace SecureEraseLibrary
             }
         }
 
-
-        public string GetRandomName()
-            => Path.GetRandomFileName().Split('.')[0];
-
-        ///<summary>
-        ///<c>GetAnonymousName()</c> should not be used to generate names for the renaming of sensitive files.
-        ///The file name string that is returned by this method leaks metadata (the epoch time at which the file name was generated), use <c>GetRandomName()</c> instead.
-        ///<summary>
-        public string GetAnonymousName()
-            => Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds).ToString();
+        private byte[] CreateByteArray(long length, int number)
+        {
+            var value = Convert.ToByte(number);
+            var array = new byte[length];
+            for (var i = 0; i < array.Length; i++)
+                array[i] = value;
+            return array;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FileGeneratorLibrary;
 using System;
+using System.IO;
 
 namespace FileGen
 {
@@ -26,7 +27,7 @@ namespace FileGen
                 {
                     switch (_arguments[i])
                     {
-                        case "-path":
+                        case "-path" when Directory.Exists(_arguments[i + 1]):
                             path = _arguments[i + 1];
                             break;
                         case "-size" when long.TryParse(_arguments[i + 1], out var sizeResult):

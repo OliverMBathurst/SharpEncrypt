@@ -104,7 +104,7 @@ namespace AESLibrary
 
         public AESKey WriteNewKey(string path, int keySize, int blockSize)
         {
-            var key = GenerateAESKey(keySize, blockSize);
+            var key = GetNewAESKey(keySize, blockSize);
             using (var stream = new FileStream(path, FileMode.CreateNew))
             {
                 new BinaryFormatter().Serialize(stream, key);
@@ -112,7 +112,7 @@ namespace AESLibrary
             return key;
         }
 
-        public AESKey GenerateAESKey(int keySize, int blockSize)
+        public AESKey GetNewAESKey(int keySize, int blockSize)
             => new AESKey(GenerateKey(keySize, blockSize));
     }
 }

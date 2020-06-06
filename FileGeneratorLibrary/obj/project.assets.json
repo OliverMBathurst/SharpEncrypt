@@ -25,16 +25,6 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
-      },
-      "SecureEraseLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/SecureEraseLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SecureEraseLibrary.dll": {}
-        }
       }
     }
   },
@@ -181,17 +171,11 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
-    },
-    "SecureEraseLibrary/1.0.0": {
-      "type": "project",
-      "path": "../SecureEraseLibrary/SecureEraseLibrary.csproj",
-      "msbuildProject": "../SecureEraseLibrary/SecureEraseLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "NETStandard.Library >= 2.0.3",
-      "SecureEraseLibrary >= 1.0.0"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
@@ -223,11 +207,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj": {
-              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

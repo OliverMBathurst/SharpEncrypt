@@ -79,7 +79,7 @@ namespace AESTool
 
                         _secureEraseInstance.ObfuscateFileProperties(inputPath);
                         _secureEraseInstance.WriteRandomData(inputPath);
-                        File.Delete(_secureEraseInstance.ObfuscatePath(inputPath));
+                        File.Delete(_secureEraseInstance.ObfuscateFileName(inputPath));
                         File.Move(outputPath, fileName);
                     }
                     else
