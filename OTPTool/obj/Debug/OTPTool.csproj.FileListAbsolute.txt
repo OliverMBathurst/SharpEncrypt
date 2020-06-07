@@ -1,0 +1,8 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\OTPTool.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\OTPTool.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\OTPTool.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.pdb

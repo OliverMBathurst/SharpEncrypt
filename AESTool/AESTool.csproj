@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AESLibrary">
-      <HintPath>..\AESLibrary\bin\Release\netstandard2.0\AESLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,9 +55,9 @@
     <EmbeddedResource Include="Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj">
-      <Project>{A6DFAE55-3665-46DE-BE7B-179C6F79CADF}</Project>
-      <Name>FileGeneratorLibrary</Name>
+    <ProjectReference Include="..\AESLibrary\AESLibrary.csproj">
+      <Project>{5066cdec-5bf2-459a-984d-0a2950ab10b3}</Project>
+      <Name>AESLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\SecureEraseLibrary\SecureEraseLibrary.csproj">
       <Project>{2BEA89AC-AD4F-479A-8E97-6E93E7A3A2FD}</Project>

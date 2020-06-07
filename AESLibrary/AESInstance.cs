@@ -7,13 +7,9 @@ namespace AESLibrary
 {
     public sealed class AESInstance
     {
-        public RijndaelManaged GenerateKey(int keySize, int blockSize)
+        public RijndaelManaged GenerateKey()
         {
-            var myRijndael = new RijndaelManaged
-            {
-                KeySize = keySize,
-                BlockSize = blockSize
-            };
+            var myRijndael = new RijndaelManaged();
             myRijndael.GenerateKey();
             myRijndael.GenerateIV();
             return myRijndael;
@@ -43,8 +39,6 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
-                rif.KeySize = aesKey.KeySize;
-                rif.BlockSize = aesKey.BlockSize;
 
                 using (var encryptor = rif.CreateEncryptor(aesKey.Key, aesKey.IV))
                 {
@@ -78,8 +72,6 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
-                rif.KeySize = aesKey.KeySize;
-                rif.BlockSize = aesKey.BlockSize;
 
                 using (var decryptor = rif.CreateDecryptor(aesKey.Key, aesKey.IV))
                 {
@@ -102,9 +94,76 @@ namespace AESLibrary
             }
         }
 
-        public AESKey WriteNewKey(string path, int keySize, int blockSize)
+        public void DecryptFile(AESKey aesKey, string filePath)
         {
-            var key = GetNewAESKey(keySize, blockSize);
+            if (aesKey.Key == null || aesKey.Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (aesKey.IV == null || aesKey.IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+
+            var readWriter = new SynchronizedReadWriter(filePath);
+
+            using (var rif = new RijndaelManaged())
+            {
+                rif.Key = aesKey.Key;
+                rif.IV = aesKey.IV;
+
+                using (var decryptor = rif.CreateDecryptor(aesKey.Key, aesKey.IV))
+                {
+                    while (!readWriter.WriteComplete)
+                    {
+                        readWriter.Read();
+                        using (var ms = new MemoryStream(readWriter.Buffer))
+                        {
+                            var bytes = new byte[readWriter.Buffer.Length];
+                            using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                            {                               
+                                cs.Read(bytes, 0, bytes.Length);                                                
+                            }
+                            readWriter.SetBuffer(bytes);
+                            readWriter.Write();
+                        }
+                    }
+                }
+            }
+        }
+
+        public void EncryptFile(AESKey aesKey, string filePath)
+        {
+            if (aesKey.Key == null || aesKey.Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (aesKey.IV == null || aesKey.IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+
+            var readWriter = new SynchronizedReadWriter(filePath);
+
+            using (var rif = new RijndaelManaged())
+            {
+                rif.Key = aesKey.Key;
+                rif.IV = aesKey.IV;
+
+                using (var encryptor = rif.CreateEncryptor(aesKey.Key, aesKey.IV))
+                {
+                    while (!readWriter.WriteComplete)
+                    {
+                        readWriter.Read();
+                        using (var ms = new MemoryStream())
+                        {
+                            using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                            {
+                                cs.Write(readWriter.Buffer, 0, readWriter.Buffer.Length);
+                            }
+                            readWriter.SetBuffer(ms.ToArray());
+                            readWriter.Write();
+                        }
+                    }
+                }
+            }
+        }
+
+        public AESKey WriteNewKey(string path)
+        {
+            var key = GetNewAESKey();
             using (var stream = new FileStream(path, FileMode.CreateNew))
             {
                 new BinaryFormatter().Serialize(stream, key);
@@ -112,7 +171,7 @@ namespace AESLibrary
             return key;
         }
 
-        public AESKey GetNewAESKey(int keySize, int blockSize)
-            => new AESKey(GenerateKey(keySize, blockSize));
+        public AESKey GetNewAESKey()
+            => new AESKey(GenerateKey());
     }
 }

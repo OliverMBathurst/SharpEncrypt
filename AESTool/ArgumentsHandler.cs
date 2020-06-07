@@ -1,5 +1,4 @@
 ﻿using AESLibrary;
-using FileGeneratorLibrary;
 using SecureEraseLibrary;
 using System;
 using System.IO;
@@ -20,9 +19,8 @@ namespace AESTool
             }
             else
             {
-                string inputPath = string.Empty, keyPath = string.Empty;
+                string inputPath = string.Empty, outputPath = string.Empty, keyPath = string.Empty;
                 bool encrypt = true, genKey = false;
-                int keySize = 256, blockSize = 128;
 
                 for (var i = 0; i < _arguments.Length; i++)
                 {
@@ -30,6 +28,10 @@ namespace AESTool
                     {
                         case "-path" when i + 1 < _arguments.Length:
                             inputPath = _arguments[i + 1];
+                            i++;
+                            break;
+                        case "-outputPath" when i + 1 < _arguments.Length:
+                            outputPath = _arguments[i + 1];
                             i++;
                             break;
                         case "-encrypt":
@@ -45,14 +47,6 @@ namespace AESTool
                         case "-genKey":
                             genKey = true;
                             break;
-                        case "-keySize" when i + 1 < _arguments.Length && int.TryParse(_arguments[i + 1], out var size):
-                            keySize = size;
-                            i++;
-                            break;
-                        case "-blockSize" when i + 1 < _arguments.Length && int.TryParse(_arguments[i + 1], out var size):
-                            blockSize = size;
-                            i++;
-                            break;
                         default:
                             throw new ArgumentException(string.Format(Resources.InvalidArg, _arguments[i], Resources.Usage));
                     }
@@ -60,7 +54,7 @@ namespace AESTool
 
                 if (genKey)
                 {
-                    new AESInstance().WriteNewKey(inputPath, keySize, blockSize);
+                    new AESInstance().WriteNewKey(inputPath);
                 }
                 else
                 {
@@ -68,22 +62,27 @@ namespace AESTool
                     if (aesInstance.TryGetKey(keyPath, out var key))
                     {
                         var secureEraseInstance = new SecureEraseInstance();
-                        var fileGeneratorInstance = new FileGeneratorInstance();
-
-                        var fileName = Path.GetFileName(inputPath);
-                        var ext = Path.GetExtension(inputPath);
-
-                        var outputPath = fileGeneratorInstance.CreateUniqueFileForDirectory(Path.GetDirectoryName(inputPath), ext);
-
-                        if (encrypt)
-                            aesInstance.Encrypt(key, inputPath, outputPath);
+                        if (string.IsNullOrEmpty(outputPath))
+                        {
+                            if (encrypt)
+                                aesInstance.EncryptFile(key, inputPath);
+                            else
+                                aesInstance.DecryptFile(key, inputPath);
+                        }
                         else
-                            aesInstance.Decrypt(key, inputPath, outputPath);
+                        {
+                            var fileName = Path.GetFileName(inputPath);
 
-                        secureEraseInstance.ObfuscateFileProperties(inputPath);
-                        secureEraseInstance.WriteRandomData(inputPath);
-                        File.Delete(secureEraseInstance.ObfuscateFileName(inputPath));
-                        File.Move(outputPath, fileName);
+                            if (encrypt)
+                                aesInstance.Encrypt(key, inputPath, outputPath);
+                            else
+                                aesInstance.Decrypt(key, inputPath, outputPath);
+
+                            secureEraseInstance.ObfuscateFileProperties(inputPath);
+                            secureEraseInstance.WriteRandomData(inputPath);
+                            File.Delete(secureEraseInstance.ObfuscateFileName(inputPath));
+                            File.Move(outputPath, fileName);
+                        }
                     }
                     else
                     {
