@@ -1,6 +1,6 @@
-﻿using System;
+﻿using OTPLibrary;
+using System;
 using System.IO;
-using System.Security.Cryptography;
 
 namespace OTPTool
 {
@@ -18,7 +18,7 @@ namespace OTPTool
             }
             else
             {
-                string path = string.Empty, keyPath = string.Empty, genKeyOfFile = string.Empty;
+                string path = string.Empty, keyPath = string.Empty, referenceFile = string.Empty;
                 bool encrypt = false, genKey = false;
                 var keySize = 0L;
 
@@ -44,11 +44,11 @@ namespace OTPTool
                             genKey = true;
                             if (i + 1 < _arguments.Length && File.Exists(_arguments[i + 1]))
                             {
-                                genKeyOfFile = _arguments[i + 1];
+                                referenceFile = _arguments[i + 1];
                                 i++;
                             }
                             break;
-                        case "-keySize" when i + 1 < _arguments.Length && int.TryParse(_arguments[i + 1], out var size):
+                        case "-keySize" when i + 1 < _arguments.Length && long.TryParse(_arguments[i + 1], out var size):
                             keySize = size;
                             i++;
                             break;
@@ -57,68 +57,23 @@ namespace OTPTool
                     }
                 }
 
+                var otp = new OTPInstance();
+
                 if (genKey)
-                    GenerateKey(path, keySize, genKeyOfFile);
-                else
-                    if (encrypt)
-                        Encrypt(path, keyPath);
+                {
+                    if (string.IsNullOrEmpty(referenceFile))
+                        otp.GenerateKey(path, keySize);
                     else
-                        Decrypt(path, keyPath);
-            }
-        }
-
-        //put this in a library
-        private void GenerateKey(string path, long keySize, string genKeyOfFile)
-        {
-            if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
-
-            var keyLength = keySize;
-            if (genKeyOfFile != string.Empty)
-            {
-                if (File.Exists(genKeyOfFile))
-                {
-                    keyLength = new FileInfo(genKeyOfFile).Length;
+                        otp.GenerateKey(path, referenceFile);
                 }
                 else
                 {
-                    throw new ArgumentException($"{genKeyOfFile} does not exist.");
+                    if (encrypt)
+                        otp.Encrypt(path, keyPath);
+                    else
+                        otp.Decrypt(path, keyPath);
                 }
             }
-
-            if (!File.Exists(path))
-            {
-                using (var provider = new RNGCryptoServiceProvider()) {
-                    using (var fs = new FileStream(path, FileMode.CreateNew))
-                    {
-                        var byteArray = new byte[1024];
-                        var length = keyLength;
-                        while (length > 0)
-                        {
-                            if (length < 1024)
-                                byteArray = new byte[length];
-
-                            provider.GetNonZeroBytes(byteArray);
-                            fs.Write(byteArray, 0, byteArray.Length);
-                            length -= byteArray.Length;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                throw new IOException($"{path} already exists.");
-            }
-        }
-
-        private void Encrypt(string path, string key)
-        {
-
-        }
-
-        private void Decrypt(string path, string key)
-        {
-
         }
     }
 }

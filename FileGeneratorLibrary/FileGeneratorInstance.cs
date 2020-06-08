@@ -7,6 +7,8 @@ namespace FileGeneratorLibrary
 {
     public sealed class FileGeneratorInstance
     {
+        private const long BUFFER_LENGTH = 1024L;
+
         public void CreateDummyFile(string filePath, long length)
         {
             using (var fs = File.Create(filePath))
@@ -15,39 +17,41 @@ namespace FileGeneratorLibrary
             }
         }
 
-        public void WriteNewFile(string path, long length = -1L, bool random = true, bool postDelete = true)
+        public void WriteNewFile(string path, long length = -1L, bool random = true, bool postDelete = true, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!Directory.Exists(path))
                 throw new ArgumentException("Directory does not exist");
-
-            var drive = DriveInfo.GetDrives().First(x => char.ToLower(x.Name[0]) == char.ToLower(path[0]));
-
+                        
             if (length == -1L)
+            {
+                var drive = DriveInfo.GetDrives().First(x => char.ToLower(x.Name[0]) == char.ToLower(path[0]));
                 length = drive.AvailableFreeSpace;
+            }
 
             var genFilePath = CreateUniqueFileForDirectory(path, ".BIN");
 
             using (var provider = new RNGCryptoServiceProvider())
             {
-                using (var sw = new BinaryWriter(File.Open(genFilePath, FileMode.Open)))
+                using (var bw = new BinaryWriter(File.Open(genFilePath, FileMode.Open)))
                 {
+                    var buffer = new byte[bufferLength];
+                    var remainingLength = length;
+
                     var completed = false;
                     while (!completed)
                     {
-                        var writeSize = 1024L;
-                        if (length < writeSize)
-                            writeSize = length;
-
-                        var bytes = new byte[writeSize];
+                        if (remainingLength < buffer.Length)
+                            buffer = new byte[remainingLength];
+                                                
                         if (random)
-                            provider.GetNonZeroBytes(bytes);
-                        sw.Write(bytes);
+                            provider.GetNonZeroBytes(buffer);
+                        bw.Write(buffer);
 
-                        length -= writeSize;
+                        remainingLength -= buffer.Length;
 
-                        if (length == 0L)
+                        if (remainingLength == 0L)
                             completed = true;
                     }
                 }

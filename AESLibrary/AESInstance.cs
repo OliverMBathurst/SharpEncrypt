@@ -7,6 +7,8 @@ namespace AESLibrary
 {
     public sealed class AESInstance
     {
+        private const long BUFFER_LENGTH = 1024L;
+
         public RijndaelManaged GenerateKey()
         {
             var myRijndael = new RijndaelManaged();
@@ -28,7 +30,7 @@ namespace AESLibrary
             return false;
         }
 
-        public void Encrypt(AESKey aesKey, string inputPath, string outputPath)
+        public void Encrypt(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
         {
             if (aesKey.Key == null || aesKey.Key.Length <= 0)
                 throw new ArgumentNullException("Key");
@@ -48,7 +50,7 @@ namespace AESLibrary
                         {
                             using (var inputFileReader = new FileStream(inputPath, FileMode.Open))
                             {
-                                var buffer = new byte[1024];
+                                var buffer = new byte[bufferLength];
                                 int read;
                                 while ((read = inputFileReader.Read(buffer, 0, buffer.Length)) > 0)
                                 {
@@ -61,7 +63,7 @@ namespace AESLibrary
             }
         }
 
-        public void Decrypt(AESKey aesKey, string inputPath, string outputPath)
+        public void Decrypt(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
         {
             if (aesKey.Key == null || aesKey.Key.Length <= 0)
                 throw new ArgumentNullException("Key");
@@ -81,7 +83,7 @@ namespace AESLibrary
                         {
                             using (var outFile = new FileStream(outputPath, FileMode.CreateNew))
                             {
-                                var buffer = new byte[1024];
+                                var buffer = new byte[bufferLength];
                                 int read;
                                 while ((read = csDecrypt.Read(buffer, 0, buffer.Length)) > 0)
                                 {
@@ -110,12 +112,15 @@ namespace AESLibrary
 
                 using (var decryptor = rif.CreateDecryptor(aesKey.Key, aesKey.IV))
                 {
+                    var bytes = new byte[readWriter.DefaultBufferLength];
                     while (!readWriter.WriteComplete)
                     {
                         readWriter.Read();
                         using (var ms = new MemoryStream(readWriter.Buffer))
                         {
-                            var bytes = new byte[readWriter.Buffer.Length];
+                            if (readWriter.Buffer.Length < bytes.Length)
+                                bytes = new byte[readWriter.Buffer.Length];
+
                             using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                             {                               
                                 cs.Read(bytes, 0, bytes.Length);                                                

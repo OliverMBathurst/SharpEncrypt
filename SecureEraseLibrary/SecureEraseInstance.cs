@@ -8,6 +8,7 @@ namespace SecureEraseLibrary
 {
     public sealed class SecureEraseInstance
     {
+        private const long BUFFER_LENGTH = 1024L;
         private readonly FileGeneratorInstance _fileGeneratorInstance = new FileGeneratorInstance();
 
         public void WriteZeros(string path, int passes = 1)
@@ -66,7 +67,7 @@ namespace SecureEraseLibrary
             }
         }
 
-        public void WriteRandomData(string path, int passes = 1)
+        public void WriteRandomData(string path, int passes = 1, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
@@ -80,11 +81,11 @@ namespace SecureEraseLibrary
                     for (var i = 0; i < passes; i++)
                     {
                         fs.Seek(0, SeekOrigin.Begin);
-                        var byteArr = new byte[1024];
+                        var byteArr = new byte[bufferLength];
                         var remainingLength = fs.Length;
                         while (remainingLength > 0)
                         {
-                            if (remainingLength < 1024)
+                            if (remainingLength < bufferLength)
                                 byteArr = new byte[remainingLength];
 
                             provider.GetNonZeroBytes(byteArr);

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj": {}
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
-        "projectName": "OTPLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
+        "projectName": "FileIOLibrary",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\OTPLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

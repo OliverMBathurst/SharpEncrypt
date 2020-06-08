@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj": {}
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj",
-        "projectName": "AESLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
+        "projectName": "FileIOLibrary",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -29,11 +29,7 @@
         },
         "frameworks": {
           "netstandard2.0": {
-            "projectReferences": {
-              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
-                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -66,14 +62,14 @@
         }
       }
     },
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
-        "projectName": "FileIOLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
+        "projectName": "OTPLibrary",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -91,7 +87,11 @@
         },
         "frameworks": {
           "netstandard2.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

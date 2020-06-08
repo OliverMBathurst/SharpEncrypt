@@ -54,5 +54,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OTPLibrary\OTPLibrary.csproj">
+      <Project>{4aaa7701-6f5e-4e60-9891-3386ac511f9b}</Project>
+      <Name>OTPLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

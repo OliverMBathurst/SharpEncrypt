@@ -5,7 +5,7 @@ namespace AESLibrary
 {
     public sealed class SynchronizedReadWriter
     {
-        private const long BUFFER_SIZE = 1024L;
+        private const long BUFFER_LENGTH = 1024L;
         private readonly string _path;
 
         public SynchronizedReadWriter(string path) => _path = path;
@@ -20,13 +20,15 @@ namespace AESLibrary
 
         public byte[] Buffer { get; private set; } = null;
 
+        public long DefaultBufferLength => BUFFER_LENGTH;
+
         public void SetBuffer(byte[] buffer)
         {
             if (Buffer == null) throw new Exception("Buffer not initialized.");
             Buffer = buffer;
         }
 
-        public void Read(long bufferSize = BUFFER_SIZE)
+        public void Read(long bufferLength = BUFFER_LENGTH)
         {
             if (ReadComplete)
                 return;
@@ -41,10 +43,10 @@ namespace AESLibrary
             {
                 fs.Seek(ReadPosition, SeekOrigin.Begin);
 
-                if (fs.Length - ReadPosition < bufferSize)
-                    bufferSize = fs.Length - ReadPosition;
+                if (fs.Length - ReadPosition < bufferLength)
+                    bufferLength = fs.Length - ReadPosition;
 
-                Buffer = new byte[bufferSize];
+                Buffer = new byte[bufferLength];
                 fs.Read(Buffer, 0, Buffer.Length);
                 ReadPosition += Buffer.Length;
                 SetReadingProperties(fs.Length);
