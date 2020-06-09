@@ -43,5 +43,10 @@ namespace SharpEncrypt
         {
             Application.Exit();
         }
+
+        private void openExplorerHereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
