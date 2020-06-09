@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "n35QXxS+nj0hqwECbJwyioOZRj0bjI2udJu1wc4NhXVE7hWvC+OqiS/yn5k8GEc1S/eUJIGp72JUz+bbrRV5jw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\GutmannLibrary\\GutmannLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

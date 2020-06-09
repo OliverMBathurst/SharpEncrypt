@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileGeneratorLibrary", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTPLibrary", "..\OTPLibrary\OTPLibrary.csproj", "{4AAA7701-6F5E-4E60-9891-3386AC511F9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIOLibrary", "..\FileIOLibrary\FileIOLibrary.csproj", "{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileIOLibrary", "..\FileIOLibrary\FileIOLibrary.csproj", "{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GutmannLibrary", "GutmannLibrary\GutmannLibrary.csproj", "{3D7A9449-50C5-403A-915A-1C95D9D38F91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7A9449-50C5-403A-915A-1C95D9D38F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7A9449-50C5-403A-915A-1C95D9D38F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7A9449-50C5-403A-915A-1C95D9D38F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7A9449-50C5-403A-915A-1C95D9D38F91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
