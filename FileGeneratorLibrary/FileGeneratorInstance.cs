@@ -22,7 +22,7 @@ namespace FileGeneratorLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!Directory.Exists(path))
-                throw new ArgumentException("Directory does not exist");
+                throw new ArgumentException("Directory does not exist.");
                         
             if (length == -1L)
             {
@@ -73,7 +73,7 @@ namespace FileGeneratorLibrary
             if (string.IsNullOrEmpty(directoryPath))
                 throw new ArgumentNullException("dirPath");
             if (!Directory.Exists(directoryPath))
-                throw new IOException($"{directoryPath} is not a valid directory");
+                throw new IOException($"{directoryPath} is not a valid directory.");
 
             var dir = Path.GetDirectoryName(directoryPath);
             var path = Path.Combine(dir, $"{GetRandomNameWithoutExtension()}{extension}");

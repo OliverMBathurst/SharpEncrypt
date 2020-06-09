@@ -7,22 +7,22 @@ namespace OTPLibrary
 {
     public sealed class OTPInstance
     {
-        private const long BUFFER_SIZE = 1024L;
+        private const long BUFFER_LENGTH = 1024L;
 
-        public void GenerateKey(string path, string referenceFile, long bufferLength = BUFFER_SIZE)
+        public void GenerateKey(string path, string referenceFile, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (string.IsNullOrEmpty(referenceFile))
                 throw new ArgumentNullException("genKeyOfFile");
 
-            if (File.Exists(referenceFile))
-                GenerateKey(path, new FileInfo(referenceFile).Length, bufferLength);
-            else
-                throw new ArgumentException($"{referenceFile} does not exist.");
+            var fi = new FileInfo(referenceFile);
+            if (!fi.Exists) throw new ArgumentException($"{referenceFile} does not exist.");
+
+            GenerateKey(path, fi.Length, bufferLength);                
         }
 
-        public void GenerateKey(string path, long length, long bufferLength = BUFFER_SIZE)
+        public void GenerateKey(string path, long length, long bufferLength = BUFFER_LENGTH)
         {
             if (File.Exists(path))
                 throw new IOException($"{path} already exists.");
@@ -63,9 +63,34 @@ namespace OTPLibrary
             return fileBytes;
         }
 
-        public void Encrypt(string filePath, string keyPath, long bufferLength = BUFFER_SIZE) => Transform(filePath, keyPath, bufferLength);
+        //<summary>
+        // Encrypts the file without the possibility of recovery
+        //<summary>
+        public void EncryptWithoutKey(string path, long bufferLength = BUFFER_LENGTH)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("path");
 
-        public void Decrypt(string filePath, string keyPath, long bufferLength = BUFFER_SIZE) => Transform(filePath, keyPath, bufferLength);
+            var readWriter = new SynchronizedReadWriter(path);
+            var bytes = new byte[bufferLength];
+            using (var provider = new RNGCryptoServiceProvider())
+            {
+                while (!readWriter.WriteComplete)
+                {
+                    readWriter.Read();
+                    if (bytes.Length > readWriter.Buffer.Length)
+                        bytes = new byte[readWriter.Buffer.Length];
+
+                    provider.GetNonZeroBytes(bytes);
+                    readWriter.SetBuffer(XOR(readWriter.Buffer, bytes));
+                    readWriter.Write();
+                }
+            }
+        }
+
+        public void Encrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
+
+        public void Decrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
 
         private void Transform(string path, string keyPath, long bufferLength)
         {

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AESLibrary\AESLibrary.csproj" />
     <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj" />
+    <ProjectReference Include="..\OTPLibrary\OTPLibrary.csproj" />
   </ItemGroup>
 
 </Project>

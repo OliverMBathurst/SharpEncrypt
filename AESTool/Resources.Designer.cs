@@ -29,9 +29,8 @@ namespace AESTool {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
-        }
-        
+        internal Resources() {}
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -93,6 +92,14 @@ namespace AESTool {
         internal static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
+            }
+        }
+
+        internal static string NotAKey
+        {
+            get
+            {
+                return ResourceManager.GetString("NotAKey", resourceCulture);
             }
         }
     }

@@ -59,7 +59,7 @@ namespace AESTool
                 else
                 {
                     var aesInstance = new AESInstance();
-                    if (aesInstance.TryGetKey(keyPath, out var key))
+                    if (!aesInstance.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(Resources.NotAKey, keyPath));
                     {
                         var secureEraseInstance = new SecureEraseInstance();
                         if (string.IsNullOrEmpty(outputPath))
@@ -74,19 +74,15 @@ namespace AESTool
                             var fileName = Path.GetFileName(inputPath);
 
                             if (encrypt)
-                                aesInstance.Encrypt(key, inputPath, outputPath);
+                                aesInstance.EncryptFile(key, inputPath, outputPath);
                             else
-                                aesInstance.Decrypt(key, inputPath, outputPath);
+                                aesInstance.EncryptFile(key, inputPath, outputPath);
 
                             secureEraseInstance.ObfuscateFileProperties(inputPath);
                             secureEraseInstance.WriteRandomData(inputPath);
                             File.Delete(secureEraseInstance.ObfuscateFileName(inputPath));
                             File.Move(outputPath, fileName);
                         }
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"{keyPath} is not a valid key.");
                     }
                 }
             }

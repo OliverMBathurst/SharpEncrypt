@@ -33,7 +33,7 @@ namespace AESLibrary
             if (ReadComplete)
                 return;
             if (Buffer != null)
-                throw new Exception("Buffer has not been cleared by a write operation");
+                throw new Exception("Buffer has not been cleared by a write operation.");
             if (string.IsNullOrEmpty(_path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(_path))

@@ -1,5 +1,8 @@
-﻿using FileGeneratorLibrary;
+﻿using AESLibrary;
+using FileGeneratorLibrary;
+using OTPLibrary;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -8,6 +11,7 @@ namespace SecureEraseLibrary
 {
     public sealed class SecureEraseInstance
     {
+        private readonly char[] _alphabet = new []{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         private const long BUFFER_LENGTH = 1024L;
         private readonly FileGeneratorInstance _fileGeneratorInstance = new FileGeneratorInstance();
 
@@ -16,7 +20,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file");
+                throw new IOException($"{path} is not a valid path of a file.");
 
             using (var fs = new FileStream(path, FileMode.Open))
             {
@@ -42,7 +46,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file");
+                throw new IOException($"{path} is not a valid path of a file.");
 
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -72,7 +76,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file");
+                throw new IOException($"{path} is not a valid path of a file.");
 
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -104,23 +108,20 @@ namespace SecureEraseLibrary
                 throw new ArgumentException($"{driveLetter} is not a valid drive letter.");
 
             var drive = drives.First();
-            if(!string.IsNullOrEmpty(tempDirectory) && Directory.Exists(tempDirectory))
-            {
-                if(char.ToLower(Path.GetPathRoot(tempDirectory)[0]) == char.ToLower(driveLetter))
-                {
-                    var tmpFile = _fileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, _fileGeneratorInstance.GetRandomExtension());
-                    _fileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
-                    WriteZeros(tmpFile, passes);
-                    Write255s(tmpFile, passes);
-                    WriteRandomData(tmpFile, passes);
-                    if(postDelete)
-                        File.Delete(tmpFile);
-                }
-                else
-                {
-                    throw new ArgumentException($"The provided directory {tempDirectory} does not exist on drive {driveLetter}");
-                }
-            }
+            if (string.IsNullOrEmpty(tempDirectory))
+                throw new ArgumentNullException("tempDirectory");
+            if(!Directory.Exists(tempDirectory))
+                throw new ArgumentException($"The provided directory {tempDirectory} does not exist.");
+            if (char.ToLower(Path.GetPathRoot(tempDirectory)[0]) != char.ToLower(driveLetter))
+                throw new ArgumentException($"Directory {tempDirectory} does not exist on drive {driveLetter}.");
+            
+            var tmpFile = _fileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, _fileGeneratorInstance.GetRandomExtension());
+            _fileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
+            WriteZeros(tmpFile, passes);
+            Write255s(tmpFile, passes);
+            WriteRandomData(tmpFile, passes);
+            if(postDelete)
+                File.Delete(tmpFile);
         }
 
         public void SDeleteFileWipe(string filePath, bool postDelete = true)
@@ -128,8 +129,37 @@ namespace SecureEraseLibrary
             WriteZeros(filePath);
             Write255s(filePath);
             WriteRandomData(filePath);
+            filePath = SDeleteFileRename(filePath);
             if (postDelete)
                 File.Delete(filePath);
+        }
+
+        public string SDeleteFileRename(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException("path");
+
+            var split = Path.GetFileName(path).Split('.');
+            var fileNameLength = split[0].Length;
+            var extensionLength = split[1].Length;
+            var dir = Path.GetDirectoryName(path);
+
+            foreach(var character in _alphabet)
+            {
+                var newName = $"{Enumerable.Repeat(character, fileNameLength)}.{Enumerable.Repeat(character, extensionLength)}";
+                var newPath = Path.Combine(dir, newName);
+                if (File.Exists(newPath))
+                {
+                    continue;
+                }
+                else
+                {
+                    File.Move(path, newName);
+                    path = newPath;
+                }
+            }
+
+            return path;
         }
 
         public void ObfuscateFileProperties(string path)
@@ -137,7 +167,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file");
+                throw new IOException($"{path} is not a valid path of a file.");
 
             var unixTime = new DateTime(1970, 1, 1);
             File.SetCreationTime(path, unixTime);
@@ -153,7 +183,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a directory");
+                throw new IOException($"{path} is not a valid path of a directory.");
 
             var unixTime = new DateTime(1970, 1, 1);
             Directory.SetCreationTime(path, unixTime);
@@ -169,7 +199,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file");
+                throw new IOException($"{path} is not a valid path of a file.");
 
             var currentPath = path;
             var dir = Path.GetDirectoryName(path);
@@ -219,14 +249,14 @@ namespace SecureEraseLibrary
             if (!new FileInfo(path).Exists)
                 throw new ArgumentException($"{path} does not exist.");
 
-            //TODO: Fix all this one individual projects have been completed, keys also should only be used once
             if (cipherType == CipherType.OTP)
             {
-
+                new OTPInstance().EncryptWithoutKey(path);
             }
-            else
+            else if (cipherType == CipherType.AES)
             {
-
+                var aes = new AESInstance();
+                aes.EncryptFile(aes.GetNewAESKey(), path);
             }
 
             if (propertyObfuscation)
@@ -243,7 +273,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
 
-            if (Directory.Exists(path))
+            if (!Directory.Exists(path)) throw new ArgumentException($"{path} is not a valid path of a directory.");
             {
                 var parent = Directory.GetParent(path).FullName;
                 var obfuscatedPath = path;
@@ -257,10 +287,6 @@ namespace SecureEraseLibrary
                     obfuscatedPath = Path.Combine(parent, randName);
                 }
                 return obfuscatedPath;
-            }
-            else
-            {
-                throw new ArgumentException($"{path} is not a valid path of a directory.");
             }
         }
 

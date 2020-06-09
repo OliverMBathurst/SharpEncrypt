@@ -30,7 +30,7 @@ namespace AESLibrary
             return false;
         }
 
-        public void Encrypt(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
+        public void EncryptFile(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
         {
             if (aesKey.Key == null || aesKey.Key.Length <= 0)
                 throw new ArgumentNullException("Key");
@@ -63,7 +63,7 @@ namespace AESLibrary
             }
         }
 
-        public void Decrypt(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
+        public void DecryptFile(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
         {
             if (aesKey.Key == null || aesKey.Key.Length <= 0)
                 throw new ArgumentNullException("Key");
