@@ -61,11 +61,65 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a file to be secured..
+        /// </summary>
+        internal static string AddSecuredFile {
+            get {
+                return ResourceManager.GetString("AddSecuredFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SharpEncrypt.
         /// </summary>
         internal static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to select encrypted files to share keys with others..
+        /// </summary>
+        internal static string ClickToShare {
+            get {
+                return ResourceManager.GetString("ClickToShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to password management..
+        /// </summary>
+        internal static string GoToPasswordManagement {
+            get {
+                return ResourceManager.GetString("GoToPasswordManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string RecentFiles {
+            get {
+                return ResourceManager.GetString("RecentFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured Folders.
+        /// </summary>
+        internal static string SecuredFolders {
+            get {
+                return ResourceManager.GetString("SecuredFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a secured file to open..
+        /// </summary>
+        internal static string SelectSecuredFile {
+            get {
+                return ResourceManager.GetString("SelectSecuredFile", resourceCulture);
             }
         }
     }

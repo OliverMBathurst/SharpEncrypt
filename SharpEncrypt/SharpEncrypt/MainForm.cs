@@ -13,40 +13,37 @@ namespace SharpEncrypt
         private void MainForm_Load(object sender, EventArgs e)
         {
             Text = Resources.AppName;
-        }
+            SharpEncryptLabel.Text = Resources.AppName;
+            Tabs.TabPages[0].Text = Resources.RecentFiles;
+            Tabs.TabPages[1].Text = Resources.SecuredFolders;
 
-        private void importPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
+            openSecuredToolTip.SetToolTip(OpenSecured, Resources.SelectSecuredFile);
+            addSecuredFileToolTip.SetToolTip(AddSecured, Resources.AddSecuredFile);
+            shareToolTip.SetToolTip(ShareButton, Resources.ClickToShare);
+            passwordManagementToolTip.SetToolTip(PasswordManagement, Resources.GoToPasswordManagement);
 
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+
 
         }
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (debugMenuStrip.Checked)
+            if (DebugMenuStrip.Checked)
             {
-                debugToolStripMenuItem.Checked = false;
-                debugMenuStrip.Enabled = false;                
+                DebugToolStripMenuItem.Checked = false;
+                DebugMenuStrip.Enabled = false;                
             }
             else
             {
-                debugToolStripMenuItem.Checked = true;
-                debugMenuStrip.Enabled = true;                
+                DebugToolStripMenuItem.Checked = true;
+                DebugMenuStrip.Enabled = true;                
             }            
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void openExplorerHereToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

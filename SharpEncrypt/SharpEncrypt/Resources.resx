@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddSecuredFile" xml:space="preserve">
+    <value>Add a file to be secured.</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>SharpEncrypt</value>
     <comment>The app's name</comment>
+  </data>
+  <data name="ClickToShare" xml:space="preserve">
+    <value>Click to select encrypted files to share keys with others.</value>
+  </data>
+  <data name="GoToPasswordManagement" xml:space="preserve">
+    <value>Go to password management.</value>
+  </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="SecuredFolders" xml:space="preserve">
+    <value>Secured Folders</value>
+  </data>
+  <data name="SelectSecuredFile" xml:space="preserve">
+    <value>Select a secured file to open.</value>
   </data>
 </root>
