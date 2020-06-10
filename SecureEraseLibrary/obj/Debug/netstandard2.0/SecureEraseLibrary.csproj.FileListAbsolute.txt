@@ -10,3 +10,9 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstanda
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\AESLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\AESLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\OTPLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\FileIOLibrary.pdb

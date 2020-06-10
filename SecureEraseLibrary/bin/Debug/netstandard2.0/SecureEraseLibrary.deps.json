@@ -9,8 +9,10 @@
     ".NETStandard,Version=v2.0/": {
       "SecureEraseLibrary/1.0.0": {
         "dependencies": {
+          "AESLibrary": "1.0.0",
           "FileGeneratorLibrary": "1.0.0",
-          "NETStandard.Library": "2.0.3"
+          "NETStandard.Library": "2.0.3",
+          "OTPLibrary": "1.0.0"
         },
         "runtime": {
           "SecureEraseLibrary.dll": {}
@@ -22,9 +24,30 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
+      "AESLibrary/1.0.0": {
+        "dependencies": {
+          "FileIOLibrary": "1.0.0"
+        },
+        "runtime": {
+          "AESLibrary.dll": {}
+        }
+      },
       "FileGeneratorLibrary/1.0.0": {
         "runtime": {
           "FileGeneratorLibrary.dll": {}
+        }
+      },
+      "FileIOLibrary/1.0.0": {
+        "runtime": {
+          "FileIOLibrary.dll": {}
+        }
+      },
+      "OTPLibrary/1.0.0": {
+        "dependencies": {
+          "FileIOLibrary": "1.0.0"
+        },
+        "runtime": {
+          "OTPLibrary.dll": {}
         }
       }
     }
@@ -49,7 +72,22 @@
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
+    "AESLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "FileGeneratorLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FileIOLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "OTPLibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

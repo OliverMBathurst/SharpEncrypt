@@ -61,11 +61,56 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AboutToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AboutToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a file to be secured..
         /// </summary>
         internal static string AddSecuredFile {
             get {
                 return ResourceManager.GetString("AddSecuredFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AddSecuredFolderToolStripMenuItem1 {
+            get {
+                return ResourceManager.GetString("AddSecuredFolderToolStripMenuItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AdvancedToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AdvancedToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Algorithm.
+        /// </summary>
+        internal static string Algorithm {
+            get {
+                return ResourceManager.GetString("Algorithm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string AnonymousRenameToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AnonymousRenameToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -88,11 +133,101 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string DebugMenuStrip {
+            get {
+                return ResourceManager.GetString("DebugMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string DiskToolsToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DiskToolsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ExitToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ExitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        internal static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string FileMenuStripItem {
+            get {
+                return ResourceManager.GetString("FileMenuStripItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        internal static string Folder {
+            get {
+                return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to password management..
         /// </summary>
         internal static string GoToPasswordManagement {
             get {
                 return ResourceManager.GetString("GoToPasswordManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string HelpMenuStrip {
+            get {
+                return ResourceManager.GetString("HelpMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to open a file from the default secure folder..
+        /// </summary>
+        internal static string OpenHomeFolder {
+            get {
+                return ResourceManager.GetString("OpenHomeFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string OpenSecuredToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OpenSecuredToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string OptionsToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OptionsToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -106,6 +241,33 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string RenameToOriginalToolStripMenuItem1 {
+            get {
+                return ResourceManager.GetString("RenameToOriginalToolStripMenuItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured.
+        /// </summary>
+        internal static string Secured {
+            get {
+                return ResourceManager.GetString("Secured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SecureDeleteToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("SecureDeleteToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secured Folders.
         /// </summary>
         internal static string SecuredFolders {
@@ -115,11 +277,74 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SecuredFoldersToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("SecuredFoldersToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string SecureToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("SecureToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a secured file to open..
         /// </summary>
         internal static string SelectSecuredFile {
             get {
                 return ResourceManager.GetString("SelectSecuredFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncryptSettings.BIN.
+        /// </summary>
+        internal static string SharpEncryptSettingsFileName {
+            get {
+                return ResourceManager.GetString("SharpEncryptSettingsFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ShowHelpToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ShowHelpToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string StopSecuringToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("StopSecuringToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string WipeFreeDiskSpaceToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("WipeFreeDiskSpaceToolStripMenuItem", resourceCulture);
             }
         }
     }

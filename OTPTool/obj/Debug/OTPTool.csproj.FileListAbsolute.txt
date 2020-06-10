@@ -6,3 +6,9 @@ C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csproj.Gener
 C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\OTPLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\bin\Debug\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPTool\obj\Debug\OTPTool.csproj.CopyComplete

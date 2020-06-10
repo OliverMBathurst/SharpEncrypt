@@ -1,0 +1,9 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\bin\Debug\netstandard2.0\GutmannLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\bin\Debug\netstandard2.0\GutmannLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\bin\Debug\netstandard2.0\GutmannLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\GutmannLibrary\obj\Debug\netstandard2.0\GutmannLibrary.pdb

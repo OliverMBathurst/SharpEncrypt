@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
   <data name="AddSecuredFile" xml:space="preserve">
     <value>Add a file to be secured.</value>
+  </data>
+  <data name="AddSecuredFolderToolStripMenuItem1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AdvancedToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Algorithm" xml:space="preserve">
+    <value>Algorithm</value>
+  </data>
+  <data name="AnonymousRenameToolStripMenuItem" xml:space="preserve">
+    <value />
   </data>
   <data name="AppName" xml:space="preserve">
     <value>SharpEncrypt</value>
@@ -127,16 +142,76 @@
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
   </data>
+  <data name="DebugMenuStrip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DiskToolsToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ExitToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FileMenuStripItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
   <data name="GoToPasswordManagement" xml:space="preserve">
     <value>Go to password management.</value>
+  </data>
+  <data name="HelpMenuStrip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OpenHomeFolder" xml:space="preserve">
+    <value>Click to open a file from the default secure folder.</value>
+  </data>
+  <data name="OpenSecuredToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OptionsToolStripMenuItem" xml:space="preserve">
+    <value />
   </data>
   <data name="RecentFiles" xml:space="preserve">
     <value>Recent Files</value>
   </data>
+  <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Secured" xml:space="preserve">
+    <value>Secured</value>
+  </data>
+  <data name="SecureDeleteToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
   <data name="SecuredFolders" xml:space="preserve">
     <value>Secured Folders</value>
   </data>
+  <data name="SecuredFoldersToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SecureToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
   <data name="SelectSecuredFile" xml:space="preserve">
     <value>Select a secured file to open.</value>
+  </data>
+  <data name="SharpEncryptSettingsFileName" xml:space="preserve">
+    <value>SharpEncryptSettings.BIN</value>
+  </data>
+  <data name="ShowHelpToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StopSecuringToolStripMenuItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
+    <value />
   </data>
 </root>

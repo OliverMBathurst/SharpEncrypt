@@ -26,3 +26,7 @@ C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CoreC
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.pdb

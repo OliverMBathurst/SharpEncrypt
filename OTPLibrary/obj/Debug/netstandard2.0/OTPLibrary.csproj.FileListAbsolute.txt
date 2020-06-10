@@ -7,3 +7,15 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\OTPLibrary\obj\Debug\nets
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\bin\Debug\netstandard2.0\OTPLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\bin\Debug\netstandard2.0\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\bin\Debug\netstandard2.0\OTPLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\bin\Debug\netstandard2.0\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\bin\Debug\netstandard2.0\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\OTPLibrary\obj\Debug\netstandard2.0\OTPLibrary.pdb
