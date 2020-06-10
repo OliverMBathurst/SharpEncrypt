@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileGeneratorTool", "..\Fil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpEncrypt", "SharpEncrypt\SharpEncrypt.csproj", "{1E3F0B74-14DE-4FC7-B605-6C658BE334B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureEraseTool", "..\SecureShred\SecureEraseTool.csproj", "{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureEraseTool", "..\SecureEraseTool\SecureEraseTool.csproj", "{809C3F83-3F6C-4D0F-8EAD-1C5D98C7DB1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AESTool", "..\AESTool\AESTool.csproj", "{1516C701-5FF7-4377-8148-4778F268BC37}"
 EndProject
