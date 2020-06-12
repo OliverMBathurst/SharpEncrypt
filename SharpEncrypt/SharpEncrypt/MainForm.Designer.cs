@@ -33,24 +33,28 @@
             this.Tabs = new System.Windows.Forms.TabControl();
             this.recentFiles = new System.Windows.Forms.TabPage();
             this.RecentFilesGrid = new System.Windows.Forms.DataGridView();
+            this.FileColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SecuredColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopSecuringAndRemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shareKeysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renameToOriginalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearRecentFilesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopSecuringAndRemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShareKeysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenameToOriginalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearRecentFilesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securedFolders = new System.Windows.Forms.TabPage();
             this.SecuredFoldersGrid = new System.Windows.Forms.DataGridView();
             this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FolderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.shareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decryptTemporarilyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DecryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DecryptTemporarilyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.FileMenuStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +69,17 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.OptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EnglishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeutschGermanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NetherlandsDutchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FrancaisFrenchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItalianoItalianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.KoreanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PolskiPolishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PortugueseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RussianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SwedishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TurkishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IncludeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,17 +101,13 @@
             this.OpenSecured = new System.Windows.Forms.Button();
             this.ShareButton = new System.Windows.Forms.Button();
             this.PasswordManagement = new System.Windows.Forms.Button();
-            this.OpenHomeFolder = new System.Windows.Forms.Button();
-            this.OpenCloudFolder = new System.Windows.Forms.Button();
             this.OpenSecuredToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.AddSecuredFileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ShareToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PasswordManagementToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.HomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.FileColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecuredColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OpenHomeFolder = new System.Windows.Forms.Button();
+            this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -154,65 +165,100 @@
             this.RecentFilesGrid.ReadOnly = true;
             this.RecentFilesGrid.RowHeadersVisible = false;
             this.RecentFilesGrid.RowHeadersWidth = 62;
+            this.RecentFilesGrid.RowTemplate.ContextMenuStrip = this.FileMenuStrip;
             this.RecentFilesGrid.RowTemplate.Height = 28;
             this.RecentFilesGrid.Size = new System.Drawing.Size(1054, 366);
             this.RecentFilesGrid.TabIndex = 1;
+            // 
+            // FileColumnHeader
+            // 
+            this.FileColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FileColumnHeader.HeaderText = "File";
+            this.FileColumnHeader.MinimumWidth = 8;
+            this.FileColumnHeader.Name = "FileColumnHeader";
+            this.FileColumnHeader.ReadOnly = true;
+            // 
+            // TimeColumnHeader
+            // 
+            this.TimeColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TimeColumnHeader.HeaderText = "Time";
+            this.TimeColumnHeader.MinimumWidth = 8;
+            this.TimeColumnHeader.Name = "TimeColumnHeader";
+            this.TimeColumnHeader.ReadOnly = true;
+            // 
+            // SecuredColumnHeader
+            // 
+            this.SecuredColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SecuredColumnHeader.HeaderText = "Secured";
+            this.SecuredColumnHeader.MinimumWidth = 8;
+            this.SecuredColumnHeader.Name = "SecuredColumnHeader";
+            this.SecuredColumnHeader.ReadOnly = true;
+            // 
+            // AlgorithmColumnHeader
+            // 
+            this.AlgorithmColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AlgorithmColumnHeader.HeaderText = "Algorithm";
+            this.AlgorithmColumnHeader.MinimumWidth = 8;
+            this.AlgorithmColumnHeader.Name = "AlgorithmColumnHeader";
+            this.AlgorithmColumnHeader.ReadOnly = true;
             // 
             // FileMenuStrip
             // 
             this.FileMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.removeFromListButKeepSecuredToolStripMenuItem,
-            this.stopSecuringAndRemoveFromListToolStripMenuItem,
-            this.shareKeysToolStripMenuItem1,
-            this.showInFolderToolStripMenuItem,
-            this.renameToOriginalToolStripMenuItem,
-            this.clearRecentFilesListToolStripMenuItem});
+            this.OpenToolStripMenuItem,
+            this.RemoveFromListButKeepSecuredToolStripMenuItem,
+            this.StopSecuringAndRemoveFromListToolStripMenuItem,
+            this.ShareKeysToolStripMenuItem1,
+            this.ShowInFolderToolStripMenuItem,
+            this.RenameToOriginalToolStripMenuItem,
+            this.ClearRecentFilesListToolStripMenuItem});
             this.FileMenuStrip.Name = "contextMenuStrip1";
             this.FileMenuStrip.Size = new System.Drawing.Size(364, 228);
             // 
-            // openToolStripMenuItem
+            // OpenToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.openToolStripMenuItem.Text = "Open";
+            this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.OpenToolStripMenuItem.Text = "Open";
             // 
-            // removeFromListButKeepSecuredToolStripMenuItem
+            // RemoveFromListButKeepSecuredToolStripMenuItem
             // 
-            this.removeFromListButKeepSecuredToolStripMenuItem.Name = "removeFromListButKeepSecuredToolStripMenuItem";
-            this.removeFromListButKeepSecuredToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.removeFromListButKeepSecuredToolStripMenuItem.Text = "Remove from list but keep secured";
+            this.RemoveFromListButKeepSecuredToolStripMenuItem.Name = "RemoveFromListButKeepSecuredToolStripMenuItem";
+            this.RemoveFromListButKeepSecuredToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.RemoveFromListButKeepSecuredToolStripMenuItem.Text = "Remove from list but keep secured";
+            this.RemoveFromListButKeepSecuredToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListButKeepSecuredToolStripMenuItem_Click);
             // 
-            // stopSecuringAndRemoveFromListToolStripMenuItem
+            // StopSecuringAndRemoveFromListToolStripMenuItem
             // 
-            this.stopSecuringAndRemoveFromListToolStripMenuItem.Name = "stopSecuringAndRemoveFromListToolStripMenuItem";
-            this.stopSecuringAndRemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.stopSecuringAndRemoveFromListToolStripMenuItem.Text = "Stop securing and remove from list";
+            this.StopSecuringAndRemoveFromListToolStripMenuItem.Name = "StopSecuringAndRemoveFromListToolStripMenuItem";
+            this.StopSecuringAndRemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.StopSecuringAndRemoveFromListToolStripMenuItem.Text = "Stop securing and remove from list";
             // 
-            // shareKeysToolStripMenuItem1
+            // ShareKeysToolStripMenuItem1
             // 
-            this.shareKeysToolStripMenuItem1.Name = "shareKeysToolStripMenuItem1";
-            this.shareKeysToolStripMenuItem1.Size = new System.Drawing.Size(363, 32);
-            this.shareKeysToolStripMenuItem1.Text = "Share keys";
+            this.ShareKeysToolStripMenuItem1.Name = "ShareKeysToolStripMenuItem1";
+            this.ShareKeysToolStripMenuItem1.Size = new System.Drawing.Size(363, 32);
+            this.ShareKeysToolStripMenuItem1.Text = "Share keys";
             // 
-            // showInFolderToolStripMenuItem
+            // ShowInFolderToolStripMenuItem
             // 
-            this.showInFolderToolStripMenuItem.Name = "showInFolderToolStripMenuItem";
-            this.showInFolderToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.showInFolderToolStripMenuItem.Text = "Show in folder";
+            this.ShowInFolderToolStripMenuItem.Name = "ShowInFolderToolStripMenuItem";
+            this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.ShowInFolderToolStripMenuItem.Text = "Show in folder";
             // 
-            // renameToOriginalToolStripMenuItem
+            // RenameToOriginalToolStripMenuItem
             // 
-            this.renameToOriginalToolStripMenuItem.Name = "renameToOriginalToolStripMenuItem";
-            this.renameToOriginalToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.renameToOriginalToolStripMenuItem.Text = "Rename to original";
+            this.RenameToOriginalToolStripMenuItem.Name = "RenameToOriginalToolStripMenuItem";
+            this.RenameToOriginalToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.RenameToOriginalToolStripMenuItem.Text = "Rename to original";
             // 
-            // clearRecentFilesListToolStripMenuItem
+            // ClearRecentFilesListToolStripMenuItem
             // 
-            this.clearRecentFilesListToolStripMenuItem.Name = "clearRecentFilesListToolStripMenuItem";
-            this.clearRecentFilesListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.clearRecentFilesListToolStripMenuItem.Text = "Clear Recent Files list";
+            this.ClearRecentFilesListToolStripMenuItem.Name = "ClearRecentFilesListToolStripMenuItem";
+            this.ClearRecentFilesListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.ClearRecentFilesListToolStripMenuItem.Text = "Clear Recent Files list";
+            this.ClearRecentFilesListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFilesListToolStripMenuItem_Click);
             // 
             // securedFolders
             // 
@@ -244,6 +290,7 @@
             this.SecuredFoldersGrid.ReadOnly = true;
             this.SecuredFoldersGrid.RowHeadersVisible = false;
             this.SecuredFoldersGrid.RowHeadersWidth = 62;
+            this.SecuredFoldersGrid.RowTemplate.ContextMenuStrip = this.FolderMenuStrip;
             this.SecuredFoldersGrid.RowTemplate.Height = 28;
             this.SecuredFoldersGrid.Size = new System.Drawing.Size(1054, 366);
             this.SecuredFoldersGrid.TabIndex = 0;
@@ -260,50 +307,51 @@
             // 
             this.FolderMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.FolderMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.shareKeysToolStripMenuItem,
-            this.decryptPermanentlyToolStripMenuItem,
-            this.decryptTemporarilyToolStripMenuItem,
-            this.removeFromListToolStripMenuItem,
-            this.openExplorerHereToolStripMenuItem,
-            this.addSecuredFolderToolStripMenuItem});
+            this.ShareKeysToolStripMenuItem,
+            this.DecryptPermanentlyToolStripMenuItem,
+            this.DecryptTemporarilyToolStripMenuItem,
+            this.RemoveFromListToolStripMenuItem,
+            this.OpenExplorerHereToolStripMenuItem,
+            this.AddSecuredFolderToolStripMenuItem});
             this.FolderMenuStrip.Name = "folderMenuStrip";
             this.FolderMenuStrip.Size = new System.Drawing.Size(361, 196);
             // 
-            // shareKeysToolStripMenuItem
+            // ShareKeysToolStripMenuItem
             // 
-            this.shareKeysToolStripMenuItem.Name = "shareKeysToolStripMenuItem";
-            this.shareKeysToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.shareKeysToolStripMenuItem.Text = "Share Keys";
+            this.ShareKeysToolStripMenuItem.Name = "ShareKeysToolStripMenuItem";
+            this.ShareKeysToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.ShareKeysToolStripMenuItem.Text = "Share Keys";
             // 
-            // decryptPermanentlyToolStripMenuItem
+            // DecryptPermanentlyToolStripMenuItem
             // 
-            this.decryptPermanentlyToolStripMenuItem.Name = "decryptPermanentlyToolStripMenuItem";
-            this.decryptPermanentlyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.decryptPermanentlyToolStripMenuItem.Text = "Decrypt Permanently";
+            this.DecryptPermanentlyToolStripMenuItem.Name = "DecryptPermanentlyToolStripMenuItem";
+            this.DecryptPermanentlyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.DecryptPermanentlyToolStripMenuItem.Text = "Decrypt Permanently";
             // 
-            // decryptTemporarilyToolStripMenuItem
+            // DecryptTemporarilyToolStripMenuItem
             // 
-            this.decryptTemporarilyToolStripMenuItem.Name = "decryptTemporarilyToolStripMenuItem";
-            this.decryptTemporarilyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.decryptTemporarilyToolStripMenuItem.Text = "Decrypt Temporarily";
+            this.DecryptTemporarilyToolStripMenuItem.Name = "DecryptTemporarilyToolStripMenuItem";
+            this.DecryptTemporarilyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.DecryptTemporarilyToolStripMenuItem.Text = "Decrypt Temporarily";
             // 
-            // removeFromListToolStripMenuItem
+            // RemoveFromListToolStripMenuItem
             // 
-            this.removeFromListToolStripMenuItem.Name = "removeFromListToolStripMenuItem";
-            this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.removeFromListToolStripMenuItem.Text = "Remove from list but keep secured";
+            this.RemoveFromListToolStripMenuItem.Name = "RemoveFromListToolStripMenuItem";
+            this.RemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.RemoveFromListToolStripMenuItem.Text = "Remove from list but keep secured";
+            this.RemoveFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListToolStripMenuItem_Click);
             // 
-            // openExplorerHereToolStripMenuItem
+            // OpenExplorerHereToolStripMenuItem
             // 
-            this.openExplorerHereToolStripMenuItem.Name = "openExplorerHereToolStripMenuItem";
-            this.openExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.openExplorerHereToolStripMenuItem.Text = "Open Explorer here";
+            this.OpenExplorerHereToolStripMenuItem.Name = "OpenExplorerHereToolStripMenuItem";
+            this.OpenExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.OpenExplorerHereToolStripMenuItem.Text = "Open Explorer here";
             // 
-            // addSecuredFolderToolStripMenuItem
+            // AddSecuredFolderToolStripMenuItem
             // 
-            this.addSecuredFolderToolStripMenuItem.Name = "addSecuredFolderToolStripMenuItem";
-            this.addSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.addSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
+            this.AddSecuredFolderToolStripMenuItem.Name = "AddSecuredFolderToolStripMenuItem";
+            this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.AddSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
             // 
             // MenuStrip
             // 
@@ -412,9 +460,98 @@
             // 
             // LanguageToolStripMenuItem
             // 
+            this.LanguageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EnglishToolStripMenuItem,
+            this.DeutschGermanToolStripMenuItem,
+            this.NetherlandsDutchToolStripMenuItem,
+            this.FrancaisFrenchToolStripMenuItem,
+            this.ItalianoItalianToolStripMenuItem,
+            this.KoreanToolStripMenuItem,
+            this.PolskiPolishToolStripMenuItem,
+            this.PortugueseToolStripMenuItem,
+            this.RussianToolStripMenuItem,
+            this.SwedishToolStripMenuItem,
+            this.TurkishToolStripMenuItem});
             this.LanguageToolStripMenuItem.Name = "LanguageToolStripMenuItem";
             this.LanguageToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
             this.LanguageToolStripMenuItem.Text = "Language";
+            // 
+            // EnglishToolStripMenuItem
+            // 
+            this.EnglishToolStripMenuItem.Name = "EnglishToolStripMenuItem";
+            this.EnglishToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.EnglishToolStripMenuItem.Text = "English";
+            this.EnglishToolStripMenuItem.Click += new System.EventHandler(this.EnglishToolStripMenuItem_Click);
+            // 
+            // DeutschGermanToolStripMenuItem
+            // 
+            this.DeutschGermanToolStripMenuItem.Name = "DeutschGermanToolStripMenuItem";
+            this.DeutschGermanToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.DeutschGermanToolStripMenuItem.Text = "Deutsch (German)";
+            this.DeutschGermanToolStripMenuItem.Click += new System.EventHandler(this.DeutschGermanToolStripMenuItem_Click);
+            // 
+            // NetherlandsDutchToolStripMenuItem
+            // 
+            this.NetherlandsDutchToolStripMenuItem.Name = "NetherlandsDutchToolStripMenuItem";
+            this.NetherlandsDutchToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.NetherlandsDutchToolStripMenuItem.Text = "Netherlands (Dutch)";
+            this.NetherlandsDutchToolStripMenuItem.Click += new System.EventHandler(this.NetherlandsDutchToolStripMenuItem_Click);
+            // 
+            // FrancaisFrenchToolStripMenuItem
+            // 
+            this.FrancaisFrenchToolStripMenuItem.Name = "FrancaisFrenchToolStripMenuItem";
+            this.FrancaisFrenchToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.FrancaisFrenchToolStripMenuItem.Text = "Français (French)";
+            this.FrancaisFrenchToolStripMenuItem.Click += new System.EventHandler(this.FrancaisFrenchToolStripMenuItem_Click);
+            // 
+            // ItalianoItalianToolStripMenuItem
+            // 
+            this.ItalianoItalianToolStripMenuItem.Name = "ItalianoItalianToolStripMenuItem";
+            this.ItalianoItalianToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.ItalianoItalianToolStripMenuItem.Text = "Italiano (Italian)";
+            this.ItalianoItalianToolStripMenuItem.Click += new System.EventHandler(this.ItalianoItalianToolStripMenuItem_Click);
+            // 
+            // KoreanToolStripMenuItem
+            // 
+            this.KoreanToolStripMenuItem.Name = "KoreanToolStripMenuItem";
+            this.KoreanToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.KoreanToolStripMenuItem.Text = "한국어 (Korean)";
+            this.KoreanToolStripMenuItem.Click += new System.EventHandler(this.KoreanToolStripMenuItem_Click);
+            // 
+            // PolskiPolishToolStripMenuItem
+            // 
+            this.PolskiPolishToolStripMenuItem.Name = "PolskiPolishToolStripMenuItem";
+            this.PolskiPolishToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.PolskiPolishToolStripMenuItem.Text = "Polski (Polish)";
+            this.PolskiPolishToolStripMenuItem.Click += new System.EventHandler(this.PolskiPolishToolStripMenuItem_Click);
+            // 
+            // PortugueseToolStripMenuItem
+            // 
+            this.PortugueseToolStripMenuItem.Name = "PortugueseToolStripMenuItem";
+            this.PortugueseToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.PortugueseToolStripMenuItem.Text = "Português (Portuguese)";
+            this.PortugueseToolStripMenuItem.Click += new System.EventHandler(this.PortugueseToolStripMenuItem_Click);
+            // 
+            // RussianToolStripMenuItem
+            // 
+            this.RussianToolStripMenuItem.Name = "RussianToolStripMenuItem";
+            this.RussianToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.RussianToolStripMenuItem.Text = "русский (Russian)";
+            this.RussianToolStripMenuItem.Click += new System.EventHandler(this.RussianToolStripMenuItem_Click);
+            // 
+            // SwedishToolStripMenuItem
+            // 
+            this.SwedishToolStripMenuItem.Name = "SwedishToolStripMenuItem";
+            this.SwedishToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.SwedishToolStripMenuItem.Text = "Svenska (Swedish)";
+            this.SwedishToolStripMenuItem.Click += new System.EventHandler(this.SwedishToolStripMenuItem_Click);
+            // 
+            // TurkishToolStripMenuItem
+            // 
+            this.TurkishToolStripMenuItem.Name = "TurkishToolStripMenuItem";
+            this.TurkishToolStripMenuItem.Size = new System.Drawing.Size(298, 34);
+            this.TurkishToolStripMenuItem.Text = "Türkçe (Turkish)";
+            this.TurkishToolStripMenuItem.Click += new System.EventHandler(this.TurkishToolStripMenuItem_Click);
             // 
             // IncludeToolStripMenuItem
             // 
@@ -519,6 +656,7 @@
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
             this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.AboutToolStripMenuItem.Text = "About";
+            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // AppLabel
             // 
@@ -614,60 +752,13 @@
             this.OpenHomeFolder.Size = new System.Drawing.Size(64, 60);
             this.OpenHomeFolder.TabIndex = 10;
             this.OpenHomeFolder.UseVisualStyleBackColor = false;
-            // 
-            // OpenCloudFolder
-            // 
-            this.OpenCloudFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.OpenCloudFolder.BackColor = System.Drawing.Color.Transparent;
-            this.OpenCloudFolder.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OpenCloudFolder.BackgroundImage")));
-            this.OpenCloudFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.OpenCloudFolder.FlatAppearance.BorderSize = 0;
-            this.OpenCloudFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.OpenCloudFolder.ForeColor = System.Drawing.Color.Transparent;
-            this.OpenCloudFolder.Location = new System.Drawing.Point(855, 70);
-            this.OpenCloudFolder.Name = "OpenCloudFolder";
-            this.OpenCloudFolder.Size = new System.Drawing.Size(64, 60);
-            this.OpenCloudFolder.TabIndex = 11;
-            this.OpenCloudFolder.UseVisualStyleBackColor = false;
-            // 
-            // FileColumnHeader
-            // 
-            this.FileColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FileColumnHeader.HeaderText = "File";
-            this.FileColumnHeader.MinimumWidth = 8;
-            this.FileColumnHeader.Name = "FileColumnHeader";
-            this.FileColumnHeader.ReadOnly = true;
-            // 
-            // TimeColumnHeader
-            // 
-            this.TimeColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TimeColumnHeader.HeaderText = "Time";
-            this.TimeColumnHeader.MinimumWidth = 8;
-            this.TimeColumnHeader.Name = "TimeColumnHeader";
-            this.TimeColumnHeader.ReadOnly = true;
-            // 
-            // SecuredColumnHeader
-            // 
-            this.SecuredColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SecuredColumnHeader.HeaderText = "Secured";
-            this.SecuredColumnHeader.MinimumWidth = 8;
-            this.SecuredColumnHeader.Name = "SecuredColumnHeader";
-            this.SecuredColumnHeader.ReadOnly = true;
-            // 
-            // AlgorithmColumnHeader
-            // 
-            this.AlgorithmColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AlgorithmColumnHeader.HeaderText = "Algorithm";
-            this.AlgorithmColumnHeader.MinimumWidth = 8;
-            this.AlgorithmColumnHeader.Name = "AlgorithmColumnHeader";
-            this.AlgorithmColumnHeader.ReadOnly = true;
+            this.OpenHomeFolder.Click += new System.EventHandler(this.OpenHomeFolder_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 582);
-            this.Controls.Add(this.OpenCloudFolder);
             this.Controls.Add(this.OpenHomeFolder);
             this.Controls.Add(this.PasswordManagement);
             this.Controls.Add(this.ShareButton);
@@ -740,25 +831,23 @@
         private System.Windows.Forms.Button OpenSecured;
         private System.Windows.Forms.Button ShareButton;
         private System.Windows.Forms.ContextMenuStrip FolderMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem shareKeysToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decryptPermanentlyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decryptTemporarilyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openExplorerHereToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addSecuredFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShareKeysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DecryptPermanentlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DecryptTemporarilyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveFromListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenExplorerHereToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AddSecuredFolderToolStripMenuItem;
         private System.Windows.Forms.DataGridView SecuredFoldersGrid;
         private System.Windows.Forms.ContextMenuStrip FileMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeFromListButKeepSecuredToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopSecuringAndRemoveFromListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem shareKeysToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem showInFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renameToOriginalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearRecentFilesListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveFromListButKeepSecuredToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem StopSecuringAndRemoveFromListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShareKeysToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ShowInFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RenameToOriginalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClearRecentFilesListToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
         private System.Windows.Forms.Button PasswordManagement;
-        private System.Windows.Forms.Button OpenHomeFolder;
-        private System.Windows.Forms.Button OpenCloudFolder;
         private System.Windows.Forms.ToolTip OpenSecuredToolTip;
         private System.Windows.Forms.ToolTip AddSecuredFileToolTip;
         private System.Windows.Forms.ToolTip ShareToolTip;
@@ -768,6 +857,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn SecuredColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
+        private System.Windows.Forms.ToolStripMenuItem EnglishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DeutschGermanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem NetherlandsDutchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FrancaisFrenchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ItalianoItalianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem KoreanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PolskiPolishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PortugueseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RussianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SwedishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TurkishToolStripMenuItem;
+        private System.Windows.Forms.Button OpenHomeFolder;
+        private System.Windows.Forms.ToolTip OpenHomeFolderToolTip;
     }
 }
 

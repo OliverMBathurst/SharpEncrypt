@@ -5,10 +5,7 @@ namespace SharpEncrypt
 {
     internal sealed class SettingsReader
     {
-        public SharpEncryptSettings Read(string filePath)
-            => ReadSettingsFile(filePath);
-
-        private SharpEncryptSettings ReadSettingsFile(string path)
+        public SharpEncryptSettings ReadSettingsFile(string path)
         {
             if (!File.Exists(path))
                 throw new IOException($"{path} does not exist.");

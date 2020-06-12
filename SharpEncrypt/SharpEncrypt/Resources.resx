@@ -142,6 +142,9 @@
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
   </data>
+  <data name="CreatedByCredits" xml:space="preserve">
+    <value>Created by Oliver Bathurst 2020</value>
+  </data>
   <data name="DebugMenuStrip" xml:space="preserve">
     <value />
   </data>

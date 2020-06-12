@@ -259,30 +259,6 @@
         2VdnbU5XpeRfJg2c4w5vTfL7DLLlRlElbdEuy7Isy7Is609J8gsi93FdLF6CtAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="OpenHomeFolder.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAUFJREFUaEPt
-        1cFNAmEQhuH14E2vNCAdWIMWoWVQB11oE9agHdiAZ28e1G+S3cSQV4Zlvx8WMm/yJIQwzH+brqqq6my7
-        kHUvPp9Ul/IsP72n/ruT6FpeZHj8IL67klm3kDfZfPzgVeI3s2wp70IP/yt+cyOz6lY+hB5M4rcxM4vu
-        5VPoodvEzJ0ctUf5EnrgLmL2QY7SSr6FHjZG/Ef818EaDhQ9ZoqDHLzNA+XW9OD9d6Dcmhy87EC5WQ/e
-        rgfKzXLwxh4ot0kHb98D5bbXwZt6oNxGHTzXgXKbfPDoT1uyR0taskdLWrJHS1qyR0tIFs0Qe7SEZNEM
-        sUdLSBbNEHu0hGTRDLFHS0gWzRB7tIRk0QyxR0tIFs0Qe7SEZNEMsUdLSBbNEHu0hGTRDLFHS0gWzRB7
-        tIRk0QypqqqqqqSu+wVsmMVjDELOYwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="OpenCloudFolder.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAaBJREFUaEPt
-        2MsqRVEcx/HtmonEA7jkaZQSRbm9hUhKGZgoRS4TRibCxFQ8AC9gJJIotxETIr6/HSeX/zmds8++rF3r
-        V5/JOWvvvdY5a/3X3jvw8fHx8fGJKU3owzpOcI83vOIOx1hBLxrhTFoxj0d8lEkDmkMLMs0YHmB1shwa
-        yBBSTz02YHUqijXUIZWo8/uwOlKNPaQyiE1YHYjDKhLNOKwLx2kQiaQNlVSaqG7RjFjSjRkcQXXdumAS
-        ZlFVurCLd1gXSJr+hQZEiub5M6wTp6kHFWcS1smysISKol3VOlFWXnCKLfRD+0/RaM67MG1KOYNuBM1o
-        wVoHuWgBNShEv35W1SaqRRQyDauR67QuwhzCauC6S4R7xc3XB3k0jPCRz/oyD1R8cj2ACwTXPz7IG212
-        uV3EEg4gr2VUzhF0Im8b2bdwESs7sBq4LiyjSgdcv5n7SxvZrzd8o7AaumoA/zIBq7FrllE0I3iCdaAL
-        9KRWi5JpxzZcqk6a8+a0KRUt7ikc4AraOKyTJ0HXUp1XqVS1ceqVvI+Pj4+PCwmCT/qygdf/wzxKAAAA
-        AElFTkSuQmCC
-</value>
-  </data>
   <metadata name="OpenSecuredToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>619, 18</value>
   </metadata>
@@ -293,10 +269,24 @@
     <value>1096, 18</value>
   </metadata>
   <metadata name="PasswordManagementToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1262, 18</value>
+    <value>1280, 16</value>
   </metadata>
   <metadata name="HomeFolderToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1303, 18</value>
+  </metadata>
+  <data name="OpenHomeFolder.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFBSURBVGhD7dXBTQJhEIbh9eBNrzQgHViDFqFlUAddaBPWoB3YgGdvHtRvkt3EkFeGZb8fFjJv
+        8iSEMMx/m66qqupsu5B1Lz6fVJfyLD+9p/67k+haXmR4/CC+u5JZt5A32Xz84FXiN7NsKe9CD/8rfnMj
+        s+pWPoQeTOK3MTOL7uVT6KHbxMydHLVH+RJ64C5i9kGO0kq+hR42RvxH/NfBGg4UPWaKgxy8zQPl1vTg
+        /Xeg3JocvOxAuVkP3q4Hys1y8MYeKLdJB2/fA+W218GbeqDcRh0814Fym3zw6E9bskdLWrJHS1qyR0ta
+        skdLSBbNEHu0hGTRDLFHS0gWzRB7tIRk0QyxR0tIFs0Qe7SEZNEMsUdLSBbNEHu0hGTRDLFHS0gWzRB7
+        tIRk0QyxR0tIFs0Qe7SEZNEMqaqqqqqkrvsFbJjFYwxCzmMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="OpenHomeFolderToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 66</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

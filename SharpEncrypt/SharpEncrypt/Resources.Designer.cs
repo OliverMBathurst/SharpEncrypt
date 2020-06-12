@@ -133,6 +133,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by Oliver Bathurst 2020.
+        /// </summary>
+        internal static string CreatedByCredits {
+            get {
+                return ResourceManager.GetString("CreatedByCredits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string DebugMenuStrip {
