@@ -8,9 +8,7 @@ namespace SharpEncrypt
     {
         public void WriteSettingsFile(string path, SharpEncryptSettings settings)
             => new Task(() => {
-                if (File.Exists(path))
-                    throw new IOException($"{path} already exists.");
-                using (var fs = File.Create(path))
+                using (var fs = new FileStream(path, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, settings);
             }).Start();
     }

@@ -313,6 +313,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided password is empty..
+        /// </summary>
+        internal static string PasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("PasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords must not contain any restricted characters: {0}.
         /// </summary>
         internal static string PasswordRestrictedChars {
@@ -426,6 +435,15 @@ namespace SharpEncrypt {
         internal static string StopSecuringToolStripMenuItem {
             get {
                 return ResourceManager.GetString("StopSecuringToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strength.
+        /// </summary>
+        internal static string Strength {
+            get {
+                return ResourceManager.GetString("Strength", resourceCulture);
             }
         }
         

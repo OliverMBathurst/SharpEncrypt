@@ -202,6 +202,9 @@
   <data name="PasswordInputDialogTitle" xml:space="preserve">
     <value>Password Input Dialog</value>
   </data>
+  <data name="PasswordIsEmpty" xml:space="preserve">
+    <value>The provided password is empty.</value>
+  </data>
   <data name="PasswordRestrictedChars" xml:space="preserve">
     <value>Passwords must not contain any restricted characters: {0}</value>
   </data>
@@ -240,6 +243,9 @@
   </data>
   <data name="StopSecuringToolStripMenuItem" xml:space="preserve">
     <value />
+  </data>
+  <data name="Strength" xml:space="preserve">
+    <value>Strength</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>

@@ -39,6 +39,8 @@
             this.New = new System.Windows.Forms.Button();
             this.PasswordGeneratorField = new System.Windows.Forms.TextBox();
             this.CopyGenerated = new System.Windows.Forms.Button();
+            this.StrengthLabel = new System.Windows.Forms.Label();
+            this.PasswordStrengthProgressBar = new System.Windows.Forms.ProgressBar();
             this.PasswordGroupBox.SuspendLayout();
             this.Generator.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +49,7 @@
             // 
             this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.OK.Location = new System.Drawing.Point(495, 347);
+            this.OK.Location = new System.Drawing.Point(495, 408);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(138, 66);
             this.OK.TabIndex = 0;
@@ -59,7 +61,7 @@
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Cancel.Location = new System.Drawing.Point(653, 347);
+            this.Cancel.Location = new System.Drawing.Point(653, 408);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(138, 66);
             this.Cancel.TabIndex = 1;
@@ -71,12 +73,14 @@
             // 
             this.PasswordGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.PasswordGroupBox.Controls.Add(this.PasswordStrengthProgressBar);
             this.PasswordGroupBox.Controls.Add(this.Copy);
+            this.PasswordGroupBox.Controls.Add(this.StrengthLabel);
             this.PasswordGroupBox.Controls.Add(this.ShowPassword);
             this.PasswordGroupBox.Controls.Add(this.PasswordInputBox);
             this.PasswordGroupBox.Location = new System.Drawing.Point(13, 13);
             this.PasswordGroupBox.Name = "PasswordGroupBox";
-            this.PasswordGroupBox.Size = new System.Drawing.Size(778, 115);
+            this.PasswordGroupBox.Size = new System.Drawing.Size(778, 182);
             this.PasswordGroupBox.TabIndex = 2;
             this.PasswordGroupBox.TabStop = false;
             this.PasswordGroupBox.Text = "Password";
@@ -122,7 +126,7 @@
             this.Generator.Controls.Add(this.CopyGenerated);
             this.Generator.Controls.Add(this.New);
             this.Generator.Controls.Add(this.PasswordGeneratorField);
-            this.Generator.Location = new System.Drawing.Point(13, 153);
+            this.Generator.Location = new System.Drawing.Point(13, 270);
             this.Generator.Name = "Generator";
             this.Generator.Size = new System.Drawing.Size(778, 115);
             this.Generator.TabIndex = 3;
@@ -163,11 +167,28 @@
             this.CopyGenerated.UseVisualStyleBackColor = true;
             this.CopyGenerated.Click += new System.EventHandler(this.CopyGenerated_Click);
             // 
+            // StrengthLabel
+            // 
+            this.StrengthLabel.AutoSize = true;
+            this.StrengthLabel.Location = new System.Drawing.Point(7, 110);
+            this.StrengthLabel.Name = "StrengthLabel";
+            this.StrengthLabel.Size = new System.Drawing.Size(71, 20);
+            this.StrengthLabel.TabIndex = 4;
+            this.StrengthLabel.Text = "Strength";
+            // 
+            // PasswordStrengthProgressBar
+            // 
+            this.PasswordStrengthProgressBar.ForeColor = System.Drawing.Color.Transparent;
+            this.PasswordStrengthProgressBar.Location = new System.Drawing.Point(11, 133);
+            this.PasswordStrengthProgressBar.Name = "PasswordStrengthProgressBar";
+            this.PasswordStrengthProgressBar.Size = new System.Drawing.Size(761, 33);
+            this.PasswordStrengthProgressBar.TabIndex = 5;
+            // 
             // PasswordInputDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 425);
+            this.ClientSize = new System.Drawing.Size(803, 486);
             this.Controls.Add(this.Generator);
             this.Controls.Add(this.PasswordGroupBox);
             this.Controls.Add(this.Cancel);
@@ -197,5 +218,7 @@
         private System.Windows.Forms.Button New;
         private System.Windows.Forms.TextBox PasswordGeneratorField;
         private System.Windows.Forms.Button CopyGenerated;
+        private System.Windows.Forms.Label StrengthLabel;
+        private System.Windows.Forms.ProgressBar PasswordStrengthProgressBar;
     }
 }
