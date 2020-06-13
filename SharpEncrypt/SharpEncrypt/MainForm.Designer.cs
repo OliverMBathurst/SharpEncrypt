@@ -86,6 +86,8 @@
             this.KeyManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportMyPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UseADifferentPasswordForEachFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChangeSessionPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -453,7 +455,9 @@
             this.IncludeToolStripMenuItem,
             this.DebugToolStripMenuItem,
             this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem,
-            this.KeyManagementToolStripMenuItem});
+            this.KeyManagementToolStripMenuItem,
+            this.UseADifferentPasswordForEachFileToolStripMenuItem,
+            this.ChangeSessionPasswordToolStripMenuItem});
             this.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             this.OptionsToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.OptionsToolStripMenuItem.Text = "Options";
@@ -473,7 +477,7 @@
             this.SwedishToolStripMenuItem,
             this.TurkishToolStripMenuItem});
             this.LanguageToolStripMenuItem.Name = "LanguageToolStripMenuItem";
-            this.LanguageToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
+            this.LanguageToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.LanguageToolStripMenuItem.Text = "Language";
             // 
             // EnglishToolStripMenuItem
@@ -556,20 +560,20 @@
             // IncludeToolStripMenuItem
             // 
             this.IncludeToolStripMenuItem.Name = "IncludeToolStripMenuItem";
-            this.IncludeToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
+            this.IncludeToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.IncludeToolStripMenuItem.Text = "Include Subfolders";
             // 
             // DebugToolStripMenuItem
             // 
             this.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem";
-            this.DebugToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
+            this.DebugToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.DebugToolStripMenuItem.Text = "Debug";
             this.DebugToolStripMenuItem.Click += new System.EventHandler(this.DebugToolStripMenuItem_Click);
             // 
             // WipeDiskSpaceAfterSecureDeleteToolStripMenuItem
             // 
             this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Name = "WipeDiskSpaceAfterSecureDeleteToolStripMenuItem";
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Text = "Wipe Disk Space After Secure Delete";
             // 
             // KeyManagementToolStripMenuItem
@@ -578,7 +582,7 @@
             this.ImportPublicKeyToolStripMenuItem,
             this.ExportMyPublicKeyToolStripMenuItem});
             this.KeyManagementToolStripMenuItem.Name = "KeyManagementToolStripMenuItem";
-            this.KeyManagementToolStripMenuItem.Size = new System.Drawing.Size(402, 34);
+            this.KeyManagementToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.KeyManagementToolStripMenuItem.Text = "Key Management";
             // 
             // ImportPublicKeyToolStripMenuItem
@@ -592,6 +596,20 @@
             this.ExportMyPublicKeyToolStripMenuItem.Name = "ExportMyPublicKeyToolStripMenuItem";
             this.ExportMyPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.ExportMyPublicKeyToolStripMenuItem.Text = "Export My Public Key";
+            // 
+            // UseADifferentPasswordForEachFileToolStripMenuItem
+            // 
+            this.UseADifferentPasswordForEachFileToolStripMenuItem.Name = "UseADifferentPasswordForEachFileToolStripMenuItem";
+            this.UseADifferentPasswordForEachFileToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
+            this.UseADifferentPasswordForEachFileToolStripMenuItem.Text = "Use a different password for each file";
+            this.UseADifferentPasswordForEachFileToolStripMenuItem.Click += new System.EventHandler(this.UseADifferentPasswordForEachFileToolStripMenuItem_Click);
+            // 
+            // ChangeSessionPasswordToolStripMenuItem
+            // 
+            this.ChangeSessionPasswordToolStripMenuItem.Name = "ChangeSessionPasswordToolStripMenuItem";
+            this.ChangeSessionPasswordToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
+            this.ChangeSessionPasswordToolStripMenuItem.Text = "Change session password";
+            this.ChangeSessionPasswordToolStripMenuItem.Click += new System.EventHandler(this.ChangeSessionPasswordToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
@@ -692,6 +710,7 @@
             this.AddSecured.Size = new System.Drawing.Size(64, 60);
             this.AddSecured.TabIndex = 6;
             this.AddSecured.UseVisualStyleBackColor = false;
+            this.AddSecured.Click += new System.EventHandler(this.AddSecured_Click);
             // 
             // OpenSecured
             // 
@@ -707,6 +726,7 @@
             this.OpenSecured.Size = new System.Drawing.Size(64, 60);
             this.OpenSecured.TabIndex = 7;
             this.OpenSecured.UseVisualStyleBackColor = false;
+            this.OpenSecured.Click += new System.EventHandler(this.OpenSecured_Click);
             // 
             // ShareButton
             // 
@@ -870,6 +890,8 @@
         private System.Windows.Forms.ToolStripMenuItem TurkishToolStripMenuItem;
         private System.Windows.Forms.Button OpenHomeFolder;
         private System.Windows.Forms.ToolTip OpenHomeFolderToolTip;
+        private System.Windows.Forms.ToolStripMenuItem UseADifferentPasswordForEachFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ChangeSessionPasswordToolStripMenuItem;
     }
 }
 

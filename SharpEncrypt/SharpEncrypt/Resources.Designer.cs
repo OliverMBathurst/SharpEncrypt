@@ -124,11 +124,29 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to select encrypted files to share keys with others..
         /// </summary>
         internal static string ClickToShare {
             get {
                 return ResourceManager.GetString("ClickToShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generator.
+        /// </summary>
+        internal static string Generator {
+            get {
+                return ResourceManager.GetString("Generator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to password management..
         /// </summary>
         internal static string GoToPasswordManagement {
@@ -210,6 +237,33 @@ namespace SharpEncrypt {
         internal static string HelpMenuStrip {
             get {
                 return ResourceManager.GetString("HelpMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         
@@ -237,6 +291,33 @@ namespace SharpEncrypt {
         internal static string OptionsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("OptionsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Input Dialog.
+        /// </summary>
+        internal static string PasswordInputDialogTitle {
+            get {
+                return ResourceManager.GetString("PasswordInputDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords must not contain any restricted characters: {0}.
+        /// </summary>
+        internal static string PasswordRestrictedChars {
+            get {
+                return ResourceManager.GetString("PasswordRestrictedChars", resourceCulture);
             }
         }
         
@@ -318,6 +399,15 @@ namespace SharpEncrypt {
         internal static string SharpEncryptSettingsFileName {
             get {
                 return ResourceManager.GetString("SharpEncryptSettingsFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
             }
         }
         

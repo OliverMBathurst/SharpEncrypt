@@ -13,6 +13,8 @@ namespace SharpEncrypt
 {
     public partial class MainForm : Form
     {
+        private string Password { get; set; }
+
         public MainForm() => InitializeComponent();
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -196,6 +198,52 @@ namespace SharpEncrypt
         {
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
             Process.Start(Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+        }
+
+        private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new PasswordInputDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Password = dialog.Password;
+                }
+            }
+        }
+
+        private void OpenSecured_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "SharpEncrypt Encrypted File (*.seef)|*.seef";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var securedFilePath = dialog.FileName;
+                    //open secured file
+                }
+            }
+        }
+
+        private void AddSecured_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "All Files (*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var fileToSecure = dialog.FileName;
+                    //secure file
+                    //add it to datagridview
+                }
+            }            
+        }
+
+        private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (UseADifferentPasswordForEachFileToolStripMenuItem.Checked)
+                UseADifferentPasswordForEachFileToolStripMenuItem.Checked = false;
+            else
+                UseADifferentPasswordForEachFileToolStripMenuItem.Checked = true;
         }
     }
 }

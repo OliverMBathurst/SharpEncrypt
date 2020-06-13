@@ -139,8 +139,14 @@
     <value>SharpEncrypt</value>
     <comment>The app's name</comment>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
   </data>
   <data name="CreatedByCredits" xml:space="preserve">
     <value>Created by Oliver Bathurst 2020</value>
@@ -163,11 +169,23 @@
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
   </data>
+  <data name="Generator" xml:space="preserve">
+    <value>Generator</value>
+  </data>
   <data name="GoToPasswordManagement" xml:space="preserve">
     <value>Go to password management.</value>
   </data>
   <data name="HelpMenuStrip" xml:space="preserve">
     <value />
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OpenHomeFolder" xml:space="preserve">
     <value>Click to open a file from the default secure folder.</value>
@@ -177,6 +195,15 @@
   </data>
   <data name="OptionsToolStripMenuItem" xml:space="preserve">
     <value />
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordInputDialogTitle" xml:space="preserve">
+    <value>Password Input Dialog</value>
+  </data>
+  <data name="PasswordRestrictedChars" xml:space="preserve">
+    <value>Passwords must not contain any restricted characters: {0}</value>
   </data>
   <data name="RecentFiles" xml:space="preserve">
     <value>Recent Files</value>
@@ -204,6 +231,9 @@
   </data>
   <data name="SharpEncryptSettingsFileName" xml:space="preserve">
     <value>SharpEncryptSettings.BIN</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
   </data>
   <data name="ShowHelpToolStripMenuItem" xml:space="preserve">
     <value />
