@@ -110,6 +110,7 @@
             this.HomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.OpenHomeFolder = new System.Windows.Forms.Button();
             this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -580,7 +581,8 @@
             // 
             this.KeyManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ImportPublicKeyToolStripMenuItem,
-            this.ExportMyPublicKeyToolStripMenuItem});
+            this.ExportMyPublicKeyToolStripMenuItem,
+            this.GenerateNewKeyPairToolStripMenuItem});
             this.KeyManagementToolStripMenuItem.Name = "KeyManagementToolStripMenuItem";
             this.KeyManagementToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
             this.KeyManagementToolStripMenuItem.Text = "Key Management";
@@ -596,6 +598,7 @@
             this.ExportMyPublicKeyToolStripMenuItem.Name = "ExportMyPublicKeyToolStripMenuItem";
             this.ExportMyPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.ExportMyPublicKeyToolStripMenuItem.Text = "Export My Public Key";
+            this.ExportMyPublicKeyToolStripMenuItem.Click += new System.EventHandler(this.ExportMyPublicKeyToolStripMenuItem_Click);
             // 
             // UseADifferentPasswordForEachFileToolStripMenuItem
             // 
@@ -666,13 +669,13 @@
             // ShowHelpToolStripMenuItem
             // 
             this.ShowHelpToolStripMenuItem.Name = "ShowHelpToolStripMenuItem";
-            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.ShowHelpToolStripMenuItem.Text = "Show Help";
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -773,6 +776,13 @@
             this.OpenHomeFolder.TabIndex = 10;
             this.OpenHomeFolder.UseVisualStyleBackColor = false;
             this.OpenHomeFolder.Click += new System.EventHandler(this.OpenHomeFolder_Click_1);
+            // 
+            // GenerateNewKeyPairToolStripMenuItem
+            // 
+            this.GenerateNewKeyPairToolStripMenuItem.Name = "GenerateNewKeyPairToolStripMenuItem";
+            this.GenerateNewKeyPairToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
+            this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate New Key Pair";
+            this.GenerateNewKeyPairToolStripMenuItem.Click += new System.EventHandler(this.GenerateNewKeyPairToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -892,6 +902,7 @@
         private System.Windows.Forms.ToolTip OpenHomeFolderToolTip;
         private System.Windows.Forms.ToolStripMenuItem UseADifferentPasswordForEachFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ChangeSessionPasswordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GenerateNewKeyPairToolStripMenuItem;
     }
 }
 

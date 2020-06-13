@@ -1,9 +1,12 @@
-﻿using System;
+﻿using SharpEncrypt.Exceptions;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Resources;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,6 +16,9 @@ namespace SharpEncrypt
 {
     public partial class MainForm : Form
     {
+        public const string GuidIdentifier = "cd77e52c6eb14e008f5c3c548857f6a2";
+        private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
+
         private string Password { get; set; }
 
         private SharpEncryptSettings SharpEncryptSettings { get; set; }
@@ -175,21 +181,19 @@ namespace SharpEncrypt
 
         private void ChangeLanguage(string lang)
         {
-            var rm = new ComponentResourceManager(typeof(Resources));
             var culture = CultureInfo.CreateSpecificCulture(lang);
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
-
             foreach (var control in this.AllControls())
             {
                 if (control is ToolStrip strip)
                     foreach (var item in strip.AllItems())
-                        rm.ApplyResources(item, item.Name);
+                        ResourceManager.ApplyResources(item, item.Name);
 
-                rm.ApplyResources(control, control.Name);
+                ResourceManager.ApplyResources(control, control.Name);
             }
 
-            SetControlText(rm);
+            SetControlText(ResourceManager);
         }
 
         private void SetControlText(ResourceManager rm)
@@ -245,6 +249,53 @@ namespace SharpEncrypt
             }
 
             SharpEncryptSettings = settings;
+        }
+
+        private void ExportMyPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("UserKeys"));
+            var pubKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPubKeyFile"));
+            if (!Directory.Exists(path) || !File.Exists(pubKeyFilePath))
+            {
+                MessageBox.Show(ResourceManager.GetString("PublicKeyDoesNotExist"));
+            }
+            else
+            {
+                try
+                {
+                    var pubKey = new RSAKeyReader().GetParameters(pubKeyFilePath);
+                    using (var dialog = new SaveFileDialog())
+                    {
+                        dialog.Filter = "Sharp Encrypt RSA Key (*.serk)|(*.serk)";
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            new RSAKeyWriter().Write(dialog.FileName, pubKey);
+                        }
+                    }
+                }
+                catch (InvalidKeyException)
+                { 
+                    MessageBox.Show(ResourceManager.GetString("InvalidKey")); 
+                }
+            }
+        }
+
+        private void GenerateNewKeyPairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("UserKeys"));
+            var pubKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPubKeyFile"));
+            var privKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPrivKeyFile"));
+
+            if (MessageBox.Show(
+                ResourceManager.GetString("KeyPairDisclaimer"), 
+                string.Empty, 
+                MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                var (publicKey, privateKey) = new RSAInstance().GetNewKeyPair();
+                var writer = new RSAKeyWriter();
+                writer.Write(pubKeyFilePath, publicKey);
+                writer.Write(privKeyFilePath, privateKey);
+            }
         }
     }
 }

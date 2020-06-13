@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OTPLibrary", "..\OTPLibrary
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileIOLibrary", "..\FileIOLibrary\FileIOLibrary.csproj", "{8FC7581F-9F55-4C08-AF2A-BF0C8215B57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GutmannLibrary", "..\GutmannLibrary\GutmannLibrary.csproj", "{3D7A9449-50C5-403A-915A-1C95D9D38F91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GutmannLibrary", "..\GutmannLibrary\GutmannLibrary.csproj", "{3D7A9449-50C5-403A-915A-1C95D9D38F91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

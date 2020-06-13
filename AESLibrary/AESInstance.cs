@@ -9,14 +9,6 @@ namespace AESLibrary
     {
         private const long BUFFER_LENGTH = 1024L;
 
-        public RijndaelManaged GenerateKey()
-        {
-            var myRijndael = new RijndaelManaged();
-            myRijndael.GenerateKey();
-            myRijndael.GenerateIV();
-            return myRijndael;
-        }
-
         public bool TryGetKey(string path, out AESKey key)
         {
             var obj = new BinaryFormatter().Deserialize(new FileStream(path, FileMode.Open));
@@ -41,6 +33,7 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
+                rif.KeySize = aesKey.KeySize;
 
                 using (var encryptor = rif.CreateEncryptor(aesKey.Key, aesKey.IV))
                 {
@@ -74,6 +67,7 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
+                rif.KeySize = aesKey.KeySize;
 
                 using (var decryptor = rif.CreateDecryptor(aesKey.Key, aesKey.IV))
                 {
@@ -109,6 +103,7 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
+                rif.KeySize = aesKey.KeySize;
 
                 using (var decryptor = rif.CreateDecryptor(aesKey.Key, aesKey.IV))
                 {
@@ -146,6 +141,7 @@ namespace AESLibrary
             {
                 rif.Key = aesKey.Key;
                 rif.IV = aesKey.IV;
+                rif.KeySize = aesKey.KeySize;
 
                 using (var encryptor = rif.CreateEncryptor(aesKey.Key, aesKey.IV))
                 {
@@ -178,5 +174,13 @@ namespace AESLibrary
 
         public AESKey GetNewAESKey()
             => new AESKey(GenerateKey());
+
+        private RijndaelManaged GenerateKey()
+        {
+            var myRijndael = new RijndaelManaged();
+            myRijndael.GenerateKey();
+            myRijndael.GenerateIV();
+            return myRijndael;
+        }
     }
 }

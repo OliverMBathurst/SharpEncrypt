@@ -214,6 +214,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate New Key Pair.
+        /// </summary>
+        internal static string GenerateNewKeyPairToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("GenerateNewKeyPairToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generator.
         /// </summary>
         internal static string Generator {
@@ -237,6 +246,24 @@ namespace SharpEncrypt {
         internal static string HelpMenuStrip {
             get {
                 return ResourceManager.GetString("HelpMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid key, please generate a new key-pair..
+        /// </summary>
+        internal static string InvalidKey {
+            get {
+                return ResourceManager.GetString("InvalidKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating a new key pair will overwrite any existing keys, continue?.
+        /// </summary>
+        internal static string KeyPairDisclaimer {
+            get {
+                return ResourceManager.GetString("KeyPairDisclaimer", resourceCulture);
             }
         }
         
@@ -331,6 +358,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A public key does not exist for this user, please generate another..
+        /// </summary>
+        internal static string PublicKeyDoesNotExist {
+            get {
+                return ResourceManager.GetString("PublicKeyDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recent Files.
         /// </summary>
         internal static string RecentFiles {
@@ -345,6 +381,24 @@ namespace SharpEncrypt {
         internal static string RenameToOriginalToolStripMenuItem1 {
             get {
                 return ResourceManager.GetString("RenameToOriginalToolStripMenuItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RSAPrivKey.serk.
+        /// </summary>
+        internal static string RSAPrivKeyFile {
+            get {
+                return ResourceManager.GetString("RSAPrivKeyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RSAPubKey.serk.
+        /// </summary>
+        internal static string RSAPubKeyFile {
+            get {
+                return ResourceManager.GetString("RSAPubKeyFile", resourceCulture);
             }
         }
         
@@ -453,6 +507,15 @@ namespace SharpEncrypt {
         internal static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Keys.
+        /// </summary>
+        internal static string UserKeys {
+            get {
+                return ResourceManager.GetString("UserKeys", resourceCulture);
             }
         }
         

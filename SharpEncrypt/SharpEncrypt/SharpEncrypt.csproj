@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
+    <Compile Include="RSAKeyWriter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +124,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.tr.resx</DependentUpon>
     </Compile>
+    <Compile Include="RSAInstance.cs" />
+    <Compile Include="RSAKeyReader.cs" />
     <Compile Include="SettingsReader.cs" />
     <Compile Include="SettingsWriter.cs" />
     <Compile Include="SharpEncryptSettings.cs" />
