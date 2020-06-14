@@ -86,6 +86,7 @@
             this.KeyManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportMyPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UseADifferentPasswordForEachFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeSessionPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,7 +111,6 @@
             this.HomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.OpenHomeFolder = new System.Windows.Forms.Button();
             this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -592,6 +592,7 @@
             this.ImportPublicKeyToolStripMenuItem.Name = "ImportPublicKeyToolStripMenuItem";
             this.ImportPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.ImportPublicKeyToolStripMenuItem.Text = "Import Someone\'s Public Key";
+            this.ImportPublicKeyToolStripMenuItem.Click += new System.EventHandler(this.ImportPublicKeyToolStripMenuItem_Click);
             // 
             // ExportMyPublicKeyToolStripMenuItem
             // 
@@ -599,6 +600,13 @@
             this.ExportMyPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.ExportMyPublicKeyToolStripMenuItem.Text = "Export My Public Key";
             this.ExportMyPublicKeyToolStripMenuItem.Click += new System.EventHandler(this.ExportMyPublicKeyToolStripMenuItem_Click);
+            // 
+            // GenerateNewKeyPairToolStripMenuItem
+            // 
+            this.GenerateNewKeyPairToolStripMenuItem.Name = "GenerateNewKeyPairToolStripMenuItem";
+            this.GenerateNewKeyPairToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
+            this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate New Key Pair";
+            this.GenerateNewKeyPairToolStripMenuItem.Click += new System.EventHandler(this.GenerateNewKeyPairToolStripMenuItem_Click);
             // 
             // UseADifferentPasswordForEachFileToolStripMenuItem
             // 
@@ -669,13 +677,13 @@
             // ShowHelpToolStripMenuItem
             // 
             this.ShowHelpToolStripMenuItem.Name = "ShowHelpToolStripMenuItem";
-            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.ShowHelpToolStripMenuItem.Text = "Show Help";
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -775,14 +783,7 @@
             this.OpenHomeFolder.Size = new System.Drawing.Size(64, 60);
             this.OpenHomeFolder.TabIndex = 10;
             this.OpenHomeFolder.UseVisualStyleBackColor = false;
-            this.OpenHomeFolder.Click += new System.EventHandler(this.OpenHomeFolder_Click_1);
-            // 
-            // GenerateNewKeyPairToolStripMenuItem
-            // 
-            this.GenerateNewKeyPairToolStripMenuItem.Name = "GenerateNewKeyPairToolStripMenuItem";
-            this.GenerateNewKeyPairToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
-            this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate New Key Pair";
-            this.GenerateNewKeyPairToolStripMenuItem.Click += new System.EventHandler(this.GenerateNewKeyPairToolStripMenuItem_Click);
+            this.OpenHomeFolder.Click += new System.EventHandler(this.OpenHomeFolder_Click);
             // 
             // MainForm
             // 

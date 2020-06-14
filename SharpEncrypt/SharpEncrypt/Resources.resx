@@ -157,8 +157,17 @@
   <data name="DiskToolsToolStripMenuItem" xml:space="preserve">
     <value />
   </data>
+  <data name="DuplicateIdentity" xml:space="preserve">
+    <value>Duplicate identity found, please use another.</value>
+  </data>
+  <data name="EncryptedFileFilter" xml:space="preserve">
+    <value>SharpEncrypt Encrypted File (*.seef)|*.seef</value>
+  </data>
   <data name="ExitToolStripMenuItem" xml:space="preserve">
     <value />
+  </data>
+  <data name="FieldCannotBeEmpty" xml:space="preserve">
+    <value>The field '{0}' cannot be empty.</value>
   </data>
   <data name="File" xml:space="preserve">
     <value>File</value>
@@ -180,6 +189,15 @@
   </data>
   <data name="HelpMenuStrip" xml:space="preserve">
     <value />
+  </data>
+  <data name="Identity" xml:space="preserve">
+    <value>Identity</value>
+  </data>
+  <data name="ImportedKeysDir" xml:space="preserve">
+    <value>Imported Keys</value>
+  </data>
+  <data name="ImportPublicKeyDialogTitle" xml:space="preserve">
+    <value>Import Public Key</value>
   </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key, please generate a new key-pair.</value>
@@ -217,6 +235,12 @@
   <data name="PasswordRestrictedChars" xml:space="preserve">
     <value>Passwords must not contain any restricted characters: {0}</value>
   </data>
+  <data name="PubKeysFile" xml:space="preserve">
+    <value>PublicKeys.BIN</value>
+  </data>
+  <data name="PublicKey" xml:space="preserve">
+    <value>Public Key</value>
+  </data>
   <data name="PublicKeyDoesNotExist" xml:space="preserve">
     <value>A public key does not exist for this user, please generate another.</value>
   </data>
@@ -225,6 +249,9 @@
   </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
     <value />
+  </data>
+  <data name="RSAKeyFilter" xml:space="preserve">
+    <value>SharpEncrypt RSA Key (*.serk)|*.serk</value>
   </data>
   <data name="RSAPrivKeyFile" xml:space="preserve">
     <value>RSAPrivKey.serk</value>

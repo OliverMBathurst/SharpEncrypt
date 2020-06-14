@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Resources;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -53,17 +51,7 @@ namespace SharpEncrypt
 
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
 
-        private void OpenHomeFolder_Click_1(object sender, EventArgs e)
-        {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
-            Process.Start(Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-        }
-
-        private void OpenHomeFolder_Click(object sender, EventArgs e)
-        {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
-            Process.Start(Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
-        }
+        private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(GetAppDirectory());
 
         private void ClearRecentFilesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -134,7 +122,7 @@ namespace SharpEncrypt
         {
             using (var dialog = new OpenFileDialog())
             {
-                dialog.Filter = "SharpEncrypt Encrypted File (*.seef)|*.seef";
+                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var securedFilePath = dialog.FileName;
@@ -219,32 +207,23 @@ namespace SharpEncrypt
 
         private void SetApplicationSettings()
         {
-            var settingsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
-            var settingsFilePath = Path.Combine(settingsDirectory, Resources.SharpEncryptSettingsFileName);
+            var settingsFilePath = GetAppSettingsPath();
             var settings = new SharpEncryptSettings();
 
-            if (!Directory.Exists(settingsDirectory))
+            if (!File.Exists(settingsFilePath))
             {
-                Directory.CreateDirectory(settingsDirectory);
                 new SettingsWriter().WriteSettingsFile(settingsFilePath, settings);
             }
             else
             {
-                if (!File.Exists(settingsFilePath))
+                var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath);
+                if (readSettings == null) //it's corrupt
                 {
                     new SettingsWriter().WriteSettingsFile(settingsFilePath, settings);
                 }
                 else
                 {
-                    var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath);
-                    if (readSettings == null) //it's corrupt
-                    {
-                        new SettingsWriter().WriteSettingsFile(settingsFilePath, settings);
-                    }
-                    else
-                    {
-                        settings = readSettings;
-                    }
+                    settings = readSettings;
                 }
             }
 
@@ -253,9 +232,9 @@ namespace SharpEncrypt
 
         private void ExportMyPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("UserKeys"));
-            var pubKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPubKeyFile"));
-            if (!Directory.Exists(path) || !File.Exists(pubKeyFilePath))
+            var (@public, _) = GetKeyPairPaths();
+
+            if (!File.Exists(@public))
             {
                 MessageBox.Show(ResourceManager.GetString("PublicKeyDoesNotExist"));
             }
@@ -263,10 +242,10 @@ namespace SharpEncrypt
             {
                 try
                 {
-                    var pubKey = new RSAKeyReader().GetParameters(pubKeyFilePath);
+                    var pubKey = new RSAKeyReader().GetParameters(@public);
                     using (var dialog = new SaveFileDialog())
                     {
-                        dialog.Filter = "Sharp Encrypt RSA Key (*.serk)|(*.serk)";
+                        dialog.Filter = ResourceManager.GetString("RSAKeyFilter");
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
                             new RSAKeyWriter().Write(dialog.FileName, pubKey);
@@ -282,9 +261,7 @@ namespace SharpEncrypt
 
         private void GenerateNewKeyPairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("UserKeys"));
-            var pubKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPubKeyFile"));
-            var privKeyFilePath = Path.Combine(path, ResourceManager.GetString("RSAPrivKeyFile"));
+            var (@public, @private) = GetKeyPairPaths();
 
             if (MessageBox.Show(
                 ResourceManager.GetString("KeyPairDisclaimer"), 
@@ -293,9 +270,49 @@ namespace SharpEncrypt
             {
                 var (publicKey, privateKey) = new RSAInstance().GetNewKeyPair();
                 var writer = new RSAKeyWriter();
-                writer.Write(pubKeyFilePath, publicKey);
-                writer.Write(privKeyFilePath, privateKey);
+                writer.Write(@public, publicKey);
+                writer.Write(@private, privateKey);
+                //encrypt the rsa priv key (IMPORTANT)
             }
         }
+
+        private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e) => new ImportPublicKeyForm().Show();
+
+        private void CreateDirs(params string[] paths)
+        {
+            foreach (var path in paths)
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+        }
+
+        private string GetAppDirectory()
+        {
+            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("AppName"));
+            CreateDirs(dir);
+            return dir;
+        }
+
+        private string GetUserKeysDirectory()
+        {
+            var dir = Path.Combine(GetAppDirectory(), ResourceManager.GetString("UserKeys"));
+            CreateDirs(dir);
+            return dir;
+        }
+
+        private string GetImportedKeysDirectory()
+        {
+            var dir = Path.Combine(GetAppDirectory(), ResourceManager.GetString("ImportedKeysDir"));
+            CreateDirs(dir);
+            return dir;
+        }
+
+        private (string pubKey, string privKey) GetKeyPairPaths()
+        {
+            var dir = GetUserKeysDirectory();
+            return (Path.Combine(dir, ResourceManager.GetString("RSAPubKeyFile")),
+                Path.Combine(dir, ResourceManager.GetString("RSAPrivKeyFile")));
+        }
+
+        private string GetAppSettingsPath() => Path.Combine(GetAppDirectory(), ResourceManager.GetString("SharpEncryptSettingsFileName"));
     }
 }

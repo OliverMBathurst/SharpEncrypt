@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,12 @@
   <ItemGroup>
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
+    <Compile Include="ImportPublicKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportPublicKeyForm.Designer.cs">
+      <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RSAKeyWriter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -129,6 +136,9 @@
     <Compile Include="SettingsReader.cs" />
     <Compile Include="SettingsWriter.cs" />
     <Compile Include="SharpEncryptSettings.cs" />
+    <EmbeddedResource Include="ImportPublicKeyForm.resx">
+      <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

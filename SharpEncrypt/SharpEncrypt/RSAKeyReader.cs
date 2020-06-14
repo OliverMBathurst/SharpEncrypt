@@ -1,5 +1,6 @@
 ﻿using SharpEncrypt.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
@@ -24,6 +25,18 @@ namespace SharpEncrypt
 
                 throw new InvalidKeyException(path);
             }
+        }
+
+        public IDictionary<string, RSAParameters> GetPublicKeys(string filePath)
+        {
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException("path");
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException(filePath);
+            
+            return new BinaryFormatter().Deserialize(new FileStream(filePath, FileMode.Open)) is IDictionary<string, RSAParameters> dict 
+                ? dict
+                : new Dictionary<string, RSAParameters>();
         }
     }
 }

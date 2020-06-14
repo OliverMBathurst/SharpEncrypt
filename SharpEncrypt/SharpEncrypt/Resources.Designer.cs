@@ -178,11 +178,38 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duplicate identity found, please use another..
+        /// </summary>
+        internal static string DuplicateIdentity {
+            get {
+                return ResourceManager.GetString("DuplicateIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt Encrypted File (*.seef)|*.seef.
+        /// </summary>
+        internal static string EncryptedFileFilter {
+            get {
+                return ResourceManager.GetString("EncryptedFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string ExitToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ExitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{0}&apos; cannot be empty..
+        /// </summary>
+        internal static string FieldCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("FieldCannotBeEmpty", resourceCulture);
             }
         }
         
@@ -246,6 +273,33 @@ namespace SharpEncrypt {
         internal static string HelpMenuStrip {
             get {
                 return ResourceManager.GetString("HelpMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identity.
+        /// </summary>
+        internal static string Identity {
+            get {
+                return ResourceManager.GetString("Identity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imported Keys.
+        /// </summary>
+        internal static string ImportedKeysDir {
+            get {
+                return ResourceManager.GetString("ImportedKeysDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Public Key.
+        /// </summary>
+        internal static string ImportPublicKeyDialogTitle {
+            get {
+                return ResourceManager.GetString("ImportPublicKeyDialogTitle", resourceCulture);
             }
         }
         
@@ -358,6 +412,24 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PublicKeys.BIN.
+        /// </summary>
+        internal static string PubKeysFile {
+            get {
+                return ResourceManager.GetString("PubKeysFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public Key.
+        /// </summary>
+        internal static string PublicKey {
+            get {
+                return ResourceManager.GetString("PublicKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A public key does not exist for this user, please generate another..
         /// </summary>
         internal static string PublicKeyDoesNotExist {
@@ -381,6 +453,15 @@ namespace SharpEncrypt {
         internal static string RenameToOriginalToolStripMenuItem1 {
             get {
                 return ResourceManager.GetString("RenameToOriginalToolStripMenuItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt RSA Key (*.serk)|*.serk.
+        /// </summary>
+        internal static string RSAKeyFilter {
+            get {
+                return ResourceManager.GetString("RSAKeyFilter", resourceCulture);
             }
         }
         
