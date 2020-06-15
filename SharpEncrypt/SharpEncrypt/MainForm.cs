@@ -16,6 +16,7 @@ namespace SharpEncrypt
     {
         public const string GuidIdentifier = "cd77e52c6eb14e008f5c3c548857f6a2";
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
+        private readonly PathService PathService = new PathService();
 
         private string Password { get; set; }
 
@@ -51,7 +52,7 @@ namespace SharpEncrypt
 
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
 
-        private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(GetAppDirectory());
+        private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(PathService.AppDirectory);
 
         private void ClearRecentFilesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -207,7 +208,7 @@ namespace SharpEncrypt
 
         private void SetApplicationSettings()
         {
-            var settingsFilePath = GetAppSettingsPath();
+            var settingsFilePath = PathService.AppSettingsPath;
             var settings = new SharpEncryptSettings();
 
             if (!File.Exists(settingsFilePath))
@@ -232,7 +233,7 @@ namespace SharpEncrypt
 
         private void ExportMyPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var (@public, _) = GetKeyPairPaths();
+            var (@public, _) = PathService.KeyPairPaths;
 
             if (!File.Exists(@public))
             {
@@ -261,11 +262,11 @@ namespace SharpEncrypt
 
         private void GenerateNewKeyPairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var (@public, @private) = GetKeyPairPaths();
+            var (@public, @private) = PathService.KeyPairPaths;
 
             if (MessageBox.Show(
-                ResourceManager.GetString("KeyPairDisclaimer"), 
-                string.Empty, 
+                ResourceManager.GetString("KeyPairDisclaimer"),
+                string.Empty,
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 var (publicKey, privateKey) = new RSAInstance().GetNewKeyPair();
@@ -277,42 +278,5 @@ namespace SharpEncrypt
         }
 
         private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e) => new ImportPublicKeyForm().Show();
-
-        private void CreateDirs(params string[] paths)
-        {
-            foreach (var path in paths)
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-        }
-
-        private string GetAppDirectory()
-        {
-            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("AppName"));
-            CreateDirs(dir);
-            return dir;
-        }
-
-        private string GetUserKeysDirectory()
-        {
-            var dir = Path.Combine(GetAppDirectory(), ResourceManager.GetString("UserKeys"));
-            CreateDirs(dir);
-            return dir;
-        }
-
-        private string GetImportedKeysDirectory()
-        {
-            var dir = Path.Combine(GetAppDirectory(), ResourceManager.GetString("ImportedKeysDir"));
-            CreateDirs(dir);
-            return dir;
-        }
-
-        private (string pubKey, string privKey) GetKeyPairPaths()
-        {
-            var dir = GetUserKeysDirectory();
-            return (Path.Combine(dir, ResourceManager.GetString("RSAPubKeyFile")),
-                Path.Combine(dir, ResourceManager.GetString("RSAPrivKeyFile")));
-        }
-
-        private string GetAppSettingsPath() => Path.Combine(GetAppDirectory(), ResourceManager.GetString("SharpEncryptSettingsFileName"));
     }
 }

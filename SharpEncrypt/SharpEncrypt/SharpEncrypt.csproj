@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="ContainerService.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
     <Compile Include="ImportPublicKeyForm.cs">
@@ -55,6 +57,7 @@
     <Compile Include="ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PathService.cs" />
     <Compile Include="RSAKeyWriter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

@@ -12,10 +12,17 @@ namespace SharpEncrypt
         private readonly char[] Numerics = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         private readonly char[] RestrictedChars = new[] { '<', '>', '\'', '\\' };
         private readonly Random Random = new Random();
+        private readonly bool CanUseSessionPassword;
+        private readonly string SessionPassword;
 
         public string Password { get; private set; }
 
-        public PasswordInputDialog() => InitializeComponent();
+        public PasswordInputDialog(bool canUseSessionPassword = false, string sessionPassword = "")
+        {
+            CanUseSessionPassword = canUseSessionPassword;
+            SessionPassword = sessionPassword;
+            InitializeComponent();
+        }
 
         private void PasswordInput_Load(object sender, EventArgs e)
         {
@@ -30,6 +37,10 @@ namespace SharpEncrypt
             New.Text = rm.GetString("New");
             CopyGenerated.Text = rm.GetString("Copy");
             StrengthLabel.Text = rm.GetString("Strength");
+            UseSessionPassword.Text = rm.GetString("UseSessionPassword");
+
+            if (CanUseSessionPassword)
+                UseSessionPassword.Enabled = true;
 
             PasswordInputBox.TextChanged += PasswordInputBox_TextChanged;
         }
@@ -66,22 +77,37 @@ namespace SharpEncrypt
 
         private void OK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(PasswordInputBox.Text))
+            if (UseSessionPassword.Enabled && UseSessionPassword.Checked)
             {
-                MessageBox.Show(Resources.PasswordIsEmpty);
-            }
-            else
-            {
-                if (!PasswordInputBox.Text.Any(x => RestrictedChars.Contains(x)))
+                if (string.IsNullOrEmpty(SessionPassword))
                 {
-                    Password = PasswordInputBox.Text;
-                    DialogResult = DialogResult.OK;
+                    MessageBox.Show(Resources.PasswordIsEmpty);
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(Resources.PasswordRestrictedChars, string.Join(", ", RestrictedChars)));
+                    Password = SessionPassword;
+                    DialogResult = DialogResult.OK;
                 }
             }
+            else
+            {
+                if (string.IsNullOrEmpty(PasswordInputBox.Text))
+                {
+                    MessageBox.Show(Resources.PasswordIsEmpty);
+                }
+                else
+                {
+                    if (!PasswordInputBox.Text.Any(x => RestrictedChars.Contains(x)))
+                    {
+                        Password = PasswordInputBox.Text;
+                        DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format(Resources.PasswordRestrictedChars, string.Join(", ", RestrictedChars)));
+                    }
+                }
+            }            
         }
 
         private void Cancel_Click(object sender, EventArgs e) => DialogResult = DialogResult.Cancel;

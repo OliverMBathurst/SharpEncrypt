@@ -32,15 +32,16 @@
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.PasswordGroupBox = new System.Windows.Forms.GroupBox();
+            this.PasswordStrengthProgressBar = new System.Windows.Forms.ProgressBar();
             this.Copy = new System.Windows.Forms.Button();
+            this.StrengthLabel = new System.Windows.Forms.Label();
             this.ShowPassword = new System.Windows.Forms.Button();
             this.PasswordInputBox = new System.Windows.Forms.TextBox();
             this.Generator = new System.Windows.Forms.GroupBox();
+            this.CopyGenerated = new System.Windows.Forms.Button();
             this.New = new System.Windows.Forms.Button();
             this.PasswordGeneratorField = new System.Windows.Forms.TextBox();
-            this.CopyGenerated = new System.Windows.Forms.Button();
-            this.StrengthLabel = new System.Windows.Forms.Label();
-            this.PasswordStrengthProgressBar = new System.Windows.Forms.ProgressBar();
+            this.UseSessionPassword = new System.Windows.Forms.CheckBox();
             this.PasswordGroupBox.SuspendLayout();
             this.Generator.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +86,14 @@
             this.PasswordGroupBox.TabStop = false;
             this.PasswordGroupBox.Text = "Password";
             // 
+            // PasswordStrengthProgressBar
+            // 
+            this.PasswordStrengthProgressBar.ForeColor = System.Drawing.Color.Transparent;
+            this.PasswordStrengthProgressBar.Location = new System.Drawing.Point(11, 133);
+            this.PasswordStrengthProgressBar.Name = "PasswordStrengthProgressBar";
+            this.PasswordStrengthProgressBar.Size = new System.Drawing.Size(761, 33);
+            this.PasswordStrengthProgressBar.TabIndex = 5;
+            // 
             // Copy
             // 
             this.Copy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -96,6 +105,15 @@
             this.Copy.Text = "Copy";
             this.Copy.UseVisualStyleBackColor = true;
             this.Copy.Click += new System.EventHandler(this.Copy_Click);
+            // 
+            // StrengthLabel
+            // 
+            this.StrengthLabel.AutoSize = true;
+            this.StrengthLabel.Location = new System.Drawing.Point(7, 110);
+            this.StrengthLabel.Name = "StrengthLabel";
+            this.StrengthLabel.Size = new System.Drawing.Size(71, 20);
+            this.StrengthLabel.TabIndex = 4;
+            this.StrengthLabel.Text = "Strength";
             // 
             // ShowPassword
             // 
@@ -133,6 +151,18 @@
             this.Generator.TabStop = false;
             this.Generator.Text = "Generator";
             // 
+            // CopyGenerated
+            // 
+            this.CopyGenerated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CopyGenerated.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CopyGenerated.Location = new System.Drawing.Point(616, 66);
+            this.CopyGenerated.Name = "CopyGenerated";
+            this.CopyGenerated.Size = new System.Drawing.Size(75, 41);
+            this.CopyGenerated.TabIndex = 5;
+            this.CopyGenerated.Text = "Copy";
+            this.CopyGenerated.UseVisualStyleBackColor = true;
+            this.CopyGenerated.Click += new System.EventHandler(this.CopyGenerated_Click);
+            // 
             // New
             // 
             this.New.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -155,40 +185,23 @@
             this.PasswordGeneratorField.Size = new System.Drawing.Size(761, 26);
             this.PasswordGeneratorField.TabIndex = 3;
             // 
-            // CopyGenerated
+            // UseSessionPassword
             // 
-            this.CopyGenerated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CopyGenerated.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CopyGenerated.Location = new System.Drawing.Point(616, 66);
-            this.CopyGenerated.Name = "CopyGenerated";
-            this.CopyGenerated.Size = new System.Drawing.Size(75, 41);
-            this.CopyGenerated.TabIndex = 5;
-            this.CopyGenerated.Text = "Copy";
-            this.CopyGenerated.UseVisualStyleBackColor = true;
-            this.CopyGenerated.Click += new System.EventHandler(this.CopyGenerated_Click);
-            // 
-            // StrengthLabel
-            // 
-            this.StrengthLabel.AutoSize = true;
-            this.StrengthLabel.Location = new System.Drawing.Point(7, 110);
-            this.StrengthLabel.Name = "StrengthLabel";
-            this.StrengthLabel.Size = new System.Drawing.Size(71, 20);
-            this.StrengthLabel.TabIndex = 4;
-            this.StrengthLabel.Text = "Strength";
-            // 
-            // PasswordStrengthProgressBar
-            // 
-            this.PasswordStrengthProgressBar.ForeColor = System.Drawing.Color.Transparent;
-            this.PasswordStrengthProgressBar.Location = new System.Drawing.Point(11, 133);
-            this.PasswordStrengthProgressBar.Name = "PasswordStrengthProgressBar";
-            this.PasswordStrengthProgressBar.Size = new System.Drawing.Size(761, 33);
-            this.PasswordStrengthProgressBar.TabIndex = 5;
+            this.UseSessionPassword.AutoSize = true;
+            this.UseSessionPassword.Enabled = false;
+            this.UseSessionPassword.Location = new System.Drawing.Point(24, 217);
+            this.UseSessionPassword.Name = "UseSessionPassword";
+            this.UseSessionPassword.Size = new System.Drawing.Size(194, 24);
+            this.UseSessionPassword.TabIndex = 4;
+            this.UseSessionPassword.Text = "Use session password";
+            this.UseSessionPassword.UseVisualStyleBackColor = true;
             // 
             // PasswordInputDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 486);
+            this.Controls.Add(this.UseSessionPassword);
             this.Controls.Add(this.Generator);
             this.Controls.Add(this.PasswordGroupBox);
             this.Controls.Add(this.Cancel);
@@ -203,6 +216,7 @@
             this.Generator.ResumeLayout(false);
             this.Generator.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -220,5 +234,6 @@
         private System.Windows.Forms.Button CopyGenerated;
         private System.Windows.Forms.Label StrengthLabel;
         private System.Windows.Forms.ProgressBar PasswordStrengthProgressBar;
+        private System.Windows.Forms.CheckBox UseSessionPassword;
     }
 }

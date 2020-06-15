@@ -601,6 +601,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use session password.
+        /// </summary>
+        internal static string UseSessionPassword {
+            get {
+                return ResourceManager.GetString("UseSessionPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string WipeFreeDiskSpaceToolStripMenuItem {

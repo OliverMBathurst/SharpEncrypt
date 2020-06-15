@@ -298,6 +298,9 @@
   <data name="UserKeys" xml:space="preserve">
     <value>User Keys</value>
   </data>
+  <data name="UseSessionPassword" xml:space="preserve">
+    <value>Use session password</value>
+  </data>
   <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
     <value />
   </data>
