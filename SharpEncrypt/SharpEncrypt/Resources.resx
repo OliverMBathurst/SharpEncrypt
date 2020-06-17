@@ -118,22 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>About</value>
+  </data>
+  <data name="ACriticalErrorHasOccurred" xml:space="preserve">
+    <value>A critical error has occurred.</value>
   </data>
   <data name="AddSecuredFile" xml:space="preserve">
     <value>Add a file to be secured.</value>
   </data>
   <data name="AddSecuredFolderToolStripMenuItem1" xml:space="preserve">
-    <value />
+    <value>Add Secured Folder</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
   <data name="AdvancedToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Advanced</value>
   </data>
   <data name="Algorithm" xml:space="preserve">
     <value>Algorithm</value>
   </data>
   <data name="AnonymousRenameToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Anonymous Rename</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>SharpEncrypt</value>
@@ -152,10 +158,16 @@
     <value>Created by Oliver Bathurst 2020</value>
   </data>
   <data name="DebugMenuStrip" xml:space="preserve">
-    <value />
+    <value>Debug</value>
+  </data>
+  <data name="DecryptFileToolStripMenuItem" xml:space="preserve">
+    <value>Decrypt File</value>
+  </data>
+  <data name="Dialog" xml:space="preserve">
+    <value>Dialog</value>
   </data>
   <data name="DiskToolsToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Disk Tools</value>
   </data>
   <data name="DuplicateIdentity" xml:space="preserve">
     <value>Duplicate identity found, please use another.</value>
@@ -164,7 +176,7 @@
     <value>SharpEncrypt Encrypted File (*.seef)|*.seef</value>
   </data>
   <data name="ExitToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Exit</value>
   </data>
   <data name="FieldCannotBeEmpty" xml:space="preserve">
     <value>The field '{0}' cannot be empty.</value>
@@ -173,7 +185,7 @@
     <value>File</value>
   </data>
   <data name="FileMenuStripItem" xml:space="preserve">
-    <value />
+    <value>File</value>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
@@ -188,7 +200,7 @@
     <value>Go to password management.</value>
   </data>
   <data name="HelpMenuStrip" xml:space="preserve">
-    <value />
+    <value>Help</value>
   </data>
   <data name="Identity" xml:space="preserve">
     <value>Identity</value>
@@ -208,20 +220,29 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NeverShowAgain" xml:space="preserve">
+    <value>Never show again</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="OneTimePadToolStripMenuItem" xml:space="preserve">
+    <value>One Time Pad</value>
+  </data>
   <data name="OpenHomeFolder" xml:space="preserve">
     <value>Click to open a file from the default secure folder.</value>
   </data>
   <data name="OpenSecuredToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Open Secured</value>
   </data>
   <data name="OptionsToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Options</value>
+  </data>
+  <data name="OTPDisclaimer" xml:space="preserve">
+    <value>The One Time Pad Vernam cipher requires that a key be generated that is either equal to or greater in length than that of the file to encrypt. e.g. a 2MB file will require at least a key of size 2MB. This cipher is widely regarded as perfect and unbreakable. It is therefore a necessity that the key is not stored with the encrypted file in a SharpEncrypt container, as the key would have to be encrypted with an inferior cipher. The next dialog will ask you for a location to store the key file. It is best to store the key file on removable media, and to wipe the free space of any drive that has previously stored a One Time Pad key. Continue?</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -248,7 +269,7 @@
     <value>Recent Files</value>
   </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
-    <value />
+    <value>Rename to original</value>
   </data>
   <data name="RSAKeyFilter" xml:space="preserve">
     <value>SharpEncrypt RSA Key (*.serk)|*.serk</value>
@@ -263,19 +284,25 @@
     <value>Secured</value>
   </data>
   <data name="SecureDeleteToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Secure Delete</value>
   </data>
   <data name="SecuredFolders" xml:space="preserve">
     <value>Secured Folders</value>
   </data>
   <data name="SecuredFoldersToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Secured Folders</value>
+  </data>
+  <data name="SecureFileToolStripMenuItem" xml:space="preserve">
+    <value>Secure File</value>
   </data>
   <data name="SecureToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Secure</value>
   </data>
   <data name="SelectSecuredFile" xml:space="preserve">
     <value>Select a secured file to open.</value>
+  </data>
+  <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
+    <value>SharpEncrypt OTP Encrypted File (*.seotpf)</value>
   </data>
   <data name="SharpEncryptSettingsFileName" xml:space="preserve">
     <value>SharpEncryptSettings.BIN</value>
@@ -284,10 +311,10 @@
     <value>Show</value>
   </data>
   <data name="ShowHelpToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Show Help</value>
   </data>
   <data name="StopSecuringToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Stop Securing</value>
   </data>
   <data name="Strength" xml:space="preserve">
     <value>Strength</value>
@@ -302,6 +329,6 @@
     <value>Use session password</value>
   </data>
   <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
-    <value />
+    <value>Wipe Free Disk Space</value>
   </data>
 </root>

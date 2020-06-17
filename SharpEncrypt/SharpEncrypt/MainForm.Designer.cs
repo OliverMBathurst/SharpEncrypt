@@ -67,6 +67,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SecureDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.Advanced = new System.Windows.Forms.ToolStripMenuItem();
+            this.OneTimePadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SecureFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DecryptFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EnglishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -385,6 +389,7 @@
             this.toolStripSeparator1,
             this.SecureDeleteToolStripMenuItem,
             this.toolStripSeparator2,
+            this.Advanced,
             this.OptionsToolStripMenuItem,
             this.ExitToolStripMenuItem});
             this.FileMenuStripItem.Name = "FileMenuStripItem";
@@ -448,6 +453,36 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(276, 6);
+            // 
+            // Advanced
+            // 
+            this.Advanced.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OneTimePadToolStripMenuItem});
+            this.Advanced.Name = "Advanced";
+            this.Advanced.Size = new System.Drawing.Size(279, 34);
+            this.Advanced.Text = "Advanced";
+            // 
+            // OneTimePadToolStripMenuItem
+            // 
+            this.OneTimePadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SecureFileToolStripMenuItem,
+            this.DecryptFileToolStripMenuItem});
+            this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
+            // 
+            // SecureFileToolStripMenuItem
+            // 
+            this.SecureFileToolStripMenuItem.Name = "SecureFileToolStripMenuItem";
+            this.SecureFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.SecureFileToolStripMenuItem.Text = "Secure File";
+            this.SecureFileToolStripMenuItem.Click += new System.EventHandler(this.SecureFileToolStripMenuItem_Click);
+            // 
+            // DecryptFileToolStripMenuItem
+            // 
+            this.DecryptFileToolStripMenuItem.Name = "DecryptFileToolStripMenuItem";
+            this.DecryptFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.DecryptFileToolStripMenuItem.Text = "Decrypt File";
             // 
             // OptionsToolStripMenuItem
             // 
@@ -904,6 +939,10 @@
         private System.Windows.Forms.ToolStripMenuItem UseADifferentPasswordForEachFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ChangeSessionPasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GenerateNewKeyPairToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Advanced;
+        private System.Windows.Forms.ToolStripMenuItem OneTimePadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SecureFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DecryptFileToolStripMenuItem;
     }
 }
 

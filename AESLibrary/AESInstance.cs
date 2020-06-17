@@ -162,6 +162,17 @@ namespace AESLibrary
             }
         }
 
+        public byte[] PasswordEncrypt(AESKey key, string password)
+        {
+            using (var ms = new MemoryStream())
+            {
+                new BinaryFormatter().Serialize(ms, key);
+                var bytes = ms.ToArray();
+                //encrypt bytes with pw and return
+            }
+            return new byte[0];
+        }
+
         public AESKey WriteNewKey(string path)
         {
             var key = GetNewAESKey();

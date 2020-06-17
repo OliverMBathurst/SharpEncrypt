@@ -17,12 +17,22 @@ namespace SharpEncrypt
         public const string GuidIdentifier = "cd77e52c6eb14e008f5c3c548857f6a2";
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
         private readonly PathService PathService = new PathService();
+        private delegate void SettingsChangeDelegate(string settingsPropertyName, bool value);
+        private delegate void SettingsWriterDelegate(SharpEncryptSettings settings);
+
+        private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
+        private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
 
         private string Password { get; set; }
 
-        private SharpEncryptSettings SharpEncryptSettings { get; set; }
+        private SharpEncryptSettings Settings { get; set; }
 
-        public MainForm() => InitializeComponent();
+        public MainForm() 
+        {
+            InitializeComponent();
+            DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
+            DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
+        }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
 
@@ -99,8 +109,8 @@ namespace SharpEncrypt
         private void LoadApplication()
         {
             SetApplicationSettings();
-            if(SharpEncryptSettings.LanguageCode != "en-GB")
-                ChangeLanguage(SharpEncryptSettings.LanguageCode);
+            if(Settings.LanguageCode != "en-GB")
+                ChangeLanguage(Settings.LanguageCode);
 
             SetSessionPassword();
         }
@@ -213,14 +223,14 @@ namespace SharpEncrypt
 
             if (!File.Exists(settingsFilePath))
             {
-                new SettingsWriter().WriteSettingsFile(settingsFilePath, settings);
+                DefaultSettingsWriterDelegate.DynamicInvoke(settings);
             }
             else
             {
                 var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath);
                 if (readSettings == null) //it's corrupt
                 {
-                    new SettingsWriter().WriteSettingsFile(settingsFilePath, settings);
+                    DefaultSettingsWriterDelegate.DynamicInvoke(settings);
                 }
                 else
                 {
@@ -228,7 +238,7 @@ namespace SharpEncrypt
                 }
             }
 
-            SharpEncryptSettings = settings;
+            Settings = settings;
         }
 
         private void ExportMyPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,5 +288,39 @@ namespace SharpEncrypt
         }
 
         private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e) => new ImportPublicKeyForm().Show();
+
+        private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Settings.OTPDisclaimerHide)
+            {
+                if (new ShowOnceDialog(
+                    ResourceManager.GetString("OTPDisclaimer"),
+                    "OTPDisclaimerHide",
+                    DefaultSettingsChangeDelegate).ShowDialog()
+                    != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+
+            //rest of logic
+        }
+
+        private void SettingsChangeHandler(string settingsPropertyName, bool value)
+        {
+            var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
+            if (prop == null)
+            {
+                MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
+            }
+            else
+            {
+                prop.SetValue(Settings, value);
+                DefaultSettingsWriterDelegate.DynamicInvoke(Settings);
+            }
+        }
+
+        private void SettingsWriterHandler(SharpEncryptSettings settings)
+            => new SettingsWriter().WriteSettingsFile(PathService.AppSettingsPath, settings);
     }
 }

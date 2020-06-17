@@ -139,6 +139,12 @@
     <Compile Include="SettingsReader.cs" />
     <Compile Include="SettingsWriter.cs" />
     <Compile Include="SharpEncryptSettings.cs" />
+    <Compile Include="ShowOnceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowOnceDialog.Designer.cs">
+      <DependentUpon>ShowOnceDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ImportPublicKeyForm.resx">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +211,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.tr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShowOnceDialog.resx">
+      <DependentUpon>ShowOnceDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -218,6 +227,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\AESLibrary\AESLibrary.csproj">
+      <Project>{5066CDEC-5BF2-459A-984D-0A2950AB10B3}</Project>
+      <Name>AESLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SecureEraseLibrary\SecureEraseLibrary.csproj">
+      <Project>{2BEA89AC-AD4F-479A-8E97-6E93E7A3A2FD}</Project>
+      <Name>SecureEraseLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

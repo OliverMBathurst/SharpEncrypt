@@ -1,12 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
     public partial class PasswordInputDialog : Form
     {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly char[] SpecialChars = new[] { '<', '>', '?', '!', '£', '$', '%', '^', '&', '*', '(', ')' };
         private readonly char[] Alphabet = new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         private readonly char[] Numerics = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -26,18 +27,17 @@ namespace SharpEncrypt
 
         private void PasswordInput_Load(object sender, EventArgs e)
         {
-            var rm = new ComponentResourceManager(typeof(Resources));
-            Text = rm.GetString("PasswordInputDialogTitle");
-            PasswordGroupBox.Text = rm.GetString("Password");
-            OK.Text = rm.GetString("OK");
-            Cancel.Text = rm.GetString("Cancel");
-            ShowPassword.Text = rm.GetString("Show");
-            Copy.Text = rm.GetString("Copy");
-            Generator.Text = rm.GetString("Generator");
-            New.Text = rm.GetString("New");
-            CopyGenerated.Text = rm.GetString("Copy");
-            StrengthLabel.Text = rm.GetString("Strength");
-            UseSessionPassword.Text = rm.GetString("UseSessionPassword");
+            Text = ResourceManager.GetString("PasswordInputDialogTitle");
+            PasswordGroupBox.Text = ResourceManager.GetString("Password");
+            OK.Text = ResourceManager.GetString("OK");
+            Cancel.Text = ResourceManager.GetString("Cancel");
+            ShowPassword.Text = ResourceManager.GetString("Show");
+            Copy.Text = ResourceManager.GetString("Copy");
+            Generator.Text = ResourceManager.GetString("Generator");
+            New.Text = ResourceManager.GetString("New");
+            CopyGenerated.Text = ResourceManager.GetString("Copy");
+            StrengthLabel.Text = ResourceManager.GetString("Strength");
+            UseSessionPassword.Text = ResourceManager.GetString("UseSessionPassword");
 
             if (CanUseSessionPassword)
                 UseSessionPassword.Enabled = true;

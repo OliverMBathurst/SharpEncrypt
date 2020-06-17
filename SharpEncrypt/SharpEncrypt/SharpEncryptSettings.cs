@@ -6,5 +6,7 @@ namespace SharpEncrypt
     internal sealed class SharpEncryptSettings
     {
         public string LanguageCode { get; set; } = "en-GB";
+
+        public bool OTPDisclaimerHide { get; set; } = false;
     }
 }

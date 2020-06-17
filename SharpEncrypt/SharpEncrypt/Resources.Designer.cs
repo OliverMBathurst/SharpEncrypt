@@ -61,11 +61,20 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to About.
         /// </summary>
         internal static string AboutToolStripMenuItem {
             get {
                 return ResourceManager.GetString("AboutToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A critical error has occurred..
+        /// </summary>
+        internal static string ACriticalErrorHasOccurred {
+            get {
+                return ResourceManager.GetString("ACriticalErrorHasOccurred", resourceCulture);
             }
         }
         
@@ -79,7 +88,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Add Secured Folder.
         /// </summary>
         internal static string AddSecuredFolderToolStripMenuItem1 {
             get {
@@ -88,7 +97,16 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        internal static string Advanced {
+            get {
+                return ResourceManager.GetString("Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
         /// </summary>
         internal static string AdvancedToolStripMenuItem {
             get {
@@ -106,7 +124,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Anonymous Rename.
         /// </summary>
         internal static string AnonymousRenameToolStripMenuItem {
             get {
@@ -160,7 +178,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Debug.
         /// </summary>
         internal static string DebugMenuStrip {
             get {
@@ -169,7 +187,25 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Decrypt File.
+        /// </summary>
+        internal static string DecryptFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DecryptFileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dialog.
+        /// </summary>
+        internal static string Dialog {
+            get {
+                return ResourceManager.GetString("Dialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk Tools.
         /// </summary>
         internal static string DiskToolsToolStripMenuItem {
             get {
@@ -196,7 +232,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string ExitToolStripMenuItem {
             get {
@@ -223,7 +259,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to File.
         /// </summary>
         internal static string FileMenuStripItem {
             get {
@@ -268,7 +304,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string HelpMenuStrip {
             get {
@@ -331,6 +367,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Never show again.
+        /// </summary>
+        internal static string NeverShowAgain {
+            get {
+                return ResourceManager.GetString("NeverShowAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         internal static string New {
@@ -349,6 +394,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One Time Pad.
+        /// </summary>
+        internal static string OneTimePadToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OneTimePadToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to open a file from the default secure folder..
         /// </summary>
         internal static string OpenHomeFolder {
@@ -358,7 +412,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Open Secured.
         /// </summary>
         internal static string OpenSecuredToolStripMenuItem {
             get {
@@ -367,11 +421,20 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Options.
         /// </summary>
         internal static string OptionsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("OptionsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The One Time Pad Vernam cipher requires that a key be generated that is either equal to or greater in length than that of the file to encrypt. e.g. a 2MB file will require at least a key of size 2MB. This cipher is widely regarded as perfect and unbreakable. It is therefore a necessity that the key is not stored with the encrypted file in a SharpEncrypt container, as the key would have to be encrypted with an inferior cipher. The next dialog will ask you for a location to store the key file. It is best to s [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OTPDisclaimer {
+            get {
+                return ResourceManager.GetString("OTPDisclaimer", resourceCulture);
             }
         }
         
@@ -448,7 +511,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Rename to original.
         /// </summary>
         internal static string RenameToOriginalToolStripMenuItem1 {
             get {
@@ -493,7 +556,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Secure Delete.
         /// </summary>
         internal static string SecureDeleteToolStripMenuItem {
             get {
@@ -511,7 +574,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Secured Folders.
         /// </summary>
         internal static string SecuredFoldersToolStripMenuItem {
             get {
@@ -520,7 +583,16 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Secure File.
+        /// </summary>
+        internal static string SecureFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("SecureFileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure.
         /// </summary>
         internal static string SecureToolStripMenuItem {
             get {
@@ -534,6 +606,15 @@ namespace SharpEncrypt {
         internal static string SelectSecuredFile {
             get {
                 return ResourceManager.GetString("SelectSecuredFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf).
+        /// </summary>
+        internal static string SharpEncryptOTPEncryptedFile {
+            get {
+                return ResourceManager.GetString("SharpEncryptOTPEncryptedFile", resourceCulture);
             }
         }
         
@@ -556,7 +637,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Show Help.
         /// </summary>
         internal static string ShowHelpToolStripMenuItem {
             get {
@@ -565,7 +646,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Stop Securing.
         /// </summary>
         internal static string StopSecuringToolStripMenuItem {
             get {
@@ -610,7 +691,7 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Wipe Free Disk Space.
         /// </summary>
         internal static string WipeFreeDiskSpaceToolStripMenuItem {
             get {
