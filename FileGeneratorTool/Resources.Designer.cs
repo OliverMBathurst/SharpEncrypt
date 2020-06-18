@@ -97,47 +97,11 @@ namespace FileGen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not a directory..
-        /// </summary>
-        internal static string NotADir {
-            get {
-                return ResourceManager.GetString("NotADir", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to -path.
-        /// </summary>
-        internal static string PathSwitch {
-            get {
-                return ResourceManager.GetString("PathSwitch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
         /// </summary>
         internal static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Writing to: {0}.
-        /// </summary>
-        internal static string WritingTo {
-            get {
-                return ResourceManager.GetString("WritingTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wrote {0} bytes.
-        /// </summary>
-        internal static string WroteNBytes {
-            get {
-                return ResourceManager.GetString("WroteNBytes", resourceCulture);
             }
         }
     }

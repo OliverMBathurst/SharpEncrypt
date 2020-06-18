@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Resources;
 
 namespace FileIOLibrary
 {
-    public class FileIOByte
-    {        
+    public class FileIOByte : IEquatable<FileIOByte>
+    {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private const char on = '1', off = '0';
         private string byteString = "00000000";
 
@@ -19,10 +23,10 @@ namespace FileIOLibrary
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
                 if (value.Length != 8)
-                    throw new ArgumentException("String not of length 8");
+                    throw new ArgumentException(ResourceManager.GetString("WrongStringLength", CultureInfo.CurrentCulture));
                 for (var i = 0; i < value.Length; i++)
                     if (value[i] != on && value[i] != off)
-                        throw new ArgumentException($"Invalid char at index {i}.");
+                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidCharAt", CultureInfo.CurrentCulture), i));
                 byteString = value;
             }
         }
@@ -52,5 +56,16 @@ namespace FileIOLibrary
                 bitsArray[i] = new Bit(ByteString[i] == on);
             return bitsArray;
         }
+
+        public bool Equals(FileIOByte other)
+        {
+            if (other != null)
+                return other.ByteString.SequenceEqual(ByteString);
+            return false;
+        }
+
+        public override bool Equals(object obj) => obj is FileIOByte b && Equals(b);
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

@@ -1,11 +1,14 @@
 ﻿using FileGeneratorLibrary;
 using System;
+using System.Globalization;
 using System.IO;
+using System.Resources;
 
 namespace FileGen
 {
     internal sealed class ArgumentsHandler
     {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
@@ -16,9 +19,9 @@ namespace FileGen
             var size = -1L;
             bool random = false, pause = true, postDelete = true;
 
-            if ((_arguments.Length == 1 && (_arguments[0] == Resources.HelpSwitch || _arguments[0] == Resources.HelpShortSwitch)) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(Resources.Usage);
+                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -42,7 +45,7 @@ namespace FileGen
                             postDelete = postResult;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(Resources.InvalidArg, _arguments[i], Resources.Usage));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                     i++;
                 }
@@ -51,7 +54,7 @@ namespace FileGen
 
                 if (pause)
                 {
-                    Console.WriteLine(Resources.FileHasBeenGenerated);
+                    Console.WriteLine(ResourceManager.GetString("FileHasBeenGenerated", CultureInfo.CurrentCulture));
                     Console.ReadLine();
                 }
             }

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace FileGeneratorLibrary
 {
-    public sealed class FileGeneratorInstance
+    public static class FileGeneratorInstance
     {
         private const long BUFFER_LENGTH = 1024L;
 
@@ -20,9 +20,11 @@ namespace FileGeneratorLibrary
 
         public static void WriteNewFile(string path, long length = -1L, bool random = true, bool postDelete = true, long bufferLength = BUFFER_LENGTH)
         {
-            if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
+            if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
-                        
+            if (!Directory.Exists(path))
+                throw new DirectoryNotFoundException(path);
+
             if (length == -1L)
             {
                 var drive = DriveInfo.GetDrives().First(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(path[0], CultureInfo.CurrentCulture));
@@ -74,7 +76,7 @@ namespace FileGeneratorLibrary
             if (string.IsNullOrEmpty(directoryPath))
                 throw new ArgumentNullException(nameof(directoryPath));
             if (!Directory.Exists(directoryPath))
-                throw new IOException($"{directoryPath} is not a valid directory.");
+                throw new DirectoryNotFoundException(directoryPath);
 
             var dir = Path.GetDirectoryName(directoryPath);
             var path = Path.Combine(dir, $"{GetRandomNameWithoutExtension()}{extension}");

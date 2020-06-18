@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OTPTool {
+namespace AESLibrary {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace OTPTool {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OTPTool.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AESLibrary.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,20 @@ namespace OTPTool {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -h.
+        ///   Looks up a localized string similar to iv.
         /// </summary>
-        internal static string HelpShortSwitch {
+        internal static string iv {
             get {
-                return ResourceManager.GetString("HelpShortSwitch", resourceCulture);
+                return ResourceManager.GetString("iv", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -help.
+        ///   Looks up a localized string similar to key.
         /// </summary>
-        internal static string HelpSwitch {
+        internal static string key {
             get {
-                return ResourceManager.GetString("HelpSwitch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invalid argument: {0}. {1}.
-        /// </summary>
-        internal static string InvalidArg {
-            get {
-                return ResourceManager.GetString("InvalidArg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Usage: [-path string] {-encrypt | -decryp} [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
-        /// </summary>
-        internal static string Usage {
-            get {
-                return ResourceManager.GetString("Usage", resourceCulture);
+                return ResourceManager.GetString("key", resourceCulture);
             }
         }
     }

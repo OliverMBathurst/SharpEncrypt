@@ -31,7 +31,7 @@ namespace SharpEncrypt
                 }
             }
 
-            new SecureEraseHelper().SDeleteFileWipe(filePath);
+            SecureEraseHelper.SDeleteFileWipe(filePath);
         }
 
         public static void Containerize(string filePath, AESKey key, string password)

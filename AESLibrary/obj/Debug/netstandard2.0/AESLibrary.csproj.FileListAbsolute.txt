@@ -19,3 +19,5 @@ C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\bin\Debug\netstandard2.0\Fi
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\bin\Debug\netstandard2.0\FileIOLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Debug\netstandard2.0\AESLibrary.csproj.GenerateResource.cache

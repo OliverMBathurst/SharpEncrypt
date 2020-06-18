@@ -60,16 +60,16 @@ namespace OTPTool
                 if (genKey)
                 {
                     if (string.IsNullOrEmpty(referenceFile))
-                        OTPInstance.GenerateKey(path, keySize);
+                        OTPHelper.GenerateKey(path, keySize);
                     else
-                        OTPInstance.GenerateKey(path, referenceFile);
+                        OTPHelper.GenerateKey(path, referenceFile);
                 }
                 else
                 {
                     if (encrypt)
-                        OTPInstance.Encrypt(path, keyPath);
+                        OTPHelper.Encrypt(path, keyPath);
                     else
-                        OTPInstance.Decrypt(path, keyPath);
+                        OTPHelper.Decrypt(path, keyPath);
                 }
             }
         }

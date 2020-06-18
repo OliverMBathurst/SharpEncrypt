@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AESTool {
+namespace FileIOLibrary {
     using System;
     
     
@@ -29,8 +29,9 @@ namespace AESTool {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {}
-
+        internal Resources() {
+        }
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -38,7 +39,7 @@ namespace AESTool {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AESTool.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileIOLibrary.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,46 +61,65 @@ namespace AESTool {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -h.
+        ///   Looks up a localized string similar to buffer.
         /// </summary>
-        internal static string HelpShortSwitch {
+        internal static string buffer {
             get {
-                return ResourceManager.GetString("HelpShortSwitch", resourceCulture);
+                return ResourceManager.GetString("buffer", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -help.
+        ///   Looks up a localized string similar to Buffer has not been cleared by a write operation..
         /// </summary>
-        internal static string HelpSwitch {
+        internal static string BufferNotCleared {
             get {
-                return ResourceManager.GetString("HelpSwitch", resourceCulture);
+                return ResourceManager.GetString("BufferNotCleared", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid argument: {0}. {1}.
+        ///   Looks up a localized string similar to Buffer not initialized..
         /// </summary>
-        internal static string InvalidArg {
+        internal static string BufferNotInitialized {
             get {
-                return ResourceManager.GetString("InvalidArg", resourceCulture);
+                return ResourceManager.GetString("BufferNotInitialized", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage: [-path string] {-encrypt | -decryp} [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
+        ///   Looks up a localized string similar to Invalid char at index {0}..
         /// </summary>
-        internal static string Usage {
+        internal static string InvalidCharAt {
             get {
-                return ResourceManager.GetString("Usage", resourceCulture);
+                return ResourceManager.GetString("InvalidCharAt", resourceCulture);
             }
         }
-
-        internal static string NotAKey
-        {
-            get
-            {
-                return ResourceManager.GetString("NotAKey", resourceCulture);
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not a valid file..
+        /// </summary>
+        internal static string NotAValidFile {
+            get {
+                return ResourceManager.GetString("NotAValidFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to path.
+        /// </summary>
+        internal static string path {
+            get {
+                return ResourceManager.GetString("path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String not of length 8..
+        /// </summary>
+        internal static string WrongStringLength {
+            get {
+                return ResourceManager.GetString("WrongStringLength", resourceCulture);
             }
         }
     }

@@ -1,6 +1,8 @@
-﻿namespace FileIOLibrary
+﻿using System;
+
+namespace FileIOLibrary
 {
-    public struct Bit : System.IEquatable<Bit>
+    public struct Bit : IEquatable<Bit>
     {
         public Bit(bool bitValue) => Value = bitValue;
 
@@ -18,6 +20,6 @@
 
         public static bool operator !=(Bit left, Bit right) => !(left == right);
 
-        public bool Equals(Bit other) => other.Equals(this);
+        public bool Equals(Bit other) => Value == other.Value;
     }
 }

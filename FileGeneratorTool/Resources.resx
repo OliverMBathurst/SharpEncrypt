@@ -133,24 +133,8 @@
     <value>Invalid argument: {0}. {1}</value>
     <comment>Invalid arg statement</comment>
   </data>
-  <data name="NotADir" xml:space="preserve">
-    <value>{0} is not a directory.</value>
-    <comment>Not a dir statement</comment>
-  </data>
-  <data name="PathSwitch" xml:space="preserve">
-    <value>-path</value>
-    <comment>Path switch</comment>
-  </data>
   <data name="Usage" xml:space="preserve">
     <value>Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}</value>
     <comment>Usage statement</comment>
-  </data>
-  <data name="WritingTo" xml:space="preserve">
-    <value>Writing to: {0}</value>
-    <comment>Writing to statement</comment>
-  </data>
-  <data name="WroteNBytes" xml:space="preserve">
-    <value>Wrote {0} bytes</value>
-    <comment>Wrote n bytes</comment>
   </data>
 </root>

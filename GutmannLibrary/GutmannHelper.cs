@@ -4,9 +4,9 @@ using System.Security.Cryptography;
 
 namespace GutmannLibrary
 {
-    public sealed class GutmannInstance
+    public static class GutmannHelper
     {
-        private readonly int[] _patterns = new[] { 
+        private readonly static int[] _patterns = new[] { 
             85, 170, 146, 73, 
             36, 0, 17, 34, 
             51, 68, 85, 102, 
@@ -18,12 +18,12 @@ namespace GutmannLibrary
 
         private const long BUFFER_LENGTH = 1024L;
 
-        public void WipeFile(string path)
+        public static void WipeFile(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new ArgumentException("File does not exist.");
+                throw new FileNotFoundException(path);
 
             RandomWipe(path);
             GutmannPatternWipe(path);
@@ -35,7 +35,7 @@ namespace GutmannLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new ArgumentException("File does not exist.");
+                throw new FileNotFoundException(path);
 
             using (var bw = new BinaryWriter(File.OpenWrite(path)))
             {
@@ -60,12 +60,12 @@ namespace GutmannLibrary
             }
         }
 
-        public void GutmannPatternWipe(string path, long bufferLength = BUFFER_LENGTH)
+        public static void GutmannPatternWipe(string path, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new ArgumentException("File does not exist.");
+                throw new FileNotFoundException(path);
 
             using (var bw = new BinaryWriter(File.OpenWrite(path)))
             {

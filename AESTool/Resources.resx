@@ -134,7 +134,7 @@
     <comment>Not a key statement</comment>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value>Usage: [-path string] {-encrypt | -decrypt } [-key string] [-genKey] [-keySize number] [-blockSize number]</value>
+    <value>Usage: [-path string] [-outputPath string] {-encrypt | -decrypt } [-key string] [-genKey]</value>
     <comment>Usage statement</comment>
   </data>
 </root>

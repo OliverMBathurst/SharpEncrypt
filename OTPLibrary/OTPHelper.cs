@@ -1,11 +1,12 @@
 ﻿using AESLibrary;
+using OTPLibrary.Exceptions;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 
 namespace OTPLibrary
 {
-    public sealed class OTPInstance
+    public static class OTPHelper
     {
         private const long BUFFER_LENGTH = 1024L;
 
@@ -15,17 +16,16 @@ namespace OTPLibrary
                 throw new ArgumentNullException(nameof(path));
             if (string.IsNullOrEmpty(referenceFile))
                 throw new ArgumentNullException(nameof(referenceFile));
+            if (!File.Exists(referenceFile)) 
+                throw new FileNotFoundException(referenceFile);
 
-            var fi = new FileInfo(referenceFile);
-            if (!fi.Exists) throw new ArgumentException($"{referenceFile} does not exist.");
-
-            GenerateKey(path, fi.Length, bufferLength);                
+            GenerateKey(path, new FileInfo(referenceFile).Length, bufferLength);                
         }
 
         public static void GenerateKey(string path, long length, long bufferLength = BUFFER_LENGTH)
         {
             if (File.Exists(path))
-                throw new IOException($"{path} already exists.");
+                throw new FileAlreadyExistsException();
 
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -53,7 +53,7 @@ namespace OTPLibrary
             if (keyBytes == null)
                 throw new ArgumentNullException(nameof(keyBytes));
             if (fileBytes.Length > keyBytes.Length)
-                throw new ArgumentException("Byte length mismatch detected.");
+                throw new ByteArrayLengthMismatchException();
 
             for(var i = 0; i < fileBytes.Length; i++)
             {
@@ -98,12 +98,14 @@ namespace OTPLibrary
                 throw new ArgumentNullException(nameof(path));
             if (string.IsNullOrEmpty(keyPath))
                 throw new ArgumentNullException(nameof(keyPath));
-            if(!File.Exists(path))
-                throw new FileNotFoundException(nameof(path));
+
+            if (!File.Exists(path))
+                throw new FileNotFoundException(path);
             if (!File.Exists(keyPath))
-                throw new FileNotFoundException(nameof(keyPath));
+                throw new FileNotFoundException(keyPath);
+
             if (new FileInfo(path).Length > new FileInfo(keyPath).Length)
-                throw new ArgumentException("File length greater than key length.");
+                throw new FileLengthGreaterThanKeyLengthException();
 
             var readWriter = new SynchronizedReadWriter(path);
             using(var keyStream = new FileStream(keyPath, FileMode.Open))

@@ -9,9 +9,9 @@ using System.Security.Cryptography;
 
 namespace SecureEraseLibrary
 {
-    public sealed class SecureEraseHelper
+    public static class SecureEraseHelper
     {
-        private readonly char[] _alphabet = new []{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+        private readonly static char[] _alphabet = new []{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         private const long BUFFER_LENGTH = 1024L;
 
         public static void WriteZeros(string path, int passes = 1)
@@ -19,7 +19,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file.");
+                throw new FileNotFoundException(path);
 
             using (var fs = new FileStream(path, FileMode.Open))
             {
@@ -45,7 +45,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file.");
+                throw new FileNotFoundException(path);
 
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -75,7 +75,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file.");
+                throw new FileNotFoundException(path);
 
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -104,15 +104,15 @@ namespace SecureEraseLibrary
         {
             var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(driveLetter, CultureInfo.CurrentCulture));
             if (!drives.Any())
-                throw new ArgumentException($"{driveLetter} is not a valid drive letter.");
+                throw new DriveNotFoundException(driveLetter.ToString());
 
             var drive = drives.First();
             if (string.IsNullOrEmpty(tempDirectory))
                 throw new ArgumentNullException(nameof(tempDirectory));
             if(!Directory.Exists(tempDirectory))
-                throw new ArgumentException($"The provided directory {tempDirectory} does not exist.");
+                throw new DirectoryNotFoundException(tempDirectory);
             if (char.ToLower(Path.GetPathRoot(tempDirectory)[0], CultureInfo.CurrentCulture) != char.ToLower(driveLetter, CultureInfo.CurrentCulture))
-                throw new ArgumentException($"Directory {tempDirectory} does not exist on drive {driveLetter}.");
+                throw new DirectoryNotFoundException($"{tempDirectory} - {driveLetter}");
             
             var tmpFile = FileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorInstance.GetRandomExtension());
             FileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
@@ -123,7 +123,7 @@ namespace SecureEraseLibrary
                 File.Delete(tmpFile);
         }
 
-        public void SDeleteFileWipe(string filePath, bool postDelete = true)
+        public static void SDeleteFileWipe(string filePath, bool postDelete = true)
         {
             WriteZeros(filePath);
             Write255s(filePath);
@@ -133,7 +133,7 @@ namespace SecureEraseLibrary
                 File.Delete(filePath);
         }
 
-        public string SDeleteFileRename(string path)
+        public static string SDeleteFileRename(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -166,7 +166,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file.");
+                throw new FileNotFoundException(path);
 
             var unixTime = new DateTime(1970, 1, 1);
             File.SetCreationTime(path, unixTime);
@@ -182,7 +182,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a directory.");
+                throw new FileNotFoundException(path);
 
             var unixTime = new DateTime(1970, 1, 1);
             Directory.SetCreationTime(path, unixTime);
@@ -198,7 +198,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
-                throw new IOException($"{path} is not a valid path of a file.");
+                throw new FileNotFoundException(path);
 
             var currentPath = path;
             var dir = Path.GetDirectoryName(path);
@@ -214,12 +214,12 @@ namespace SecureEraseLibrary
             return currentPath;
         }
 
-        public void ShredDirectory(string path, CipherType cipherType, bool recurse = false, bool nameObfuscation = true, bool propertyObfuscation = true)
+        public static void ShredDirectory(string path, CipherType cipherType, bool recurse = false, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory)
-                throw new ArgumentException($"{path} is not a directory.");
+                throw new DirectoryNotFoundException(path);
             if (!Directory.Exists(path))
-                throw new ArgumentException($"{path} does not exist.");
+                throw new DirectoryNotFoundException(path);
 
             var files = Directory.GetFiles(path);
             foreach (var file in files)
@@ -244,12 +244,12 @@ namespace SecureEraseLibrary
         public static void ShredFile(string path, CipherType cipherType, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory)
-                throw new ArgumentException($"{path} is not a file.");
-            if (!new FileInfo(path).Exists)
-                throw new ArgumentException($"{path} does not exist.");
+                throw new FileNotFoundException(path);
+            if (!File.Exists(path))
+                throw new FileNotFoundException(path);
 
             if (cipherType == CipherType.OTP)
-                OTPInstance.EncryptWithoutKey(path);
+                OTPHelper.EncryptWithoutKey(path);
             else if (cipherType == CipherType.AES)
                 AESHelper.EncryptFile(AESHelper.GetNewAESKey(), path);
 
@@ -267,7 +267,7 @@ namespace SecureEraseLibrary
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
 
-            if (!Directory.Exists(path)) throw new ArgumentException($"{path} is not a valid path of a directory.");
+            if (!Directory.Exists(path)) throw new DirectoryNotFoundException(path);
             {
                 var parent = Directory.GetParent(path).FullName;
                 var obfuscatedPath = path;

@@ -1,10 +1,14 @@
-﻿using System;
+﻿using FileIOLibrary;
+using System;
+using System.Globalization;
 using System.IO;
+using System.Resources;
 
 namespace AESLibrary
 {
     public sealed class SynchronizedReadWriter
     {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private const long BUFFER_LENGTH = 1024L;
         private readonly string _path;
         private byte[] buffer;
@@ -25,7 +29,7 @@ namespace AESLibrary
 
         public void SetBuffer(byte[] bufferParam)
         {
-            if (buffer == null) throw new Exception("Buffer not initialized.");
+            if (buffer == null) throw new Exception(ResourceManager.GetString("BufferNotInitialized", CultureInfo.CurrentCulture));
             buffer = bufferParam;
         }
 
@@ -34,11 +38,11 @@ namespace AESLibrary
             if (ReadComplete)
                 return;
             if (buffer != null)
-                throw new Exception("Buffer has not been cleared by a write operation.");
+                throw new Exception(ResourceManager.GetString("BufferNotCleared", CultureInfo.CurrentCulture));
             if (string.IsNullOrEmpty(_path))
-                throw new ArgumentNullException(nameof(_path));
+                throw new ArgumentNullException(ResourceManager.GetString("path", CultureInfo.CurrentCulture));
             if (!File.Exists(_path))
-                throw new Exception($"{_path} is not a valid file.");
+                throw new IOException(ResourceManager.GetString("NotAValidFile", CultureInfo.CurrentCulture));
 
             using (var fs = new FileStream(_path, FileMode.Open))
             {
@@ -59,9 +63,9 @@ namespace AESLibrary
             if (WriteComplete)
                 return;
             if (buffer == null)
-                throw new ArgumentNullException(nameof(buffer));
+                throw new ArgumentNullException(ResourceManager.GetString("buffer", CultureInfo.CurrentCulture));
             if (string.IsNullOrEmpty(_path))
-                throw new ArgumentNullException(nameof(_path));
+                throw new ArgumentNullException(ResourceManager.GetString("path", CultureInfo.CurrentCulture));
             if (!File.Exists(_path))
                 throw new Exception($"{_path} is not a valid file.");
 

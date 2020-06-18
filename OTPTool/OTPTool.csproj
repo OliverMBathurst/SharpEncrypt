@@ -53,7 +53,6 @@
     <Compile Include="ArgumentsHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 
@@ -34,10 +35,12 @@ namespace AESLibrary
             var iv = aesKey.GetIV();
             var keyLength = aesKey.KeyLength;
 
-            if (key.Length <= 0)
-                throw new ArgumentException("Key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (!key.Any() || keyLength <= 0)
+                throw new KeyLengthException(Resources.key);
+            if (iv == null)
+                throw new ArgumentNullException(Resources.iv);
+            if (!iv.Any())
+                throw new ByteArrayLengthException(Resources.iv);
 
             using (var rif = new RijndaelManaged())
             {
@@ -75,10 +78,12 @@ namespace AESLibrary
             var iv = aesKey.GetIV();
             var keyLength = aesKey.KeyLength;
 
-            if (key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (!key.Any() || keyLength <= 0)
+                throw new KeyLengthException(Resources.key);
+            if (iv == null)
+                throw new ArgumentNullException(Resources.iv);
+            if (!iv.Any())
+                throw new ByteArrayLengthException(Resources.iv);
 
             using (var rif = new RijndaelManaged())
             {
@@ -116,10 +121,12 @@ namespace AESLibrary
             var iv = aesKey.GetIV();
             var keyLength = aesKey.KeyLength;
 
-            if (key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (!key.Any() || keyLength <= 0)
+                throw new KeyLengthException(Resources.key);
+            if (iv == null)
+                throw new ArgumentNullException(Resources.iv);
+            if (!iv.Any())
+                throw new ByteArrayLengthException(Resources.iv);
 
             var readWriter = new SynchronizedReadWriter(filePath);
 
@@ -161,10 +168,12 @@ namespace AESLibrary
             var iv = aesKey.GetIV();
             var keyLength = aesKey.KeyLength;
 
-            if (key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (iv == null || iv.Length <= 0)
-                throw new ArgumentNullException("IV");
+            if (!key.Any() || keyLength <= 0)
+                throw new KeyLengthException(Resources.key);
+            if (iv == null)
+                throw new ArgumentNullException(Resources.iv);
+            if (!iv.Any())
+                throw new ByteArrayLengthException(Resources.iv);
 
             var readWriter = new SynchronizedReadWriter(filePath);
 
