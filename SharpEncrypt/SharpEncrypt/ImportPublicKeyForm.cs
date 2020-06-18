@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
-    public partial class ImportPublicKeyForm : Form
+    internal partial class ImportPublicKeyForm : Form
     {
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
 

@@ -12,13 +12,12 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
-    public partial class MainForm : Form
+    internal partial class MainForm : Form
     {
-        public const string GuidIdentifier = "cd77e52c6eb14e008f5c3c548857f6a2";
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
         private readonly PathService PathService = new PathService();
-        private delegate void SettingsChangeDelegate(string settingsPropertyName, bool value);
-        private delegate void SettingsWriterDelegate(SharpEncryptSettings settings);
+        private delegate void SettingsChangeDelegate(string settingsPropertyName, object value);
+        private delegate void SettingsWriterDelegate(SharpEncryptSettings settings, bool synchronous);
 
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
@@ -39,7 +38,9 @@ namespace SharpEncrypt
         private void ExitToolStripMenuItem1_Click(object sender, EventArgs e) => Application.Exit();
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(Resources.CreatedByCredits);
-        
+
+        #region Language Menu Items
+
         private void EnglishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("en-GB");
 
         private void DeutschGermanToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("de-DE");
@@ -61,6 +62,8 @@ namespace SharpEncrypt
         private void SwedishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("sv-SE");
 
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
+
+        #endregion
 
         private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(PathService.AppDirectory);
 
@@ -109,10 +112,16 @@ namespace SharpEncrypt
         private void LoadApplication()
         {
             SetApplicationSettings();
-            if(Settings.LanguageCode != "en-GB")
+            if(Settings.LanguageCode != Constants.DefaultLanguage)
                 ChangeLanguage(Settings.LanguageCode);
 
             SetSessionPassword();
+        }
+
+        private void ReloadApplication(bool changeLanguage)
+        {
+            if (changeLanguage)
+                ChangeLanguage(Settings.LanguageCode);
         }
 
         private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -156,6 +165,8 @@ namespace SharpEncrypt
             }            
         }
 
+        #region Flag Menu Items
+
         private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (UseADifferentPasswordForEachFileToolStripMenuItem.Checked)
@@ -177,6 +188,10 @@ namespace SharpEncrypt
                 DebugMenuStrip.Enabled = true;
             }
         }
+
+        #endregion
+
+        #region Language change methods
 
         private void ChangeLanguage(string lang)
         {
@@ -216,6 +231,8 @@ namespace SharpEncrypt
             OpenHomeFolderToolTip.SetToolTip(OpenHomeFolder, rm.GetString("OpenHomeFolder"));
         }
 
+        #endregion
+
         private void SetApplicationSettings()
         {
             var settingsFilePath = PathService.AppSettingsPath;
@@ -223,18 +240,18 @@ namespace SharpEncrypt
 
             if (!File.Exists(settingsFilePath))
             {
-                DefaultSettingsWriterDelegate.DynamicInvoke(settings);
+                DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
             }
             else
             {
-                var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath);
+                var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath, true);
                 if (readSettings == null) //it's corrupt
                 {
-                    DefaultSettingsWriterDelegate.DynamicInvoke(settings);
+                    DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
                 }
                 else
                 {
-                    settings = readSettings;
+                    settings = readSettings.Result;
                 }
             }
 
@@ -306,7 +323,7 @@ namespace SharpEncrypt
             //rest of logic
         }
 
-        private void SettingsChangeHandler(string settingsPropertyName, bool value)
+        private void SettingsChangeHandler(string settingsPropertyName, object value)
         {
             var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
             if (prop == null)
@@ -315,12 +332,38 @@ namespace SharpEncrypt
             }
             else
             {
-                prop.SetValue(Settings, value);
-                DefaultSettingsWriterDelegate.DynamicInvoke(Settings);
+                if (!value.GetType().IsAssignableFrom(prop.PropertyType))
+                {
+                    MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
+                }
+                else
+                {
+                    prop.SetValue(Settings, value);
+                    DefaultSettingsWriterDelegate.DynamicInvoke(Settings, false);
+                }                
             }
         }
 
-        private void SettingsWriterHandler(SharpEncryptSettings settings)
-            => new SettingsWriter().WriteSettingsFile(PathService.AppSettingsPath, settings);
+        private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
+            => new SettingsWriter().WriteSettingsFile(PathService.AppSettingsPath, settings, synchronous);
+
+        private void ResetAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show(
+                ResourceManager.GetString("AreYouSure?"),
+                string.Empty,
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var newSettingsObj = new SharpEncryptSettings();
+                var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
+                DefaultSettingsWriterDelegate.DynamicInvoke(newSettingsObj, false);
+
+                Settings = newSettingsObj;
+
+                ReloadApplication(changeLang);
+            }            
+        }
+
+        private void WipeFreeDiskSpaceToolStripMenuItem_Click(object sender, EventArgs e) => new HardDriveWipeDialog().Show();
     }
 }

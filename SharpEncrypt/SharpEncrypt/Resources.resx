@@ -145,6 +145,12 @@
     <value>SharpEncrypt</value>
     <comment>The app's name</comment>
   </data>
+  <data name="AreYouSure?" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="AvailableSize" xml:space="preserve">
+    <value>Available Space (GB)</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -168,6 +174,15 @@
   </data>
   <data name="DiskToolsToolStripMenuItem" xml:space="preserve">
     <value>Disk Tools</value>
+  </data>
+  <data name="Drive" xml:space="preserve">
+    <value>Drive</value>
+  </data>
+  <data name="DriveFormat" xml:space="preserve">
+    <value>Drive Format</value>
+  </data>
+  <data name="DriveType" xml:space="preserve">
+    <value>Drive Type</value>
   </data>
   <data name="DuplicateIdentity" xml:space="preserve">
     <value>Duplicate identity found, please use another.</value>
@@ -198,6 +213,9 @@
   </data>
   <data name="GoToPasswordManagement" xml:space="preserve">
     <value>Go to password management.</value>
+  </data>
+  <data name="HDDWipeDialog" xml:space="preserve">
+    <value>Drive Wipe Dialog</value>
   </data>
   <data name="HelpMenuStrip" xml:space="preserve">
     <value>Help</value>
@@ -271,6 +289,9 @@
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
     <value>Rename to original</value>
   </data>
+  <data name="ResetAllSettingsToolStripMenuItem" xml:space="preserve">
+    <value>Reset all settings</value>
+  </data>
   <data name="RSAKeyFilter" xml:space="preserve">
     <value>SharpEncrypt RSA Key (*.serk)|*.serk</value>
   </data>
@@ -321,6 +342,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="TotalSize" xml:space="preserve">
+    <value>Total Size (GB)</value>
   </data>
   <data name="UserKeys" xml:space="preserve">
     <value>User Keys</value>

@@ -49,14 +49,27 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="ContainerService.cs" />
+    <Compile Include="DriveSelectionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DriveSelectionControl.Designer.cs">
+      <DependentUpon>DriveSelectionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
+    <Compile Include="HardDriveWipeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HardDriveWipeDialog.Designer.cs">
+      <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportPublicKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="PathService.cs" />
     <Compile Include="RSAKeyWriter.cs" />
     <Compile Include="MainForm.cs">
@@ -145,6 +158,12 @@
     <Compile Include="ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DriveSelectionControl.resx">
+      <DependentUpon>DriveSelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HardDriveWipeDialog.resx">
+      <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportPublicKeyForm.resx">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,5 +256,6 @@
       <Name>SecureEraseLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

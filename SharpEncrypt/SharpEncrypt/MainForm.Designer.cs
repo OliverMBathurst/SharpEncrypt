@@ -93,6 +93,7 @@
             this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UseADifferentPasswordForEachFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeSessionPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetAllSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -398,24 +399,28 @@
             // 
             // OpenSecuredToolStripMenuItem
             // 
+            this.OpenSecuredToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OpenSecuredToolStripMenuItem.Image")));
             this.OpenSecuredToolStripMenuItem.Name = "OpenSecuredToolStripMenuItem";
             this.OpenSecuredToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.OpenSecuredToolStripMenuItem.Text = "Open Secured";
             // 
             // SecureToolStripMenuItem
             // 
+            this.SecureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("SecureToolStripMenuItem.Image")));
             this.SecureToolStripMenuItem.Name = "SecureToolStripMenuItem";
             this.SecureToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.SecureToolStripMenuItem.Text = "Secure";
             // 
             // StopSecuringToolStripMenuItem
             // 
+            this.StopSecuringToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("StopSecuringToolStripMenuItem.Image")));
             this.StopSecuringToolStripMenuItem.Name = "StopSecuringToolStripMenuItem";
             this.StopSecuringToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.StopSecuringToolStripMenuItem.Text = "Stop Securing";
             // 
             // SecuredFoldersToolStripMenuItem
             // 
+            this.SecuredFoldersToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("SecuredFoldersToolStripMenuItem.Image")));
             this.SecuredFoldersToolStripMenuItem.Name = "SecuredFoldersToolStripMenuItem";
             this.SecuredFoldersToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.SecuredFoldersToolStripMenuItem.Text = "Secured Folders";
@@ -445,6 +450,7 @@
             // 
             // SecureDeleteToolStripMenuItem
             // 
+            this.SecureDeleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("SecureDeleteToolStripMenuItem.Image")));
             this.SecureDeleteToolStripMenuItem.Name = "SecureDeleteToolStripMenuItem";
             this.SecureDeleteToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.SecureDeleteToolStripMenuItem.Text = "Secure Delete";
@@ -468,20 +474,20 @@
             this.SecureFileToolStripMenuItem,
             this.DecryptFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
             // 
             this.SecureFileToolStripMenuItem.Name = "SecureFileToolStripMenuItem";
-            this.SecureFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.SecureFileToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
             this.SecureFileToolStripMenuItem.Text = "Secure File";
             this.SecureFileToolStripMenuItem.Click += new System.EventHandler(this.SecureFileToolStripMenuItem_Click);
             // 
             // DecryptFileToolStripMenuItem
             // 
             this.DecryptFileToolStripMenuItem.Name = "DecryptFileToolStripMenuItem";
-            this.DecryptFileToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.DecryptFileToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
             this.DecryptFileToolStripMenuItem.Text = "Decrypt File";
             // 
             // OptionsToolStripMenuItem
@@ -493,7 +499,9 @@
             this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem,
             this.KeyManagementToolStripMenuItem,
             this.UseADifferentPasswordForEachFileToolStripMenuItem,
-            this.ChangeSessionPasswordToolStripMenuItem});
+            this.ChangeSessionPasswordToolStripMenuItem,
+            this.ResetAllSettingsToolStripMenuItem});
+            this.OptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OptionsToolStripMenuItem.Image")));
             this.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             this.OptionsToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.OptionsToolStripMenuItem.Text = "Options";
@@ -657,8 +665,16 @@
             this.ChangeSessionPasswordToolStripMenuItem.Text = "Change session password";
             this.ChangeSessionPasswordToolStripMenuItem.Click += new System.EventHandler(this.ChangeSessionPasswordToolStripMenuItem_Click);
             // 
+            // ResetAllSettingsToolStripMenuItem
+            // 
+            this.ResetAllSettingsToolStripMenuItem.Name = "ResetAllSettingsToolStripMenuItem";
+            this.ResetAllSettingsToolStripMenuItem.Size = new System.Drawing.Size(408, 34);
+            this.ResetAllSettingsToolStripMenuItem.Text = "Reset all settings";
+            this.ResetAllSettingsToolStripMenuItem.Click += new System.EventHandler(this.ResetAllSettingsToolStripMenuItem_Click);
+            // 
             // ExitToolStripMenuItem
             // 
+            this.ExitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ExitToolStripMenuItem.Image")));
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.ExitToolStripMenuItem.Text = "Exit";
@@ -682,9 +698,11 @@
             // 
             // WipeFreeDiskSpaceToolStripMenuItem
             // 
+            this.WipeFreeDiskSpaceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("WipeFreeDiskSpaceToolStripMenuItem.Image")));
             this.WipeFreeDiskSpaceToolStripMenuItem.Name = "WipeFreeDiskSpaceToolStripMenuItem";
             this.WipeFreeDiskSpaceToolStripMenuItem.Size = new System.Drawing.Size(284, 34);
             this.WipeFreeDiskSpaceToolStripMenuItem.Text = "Wipe Free Disk Space";
+            this.WipeFreeDiskSpaceToolStripMenuItem.Click += new System.EventHandler(this.WipeFreeDiskSpaceToolStripMenuItem_Click);
             // 
             // AdvancedToolStripMenuItem
             // 
@@ -711,14 +729,16 @@
             // 
             // ShowHelpToolStripMenuItem
             // 
+            this.ShowHelpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ShowHelpToolStripMenuItem.Image")));
             this.ShowHelpToolStripMenuItem.Name = "ShowHelpToolStripMenuItem";
-            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.ShowHelpToolStripMenuItem.Text = "Show Help";
             // 
             // AboutToolStripMenuItem
             // 
+            this.AboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripMenuItem.Image")));
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -943,6 +963,7 @@
         private System.Windows.Forms.ToolStripMenuItem OneTimePadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SecureFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetAllSettingsToolStripMenuItem;
     }
 }
 

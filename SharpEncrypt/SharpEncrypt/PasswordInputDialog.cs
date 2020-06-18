@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
-    public partial class PasswordInputDialog : Form
+    internal partial class PasswordInputDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly char[] SpecialChars = new[] { '<', '>', '?', '!', '£', '$', '%', '^', '&', '*', '(', ')' };

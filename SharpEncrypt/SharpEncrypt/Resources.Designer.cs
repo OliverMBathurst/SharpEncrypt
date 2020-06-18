@@ -142,6 +142,24 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        internal static string AreYouSure_ {
+            get {
+                return ResourceManager.GetString("AreYouSure?", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Space (GB).
+        /// </summary>
+        internal static string AvailableSize {
+            get {
+                return ResourceManager.GetString("AvailableSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -210,6 +228,33 @@ namespace SharpEncrypt {
         internal static string DiskToolsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("DiskToolsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive.
+        /// </summary>
+        internal static string Drive {
+            get {
+                return ResourceManager.GetString("Drive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive Format.
+        /// </summary>
+        internal static string DriveFormat {
+            get {
+                return ResourceManager.GetString("DriveFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive Type.
+        /// </summary>
+        internal static string DriveType {
+            get {
+                return ResourceManager.GetString("DriveType", resourceCulture);
             }
         }
         
@@ -300,6 +345,15 @@ namespace SharpEncrypt {
         internal static string GoToPasswordManagement {
             get {
                 return ResourceManager.GetString("GoToPasswordManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive Wipe Dialog.
+        /// </summary>
+        internal static string HDDWipeDialog {
+            get {
+                return ResourceManager.GetString("HDDWipeDialog", resourceCulture);
             }
         }
         
@@ -520,6 +574,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset all settings.
+        /// </summary>
+        internal static string ResetAllSettingsToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ResetAllSettingsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SharpEncrypt RSA Key (*.serk)|*.serk.
         /// </summary>
         internal static string RSAKeyFilter {
@@ -669,6 +732,15 @@ namespace SharpEncrypt {
         internal static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Size (GB).
+        /// </summary>
+        internal static string TotalSize {
+            get {
+                return ResourceManager.GetString("TotalSize", resourceCulture);
             }
         }
         

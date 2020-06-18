@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
-    public partial class ShowOnceDialog : Form
+    internal partial class ShowOnceDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly string SettingsName;
@@ -38,7 +38,7 @@ namespace SharpEncrypt
         private void OK_Click(object sender, EventArgs e)
         {
             if (NeverShowAgain.Checked)
-                SettingChangedDelegate.DynamicInvoke(SettingsName);
+                SettingChangedDelegate.DynamicInvoke(SettingsName, true);
 
             DialogResult = DialogResult.OK;
             Close();
