@@ -19,10 +19,16 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureEraseL
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileGeneratorLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureEraseLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileGeneratorLibrary.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.GenerateResource.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\OTPLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\AESLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\OTPLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\AESLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csprojAssemblyReference.cache

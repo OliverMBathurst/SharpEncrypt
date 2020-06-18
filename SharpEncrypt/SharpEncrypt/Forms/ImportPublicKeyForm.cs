@@ -12,7 +12,7 @@ namespace SharpEncrypt
 {
     internal partial class ImportPublicKeyForm : Form
     {
-        private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
 
         public string PubKeyPath { get; private set; }
 

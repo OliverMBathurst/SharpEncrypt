@@ -8,7 +8,7 @@ namespace SharpEncrypt
 {
     internal partial class HardDriveWipeDialog : Form
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly DriveSelectionControl DriveSelectionControl = new DriveSelectionControl { Dock = DockStyle.Fill };
 
         public HardDriveWipeDialog() => InitializeComponent();

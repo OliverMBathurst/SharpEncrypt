@@ -97,15 +97,6 @@ namespace FileIOLibrary {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not a valid file..
-        /// </summary>
-        internal static string NotAValidFile {
-            get {
-                return ResourceManager.GetString("NotAValidFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to path.
         /// </summary>
         internal static string path {

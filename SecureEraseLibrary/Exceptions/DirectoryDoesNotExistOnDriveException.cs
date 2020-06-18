@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SecureEraseLibrary
 {
-    class DirectoryDoesNotExistOnDriveException
+    public class DirectoryDoesNotExistOnDriveException : Exception
     {
+        public DirectoryDoesNotExistOnDriveException() { }
+
+        public DirectoryDoesNotExistOnDriveException(string message) : base(message) { }
+
+        public DirectoryDoesNotExistOnDriveException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

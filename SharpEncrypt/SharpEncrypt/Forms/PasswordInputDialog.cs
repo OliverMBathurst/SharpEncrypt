@@ -8,7 +8,7 @@ namespace SharpEncrypt
 {
     internal partial class PasswordInputDialog : Form
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly char[] SpecialChars = new[] { '<', '>', '?', '!', '£', '$', '%', '^', '&', '*', '(', ')' };
         private readonly char[] Alphabet = new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         private readonly char[] Numerics = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -82,7 +82,7 @@ namespace SharpEncrypt
             {
                 if (string.IsNullOrEmpty(SessionPassword))
                 {
-                    MessageBox.Show(Resources.PasswordIsEmpty);
+                    MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
                 }
                 else
                 {
@@ -94,7 +94,7 @@ namespace SharpEncrypt
             {
                 if (string.IsNullOrEmpty(PasswordInputBox.Text))
                 {
-                    MessageBox.Show(Resources.PasswordIsEmpty);
+                    MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
                 }
                 else
                 {
@@ -105,7 +105,9 @@ namespace SharpEncrypt
                     }
                     else
                     {
-                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("PasswordRestrictedChars"), string.Join(", ", RestrictedChars)));
+                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
+                            ResourceManager.GetString("PasswordRestrictedChars"), 
+                            string.Join(", ", RestrictedChars)));
                     }
                 }
             }            

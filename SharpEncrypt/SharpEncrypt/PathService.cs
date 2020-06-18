@@ -6,7 +6,7 @@ namespace SharpEncrypt
 {
     internal sealed class PathService
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
 
         public string AppDirectory
         {

@@ -109,17 +109,17 @@ namespace SecureEraseLibrary
             var drive = drives.First();
             if (string.IsNullOrEmpty(tempDirectory))
                 throw new ArgumentNullException(nameof(tempDirectory));
-            if(!Directory.Exists(tempDirectory))
+            if (!Directory.Exists(tempDirectory))
                 throw new DirectoryNotFoundException(tempDirectory);
             if (char.ToLower(Path.GetPathRoot(tempDirectory)[0], CultureInfo.CurrentCulture) != char.ToLower(driveLetter, CultureInfo.CurrentCulture))
-                throw new DirectoryNotFoundException($"{tempDirectory} - {driveLetter}");
+                throw new DirectoryDoesNotExistOnDriveException($"{tempDirectory} - {driveLetter}");
             
             var tmpFile = FileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorInstance.GetRandomExtension());
             FileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
             WriteZeros(tmpFile, passes);
             Write255s(tmpFile, passes);
             WriteRandomData(tmpFile, passes);
-            if(postDelete)
+            if (postDelete)
                 File.Delete(tmpFile);
         }
 

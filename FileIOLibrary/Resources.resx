@@ -129,9 +129,6 @@
   <data name="InvalidCharAt" xml:space="preserve">
     <value>Invalid char at index {0}.</value>
   </data>
-  <data name="NotAValidFile" xml:space="preserve">
-    <value>{0} is not a valid file.</value>
-  </data>
   <data name="path" xml:space="preserve">
     <value>path</value>
   </data>

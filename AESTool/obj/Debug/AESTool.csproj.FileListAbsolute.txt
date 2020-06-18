@@ -15,10 +15,14 @@ C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\AESTool.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\AESTool.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\AESLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\SecureEraseLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileGeneratorLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\AESLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\SecureEraseLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileGeneratorLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.GenerateResource.cache
@@ -26,7 +30,3 @@ C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CoreC
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\obj\Debug\AESTool.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.dll
-C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.dll
-C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\FileIOLibrary.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\AESTool\bin\Debug\OTPLibrary.pdb

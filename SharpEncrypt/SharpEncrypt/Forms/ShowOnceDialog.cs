@@ -6,7 +6,7 @@ namespace SharpEncrypt
 {
     internal partial class ShowOnceDialog : Form
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly string SettingsName;
         private readonly Delegate SettingChangedDelegate;
 

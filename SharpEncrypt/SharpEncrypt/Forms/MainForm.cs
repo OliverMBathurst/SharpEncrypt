@@ -14,7 +14,7 @@ namespace SharpEncrypt
 {
     internal partial class MainForm : Form
     {
-        private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources));
+        private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly PathService PathService = new PathService();
         private delegate void SettingsChangeDelegate(string settingsPropertyName, object value);
         private delegate void SettingsWriterDelegate(SharpEncryptSettings settings, bool synchronous);
@@ -37,7 +37,7 @@ namespace SharpEncrypt
 
         private void ExitToolStripMenuItem1_Click(object sender, EventArgs e) => Application.Exit();
 
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(Resources.CreatedByCredits);
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(ResourceManager.GetString("CreatedByCredits"));
 
         #region Language Menu Items
 

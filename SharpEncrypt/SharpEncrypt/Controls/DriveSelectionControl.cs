@@ -8,7 +8,7 @@ namespace SharpEncrypt
 {
     internal partial class DriveSelectionControl : UserControl
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly DriveInfo[] Drives = DriveInfo.GetDrives();
 
         public DriveSelectionControl() => InitializeComponent();

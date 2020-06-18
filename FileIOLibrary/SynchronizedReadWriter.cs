@@ -29,7 +29,7 @@ namespace AESLibrary
 
         public void SetBuffer(byte[] bufferParam)
         {
-            if (buffer == null) throw new Exception(ResourceManager.GetString("BufferNotInitialized", CultureInfo.CurrentCulture));
+            if (buffer == null) throw new ArgumentNullException(ResourceManager.GetString("BufferNotInitialized", CultureInfo.CurrentCulture));
             buffer = bufferParam;
         }
 
@@ -42,7 +42,7 @@ namespace AESLibrary
             if (string.IsNullOrEmpty(_path))
                 throw new ArgumentNullException(ResourceManager.GetString("path", CultureInfo.CurrentCulture));
             if (!File.Exists(_path))
-                throw new IOException(ResourceManager.GetString("NotAValidFile", CultureInfo.CurrentCulture));
+                throw new FileNotFoundException(_path);
 
             using (var fs = new FileStream(_path, FileMode.Open))
             {
@@ -67,7 +67,7 @@ namespace AESLibrary
             if (string.IsNullOrEmpty(_path))
                 throw new ArgumentNullException(ResourceManager.GetString("path", CultureInfo.CurrentCulture));
             if (!File.Exists(_path))
-                throw new Exception($"{_path} is not a valid file.");
+                throw new FileNotFoundException(_path);
 
             using (var fs = new FileStream(_path, FileMode.Open))
             {

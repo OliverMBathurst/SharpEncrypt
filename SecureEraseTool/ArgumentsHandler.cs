@@ -51,9 +51,9 @@ namespace SecureShred
                 }
 
                 if (shredType.ToLower() == Resources.File.ToLower())
-                    new SecureEraseInstance().ShredFile(path, cipher, nameObfuscation, propertyObfuscation);
+                    SecureEraseHelper.ShredFile(path, cipher, nameObfuscation, propertyObfuscation);
                 else if(shredType.ToLower() == Resources.Directory.ToLower())
-                    new SecureEraseInstance().ShredDirectory(path, cipher, recurse, nameObfuscation, propertyObfuscation);
+                    SecureEraseHelper.ShredDirectory(path, cipher, recurse, nameObfuscation, propertyObfuscation);
                 else
                     throw new ArgumentException("Invalid shred type.");
             }
