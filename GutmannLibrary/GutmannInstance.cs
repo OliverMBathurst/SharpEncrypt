@@ -21,7 +21,7 @@ namespace GutmannLibrary
         public void WipeFile(string path)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new ArgumentException("File does not exist.");
 
@@ -30,10 +30,10 @@ namespace GutmannLibrary
             RandomWipe(path);
         }
 
-        public void RandomWipe(string path, int passes = 4, long bufferLength = BUFFER_LENGTH)
+        public static void RandomWipe(string path, int passes = 4, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new ArgumentException("File does not exist.");
 
@@ -63,7 +63,7 @@ namespace GutmannLibrary
         public void GutmannPatternWipe(string path, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new ArgumentException("File does not exist.");
 
@@ -86,7 +86,7 @@ namespace GutmannLibrary
             }
         }
 
-        private byte[] Fill(byte[] array, int number)
+        private static byte[] Fill(byte[] array, int number)
         {
             var value = (byte)number;
             for (var i = 0; i < array.Length; i++)

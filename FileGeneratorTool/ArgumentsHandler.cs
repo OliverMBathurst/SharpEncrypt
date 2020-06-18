@@ -47,7 +47,7 @@ namespace FileGen
                     i++;
                 }
 
-                new FileGeneratorInstance().WriteNewFile(path, size, random, postDelete);
+                FileGeneratorInstance.WriteNewFile(path, size, random, postDelete);
 
                 if (pause)
                 {

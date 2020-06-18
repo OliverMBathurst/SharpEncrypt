@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Resources;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -35,14 +36,14 @@ namespace SharpEncrypt
 
         private void Browse_Click(object sender, EventArgs e)
         {
-            var openFileDialog = new OpenFileDialog
+            using (var openFileDialog = new OpenFileDialog())
             {
-                Filter = ResourceManager.GetString("RSAKeyFilter")
-            };
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                PubKeyPath = openFileDialog.FileName;
-                PublicKeyFilePathField.Text = PubKeyPath;
+                openFileDialog.Filter = ResourceManager.GetString("RSAKeyFilter");
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    PubKeyPath = openFileDialog.FileName;
+                    PublicKeyFilePathField.Text = PubKeyPath;
+                }
             }
         }
 
@@ -50,13 +51,13 @@ namespace SharpEncrypt
         {
             if (string.IsNullOrEmpty(Identity.Text))
             {
-                MessageBox.Show(string.Format(ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("Identity")));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("Identity")));
                 return;
             }
 
             if (string.IsNullOrEmpty(PublicKeyFilePathField.Text))
             {
-                MessageBox.Show(string.Format(ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("PublicKey")));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("PublicKey")));
                 return;
             }
 
@@ -70,11 +71,9 @@ namespace SharpEncrypt
             var keysDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("ImportedKeysDir"));
             var keyFilePath = Path.Combine(keysDir, ResourceManager.GetString("PubKeysFile"));
 
-            var reader = new RSAKeyReader();
-
             IDictionary<string, RSAParameters> pubKeyList = new Dictionary<string, RSAParameters>();
             if (File.Exists(keyFilePath))
-                pubKeyList = reader.GetPublicKeys(keyFilePath);
+                pubKeyList = RSAKeyReader.GetPublicKeys(keyFilePath);
 
             if (pubKeyList.ContainsKey(PublicKeyIdentity))
             {
@@ -82,7 +81,7 @@ namespace SharpEncrypt
                 return false;
             }
             
-            pubKeyList.Add(PublicKeyIdentity, reader.GetParameters(PubKeyPath));           
+            pubKeyList.Add(PublicKeyIdentity, RSAKeyReader.GetParameters(PubKeyPath));           
 
             using (var fs = new FileStream(keyFilePath, FileMode.Create))
             {

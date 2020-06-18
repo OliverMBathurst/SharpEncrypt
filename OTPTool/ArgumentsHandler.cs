@@ -57,21 +57,19 @@ namespace OTPTool
                     }
                 }
 
-                var otp = new OTPInstance();
-
                 if (genKey)
                 {
                     if (string.IsNullOrEmpty(referenceFile))
-                        otp.GenerateKey(path, keySize);
+                        OTPInstance.GenerateKey(path, keySize);
                     else
-                        otp.GenerateKey(path, referenceFile);
+                        OTPInstance.GenerateKey(path, referenceFile);
                 }
                 else
                 {
                     if (encrypt)
-                        otp.Encrypt(path, keyPath);
+                        OTPInstance.Encrypt(path, keyPath);
                     else
-                        otp.Decrypt(path, keyPath);
+                        OTPInstance.Decrypt(path, keyPath);
                 }
             }
         }

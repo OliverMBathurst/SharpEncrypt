@@ -9,12 +9,12 @@ namespace OTPLibrary
     {
         private const long BUFFER_LENGTH = 1024L;
 
-        public void GenerateKey(string path, string referenceFile, long bufferLength = BUFFER_LENGTH)
+        public static void GenerateKey(string path, string referenceFile, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (string.IsNullOrEmpty(referenceFile))
-                throw new ArgumentNullException("genKeyOfFile");
+                throw new ArgumentNullException(nameof(referenceFile));
 
             var fi = new FileInfo(referenceFile);
             if (!fi.Exists) throw new ArgumentException($"{referenceFile} does not exist.");
@@ -22,7 +22,7 @@ namespace OTPLibrary
             GenerateKey(path, fi.Length, bufferLength);                
         }
 
-        public void GenerateKey(string path, long length, long bufferLength = BUFFER_LENGTH)
+        public static void GenerateKey(string path, long length, long bufferLength = BUFFER_LENGTH)
         {
             if (File.Exists(path))
                 throw new IOException($"{path} already exists.");
@@ -46,12 +46,12 @@ namespace OTPLibrary
             }
         }
 
-        public byte[] XOR(byte[] fileBytes, byte[] keyBytes)
+        public static byte[] XOR(byte[] fileBytes, byte[] keyBytes)
         {
             if (fileBytes == null)
-                throw new ArgumentNullException("fileBytes");
+                throw new ArgumentNullException(nameof(fileBytes));
             if (keyBytes == null)
-                throw new ArgumentNullException("keyBytes");
+                throw new ArgumentNullException(nameof(keyBytes));
             if (fileBytes.Length > keyBytes.Length)
                 throw new ArgumentException("Byte length mismatch detected.");
 
@@ -66,10 +66,10 @@ namespace OTPLibrary
         //<summary>
         // Encrypts the file without the possibility of recovery
         //<summary>
-        public void EncryptWithoutKey(string path, long bufferLength = BUFFER_LENGTH)
+        public static void EncryptWithoutKey(string path, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
 
             var readWriter = new SynchronizedReadWriter(path);
             var bytes = new byte[bufferLength];
@@ -78,30 +78,30 @@ namespace OTPLibrary
                 while (!readWriter.WriteComplete)
                 {
                     readWriter.Read();
-                    if (bytes.Length > readWriter.Buffer.Length)
-                        bytes = new byte[readWriter.Buffer.Length];
+                    if (bytes.Length > readWriter.GetBuffer().Length)
+                        bytes = new byte[readWriter.GetBuffer().Length];
 
                     provider.GetNonZeroBytes(bytes);
-                    readWriter.SetBuffer(XOR(readWriter.Buffer, bytes));
+                    readWriter.SetBuffer(XOR(readWriter.GetBuffer(), bytes));
                     readWriter.Write();
                 }
             }
         }
 
-        public void Encrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
+        public static void Encrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
 
-        public void Decrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
+        public static void Decrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
 
-        private void Transform(string path, string keyPath, long bufferLength)
+        private static void Transform(string path, string keyPath, long bufferLength)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (string.IsNullOrEmpty(keyPath))
-                throw new ArgumentNullException("keyPath");
+                throw new ArgumentNullException(nameof(keyPath));
             if(!File.Exists(path))
-                throw new FileNotFoundException("path");
+                throw new FileNotFoundException(nameof(path));
             if (!File.Exists(keyPath))
-                throw new FileNotFoundException("keyPath");
+                throw new FileNotFoundException(nameof(keyPath));
             if (new FileInfo(path).Length > new FileInfo(keyPath).Length)
                 throw new ArgumentException("File length greater than key length.");
 
@@ -112,12 +112,12 @@ namespace OTPLibrary
                 while (!readWriter.WriteComplete)
                 {
                     readWriter.Read(bufferLength);
-                    if (readWriter.Buffer.Length < bufferLength)
-                        keyBytes = new byte[readWriter.Buffer.Length];
+                    if (readWriter.GetBuffer().Length < bufferLength)
+                        keyBytes = new byte[readWriter.GetBuffer().Length];
 
                     keyStream.Read(keyBytes, 0, keyBytes.Length);
 
-                    readWriter.SetBuffer(XOR(readWriter.Buffer, keyBytes));
+                    readWriter.SetBuffer(XOR(readWriter.GetBuffer(), keyBytes));
                     readWriter.Write();
                 }
             }

@@ -6,7 +6,6 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstanda
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.AssemblyInfoInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.AssemblyInfo.cs
-C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.pdb
@@ -16,3 +15,4 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstanda
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\AESLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\OTPLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\bin\Debug\netstandard2.0\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseLibrary\obj\Debug\netstandard2.0\SecureEraseLibrary.csproj.CoreCompileInputs.cache

@@ -54,33 +54,32 @@ namespace AESTool
 
                 if (genKey)
                 {
-                    new AESInstance().WriteNewKey(inputPath);
+                    AESHelper.WriteNewKey(inputPath);
                 }
                 else
                 {
-                    var aesInstance = new AESInstance();
-                    if (!aesInstance.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(Resources.NotAKey, keyPath));
+                    if (!AESHelper.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(Resources.NotAKey, keyPath));
                     {
-                        var secureEraseInstance = new SecureEraseInstance();
+                        var secureEraseInstance = new SecureEraseHelper();
                         if (string.IsNullOrEmpty(outputPath))
                         {
                             if (encrypt)
-                                aesInstance.EncryptFile(key, inputPath);
+                                AESHelper.EncryptFile(key, inputPath);
                             else
-                                aesInstance.DecryptFile(key, inputPath);
+                                AESHelper.DecryptFile(key, inputPath);
                         }
                         else
                         {
                             var fileName = Path.GetFileName(inputPath);
 
                             if (encrypt)
-                                aesInstance.EncryptFile(key, inputPath, outputPath);
+                                AESHelper.EncryptFile(key, inputPath, outputPath);
                             else
-                                aesInstance.EncryptFile(key, inputPath, outputPath);
+                                AESHelper.EncryptFile(key, inputPath, outputPath);
 
-                            secureEraseInstance.ObfuscateFileProperties(inputPath);
-                            secureEraseInstance.WriteRandomData(inputPath);
-                            File.Delete(secureEraseInstance.ObfuscateFileName(inputPath));
+                            SecureEraseHelper.ObfuscateFileProperties(inputPath);
+                            SecureEraseHelper.WriteRandomData(inputPath);
+                            File.Delete(SecureEraseHelper.ObfuscateFileName(inputPath));
                             File.Move(outputPath, fileName);
                         }
                     }

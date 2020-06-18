@@ -124,6 +124,15 @@ namespace SharpEncrypt {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Files (*.*)|*.*.
+        /// </summary>
+        internal static string AllFilesFilter {
+            get {
+                return ResourceManager.GetString("AllFilesFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anonymous Rename.
         /// </summary>
         internal static string AnonymousRenameToolStripMenuItem {
@@ -228,6 +237,15 @@ namespace SharpEncrypt {
         internal static string DiskToolsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("DiskToolsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} does not exist..
+        /// </summary>
+        internal static string DoesNotExist {
+            get {
+                return ResourceManager.GetString("DoesNotExist", resourceCulture);
             }
         }
         

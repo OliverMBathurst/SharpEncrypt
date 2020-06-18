@@ -3,7 +3,7 @@ C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\bin\Debug\netstan
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\bin\Debug\netstandard2.0\FileGeneratorLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.AssemblyInfoInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.AssemblyInfo.cs
-C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Debug\netstandard2.0\FileGeneratorLibrary.csproj.CoreCompileInputs.cache

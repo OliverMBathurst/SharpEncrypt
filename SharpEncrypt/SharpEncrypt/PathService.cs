@@ -50,7 +50,7 @@ namespace SharpEncrypt
 
         public string AppSettingsPath => Path.Combine(AppDirectory, ResourceManager.GetString("SharpEncryptSettingsFileName"));
 
-        private void CreateDirs(params string[] paths)
+        private static void CreateDirs(params string[] paths)
         {
             foreach (var path in paths)
                 if (!Directory.Exists(path))

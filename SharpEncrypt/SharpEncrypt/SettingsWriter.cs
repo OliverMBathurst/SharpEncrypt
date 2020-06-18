@@ -4,14 +4,15 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt
 {
-    internal sealed class SettingsWriter
+    internal static class SettingsWriter
     {
-        public Task WriteSettingsFile(string path, SharpEncryptSettings settings, bool synchronous)
+        public static Task WriteSettingsFile(string path, SharpEncryptSettings settings, bool synchronous)
         {
             var task = new Task(() => {
                 using (var fs = new FileStream(path, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, settings);
             });
+
             if (synchronous)
                 task.RunSynchronously();
             else

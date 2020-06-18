@@ -7,12 +7,13 @@ namespace SharpEncrypt
 {
     internal sealed class RSAKeyWriter
     {
-        public void Write(string path, RSAParameters parameters)
+        public static void Write(string path, RSAParameters parameters)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
-            if (!Directory.Exists(Path.GetDirectoryName(path)))
-                throw new ArgumentException("path");
+                throw new ArgumentNullException(nameof(path));
+            var dir = Path.GetDirectoryName(path);
+            if (!Directory.Exists(dir))
+                throw new DirectoryNotFoundException(dir);
 
             using (var fs = new FileStream(path, FileMode.Create))
             {

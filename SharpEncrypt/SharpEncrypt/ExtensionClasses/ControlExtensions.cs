@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SharpEncrypt
@@ -7,6 +8,9 @@ namespace SharpEncrypt
     {
         public static IEnumerable<Control> AllControls(this Control control)
         {
+            if (control == null)
+                throw new ArgumentNullException(nameof(control));
+
             foreach (Control c in control.Controls)
             {
                 yield return c;

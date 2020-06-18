@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "Y02REp7FT0qeBgfZPKeTNnP0XS8d6fiECMSrLIOQE+0+mzv4Q/Qu4tpjCHzQxL7E7jpbafbfeakxyY+Xpl2f/A==",
+  "dgSpecHash": "AAlemXwNREQxbkA2OFYGvcTz3pbxagaORibgLTEIQgB3Q85JDZUq38cvwuXLAfPeN+rODHP9UbAgX9tzZRjD8w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codequality.analyzers\\3.0.0\\microsoft.codequality.analyzers.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.netcore.analyzers\\3.0.0\\microsoft.netcore.analyzers.3.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.netframework.analyzers\\3.0.0\\microsoft.netframework.analyzers.3.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []

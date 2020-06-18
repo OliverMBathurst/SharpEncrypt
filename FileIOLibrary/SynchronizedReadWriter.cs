@@ -7,6 +7,7 @@ namespace AESLibrary
     {
         private const long BUFFER_LENGTH = 1024L;
         private readonly string _path;
+        private byte[] buffer;
 
         public SynchronizedReadWriter(string path) => _path = path;
 
@@ -18,24 +19,24 @@ namespace AESLibrary
 
         public bool ReadComplete { get; private set; } = false;
 
-        public byte[] Buffer { get; private set; } = null;
+        public byte[] GetBuffer() => buffer;
 
-        public long DefaultBufferLength => BUFFER_LENGTH;
+        public static long DefaultBufferLength => BUFFER_LENGTH;
 
-        public void SetBuffer(byte[] buffer)
+        public void SetBuffer(byte[] bufferParam)
         {
-            if (Buffer == null) throw new Exception("Buffer not initialized.");
-            Buffer = buffer;
+            if (buffer == null) throw new Exception("Buffer not initialized.");
+            buffer = bufferParam;
         }
 
         public void Read(long bufferLength = BUFFER_LENGTH)
         {
             if (ReadComplete)
                 return;
-            if (Buffer != null)
+            if (buffer != null)
                 throw new Exception("Buffer has not been cleared by a write operation.");
             if (string.IsNullOrEmpty(_path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(_path));
             if (!File.Exists(_path))
                 throw new Exception($"{_path} is not a valid file.");
 
@@ -46,9 +47,9 @@ namespace AESLibrary
                 if (fs.Length - ReadPosition < bufferLength)
                     bufferLength = fs.Length - ReadPosition;
 
-                Buffer = new byte[bufferLength];
-                fs.Read(Buffer, 0, Buffer.Length);
-                ReadPosition += Buffer.Length;
+                buffer = new byte[bufferLength];
+                fs.Read(buffer, 0, buffer.Length);
+                ReadPosition += buffer.Length;
                 SetReadingProperties(fs.Length);
             }
         }
@@ -57,22 +58,22 @@ namespace AESLibrary
         {
             if (WriteComplete)
                 return;
-            if (Buffer == null)
-                throw new Exception("Buffer not initialized.");
+            if (buffer == null)
+                throw new ArgumentNullException(nameof(buffer));
             if (string.IsNullOrEmpty(_path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(_path));
             if (!File.Exists(_path))
                 throw new Exception($"{_path} is not a valid file.");
 
             using (var fs = new FileStream(_path, FileMode.Open))
             {
                 fs.Seek(WritePosition, SeekOrigin.Begin);
-                fs.Write(Buffer, 0, Buffer.Length);
-                WritePosition += Buffer.Length;
+                fs.Write(buffer, 0, buffer.Length);
+                WritePosition += buffer.Length;
                 SetWritingProperties(fs.Length);
             }
 
-            Buffer = null;            
+            buffer = null;            
         }
 
         private void SetReadingProperties(long length)

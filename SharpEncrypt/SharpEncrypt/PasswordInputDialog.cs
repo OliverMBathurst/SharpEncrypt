@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
@@ -104,7 +105,7 @@ namespace SharpEncrypt
                     }
                     else
                     {
-                        MessageBox.Show(string.Format(Resources.PasswordRestrictedChars, string.Join(", ", RestrictedChars)));
+                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("PasswordRestrictedChars"), string.Join(", ", RestrictedChars)));
                     }
                 }
             }            

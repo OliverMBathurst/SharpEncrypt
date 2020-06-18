@@ -7,12 +7,12 @@ using System.Security.Cryptography;
 
 namespace SharpEncrypt
 {
-    internal sealed class RSAKeyReader
+    internal static class RSAKeyReader
     {
-        public RSAParameters GetParameters(string path)
+        public static RSAParameters GetParameters(string path)
         {
             if (string.IsNullOrEmpty(path))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new FileNotFoundException(path);
 
@@ -27,16 +27,19 @@ namespace SharpEncrypt
             }
         }
 
-        public IDictionary<string, RSAParameters> GetPublicKeys(string filePath)
+        public static IDictionary<string, RSAParameters> GetPublicKeys(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(filePath));
             if (!File.Exists(filePath))
                 throw new FileNotFoundException(filePath);
-            
-            return new BinaryFormatter().Deserialize(new FileStream(filePath, FileMode.Open)) is IDictionary<string, RSAParameters> dict 
-                ? dict
-                : new Dictionary<string, RSAParameters>();
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
+            {
+                return new BinaryFormatter().Deserialize(fs) is IDictionary<string, RSAParameters> dict
+                    ? dict
+                    : new Dictionary<string, RSAParameters>();
+            }                
         }
     }
 }

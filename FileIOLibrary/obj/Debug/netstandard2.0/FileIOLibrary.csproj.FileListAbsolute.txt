@@ -4,6 +4,6 @@ C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\bin\Debug\netstandard2.0
 C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.AssemblyInfoInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.AssemblyInfo.cs
-C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Debug\netstandard2.0\FileIOLibrary.csproj.CoreCompileInputs.cache

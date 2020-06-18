@@ -6,17 +6,23 @@ namespace AESLibrary
     [Serializable]
     public sealed class AESKey
     {
+        private readonly byte[] keyBytes;
+        private readonly byte[] IVBytes;
+
         public AESKey(RijndaelManaged managed)
         {
-            Key = managed.Key;
-            IV = managed.IV;
-            KeySize = managed.KeySize;
+            if (managed == null)
+                throw new ArgumentNullException(nameof(managed));
+
+            keyBytes = managed.Key;
+            IVBytes = managed.IV;
+            KeyLength = managed.KeySize;
         }
 
-        public byte[] Key { get; }
+        public byte[] GetKey() => keyBytes;
 
-        public byte[] IV { get; }
+        public byte[] GetIV() => IVBytes;
 
-        public int KeySize { get; }
+        public int KeyLength { get; }
     }
 }

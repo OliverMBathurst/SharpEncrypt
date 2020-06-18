@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "l1lM8ZF+ApBjPsJNZ79EsZDfcq4mZ8MGkNY0dpccWrcAXakwdesfuBfrZV64xRz9piLRkgv9Xuw1IA5DvHaDSA==",
+  "dgSpecHash": "a6FOGRnz0BNZ+9ddCrD0FJtdR+Em5fhNaPuTNxF0kLqlK+KLumo5WlwlJmlhBhI9gexDFh3wFZ+BB0p4TWv48g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codequality.analyzers\\3.0.0\\microsoft.codequality.analyzers.3.0.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.netcore.analyzers\\3.0.0\\microsoft.netcore.analyzers.3.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.netframework.analyzers\\3.0.0\\microsoft.netframework.analyzers.3.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []

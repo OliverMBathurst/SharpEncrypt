@@ -155,7 +155,7 @@ namespace SharpEncrypt
         {
             using (var dialog = new OpenFileDialog())
             {
-                dialog.Filter = "All Files (*.*)|*.*";
+                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var fileToSecure = dialog.FileName;
@@ -244,7 +244,7 @@ namespace SharpEncrypt
             }
             else
             {
-                var readSettings = new SettingsReader().ReadSettingsFile(settingsFilePath, true);
+                var readSettings = SettingsReader.ReadSettingsFile(settingsFilePath, true);
                 if (readSettings == null) //it's corrupt
                 {
                     DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
@@ -270,13 +270,13 @@ namespace SharpEncrypt
             {
                 try
                 {
-                    var pubKey = new RSAKeyReader().GetParameters(@public);
+                    var pubKey = RSAKeyReader.GetParameters(@public);
                     using (var dialog = new SaveFileDialog())
                     {
                         dialog.Filter = ResourceManager.GetString("RSAKeyFilter");
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            new RSAKeyWriter().Write(dialog.FileName, pubKey);
+                            RSAKeyWriter.Write(dialog.FileName, pubKey);
                         }
                     }
                 }
@@ -296,28 +296,36 @@ namespace SharpEncrypt
                 string.Empty,
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                var (publicKey, privateKey) = new RSAInstance().GetNewKeyPair();
-                var writer = new RSAKeyWriter();
-                writer.Write(@public, publicKey);
-                writer.Write(@private, privateKey);
+                var (publicKey, privateKey) = RSAHelper.GetNewKeyPair();
+                RSAKeyWriter.Write(@public, publicKey);
+                RSAKeyWriter.Write(@private, privateKey);
                 //encrypt the rsa priv key (IMPORTANT)
             }
         }
 
-        private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e) => new ImportPublicKeyForm().Show();
+        private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var importPubKeyForm = new ImportPublicKeyForm())
+            {
+                importPubKeyForm.Show();
+            }                
+        }
 
         private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!Settings.OTPDisclaimerHide)
             {
-                if (new ShowOnceDialog(
-                    ResourceManager.GetString("OTPDisclaimer"),
-                    "OTPDisclaimerHide",
-                    DefaultSettingsChangeDelegate).ShowDialog()
-                    != DialogResult.OK)
+                using (var showOnceDialog = new ShowOnceDialog(
+                        ResourceManager.GetString("OTPDisclaimer"),
+                        "OTPDisclaimerHide",
+                        DefaultSettingsChangeDelegate))
                 {
-                    return;
-                }
+                    if (showOnceDialog.ShowDialog()
+                        != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }                    
             }
 
             //rest of logic
@@ -345,7 +353,7 @@ namespace SharpEncrypt
         }
 
         private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
-            => new SettingsWriter().WriteSettingsFile(PathService.AppSettingsPath, settings, synchronous);
+            => SettingsWriter.WriteSettingsFile(PathService.AppSettingsPath, settings, synchronous);
 
         private void ResetAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -364,6 +372,12 @@ namespace SharpEncrypt
             }            
         }
 
-        private void WipeFreeDiskSpaceToolStripMenuItem_Click(object sender, EventArgs e) => new HardDriveWipeDialog().Show();
+        private void WipeFreeDiskSpaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var hardDriveWipeDialog = new HardDriveWipeDialog())
+            {
+                hardDriveWipeDialog.Show();
+            }
+        }
     }
 }

@@ -1,15 +1,16 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
 namespace SharpEncrypt
 {
-    internal sealed class SettingsReader
+    internal static class SettingsReader
     {
-        public Task<SharpEncryptSettings> ReadSettingsFile(string path, bool synchronous)
+        public static Task<SharpEncryptSettings> ReadSettingsFile(string path, bool synchronous)
         {
-            if (!File.Exists(path))
-                throw new IOException($"{path} does not exist.");
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentNullException(nameof(path));
 
             var task = new Task<SharpEncryptSettings>(() =>
             {

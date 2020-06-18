@@ -13,7 +13,7 @@ namespace SharpEncrypt
 
         public HardDriveWipeDialog() => InitializeComponent();
 
-        public IEnumerable<DriveInfo> SelectedDrives => DriveSelectionControl.GetSelectedDrives();
+        public IEnumerable<DriveInfo> SelectedDrives { get; private set; }
 
         private void HardDriveWipeDialog_Load(object sender, EventArgs e)
         {
@@ -31,6 +31,7 @@ namespace SharpEncrypt
 
         private void OK_Click(object sender, EventArgs e)
         {
+            SelectedDrives = DriveSelectionControl.GetSelectedDrives();
             DialogResult = DialogResult.OK;
             Close();
         }

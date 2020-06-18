@@ -12,3 +12,17 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureEraseTool.
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureEraseTool.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SecureShred\obj\Debug\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureShred.exe.config
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureShred.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureEraseLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileGeneratorLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\SecureEraseLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\bin\Debug\FileGeneratorLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureEraseTool.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.exe
+C:\Users\Oliver\source\repos\SharpEncrypt\SecureEraseTool\obj\Debug\SecureShred.pdb
