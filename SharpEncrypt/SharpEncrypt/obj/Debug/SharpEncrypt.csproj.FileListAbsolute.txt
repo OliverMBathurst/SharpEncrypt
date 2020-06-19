@@ -1,12 +1,6 @@
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.csprojAssemblyReference.cache
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.DriveSelectionControl.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.HardDriveWipeDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.ImportPublicKeyForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.MainForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.PasswordInputDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Properties.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.ShowOnceDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.br.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.de.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.es.resources
@@ -58,3 +52,9 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\tr
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Controls.DriveSelectionControl.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.HardDriveWipeDialog.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ImportPublicKeyForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.MainForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.PasswordInputDialog.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ShowOnceDialog.resources

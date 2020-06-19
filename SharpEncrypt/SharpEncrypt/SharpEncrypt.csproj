@@ -62,8 +62,10 @@
     <Compile Include="Controls\DriveSelectionControl.Designer.cs">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
+    <Compile Include="TaskHandler.cs" />
     <Compile Include="Forms\HardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>

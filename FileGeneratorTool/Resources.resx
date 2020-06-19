@@ -134,7 +134,7 @@
     <comment>Invalid arg statement</comment>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value>Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}</value>
+    <value>Usage: [-path string] [-length number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}</value>
     <comment>Usage statement</comment>
   </data>
 </root>

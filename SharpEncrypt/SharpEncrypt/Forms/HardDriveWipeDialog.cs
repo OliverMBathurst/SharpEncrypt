@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Resources;
 using System.Windows.Forms;
+using SharpEncrypt.Controls;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Forms
 {
     internal partial class HardDriveWipeDialog : Form
     {

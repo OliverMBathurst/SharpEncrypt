@@ -1,4 +1,4 @@
-﻿namespace SharpEncrypt
+﻿namespace SharpEncrypt.Forms
 {
     partial class ImportPublicKeyForm
     {

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace AESLibrary
 {
-    public sealed class AESHelper
+    public static class AESHelper
     {
         private const long BUFFER_LENGTH = 1024L;
 

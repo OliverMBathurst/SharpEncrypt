@@ -106,11 +106,11 @@ namespace SecureShred {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -path.
+        ///   Looks up a localized string similar to Invalid shred type..
         /// </summary>
-        internal static string PathSwitch {
+        internal static string InvalidShredType {
             get {
-                return ResourceManager.GetString("PathSwitch", resourceCulture);
+                return ResourceManager.GetString("InvalidShredType", resourceCulture);
             }
         }
         
@@ -120,24 +120,6 @@ namespace SecureShred {
         internal static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Writing to: {0}.
-        /// </summary>
-        internal static string WritingTo {
-            get {
-                return ResourceManager.GetString("WritingTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wrote {0} bytes.
-        /// </summary>
-        internal static string WroteNBytes {
-            get {
-                return ResourceManager.GetString("WroteNBytes", resourceCulture);
             }
         }
     }

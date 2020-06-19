@@ -1,0 +1,11 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\FileIOLibrary\obj\Release\netstandard2.0\FileIOLibrary.pdb

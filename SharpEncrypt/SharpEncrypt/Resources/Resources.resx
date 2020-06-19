@@ -166,11 +166,20 @@
   <data name="CreatedByCredits" xml:space="preserve">
     <value>Created by Oliver Bathurst 2020</value>
   </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
   <data name="DebugMenuStrip" xml:space="preserve">
     <value>Debug</value>
   </data>
   <data name="DecryptFileToolStripMenuItem" xml:space="preserve">
     <value>Decrypt File</value>
+  </data>
+  <data name="DecryptPermanentlyToolStripMenuItem" xml:space="preserve">
+    <value>Decrypt permanently</value>
+  </data>
+  <data name="DecryptTemporarilyToolStripMenuItem" xml:space="preserve">
+    <value>Decrypt temporarily</value>
   </data>
   <data name="Dialog" xml:space="preserve">
     <value>Dialog</value>
@@ -235,6 +244,9 @@
   <data name="ImportPublicKeyDialogTitle" xml:space="preserve">
     <value>Import Public Key</value>
   </data>
+  <data name="IncludeSubfolders" xml:space="preserve">
+    <value>Include subfolders</value>
+  </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key, please generate a new key-pair.</value>
   </data>
@@ -249,6 +261,9 @@
   </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
+  </data>
+  <data name="NotAValidContainer" xml:space="preserve">
+    <value>{0} is not a valid container.</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -328,6 +343,9 @@
   <data name="SelectSecuredFile" xml:space="preserve">
     <value>Select a secured file to open.</value>
   </data>
+  <data name="ShareKeysToolStripMenuItem" xml:space="preserve">
+    <value>Share keys</value>
+  </data>
   <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
     <value>SharpEncrypt OTP Encrypted File (*.seotpf)</value>
   </data>
@@ -357,6 +375,15 @@
   </data>
   <data name="UseSessionPassword" xml:space="preserve">
     <value>Use session password</value>
+  </data>
+  <data name="ValidateContainerToolStripMenuItem" xml:space="preserve">
+    <value>Validate Container</value>
+  </data>
+  <data name="ValidContainer" xml:space="preserve">
+    <value>{0} is a valid container.</value>
+  </data>
+  <data name="WipeDiskSpaceAfterSecureDeleteToolStripMenuItem" xml:space="preserve">
+    <value>Wipe free disk space after secure delete</value>
   </data>
   <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
     <value>Wipe Free Disk Space</value>

@@ -7,3 +7,8 @@ C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\bin\Release\netstandard2.0\FileIOLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\bin\Release\netstandard2.0\FileIOLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\AESLibrary\obj\Release\netstandard2.0\AESLibrary.csproj.CopyComplete

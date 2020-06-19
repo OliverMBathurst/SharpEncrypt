@@ -1,4 +1,5 @@
 ﻿using SharpEncrypt.Exceptions;
+using SharpEncrypt.ExtensionClasses;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,9 +9,7 @@ using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
 
-[assembly: NeutralResourcesLanguage("en-GB")]
-
-namespace SharpEncrypt
+namespace SharpEncrypt.Forms
 {
     internal partial class MainForm : Form
     {
@@ -21,6 +20,7 @@ namespace SharpEncrypt
 
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
+        private readonly TaskHandler FileHandler;
 
         private string Password { get; set; }
 
@@ -31,41 +31,83 @@ namespace SharpEncrypt
             InitializeComponent();
             DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
             DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
+            FileHandler = new TaskHandler();
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
 
-        private void ExitToolStripMenuItem1_Click(object sender, EventArgs e) => Application.Exit();
+        #region Misc methods
 
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(ResourceManager.GetString("CreatedByCredits"));
+        private void AddSecured()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var fileToSecure = dialog.FileName;
+                    //secure file
+                    //add it to datagridview
+                }
+            }
+        }
 
-        #region Language Menu Items
+        private void OpenSecured()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var securedFilePath = dialog.FileName;
+                    //open secured file
+                }
+            }
+        }
 
-        private void EnglishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("en-GB");
+        private void LoadApplication()
+        {
+            SetApplicationSettings();
+            if (Settings.LanguageCode != Constants.DefaultLanguage)
+                ChangeLanguage(Settings.LanguageCode);
 
-        private void DeutschGermanToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("de-DE");
+            SetSessionPassword();
+        }
 
-        private void NetherlandsDutchToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("nl-NL");
+        private void ReloadApplication(bool changeLanguage)
+        {
+            if (changeLanguage)
+                ChangeLanguage(Settings.LanguageCode);
+        }
 
-        private void FrancaisFrenchToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("fr-FR");
+        private void SetApplicationSettings()
+        {
+            var settingsFilePath = PathService.AppSettingsPath;
+            var settings = new SharpEncryptSettings();
 
-        private void ItalianoItalianToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("it-IT");
+            if (!File.Exists(settingsFilePath))
+            {
+                DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
+            }
+            else
+            {
+                var readSettings = SettingsReader.ReadSettingsFile(settingsFilePath, true);
+                if (readSettings == null) //it's corrupt
+                {
+                    DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
+                }
+                else
+                {
+                    settings = readSettings.Result;
+                }
+            }
 
-        private void KoreanToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("ko-KR");
-
-        private void PolskiPolishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("pl-PL");
-
-        private void PortugueseToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("pt-BR");
-
-        private void RussianToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("ru-RU");
-
-        private void SwedishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("sv-SE");
-
-        private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
+            Settings = settings;
+        }
 
         #endregion
 
-        private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(PathService.AppDirectory);
+        #region File context menu items
 
         private void ClearRecentFilesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -80,6 +122,72 @@ namespace SharpEncrypt
 
             RecentFilesGrid.Refresh();
         }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StopSecuringAndRemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShareKeysToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowInFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RenameToOriginalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Folder context menu items
+
+        private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
+                SecuredFoldersGrid.Rows.Remove(row);
+
+            SecuredFoldersGrid.Refresh();
+        }
+
+        private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DecryptPermanentlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DecryptTemporarilyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OpenExplorerHereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddSecuredFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Mouse events
 
         private void RecentFilesGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -101,92 +209,124 @@ namespace SharpEncrypt
             }
         }
 
-        private void RemoveFromListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
-                SecuredFoldersGrid.Rows.Remove(row);
+        #endregion
 
-            SecuredFoldersGrid.Refresh();
+        #region GUI buttons
+
+        private void OpenSecured_Click(object sender, EventArgs e) => OpenSecured();
+
+        private void AddSecured_Click(object sender, EventArgs e) => AddSecured();
+
+        private void ShareButton_Click(object sender, EventArgs e)
+        {
+
         }
 
-        private void LoadApplication()
+        private void PasswordManagement_Click(object sender, EventArgs e)
         {
-            SetApplicationSettings();
-            if(Settings.LanguageCode != Constants.DefaultLanguage)
-                ChangeLanguage(Settings.LanguageCode);
 
-            SetSessionPassword();
         }
 
-        private void ReloadApplication(bool changeLanguage)
-        {
-            if (changeLanguage)
-                ChangeLanguage(Settings.LanguageCode);
-        }
+        private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(PathService.AppDirectory);
 
-        private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e)
-            => SetSessionPassword();
+        #endregion
 
-        private void SetSessionPassword()
+        #region Disk tools menu items
+
+        private void WipeFreeDiskSpaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var dialog = new PasswordInputDialog())
+            using (var hardDriveWipeDialog = new HardDriveWipeDialog())
             {
-                if (dialog.ShowDialog() == DialogResult.OK)
+                hardDriveWipeDialog.Show();
+            }
+        }
+
+        private void AdvancedDiskWipeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Debug menu items
+
+        private void ValidateContainerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using(var openFileDialog = new OpenFileDialog())
+            {
+                if(openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Password = dialog.Password;
+                    MessageBox.Show(ContainerHelper.ValidateContainer(openFileDialog.FileName) 
+                        ? string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("ValidContainer"), openFileDialog.FileName)
+                        : string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("NotAValidContainer"), openFileDialog.FileName));
                 }
             }
         }
 
-        private void OpenSecured_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var securedFilePath = dialog.FileName;
-                    //open secured file
-                }
-            }
-        }
-
-        private void AddSecured_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var fileToSecure = dialog.FileName;
-                    //secure file
-                    //add it to datagridview
-                }
-            }            
-        }
+        #endregion
 
         #region Flag Menu Items
-
-        private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (UseADifferentPasswordForEachFileToolStripMenuItem.Checked)
-                UseADifferentPasswordForEachFileToolStripMenuItem.Checked = false;
-            else
-                UseADifferentPasswordForEachFileToolStripMenuItem.Checked = true;
-        }
-
         private void DebugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (DebugMenuStrip.Checked)
+            Toggle(DebugMenuStrip);
+            DefaultSettingsChangeDelegate.DynamicInvoke("DebugEnabled", Toggle(Debug));
+        }
+
+        private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
+            => DefaultSettingsChangeDelegate.DynamicInvoke("UseADifferentPasswordForEachFile", Toggle(UseADifferentPasswordForEachFile));
+
+        private void IncludeToolStripMenuItem_Click(object sender, EventArgs e)
+            => DefaultSettingsChangeDelegate.DynamicInvoke("IncludeSubfolders", Toggle(IncludeSubfolders));
+
+        private void WipeDiskSpaceAfterSecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
+            => DefaultSettingsChangeDelegate.DynamicInvoke("WipeFreeSpaceAfterSecureDelete", Toggle(WipeDiskSpaceAfterSecureDeleteToolStripMenuItem));
+
+        private static bool Toggle(ToolStripMenuItem item)
+        {
+            if (item.Checked)
+                item.Checked = false;
+            else
+                item.Checked = true;
+
+            return item.Checked;
+        }
+
+        #endregion
+
+        #region Handlers
+
+        private void SettingsChangeHandler(string settingsPropertyName, object value)
+        {
+            var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
+            if (prop == null)
             {
-                DebugToolStripMenuItem.Checked = false;
-                DebugMenuStrip.Enabled = false;
+                MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
             }
             else
             {
-                DebugToolStripMenuItem.Checked = true;
-                DebugMenuStrip.Enabled = true;
+                if (!value.GetType().IsAssignableFrom(prop.PropertyType))
+                {
+                    MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
+                }
+                else
+                {
+                    prop.SetValue(Settings, value);
+                    DefaultSettingsWriterDelegate.DynamicInvoke(Settings, false);
+                }
             }
+        }
+
+        private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
+        {
+            var task = SettingsWriter.WriteSettingsFileTask(PathService.AppSettingsPath, settings);
+            if (synchronous)
+            {
+                task.RunSynchronously();
+            }
+            else
+            {
+                task.Start();
+            }                
         }
 
         #endregion
@@ -224,8 +364,8 @@ namespace SharpEncrypt
 
             SecuredFoldersGrid.Columns[0].HeaderText = rm.GetString("Folder");
 
-            OpenSecuredToolTip.SetToolTip(OpenSecured, rm.GetString("SelectSecuredFile"));
-            AddSecuredFileToolTip.SetToolTip(AddSecured, rm.GetString("AddSecuredFile"));
+            OpenSecuredToolTip.SetToolTip(OpenSecuredGUIButton, rm.GetString("SelectSecuredFile"));
+            AddSecuredFileToolTip.SetToolTip(AddSecuredGUIButton, rm.GetString("AddSecuredFile"));
             ShareToolTip.SetToolTip(ShareButton, rm.GetString("ClickToShare"));
             PasswordManagementToolTip.SetToolTip(PasswordManagement, rm.GetString("GoToPasswordManagement"));
             OpenHomeFolderToolTip.SetToolTip(OpenHomeFolder, rm.GetString("OpenHomeFolder"));
@@ -233,29 +373,112 @@ namespace SharpEncrypt
 
         #endregion
 
-        private void SetApplicationSettings()
+        #region Help menu items
+        private void ShowHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var settingsFilePath = PathService.AppSettingsPath;
-            var settings = new SharpEncryptSettings();
 
-            if (!File.Exists(settingsFilePath))
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(ResourceManager.GetString("CreatedByCredits"));
+
+        #endregion
+
+        #region File menu items
+
+        private void OpenSecuredToolStripMenuItem_Click(object sender, EventArgs e) => OpenSecured();
+
+        private void SecureToolStripMenuItem_Click(object sender, EventArgs e) => AddSecured();
+
+        private void StopSecuringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SecuredFoldersToolStripMenuItem_Click(object sender, EventArgs e) => Tabs.SelectedTab = Tabs.TabPages[1];
+
+        private void AnonymousRenameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RenameToOriginalToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddSecuredFolderToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
+
+        private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Settings.OTPDisclaimerHide)
             {
-                DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
-            }
-            else
-            {
-                var readSettings = SettingsReader.ReadSettingsFile(settingsFilePath, true);
-                if (readSettings == null) //it's corrupt
+                using (var showOnceDialog = new ShowOnceDialog(
+                        ResourceManager.GetString("OTPDisclaimer"),
+                        "OTPDisclaimerHide",
+                        DefaultSettingsChangeDelegate))
                 {
-                    DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
-                }
-                else
-                {
-                    settings = readSettings.Result;
+                    if (showOnceDialog.ShowDialog()
+                        != DialogResult.OK)
+                    {
+                        return;
+                    }
                 }
             }
 
-            Settings = settings;
+            //rest of logic
+        }
+
+        private void DecryptFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e) => SetSessionPassword();
+
+        private void SetSessionPassword()
+        {
+            using (var dialog = new PasswordInputDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    Password = dialog.Password;
+                }
+            }
+        }
+
+        private void ResetAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                ResourceManager.GetString("AreYouSure?"),
+                string.Empty,
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var newSettingsObj = new SharpEncryptSettings();
+                var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
+                DefaultSettingsWriterDelegate.DynamicInvoke(newSettingsObj, false);
+
+                Settings = newSettingsObj;
+
+                ReloadApplication(changeLang);
+            }
+        }
+
+        private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var importPubKeyForm = new ImportPublicKeyForm())
+            {
+                importPubKeyForm.Show();
+            }
         }
 
         private void ExportMyPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -281,8 +504,8 @@ namespace SharpEncrypt
                     }
                 }
                 catch (InvalidKeyException)
-                { 
-                    MessageBox.Show(ResourceManager.GetString("InvalidKey")); 
+                {
+                    MessageBox.Show(ResourceManager.GetString("InvalidKey"));
                 }
             }
         }
@@ -303,81 +526,32 @@ namespace SharpEncrypt
             }
         }
 
-        private void ImportPublicKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var importPubKeyForm = new ImportPublicKeyForm())
-            {
-                importPubKeyForm.Show();
-            }                
-        }
+        #endregion
 
-        private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!Settings.OTPDisclaimerHide)
-            {
-                using (var showOnceDialog = new ShowOnceDialog(
-                        ResourceManager.GetString("OTPDisclaimer"),
-                        "OTPDisclaimerHide",
-                        DefaultSettingsChangeDelegate))
-                {
-                    if (showOnceDialog.ShowDialog()
-                        != DialogResult.OK)
-                    {
-                        return;
-                    }
-                }                    
-            }
+        #region Language Menu Items
 
-            //rest of logic
-        }
+        private void EnglishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("en-GB");
 
-        private void SettingsChangeHandler(string settingsPropertyName, object value)
-        {
-            var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
-            if (prop == null)
-            {
-                MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
-            }
-            else
-            {
-                if (!value.GetType().IsAssignableFrom(prop.PropertyType))
-                {
-                    MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
-                }
-                else
-                {
-                    prop.SetValue(Settings, value);
-                    DefaultSettingsWriterDelegate.DynamicInvoke(Settings, false);
-                }                
-            }
-        }
+        private void DeutschGermanToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("de-DE");
 
-        private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
-            => SettingsWriter.WriteSettingsFile(PathService.AppSettingsPath, settings, synchronous);
+        private void NetherlandsDutchToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("nl-NL");
 
-        private void ResetAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(MessageBox.Show(
-                ResourceManager.GetString("AreYouSure?"),
-                string.Empty,
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                var newSettingsObj = new SharpEncryptSettings();
-                var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
-                DefaultSettingsWriterDelegate.DynamicInvoke(newSettingsObj, false);
+        private void FrancaisFrenchToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("fr-FR");
 
-                Settings = newSettingsObj;
+        private void ItalianoItalianToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("it-IT");
 
-                ReloadApplication(changeLang);
-            }            
-        }
+        private void KoreanToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("ko-KR");
 
-        private void WipeFreeDiskSpaceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var hardDriveWipeDialog = new HardDriveWipeDialog())
-            {
-                hardDriveWipeDialog.Show();
-            }
-        }
+        private void PolskiPolishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("pl-PL");
+
+        private void PortugueseToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("pt-BR");
+
+        private void RussianToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("ru-RU");
+
+        private void SwedishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("sv-SE");
+
+        private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
+
+        #endregion
     }
 }

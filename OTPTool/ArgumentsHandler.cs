@@ -1,20 +1,23 @@
 ﻿using OTPLibrary;
 using System;
+using System.Globalization;
 using System.IO;
+using System.Resources;
 
 namespace OTPTool
 {
     internal sealed class ArgumentsHandler
     {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
-            if ((_arguments.Length == 1 && (_arguments[0] == Resources.HelpSwitch || _arguments[0] == Resources.HelpShortSwitch)) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(Resources.Usage);
+                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -30,10 +33,10 @@ namespace OTPTool
                             path = _arguments[i + 1];
                             i++;
                             break;
-                        case "-encrypt":
+                        case "encrypt":
                             encrypt = true;
                             break;
-                        case "-decrypt":
+                        case "decrypt":
                             encrypt = false;
                             break;
                         case "-key" when i + 1 < _arguments.Length:
@@ -53,7 +56,7 @@ namespace OTPTool
                             i++;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(Resources.InvalidArg, _arguments[i], Resources.Usage));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                 }
 

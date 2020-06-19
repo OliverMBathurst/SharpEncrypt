@@ -38,6 +38,14 @@ namespace SharpEncrypt
             }            
         }
 
+        public string PubKeyFile 
+        {
+            get
+            {
+                return Path.Combine(ImportedKeysDirectory, ResourceManager.GetString("PubKeysFile"));
+            }
+        }
+
         public (string pubKey, string privKey) KeyPairPaths
         {
             get

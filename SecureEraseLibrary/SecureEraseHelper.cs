@@ -114,8 +114,8 @@ namespace SecureEraseLibrary
             if (char.ToLower(Path.GetPathRoot(tempDirectory)[0], CultureInfo.CurrentCulture) != char.ToLower(driveLetter, CultureInfo.CurrentCulture))
                 throw new DirectoryDoesNotExistOnDriveException($"{tempDirectory} - {driveLetter}");
             
-            var tmpFile = FileGeneratorInstance.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorInstance.GetRandomExtension());
-            FileGeneratorInstance.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
+            var tmpFile = FileGeneratorHelper.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorHelper.GetRandomExtension());
+            FileGeneratorHelper.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
             WriteZeros(tmpFile, passes);
             Write255s(tmpFile, passes);
             WriteRandomData(tmpFile, passes);
@@ -204,9 +204,9 @@ namespace SecureEraseLibrary
             var dir = Path.GetDirectoryName(path);
             for (var i = 0; i < passes; i++)
             {
-                var rand = FileGeneratorInstance.GetRandomNameWithoutExtension();
+                var rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
                 while (File.Exists(Path.Combine(dir, rand)))
-                    rand = FileGeneratorInstance.GetRandomNameWithoutExtension();
+                    rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
 
                 File.Move(currentPath, rand);
                 currentPath = Path.Combine(dir, rand);
@@ -273,9 +273,9 @@ namespace SecureEraseLibrary
                 var obfuscatedPath = path;
                 for(var i = 0; i < passes; i++)
                 {                    
-                    var randName = FileGeneratorInstance.GetRandomNameWithoutExtension();
+                    var randName = FileGeneratorHelper.GetRandomNameWithoutExtension();
                     while (Directory.Exists(Path.Combine(parent, randName)))
-                        randName = FileGeneratorInstance.GetRandomNameWithoutExtension();
+                        randName = FileGeneratorHelper.GetRandomNameWithoutExtension();
 
                     Directory.Move(obfuscatedPath, randName);
                     obfuscatedPath = Path.Combine(parent, randName);

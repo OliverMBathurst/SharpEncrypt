@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 
 namespace FileGeneratorLibrary
 {
-    public static class FileGeneratorInstance
+    public static class FileGeneratorHelper
     {
         private const long BUFFER_LENGTH = 1024L;
 
@@ -27,8 +27,10 @@ namespace FileGeneratorLibrary
 
             if (length == -1L)
             {
-                var drive = DriveInfo.GetDrives().First(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(path[0], CultureInfo.CurrentCulture));
-                length = drive.AvailableFreeSpace;
+                var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(path[0], CultureInfo.CurrentCulture));
+                if (!drives.Any())
+                    throw new DriveNotFoundException(path[0].ToString());
+                length = drives.First().AvailableFreeSpace;
             }
 
             var genFilePath = CreateUniqueFileForDirectory(path, ".BIN");

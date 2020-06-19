@@ -207,6 +207,15 @@ namespace SharpEncrypt.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Debug.
         /// </summary>
+        internal static string Debug {
+            get {
+                return ResourceManager.GetString("Debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
         internal static string DebugMenuStrip {
             get {
                 return ResourceManager.GetString("DebugMenuStrip", resourceCulture);
@@ -219,6 +228,24 @@ namespace SharpEncrypt.Resources {
         internal static string DecryptFileToolStripMenuItem {
             get {
                 return ResourceManager.GetString("DecryptFileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt permanently.
+        /// </summary>
+        internal static string DecryptPermanentlyToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DecryptPermanentlyToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt temporarily.
+        /// </summary>
+        internal static string DecryptTemporarilyToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DecryptTemporarilyToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -412,6 +439,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Include subfolders.
+        /// </summary>
+        internal static string IncludeSubfolders {
+            get {
+                return ResourceManager.GetString("IncludeSubfolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid key, please generate a new key-pair..
         /// </summary>
         internal static string InvalidKey {
@@ -453,6 +489,15 @@ namespace SharpEncrypt.Resources {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is not a valid container..
+        /// </summary>
+        internal static string NotAValidContainer {
+            get {
+                return ResourceManager.GetString("NotAValidContainer", resourceCulture);
             }
         }
         
@@ -691,6 +736,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share keys.
+        /// </summary>
+        internal static string ShareKeysToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ShareKeysToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf).
         /// </summary>
         internal static string SharpEncryptOTPEncryptedFile {
@@ -777,6 +831,33 @@ namespace SharpEncrypt.Resources {
         internal static string UseSessionPassword {
             get {
                 return ResourceManager.GetString("UseSessionPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validate Container.
+        /// </summary>
+        internal static string ValidateContainerToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ValidateContainerToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is a valid container..
+        /// </summary>
+        internal static string ValidContainer {
+            get {
+                return ResourceManager.GetString("ValidContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wipe free disk space after secure delete.
+        /// </summary>
+        internal static string WipeDiskSpaceAfterSecureDeleteToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("WipeDiskSpaceAfterSecureDeleteToolStripMenuItem", resourceCulture);
             }
         }
         

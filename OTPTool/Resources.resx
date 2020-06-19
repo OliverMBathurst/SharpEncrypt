@@ -130,7 +130,7 @@
     <comment>Invalid arg statement</comment>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value>Usage: [-path string] {-encrypt | -decrypt } [-key string] [-genKey] [-keySize number] [-blockSize number]</value>
+    <value>Usage: [-path string] [-cipher string {otp | aes}] [-type string {File | Directory}] [-recurse boolean {true | false}] [-nameObfuscation boolean {true | false}] [-propertyObfuscation boolean {true | false}]</value>
     <comment>Usage statement</comment>
   </data>
 </root>

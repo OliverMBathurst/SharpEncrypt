@@ -4,7 +4,7 @@ using System.IO;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Controls
 {
     internal partial class DriveSelectionControl : UserControl
     {

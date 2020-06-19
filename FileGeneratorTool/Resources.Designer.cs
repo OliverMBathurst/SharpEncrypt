@@ -97,7 +97,7 @@ namespace FileGen {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
+        ///   Looks up a localized string similar to Usage: [-path string] [-length number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
         /// </summary>
         internal static string Usage {
             get {

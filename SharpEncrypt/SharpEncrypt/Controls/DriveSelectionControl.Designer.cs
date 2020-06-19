@@ -1,4 +1,4 @@
-﻿namespace SharpEncrypt
+﻿namespace SharpEncrypt.Controls
 {
     partial class DriveSelectionControl
     {

@@ -16,7 +16,7 @@ namespace FileGen
         public void Execute()
         {
             var path = Environment.CurrentDirectory;
-            var size = -1L;
+            var length = -1L;
             bool random = false, pause = true, postDelete = true;
 
             if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
@@ -32,8 +32,8 @@ namespace FileGen
                         case "-path" when Directory.Exists(_arguments[i + 1]):
                             path = _arguments[i + 1];
                             break;
-                        case "-size" when long.TryParse(_arguments[i + 1], out var sizeResult):
-                            size = sizeResult;
+                        case "-length" when long.TryParse(_arguments[i + 1], out var lengthResult):
+                            length = lengthResult;
                             break;
                         case "-random" when bool.TryParse(_arguments[i + 1], out var randomResult):
                             random = randomResult;
@@ -50,7 +50,7 @@ namespace FileGen
                     i++;
                 }
 
-                FileGeneratorInstance.WriteNewFile(path, size, random, postDelete);
+                FileGeneratorHelper.WriteNewFile(path, length, random, postDelete);
 
                 if (pause)
                 {

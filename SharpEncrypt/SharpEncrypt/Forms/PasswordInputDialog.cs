@@ -4,7 +4,7 @@ using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Forms
 {
     internal partial class PasswordInputDialog : Form
     {

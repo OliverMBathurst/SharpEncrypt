@@ -88,7 +88,7 @@ namespace OTPTool {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage: [-path string] {-encrypt | -decrypt } [-key string] [-genKey] [-keySize number] [-blockSize number].
+        ///   Looks up a localized string similar to Usage: [-path string] [-cipher string {otp | aes}] [-type string {File | Directory}] [-recurse boolean {true | false}] [-nameObfuscation boolean {true | false}] [-propertyObfuscation boolean {true | false}].
         /// </summary>
         internal static string Usage {
             get {

@@ -8,15 +8,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Forms
 {
     internal partial class ImportPublicKeyForm : Form
     {
+        private readonly PathService PathService = new PathService();
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
-
-        public string PubKeyPath { get; private set; }
-
-        public string PublicKeyIdentity { get; private set; }
 
         public ImportPublicKeyForm() => InitializeComponent();
 
@@ -41,8 +38,7 @@ namespace SharpEncrypt
                 openFileDialog.Filter = ResourceManager.GetString("RSAKeyFilter");
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    PubKeyPath = openFileDialog.FileName;
-                    PublicKeyFilePathField.Text = PubKeyPath;
+                    PublicKeyFilePathField.Text = openFileDialog.FileName;
                 }
             }
         }
@@ -61,27 +57,26 @@ namespace SharpEncrypt
                 return;
             }
 
-            PublicKeyIdentity = Identity.Text;
-            if(ImportPublicKey())
+            if(ImportPublicKey(Identity.Text))
                 DialogResult = DialogResult.OK;
         }
 
-        private bool ImportPublicKey()
+        private bool ImportPublicKey(string identity)
         {
-            var keysDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), ResourceManager.GetString("ImportedKeysDir"));
-            var keyFilePath = Path.Combine(keysDir, ResourceManager.GetString("PubKeysFile"));
-
+            var keyFilePath = PathService.PubKeyFile;
             IDictionary<string, RSAParameters> pubKeyList = new Dictionary<string, RSAParameters>();
             if (File.Exists(keyFilePath))
+            {
                 pubKeyList = RSAKeyReader.GetPublicKeys(keyFilePath);
 
-            if (pubKeyList.ContainsKey(PublicKeyIdentity))
-            {
-                MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));
-                return false;
+                if (pubKeyList.ContainsKey(identity))
+                {
+                    MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));
+                    return false;
+                }
             }
             
-            pubKeyList.Add(PublicKeyIdentity, RSAKeyReader.GetParameters(PubKeyPath));           
+            pubKeyList.Add(identity, RSAKeyReader.GetParameters(PublicKeyFilePathField.Text));
 
             using (var fs = new FileStream(keyFilePath, FileMode.Create))
             {

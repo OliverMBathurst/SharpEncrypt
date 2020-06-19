@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.ExtensionClasses
 {
     public static class ControlExtensions
     {

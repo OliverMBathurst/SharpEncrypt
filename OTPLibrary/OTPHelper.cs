@@ -16,7 +16,7 @@ namespace OTPLibrary
                 throw new ArgumentNullException(nameof(path));
             if (string.IsNullOrEmpty(referenceFile))
                 throw new ArgumentNullException(nameof(referenceFile));
-            if (!File.Exists(referenceFile)) 
+            if (!File.Exists(referenceFile))
                 throw new FileNotFoundException(referenceFile);
 
             GenerateKey(path, new FileInfo(referenceFile).Length, bufferLength);                

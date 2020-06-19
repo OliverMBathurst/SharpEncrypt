@@ -1,19 +1,22 @@
 ﻿using SecureEraseLibrary;
 using System;
+using System.Globalization;
+using System.Resources;
 
 namespace SecureShred
 {
     internal sealed class ArgumentsHandler
     {
+        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
-            if ((_arguments.Length == 1 && (_arguments[0] == Resources.HelpSwitch || _arguments[0] == Resources.HelpShortSwitch)) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(Resources.Usage);
+                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -45,17 +48,17 @@ namespace SecureShred
                             propertyObfuscation = propertyObfuscationResult;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(Resources.InvalidArg, _arguments[i], Resources.Usage));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                     i++;
                 }
-
-                if (shredType.ToLower() == Resources.File.ToLower())
+                
+                if (shredType.ToLower(CultureInfo.CurrentCulture) == ResourceManager.GetString("File", CultureInfo.CurrentCulture).ToLower(CultureInfo.CurrentCulture))
                     SecureEraseHelper.ShredFile(path, cipher, nameObfuscation, propertyObfuscation);
-                else if(shredType.ToLower() == Resources.Directory.ToLower())
+                else if(shredType.ToLower(CultureInfo.CurrentCulture) == ResourceManager.GetString("Directory", CultureInfo.CurrentCulture).ToLower(CultureInfo.CurrentCulture))
                     SecureEraseHelper.ShredDirectory(path, cipher, recurse, nameObfuscation, propertyObfuscation);
                 else
-                    throw new ArgumentException("Invalid shred type.");
+                    throw new ArgumentException(ResourceManager.GetString("InvalidShredType", CultureInfo.CurrentCulture));
             }
         }
     }

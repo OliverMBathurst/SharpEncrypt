@@ -6,18 +6,10 @@ namespace SharpEncrypt
 {
     internal static class SettingsWriter
     {
-        public static Task WriteSettingsFile(string path, SharpEncryptSettings settings, bool synchronous)
-        {
-            var task = new Task(() => {
+        public static Task WriteSettingsFileTask(string path, SharpEncryptSettings settings)
+            => new Task(() => {
                 using (var fs = new FileStream(path, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, settings);
             });
-
-            if (synchronous)
-                task.RunSynchronously();
-            else
-                task.Start();
-            return task;
-        }
     }
 }
