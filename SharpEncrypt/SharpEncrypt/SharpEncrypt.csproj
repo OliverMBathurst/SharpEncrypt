@@ -39,6 +39,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SharpEncrypt.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,10 +65,9 @@
     <Compile Include="Controls\DriveSelectionControl.Designer.cs">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
-    <Compile Include="TaskHandler.cs" />
+    <Compile Include="BackgroundTaskHandler.cs" />
     <Compile Include="Forms\HardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>

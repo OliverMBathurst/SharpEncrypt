@@ -7,12 +7,12 @@ namespace SharpEncrypt
 {
     internal static class SettingsReader
     {
-        public static Task<SharpEncryptSettings> ReadSettingsFile(string path, bool synchronous)
+        public static Task<SharpEncryptSettings> ReadSettingsFileTask(string path)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
 
-            var task = new Task<SharpEncryptSettings>(() =>
+            return new Task<SharpEncryptSettings>(() =>
             {
                 using (var fs = File.Open(path, FileMode.Open))
                 {
@@ -22,13 +22,6 @@ namespace SharpEncrypt
                         return null;
                 }
             });
-
-            if (synchronous)
-                task.RunSynchronously();
-            else
-                task.Start();
-
-            return task;
         }
     }
 }

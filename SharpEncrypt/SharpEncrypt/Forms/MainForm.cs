@@ -14,13 +14,14 @@ namespace SharpEncrypt.Forms
     internal partial class MainForm : Form
     {
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
-        private readonly PathService PathService = new PathService();
+        
         private delegate void SettingsChangeDelegate(string settingsPropertyName, object value);
         private delegate void SettingsWriterDelegate(SharpEncryptSettings settings, bool synchronous);
 
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
-        private readonly TaskHandler FileHandler;
+        private readonly BackgroundTaskHandler TaskHandler = new BackgroundTaskHandler();
+        private readonly PathService PathService = new PathService();
 
         private string Password { get; set; }
 
@@ -31,7 +32,6 @@ namespace SharpEncrypt.Forms
             InitializeComponent();
             DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
             DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
-            FileHandler = new TaskHandler();
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -67,11 +67,12 @@ namespace SharpEncrypt.Forms
 
         private void LoadApplication()
         {
+            TaskHandler.Run();
             SetApplicationSettings();
             if (Settings.LanguageCode != Constants.DefaultLanguage)
                 ChangeLanguage(Settings.LanguageCode);
 
-            SetSessionPassword();
+            SetSessionPassword();            
         }
 
         private void ReloadApplication(bool changeLanguage)
@@ -91,14 +92,15 @@ namespace SharpEncrypt.Forms
             }
             else
             {
-                var readSettings = SettingsReader.ReadSettingsFile(settingsFilePath, true);
-                if (readSettings == null) //it's corrupt
+                var task = SettingsReader.ReadSettingsFileTask(settingsFilePath);
+                TaskHandler.AddJob(task, true);
+                if (task.Result == null) //it's corrupt
                 {
                     DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
                 }
                 else
                 {
-                    settings = readSettings.Result;
+                    settings = task.Result;
                 }
             }
 
@@ -317,17 +319,7 @@ namespace SharpEncrypt.Forms
         }
 
         private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
-        {
-            var task = SettingsWriter.WriteSettingsFileTask(PathService.AppSettingsPath, settings);
-            if (synchronous)
-            {
-                task.RunSynchronously();
-            }
-            else
-            {
-                task.Start();
-            }                
-        }
+            => TaskHandler.AddJob(SettingsWriter.WriteSettingsFileTask(PathService.AppSettingsPath, settings), synchronous);
 
         #endregion
 
