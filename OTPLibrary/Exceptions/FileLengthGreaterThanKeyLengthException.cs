@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OTPLibrary
+namespace OTPLibrary.Exceptions
 {
     public class FileLengthGreaterThanKeyLengthException : Exception
     {

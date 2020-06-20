@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Resources;
 
-namespace FileGen
+namespace FileGeneratorTool
 {
     internal sealed class ArgumentsHandler
     {

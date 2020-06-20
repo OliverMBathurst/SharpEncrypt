@@ -22,7 +22,7 @@ namespace OTPTool
             else
             {
                 string path = string.Empty, keyPath = string.Empty, referenceFile = string.Empty;
-                bool encrypt = false, genKey = false;
+                var genKey = false;
                 var keySize = 0L;
 
                 for (var i = 0; i < _arguments.Length; i++)
@@ -33,13 +33,7 @@ namespace OTPTool
                             path = _arguments[i + 1];
                             i++;
                             break;
-                        case "encrypt":
-                            encrypt = true;
-                            break;
-                        case "decrypt":
-                            encrypt = false;
-                            break;
-                        case "-key" when i + 1 < _arguments.Length:
+                        case "-keyPath" when i + 1 < _arguments.Length:
                             keyPath = _arguments[i + 1];
                             i++;
                             break;
@@ -69,10 +63,7 @@ namespace OTPTool
                 }
                 else
                 {
-                    if (encrypt)
-                        OTPHelper.Encrypt(path, keyPath);
-                    else
-                        OTPHelper.Decrypt(path, keyPath);
+                    OTPHelper.Transform(path, keyPath);
                 }
             }
         }

@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SecureShred {
+namespace SecureEraseTool
+{
     using System;
     
     
@@ -115,7 +116,7 @@ namespace SecureShred {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}.
+        ///   Looks up a localized string similar to Usage: [-path string] [-cipher string {otp | aes}] [-type string {File | Directory}] [-recurse boolean {true | false}] [-nameObfuscation boolean {true | false}] [-propertyObfuscation boolean {true | false}].
         /// </summary>
         internal static string Usage {
             get {

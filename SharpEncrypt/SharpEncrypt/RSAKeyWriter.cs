@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace SharpEncrypt
 {
-    internal sealed class RSAKeyWriter
+    internal static class RSAKeyWriter
     {
         public static void Write(string path, RSAParameters parameters)
         {

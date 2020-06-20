@@ -141,7 +141,7 @@
     <value>Invalid shred type.</value>
   </data>
   <data name="Usage" xml:space="preserve">
-    <value>Usage: [-path string] [-size number] [-random] {true|false} [-pause] {true|false} [-postDelete] {true|false}</value>
+    <value>Usage: [-path string] [-cipher string {otp | aes}] [-type string {File | Directory}] [-recurse boolean {true | false}] [-nameObfuscation boolean {true | false}] [-propertyObfuscation boolean {true | false}]</value>
     <comment>Usage statement</comment>
   </data>
 </root>

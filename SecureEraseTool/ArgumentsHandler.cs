@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using System.Resources;
 
-namespace SecureShred
+namespace SecureEraseTool
 {
     internal sealed class ArgumentsHandler
     {

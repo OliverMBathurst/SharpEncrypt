@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileGen {
+namespace FileGeneratorTool
+{
     using System;
     
     

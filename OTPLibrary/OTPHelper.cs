@@ -1,4 +1,4 @@
-﻿using AESLibrary;
+﻿using FileIOLibrary;
 using OTPLibrary.Exceptions;
 using System;
 using System.IO;
@@ -88,11 +88,7 @@ namespace OTPLibrary
             }
         }
 
-        public static void Encrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
-
-        public static void Decrypt(string filePath, string keyPath, long bufferLength = BUFFER_LENGTH) => Transform(filePath, keyPath, bufferLength);
-
-        private static void Transform(string path, string keyPath, long bufferLength)
+        public static void Transform(string path, string keyPath, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));

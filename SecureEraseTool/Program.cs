@@ -1,4 +1,4 @@
-﻿namespace SecureShred
+﻿namespace SecureEraseTool
 {
     internal sealed class Program
     {

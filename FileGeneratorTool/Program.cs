@@ -1,5 +1,5 @@
 ﻿
-namespace FileGen
+namespace FileGeneratorTool
 {
     internal sealed class Program
     {
