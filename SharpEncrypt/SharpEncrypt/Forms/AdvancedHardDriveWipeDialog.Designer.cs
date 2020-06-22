@@ -1,6 +1,6 @@
 ﻿namespace SharpEncrypt.Forms
 {
-    partial class HardDriveWipeDialog
+    partial class AdvancedHardDriveWipeDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -32,6 +32,9 @@
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
+            this.Options = new System.Windows.Forms.Button();
+            this.ClearJobs = new System.Windows.Forms.Button();
+            this.ViewJobs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ControlsPanel
@@ -43,13 +46,13 @@
             this.ControlsPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ControlsPanel.Location = new System.Drawing.Point(11, 12);
             this.ControlsPanel.Name = "ControlsPanel";
-            this.ControlsPanel.Size = new System.Drawing.Size(1084, 554);
+            this.ControlsPanel.Size = new System.Drawing.Size(1084, 442);
             this.ControlsPanel.TabIndex = 0;
             // 
             // OK
             // 
             this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OK.Location = new System.Drawing.Point(851, 582);
+            this.OK.Location = new System.Drawing.Point(851, 470);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(119, 62);
             this.OK.TabIndex = 1;
@@ -60,7 +63,7 @@
             // Cancel
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cancel.Location = new System.Drawing.Point(976, 582);
+            this.Cancel.Location = new System.Drawing.Point(976, 470);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(119, 62);
             this.Cancel.TabIndex = 2;
@@ -68,18 +71,54 @@
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // HardDriveWipeDialog
+            // Options
+            // 
+            this.Options.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Options.Location = new System.Drawing.Point(726, 470);
+            this.Options.Name = "Options";
+            this.Options.Size = new System.Drawing.Size(119, 62);
+            this.Options.TabIndex = 3;
+            this.Options.Text = "Options";
+            this.Options.UseVisualStyleBackColor = true;
+            this.Options.Click += new System.EventHandler(this.Options_Click);
+            // 
+            // ClearJobs
+            // 
+            this.ClearJobs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClearJobs.Location = new System.Drawing.Point(601, 470);
+            this.ClearJobs.Name = "ClearJobs";
+            this.ClearJobs.Size = new System.Drawing.Size(119, 62);
+            this.ClearJobs.TabIndex = 4;
+            this.ClearJobs.Text = "Clear Jobs";
+            this.ClearJobs.UseVisualStyleBackColor = true;
+            this.ClearJobs.Click += new System.EventHandler(this.ClearJobs_Click);
+            // 
+            // ViewJobs
+            // 
+            this.ViewJobs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ViewJobs.Location = new System.Drawing.Point(476, 470);
+            this.ViewJobs.Name = "ViewJobs";
+            this.ViewJobs.Size = new System.Drawing.Size(119, 62);
+            this.ViewJobs.TabIndex = 5;
+            this.ViewJobs.Text = "View Jobs";
+            this.ViewJobs.UseVisualStyleBackColor = true;
+            this.ViewJobs.Click += new System.EventHandler(this.ViewJobs_Click);
+            // 
+            // AdvancedHardDriveWipeDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 656);
+            this.ClientSize = new System.Drawing.Size(1107, 544);
+            this.Controls.Add(this.ViewJobs);
+            this.Controls.Add(this.ClearJobs);
+            this.Controls.Add(this.Options);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.ControlsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "HardDriveWipeDialog";
+            this.Name = "AdvancedHardDriveWipeDialog";
             this.Text = "HardDriveWipeDialog";
-            this.Load += new System.EventHandler(this.HardDriveWipeDialog_Load);
+            this.Load += new System.EventHandler(this.AdvancedHardDriveWipeDialog_Load);
             this.ResumeLayout(false);
 
         }
@@ -89,5 +128,8 @@
         private System.Windows.Forms.Panel ControlsPanel;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
+        private System.Windows.Forms.Button Options;
+        private System.Windows.Forms.Button ClearJobs;
+        private System.Windows.Forms.Button ViewJobs;
     }
 }

@@ -32,6 +32,7 @@ namespace SharpEncrypt.Forms
             InitializeComponent();
             DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
             DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
+            FormClosing += FormClosingHandler;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -40,9 +41,8 @@ namespace SharpEncrypt.Forms
 
         private void AddSecured()
         {
-            using (var dialog = new OpenFileDialog())
+            using (var dialog = GetAllFilesDialog())
             {
-                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var fileToSecure = dialog.FileName;
@@ -54,9 +54,8 @@ namespace SharpEncrypt.Forms
 
         private void OpenSecured()
         {
-            using (var dialog = new OpenFileDialog())
+            using (var dialog = GetSEEFFilesDialog())
             {
-                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     var securedFilePath = dialog.FileName;
@@ -105,6 +104,22 @@ namespace SharpEncrypt.Forms
             }
 
             Settings = settings;
+            SetUIOptions();
+        }
+
+        private void SetUIOptions()
+        {
+            Debug.Checked = Settings.DebugEnabled;
+            IncludeSubfolders.Checked = Settings.IncludeSubfolders;
+            UseADifferentPasswordForEachFile.Checked = Settings.UseADifferentPasswordForEachFile;
+            WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Checked = Settings.WipeFreeSpaceAfterSecureDelete;
+            if (Debug.Checked)
+                DebugMenuStrip.Enabled = true;
+        }
+
+        private static void CloseApplication()
+        {
+            Application.Exit();
         }
 
         #endregion
@@ -239,13 +254,16 @@ namespace SharpEncrypt.Forms
         {
             using (var hardDriveWipeDialog = new HardDriveWipeDialog())
             {
-                hardDriveWipeDialog.Show();
+                hardDriveWipeDialog.ShowDialog();
             }
         }
 
         private void AdvancedDiskWipeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            using (var hardDriveWipeDialog = new AdvancedHardDriveWipeDialog())
+            {
+                hardDriveWipeDialog.ShowDialog();
+            }
         }
 
         #endregion
@@ -254,7 +272,7 @@ namespace SharpEncrypt.Forms
 
         private void ValidateContainerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(var openFileDialog = new OpenFileDialog())
+            using(var openFileDialog = GetSEEFFilesDialog())
             {
                 if(openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -270,20 +288,20 @@ namespace SharpEncrypt.Forms
         #region Flag Menu Items
         private void DebugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Toggle(DebugMenuStrip);
-            DefaultSettingsChangeDelegate.DynamicInvoke("DebugEnabled", Toggle(Debug));
+            ToggleEnablement(DebugMenuStrip);
+            DefaultSettingsChangeDelegate.DynamicInvoke("DebugEnabled", ToggleChecked(Debug));
         }
 
         private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
-            => DefaultSettingsChangeDelegate.DynamicInvoke("UseADifferentPasswordForEachFile", Toggle(UseADifferentPasswordForEachFile));
+            => DefaultSettingsChangeDelegate.DynamicInvoke("UseADifferentPasswordForEachFile", ToggleChecked(UseADifferentPasswordForEachFile));
 
         private void IncludeToolStripMenuItem_Click(object sender, EventArgs e)
-            => DefaultSettingsChangeDelegate.DynamicInvoke("IncludeSubfolders", Toggle(IncludeSubfolders));
+            => DefaultSettingsChangeDelegate.DynamicInvoke("IncludeSubfolders", ToggleChecked(IncludeSubfolders));
 
         private void WipeDiskSpaceAfterSecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
-            => DefaultSettingsChangeDelegate.DynamicInvoke("WipeFreeSpaceAfterSecureDelete", Toggle(WipeDiskSpaceAfterSecureDeleteToolStripMenuItem));
+            => DefaultSettingsChangeDelegate.DynamicInvoke("WipeFreeSpaceAfterSecureDelete", ToggleChecked(WipeDiskSpaceAfterSecureDeleteToolStripMenuItem));
 
-        private static bool Toggle(ToolStripMenuItem item)
+        private static bool ToggleChecked(ToolStripMenuItem item)
         {
             if (item.Checked)
                 item.Checked = false;
@@ -291,6 +309,16 @@ namespace SharpEncrypt.Forms
                 item.Checked = true;
 
             return item.Checked;
+        }
+
+        private static bool ToggleEnablement(ToolStripMenuItem item)
+        {
+            if (item.Enabled)
+                item.Enabled = false;
+            else
+                item.Enabled = true;
+
+            return item.Enabled;
         }
 
         #endregion
@@ -320,6 +348,32 @@ namespace SharpEncrypt.Forms
 
         private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
             => TaskHandler.AddJob(SettingsWriter.WriteSettingsFileTask(PathService.AppSettingsPath, settings), synchronous);
+
+        private void CloseApplicationHandler(object sender, FormClosedEventArgs e)
+        {
+            CloseApplication();
+        }
+
+        private void FormClosingHandler(object sender, FormClosingEventArgs e)
+        {
+            OnExitRequested();
+        }
+
+        private void OnExitRequested()
+        {
+            if (!TaskHandler.HasCompletedJobs)
+            {
+                using (var taskHandlerForm = new TaskProgressForm(TaskHandler))
+                {
+                    taskHandlerForm.FormClosed += CloseApplicationHandler;
+                    taskHandlerForm.Show();
+                }
+            }
+            else
+            {
+                CloseApplication();
+            }
+        }
 
         #endregion
 
@@ -408,7 +462,10 @@ namespace SharpEncrypt.Forms
 
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => Application.Exit();
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnExitRequested();
+        }
 
         private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -419,8 +476,7 @@ namespace SharpEncrypt.Forms
                         "OTPDisclaimerHide",
                         DefaultSettingsChangeDelegate))
                 {
-                    if (showOnceDialog.ShowDialog()
-                        != DialogResult.OK)
+                    if (showOnceDialog.ShowDialog() != DialogResult.OK)
                     {
                         return;
                     }
@@ -520,6 +576,28 @@ namespace SharpEncrypt.Forms
 
         #endregion
 
+        #region Misc
+
+        private OpenFileDialog GetAllFilesDialog()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
+                return dialog;
+            }
+        }
+
+        private OpenFileDialog GetSEEFFilesDialog()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
+                return dialog;
+            }
+        }
+
+        #endregion
+
         #region Language Menu Items
 
         private void EnglishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("en-GB");
@@ -545,5 +623,10 @@ namespace SharpEncrypt.Forms
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
 
         #endregion
+
+        private void ViewJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

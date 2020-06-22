@@ -123,6 +123,9 @@
   <data name="ACriticalErrorHasOccurred" xml:space="preserve">
     <value>A critical error has occurred.</value>
   </data>
+  <data name="AddJob" xml:space="preserve">
+    <value>Add Job</value>
+  </data>
   <data name="AddSecuredFile" xml:space="preserve">
     <value>Add a file to be secured.</value>
   </data>
@@ -156,6 +159,9 @@
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ClearJobs" xml:space="preserve">
+    <value>Clear Jobs</value>
   </data>
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
@@ -256,6 +262,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NameObfuscationRounds" xml:space="preserve">
+    <value>Name Obfuscation Rounds</value>
+  </data>
   <data name="NeverShowAgain" xml:space="preserve">
     <value>Never show again</value>
   </data>
@@ -277,6 +286,9 @@
   <data name="OpenSecuredToolStripMenuItem" xml:space="preserve">
     <value>Open Secured</value>
   </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="OptionsToolStripMenuItem" xml:space="preserve">
     <value>Options</value>
   </data>
@@ -294,6 +306,9 @@
   </data>
   <data name="PasswordRestrictedChars" xml:space="preserve">
     <value>Passwords must not contain any restricted characters: {0}</value>
+  </data>
+  <data name="PropertyObfuscationRounds" xml:space="preserve">
+    <value>Property Obfuscation Rounds</value>
   </data>
   <data name="PubKeysFile" xml:space="preserve">
     <value>PublicKeys.BIN</value>
@@ -364,6 +379,12 @@
   <data name="Strength" xml:space="preserve">
     <value>Strength</value>
   </data>
+  <data name="TaskProgressForm" xml:space="preserve">
+    <value>Task Progress</value>
+  </data>
+  <data name="TasksRemaining" xml:space="preserve">
+    <value>{0} tasks remaining.</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
@@ -382,10 +403,28 @@
   <data name="ValidContainer" xml:space="preserve">
     <value>{0} is a valid container.</value>
   </data>
+  <data name="ViewJobs" xml:space="preserve">
+    <value>View Jobs</value>
+  </data>
+  <data name="ViewJobsToolStripMenuItem" xml:space="preserve">
+    <value>View Jobs</value>
+  </data>
   <data name="WipeDiskSpaceAfterSecureDeleteToolStripMenuItem" xml:space="preserve">
     <value>Wipe free disk space after secure delete</value>
   </data>
   <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
     <value>Wipe Free Disk Space</value>
+  </data>
+  <data name="WipeNumber" xml:space="preserve">
+    <value>Wipe Rounds</value>
+  </data>
+  <data name="WipeOptions" xml:space="preserve">
+    <value>Wipe Options</value>
+  </data>
+  <data name="WipeRounds" xml:space="preserve">
+    <value>Wipe Rounds</value>
+  </data>
+  <data name="WipeType" xml:space="preserve">
+    <value>Wipe Type</value>
   </data>
 </root>

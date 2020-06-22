@@ -65,9 +65,29 @@
     <Compile Include="Controls\DriveSelectionControl.Designer.cs">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DriveWipeJobSettingsHelper.cs" />
+    <Compile Include="Enums\DriveWipeType.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
     <Compile Include="BackgroundTaskHandler.cs" />
+    <Compile Include="Forms\AdvancedHardDriveWipeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdvancedHardDriveWipeDialog.Designer.cs">
+      <DependentUpon>AdvancedHardDriveWipeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdvancedHardDriveWipeOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdvancedHardDriveWipeOptionsDialog.Designer.cs">
+      <DependentUpon>AdvancedHardDriveWipeOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GenericGridForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GenericGridForm.Designer.cs">
+      <DependentUpon>GenericGridForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +100,14 @@
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TaskProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TaskProgressForm.Designer.cs">
+      <DependentUpon>TaskProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DriveWipeJob.cs" />
+    <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="PathService.cs" />
     <Compile Include="RSAKeyWriter.cs" />
@@ -172,6 +200,15 @@
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdvancedHardDriveWipeDialog.resx">
+      <DependentUpon>AdvancedHardDriveWipeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdvancedHardDriveWipeOptionsDialog.resx">
+      <DependentUpon>AdvancedHardDriveWipeOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GenericGridForm.resx">
+      <DependentUpon>GenericGridForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HardDriveWipeDialog.resx">
       <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -183,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordInputDialog.resx">
       <DependentUpon>PasswordInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TaskProgressForm.resx">
+      <DependentUpon>TaskProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
