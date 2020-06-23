@@ -79,6 +79,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added {0} jobs..
+        /// </summary>
+        internal static string AddedNJobs {
+            get {
+                return ResourceManager.GetString("AddedNJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Job.
         /// </summary>
         internal static string AddJob {
@@ -201,6 +210,15 @@ namespace SharpEncrypt.Resources {
         internal static string ClickToShare {
             get {
                 return ResourceManager.GetString("ClickToShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        internal static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
             }
         }
         
@@ -516,6 +534,15 @@ namespace SharpEncrypt.Resources {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No drives selected..
+        /// </summary>
+        internal static string NoDrivesSelected {
+            get {
+                return ResourceManager.GetString("NoDrivesSelected", resourceCulture);
             }
         }
         
@@ -862,6 +889,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task Type.
+        /// </summary>
+        internal static string TaskType {
+            get {
+                return ResourceManager.GetString("TaskType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         internal static string Time {
@@ -912,6 +948,15 @@ namespace SharpEncrypt.Resources {
         internal static string ValidContainer {
             get {
                 return ResourceManager.GetString("ValidContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Completed Jobs.
+        /// </summary>
+        internal static string ViewCompletedJobsToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ViewCompletedJobsToolStripMenuItem", resourceCulture);
             }
         }
         

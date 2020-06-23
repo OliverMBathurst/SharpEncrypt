@@ -3,7 +3,7 @@
 namespace SharpEncrypt
 {
     [Serializable]
-    internal sealed class SharpEncryptSettings
+    public sealed class SharpEncryptSettings
     {
         public string LanguageCode { get; set; } = "en-GB";
 

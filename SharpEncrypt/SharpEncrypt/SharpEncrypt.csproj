@@ -57,15 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ContainerHelper.cs" />
+    <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="Helpers\ContainerHelper.cs" />
     <Compile Include="Controls\DriveSelectionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\DriveSelectionControl.Designer.cs">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DriveWipeJobSettingsHelper.cs" />
+    <Compile Include="Helpers\DriveWipeJobSettingsHelper.cs" />
     <Compile Include="Enums\DriveWipeType.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
@@ -109,8 +111,9 @@
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
-    <Compile Include="PathService.cs" />
-    <Compile Include="RSAKeyWriter.cs" />
+    <Compile Include="Models\SharpEncryptTaskResult.cs" />
+    <Compile Include="Helpers\PathHelper.cs" />
+    <Compile Include="Helpers\RSAKeyWriterHelper.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,10 +189,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.tr.resx</DependentUpon>
     </Compile>
-    <Compile Include="RSAHelper.cs" />
-    <Compile Include="RSAKeyReader.cs" />
-    <Compile Include="SettingsReader.cs" />
-    <Compile Include="SettingsWriter.cs" />
+    <Compile Include="Helpers\RSAKeyPairHelper.cs" />
+    <Compile Include="Helpers\RSAKeyReaderHelper.cs" />
     <Compile Include="SharpEncryptSettings.cs" />
     <Compile Include="Forms\ShowOnceDialog.cs">
       <SubType>Form</SubType>
@@ -197,6 +198,8 @@
     <Compile Include="Forms\ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\ReadSettingsFileTask.cs" />
+    <Compile Include="Tasks\WriteSettingsFileTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +325,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

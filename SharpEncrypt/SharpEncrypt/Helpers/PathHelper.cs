@@ -2,9 +2,9 @@
 using System.IO;
 using System.Resources;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Helpers
 {
-    internal sealed class PathService
+    internal sealed class PathHelper
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
 

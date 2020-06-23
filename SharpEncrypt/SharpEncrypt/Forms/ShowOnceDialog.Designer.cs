@@ -92,6 +92,7 @@
             this.Controls.Add(this.DialogTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShowOnceDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShowOnceDialog";
             this.Load += new System.EventHandler(this.ShowOnceDialog_Load);
             this.ResumeLayout(false);

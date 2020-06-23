@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Helpers
 {
     internal static class ContainerHelper
     {

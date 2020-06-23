@@ -122,6 +122,7 @@
             this.Controls.Add(this.Identity);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ImportPublicKeyForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImportPublicKeyForm";
             this.Load += new System.EventHandler(this.ImportPublicKeyForm_Load);
             this.Identity.ResumeLayout(false);

@@ -3,9 +3,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Helpers
 {
-    internal static class RSAKeyWriter
+    internal static class RSAKeyWriterHelper
     {
         public static void Write(string path, RSAParameters parameters)
         {

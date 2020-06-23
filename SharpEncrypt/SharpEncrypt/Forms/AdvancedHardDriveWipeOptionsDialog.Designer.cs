@@ -172,6 +172,7 @@
             this.Controls.Add(this.WipeTypeGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdvancedHardDriveWipeOptionsDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdvancedHardDriveWipeOptionsDialog";
             this.Load += new System.EventHandler(this.AdvancedHardDriveWipeOptionsDialog_Load);
             this.WipeTypeGroupBox.ResumeLayout(false);

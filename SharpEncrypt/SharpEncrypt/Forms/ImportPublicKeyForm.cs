@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpEncrypt.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -12,7 +13,7 @@ namespace SharpEncrypt.Forms
 {
     internal partial class ImportPublicKeyForm : Form
     {
-        private readonly PathService PathService = new PathService();
+        private readonly PathHelper PathService = new PathHelper();
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
 
         public ImportPublicKeyForm() => InitializeComponent();
@@ -67,7 +68,7 @@ namespace SharpEncrypt.Forms
             IDictionary<string, RSAParameters> pubKeyList = new Dictionary<string, RSAParameters>();
             if (File.Exists(keyFilePath))
             {
-                pubKeyList = RSAKeyReader.GetPublicKeys(keyFilePath);
+                pubKeyList = RSAKeyReaderHelper.GetPublicKeys(keyFilePath);
 
                 if (pubKeyList.ContainsKey(identity))
                 {
@@ -76,7 +77,7 @@ namespace SharpEncrypt.Forms
                 }
             }
             
-            pubKeyList.Add(identity, RSAKeyReader.GetParameters(PublicKeyFilePathField.Text));
+            pubKeyList.Add(identity, RSAKeyReaderHelper.GetParameters(PublicKeyFilePathField.Text));
 
             using (var fs = new FileStream(keyFilePath, FileMode.Create))
             {

@@ -123,6 +123,9 @@
   <data name="ACriticalErrorHasOccurred" xml:space="preserve">
     <value>A critical error has occurred.</value>
   </data>
+  <data name="AddedNJobs" xml:space="preserve">
+    <value>Added {0} jobs.</value>
+  </data>
   <data name="AddJob" xml:space="preserve">
     <value>Add Job</value>
   </data>
@@ -165,6 +168,9 @@
   </data>
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
@@ -270,6 +276,9 @@
   </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
+  </data>
+  <data name="NoDrivesSelected" xml:space="preserve">
+    <value>No drives selected.</value>
   </data>
   <data name="NotAValidContainer" xml:space="preserve">
     <value>{0} is not a valid container.</value>
@@ -385,6 +394,9 @@
   <data name="TasksRemaining" xml:space="preserve">
     <value>{0} tasks remaining.</value>
   </data>
+  <data name="TaskType" xml:space="preserve">
+    <value>Task Type</value>
+  </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
@@ -402,6 +414,9 @@
   </data>
   <data name="ValidContainer" xml:space="preserve">
     <value>{0} is a valid container.</value>
+  </data>
+  <data name="ViewCompletedJobsToolStripMenuItem" xml:space="preserve">
+    <value>View Completed Jobs</value>
   </data>
   <data name="ViewJobs" xml:space="preserve">
     <value>View Jobs</value>

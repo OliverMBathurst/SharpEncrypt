@@ -209,6 +209,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(200, 200);
             this.Name = "PasswordInputDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PasswordInput";
             this.Load += new System.EventHandler(this.PasswordInput_Load);
             this.PasswordGroupBox.ResumeLayout(false);

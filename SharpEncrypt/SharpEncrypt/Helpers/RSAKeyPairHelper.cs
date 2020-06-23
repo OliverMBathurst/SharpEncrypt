@@ -1,8 +1,8 @@
 ﻿using System.Security.Cryptography;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Helpers
 {
-    internal static class RSAHelper
+    internal static class RSAKeyPairHelper
     {
         public static (RSAParameters publicKey, RSAParameters privateKey) GetNewKeyPair()
         {

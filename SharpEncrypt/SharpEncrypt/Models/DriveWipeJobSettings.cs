@@ -14,9 +14,6 @@ namespace SharpEncrypt.Models
 
         public bool WipeRounds { get; set; }
 
-        public override string ToString()
-        {
-            return Type.ToString();
-        }
+        public override string ToString() => Type.ToString();
     }
 }

@@ -97,7 +97,7 @@
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidateContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewCompletedJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WipeFreeDiskSpaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AdvancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -711,7 +711,7 @@
             // 
             this.DebugMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ValidateContainerToolStripMenuItem,
-            this.ViewJobsToolStripMenuItem});
+            this.ViewCompletedJobsToolStripMenuItem});
             this.DebugMenuStrip.Enabled = false;
             this.DebugMenuStrip.Name = "DebugMenuStrip";
             this.DebugMenuStrip.Size = new System.Drawing.Size(82, 29);
@@ -720,16 +720,16 @@
             // ValidateContainerToolStripMenuItem
             // 
             this.ValidateContainerToolStripMenuItem.Name = "ValidateContainerToolStripMenuItem";
-            this.ValidateContainerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ValidateContainerToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.ValidateContainerToolStripMenuItem.Text = "Validate Container";
             this.ValidateContainerToolStripMenuItem.Click += new System.EventHandler(this.ValidateContainerToolStripMenuItem_Click);
             // 
-            // ViewJobsToolStripMenuItem
+            // ViewCompletedJobsToolStripMenuItem
             // 
-            this.ViewJobsToolStripMenuItem.Name = "ViewJobsToolStripMenuItem";
-            this.ViewJobsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.ViewJobsToolStripMenuItem.Text = "View Jobs";
-            this.ViewJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewJobsToolStripMenuItem_Click);
+            this.ViewCompletedJobsToolStripMenuItem.Name = "ViewCompletedJobsToolStripMenuItem";
+            this.ViewCompletedJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.ViewCompletedJobsToolStripMenuItem.Text = "View Completed Jobs";
+            this.ViewCompletedJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewJobsToolStripMenuItem_Click);
             // 
             // DiskToolsToolStripMenuItem
             // 
@@ -1014,7 +1014,7 @@
         private System.Windows.Forms.ToolStripMenuItem DecryptFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetAllSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ValidateContainerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ViewJobsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ViewCompletedJobsToolStripMenuItem;
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace FileGeneratorLibrary
@@ -18,20 +17,12 @@ namespace FileGeneratorLibrary
             }
         }
 
-        public static void WriteNewFile(string path, long length = -1L, bool random = true, bool postDelete = true, long bufferLength = BUFFER_LENGTH)
+        public static void WriteNewFile(string path, long length, bool random = true, bool postDelete = true, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!Directory.Exists(path))
                 throw new DirectoryNotFoundException(path);
-
-            if (length == -1L)
-            {
-                var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(path[0], CultureInfo.CurrentCulture));
-                if (!drives.Any())
-                    throw new DriveNotFoundException(path[0].ToString());
-                length = drives.First().AvailableFreeSpace;
-            }
 
             var genFilePath = CreateUniqueFileForDirectory(path, ".BIN");
 
@@ -101,7 +92,7 @@ namespace FileGeneratorLibrary
         ///<summary>
         public static string GetAnonymousName() => Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds).ToString(CultureInfo.CurrentCulture);
 
-        public static void WriteNewFile(DriveInfo driveInfo, long size = -1L, bool random = true, bool postDelete = true)
+        public static void WriteNewFile(DriveInfo driveInfo, long size, bool random = true, bool postDelete = true)
         {
             if (driveInfo == null)
                 throw new ArgumentNullException(nameof(driveInfo));

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpEncrypt.AbstractClasses;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
@@ -10,7 +11,6 @@ namespace SharpEncrypt.Forms
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly BackgroundTaskHandler BackgroundTaskHandler;
         private readonly int InitialTaskCount;
-
 
         public TaskProgressForm(BackgroundTaskHandler handler)
         {
@@ -30,7 +30,7 @@ namespace SharpEncrypt.Forms
             Close();
         }
 
-        private void BackgroundTaskHandler_TaskDequeuedEvent(System.Threading.Tasks.Task task)
+        private void BackgroundTaskHandler_TaskDequeuedEvent(SharpEncryptTask task)
         {
             var tskCount = BackgroundTaskHandler.TaskCount;
             var taskCount = tskCount == 0 ? 1 : tskCount;

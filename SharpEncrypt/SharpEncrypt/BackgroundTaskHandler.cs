@@ -1,42 +1,49 @@
 ﻿using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System;
 using System.Threading;
+using SharpEncrypt.AbstractClasses;
+using System.Collections.Generic;
 
 namespace SharpEncrypt
 {
     public sealed class BackgroundTaskHandler : IDisposable
     {
         private readonly BackgroundWorker BackgroundWorker = new BackgroundWorker();
-        private readonly ConcurrentQueue<Task> Tasks = new ConcurrentQueue<Task>();
+        private readonly ConcurrentQueue<SharpEncryptTask> Tasks = new ConcurrentQueue<SharpEncryptTask>();
 
-        public delegate void TaskDequeued(Task task);
-        public delegate void TaskCompleted(Task task);
+        public delegate void TaskDequeued(SharpEncryptTask task);
+        public delegate void TaskCompleted(SharpEncryptTask task);
         public delegate void CurrentTasksCompleted();
 
         public event TaskCompleted TaskCompletedEvent;
         public event TaskDequeued TaskDequeuedEvent;
         public event CurrentTasksCompleted TasksCompleted;
 
-        public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTask.Task == null || CurrentTask.Task.IsCompleted);
+        public BackgroundTaskHandler()
+        {
+            BackgroundWorker.DoWork += BackgroundWorkerWork;
+            TaskCompletedEvent += BackgroundTaskHandler_TaskCompletedEvent;
+        }
+
+        public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTask.SharpEncryptTask.InnerTask == null || CurrentTask.SharpEncryptTask.InnerTask.IsCompleted);
 
         public int TaskCount => Tasks.Count;
 
         public bool IsBusy => BackgroundWorker.IsBusy;
 
-        public (Task Task, CancellationTokenSource CancelToken) CurrentTask { get; private set; }
+        public (SharpEncryptTask SharpEncryptTask, CancellationTokenSource CancelToken) CurrentTask { get; private set; }
 
-        public BackgroundTaskHandler() => BackgroundWorker.DoWork += BackgroundWorkerWork;        
-
-        public void AddJob(Task task, bool synchronous = false) 
+        public List<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new List<(SharpEncryptTask task, DateTime time)>();
+        
+        public void AddJob(SharpEncryptTask task, bool synchronous = false) 
         {
             if (task == null)
                 throw new ArgumentNullException(nameof(task));
 
             Tasks.Enqueue(task);
             if (synchronous)
-                task.Wait();
+                task.InnerTask.Wait();
         }
 
         public void CancelWorker()
@@ -51,7 +58,7 @@ namespace SharpEncrypt
             while (!Tasks.IsEmpty)
                 Tasks.TryDequeue(out _);
 
-            if (CurrentTask.Task != null)
+            if (CurrentTask.SharpEncryptTask.InnerTask != null)
                 CurrentTask.CancelToken.Cancel();            
         }
 
@@ -62,12 +69,17 @@ namespace SharpEncrypt
         }
 
         #region Events
-        private void OnTaskCompleted(Task task)
+        private void BackgroundTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
+        {
+            CompletedTasks.Add((task, DateTime.Now));
+        }
+
+        private void OnTaskCompleted(SharpEncryptTask task)
         {
             TaskCompletedEvent?.Invoke(task);
         }
 
-        private void OnTaskDequeued(Task task)
+        private void OnTaskDequeued(SharpEncryptTask task)
         {
             TaskDequeuedEvent?.Invoke(task);
         }
@@ -93,9 +105,9 @@ namespace SharpEncrypt
                     OnTaskDequeued(task);
                     var cancellationTokenSource = new CancellationTokenSource();
                     CurrentTask = (task, cancellationTokenSource);
-                    CurrentTask.Task.Start();
-                    CurrentTask.Task.Wait(cancellationTokenSource.Token);
-                    OnTaskCompleted(CurrentTask.Task);
+                    CurrentTask.SharpEncryptTask.InnerTask.Start();
+                    CurrentTask.SharpEncryptTask.InnerTask.Wait(cancellationTokenSource.Token);
+                    OnTaskCompleted(CurrentTask.SharpEncryptTask);
 
                     if (Tasks.IsEmpty)
                         OnCurrentTasksCompleted();

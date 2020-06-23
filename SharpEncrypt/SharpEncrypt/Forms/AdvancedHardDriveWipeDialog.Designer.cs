@@ -32,7 +32,7 @@
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
-            this.Options = new System.Windows.Forms.Button();
+            this.AddJob = new System.Windows.Forms.Button();
             this.ClearJobs = new System.Windows.Forms.Button();
             this.ViewJobs = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -71,16 +71,16 @@
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // Options
+            // AddJob
             // 
-            this.Options.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Options.Location = new System.Drawing.Point(726, 470);
-            this.Options.Name = "Options";
-            this.Options.Size = new System.Drawing.Size(119, 62);
-            this.Options.TabIndex = 3;
-            this.Options.Text = "Options";
-            this.Options.UseVisualStyleBackColor = true;
-            this.Options.Click += new System.EventHandler(this.Options_Click);
+            this.AddJob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddJob.Location = new System.Drawing.Point(726, 470);
+            this.AddJob.Name = "AddJob";
+            this.AddJob.Size = new System.Drawing.Size(119, 62);
+            this.AddJob.TabIndex = 3;
+            this.AddJob.Text = "Add Job";
+            this.AddJob.UseVisualStyleBackColor = true;
+            this.AddJob.Click += new System.EventHandler(this.Options_Click);
             // 
             // ClearJobs
             // 
@@ -111,12 +111,13 @@
             this.ClientSize = new System.Drawing.Size(1107, 544);
             this.Controls.Add(this.ViewJobs);
             this.Controls.Add(this.ClearJobs);
-            this.Controls.Add(this.Options);
+            this.Controls.Add(this.AddJob);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.ControlsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AdvancedHardDriveWipeDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HardDriveWipeDialog";
             this.Load += new System.EventHandler(this.AdvancedHardDriveWipeDialog_Load);
             this.ResumeLayout(false);
@@ -128,7 +129,7 @@
         private System.Windows.Forms.Panel ControlsPanel;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button Options;
+        private System.Windows.Forms.Button AddJob;
         private System.Windows.Forms.Button ClearJobs;
         private System.Windows.Forms.Button ViewJobs;
     }

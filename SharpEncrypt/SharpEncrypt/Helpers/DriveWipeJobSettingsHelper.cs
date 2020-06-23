@@ -3,7 +3,7 @@ using SharpEncrypt.Models;
 using System;
 using System.Collections.Generic;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Helpers
 {
     internal static class DriveWipeJobSettingsHelper
     {

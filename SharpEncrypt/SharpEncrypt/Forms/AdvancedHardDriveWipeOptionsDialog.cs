@@ -1,4 +1,4 @@
-﻿using SharpEncrypt.Enums;
+﻿using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 using System;
 using System.Collections.Generic;
@@ -34,11 +34,17 @@ namespace SharpEncrypt.Forms
 
             WipeTypeComboBox.DataSource = Options;
             WipeTypeComboBox.SelectedIndexChanged += WipeTypeComboBox_SelectedIndexChanged;
+            OnIndexChanged(0);
         }
 
         private void WipeTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ItemSelected(Options[WipeTypeComboBox.SelectedIndex]);
+            OnIndexChanged(WipeTypeComboBox.SelectedIndex);
+        }
+
+        private void OnIndexChanged(int index)
+        {
+            ItemSelected(Options[index]);
         }
 
         private void ItemSelected(DriveWipeJobSettings settings)

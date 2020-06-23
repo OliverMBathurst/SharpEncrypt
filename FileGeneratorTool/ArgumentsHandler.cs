@@ -16,7 +16,7 @@ namespace FileGeneratorTool
         public void Execute()
         {
             var path = Environment.CurrentDirectory;
-            var length = -1L;
+            var length = 0L;
             bool random = false, pause = true, postDelete = true;
 
             if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)

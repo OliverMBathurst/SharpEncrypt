@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Resources;
 using System.Windows.Forms;
 using SharpEncrypt.Controls;
@@ -14,7 +14,8 @@ namespace SharpEncrypt.Forms
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly DriveSelectionControl DriveSelectionControl = new DriveSelectionControl { Dock = DockStyle.Fill };
-        private readonly IDictionary<DriveInfo, IList<DriveWipeJob>> Jobs = new Dictionary<DriveInfo, IList<DriveWipeJob>>();
+
+        public IDictionary<DriveInfo, IList<DriveWipeJob>> Jobs { get; } = new Dictionary<DriveInfo, IList<DriveWipeJob>>();
 
         public AdvancedHardDriveWipeDialog() => InitializeComponent();
 
@@ -23,7 +24,7 @@ namespace SharpEncrypt.Forms
             Text = ResourceManager.GetString("HDDWipeDialog");
             OK.Text = ResourceManager.GetString("OK");
             Cancel.Text = ResourceManager.GetString("Cancel");
-            Options.Text = ResourceManager.GetString("Options");
+            AddJob.Text = ResourceManager.GetString("AddJob");
             ClearJobs.Text = ResourceManager.GetString("ClearJobs");
             ViewJobs.Text = ResourceManager.GetString("ViewJobs");
             ControlsPanel.Controls.Add(DriveSelectionControl);            
@@ -46,7 +47,7 @@ namespace SharpEncrypt.Forms
             var drives = DriveSelectionControl.GetSelectedDrives();
             if (!drives.Any())
             {
-                MessageBox.Show("");
+                MessageBox.Show(ResourceManager.GetString("NoDrivesSelected"));
             }                
             else
             {
@@ -62,7 +63,7 @@ namespace SharpEncrypt.Forms
                             else
                                 Jobs.Add(drive, new List<DriveWipeJob> { job });
                         }
-                        MessageBox.Show("Added N jobs etc.");
+                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNJobs"), drives.Count()));
                     }
                 }
             }
@@ -82,18 +83,18 @@ namespace SharpEncrypt.Forms
                 columns.Add(ResourceManager.GetString(prop.Name));
 
             var rows = new List<List<object>>();
-            foreach(var job in Jobs)
+            foreach(var kvp in Jobs)
             {
-                foreach (var value in job.Value)
+                foreach (var value in kvp.Value)
                 {
-                    var list = new List<object> {
-                        job.Key.Name
+                    var row = new List<object> {
+                        kvp.Key.Name
                     };
 
                     foreach(var prop in props)
-                        list.Add(prop.GetValue(value));
+                        row.Add(prop.GetValue(value));
 
-                    rows.Add(list);
+                    rows.Add(row);
                 }
             }
 

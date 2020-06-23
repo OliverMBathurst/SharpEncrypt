@@ -1,10 +1,14 @@
 ﻿using SharpEncrypt.Exceptions;
 using SharpEncrypt.ExtensionClasses;
+using SharpEncrypt.Helpers;
+using SharpEncrypt.Tasks;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,7 +25,7 @@ namespace SharpEncrypt.Forms
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
         private readonly BackgroundTaskHandler TaskHandler = new BackgroundTaskHandler();
-        private readonly PathService PathService = new PathService();
+        private readonly PathHelper PathService = new PathHelper();
 
         private string Password { get; set; }
 
@@ -91,15 +95,16 @@ namespace SharpEncrypt.Forms
             }
             else
             {
-                var task = SettingsReader.ReadSettingsFileTask(settingsFilePath);
+                var task = new ReadSettingsFileTask(settingsFilePath);
                 TaskHandler.AddJob(task, true);
-                if (task.Result == null) //it's corrupt
+
+                if(task.Result.Value != null && task.Result.Value is SharpEncryptSettings deserializedSettings)
                 {
-                    DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
+                    settings = deserializedSettings;
                 }
                 else
                 {
-                    settings = task.Result;
+                    DefaultSettingsWriterDelegate.DynamicInvoke(settings, false);
                 }
             }
 
@@ -283,6 +288,16 @@ namespace SharpEncrypt.Forms
             }
         }
 
+        private void ViewJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var columns = new[] { ResourceManager.GetString("TaskType"), ResourceManager.GetString("Completed") };
+            var rows = TaskHandler.CompletedTasks.Select(x => new List<object> { x.Task.TaskType, x.Time.ToString(CultureInfo.CurrentCulture) }).ToList();
+            using (var completedJobsDialog = new GenericGridForm(columns, rows))
+            {
+                completedJobsDialog.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region Flag Menu Items
@@ -347,7 +362,7 @@ namespace SharpEncrypt.Forms
         }
 
         private void SettingsWriterHandler(SharpEncryptSettings settings, bool synchronous)
-            => TaskHandler.AddJob(SettingsWriter.WriteSettingsFileTask(PathService.AppSettingsPath, settings), synchronous);
+            => TaskHandler.AddJob(new WriteSettingsFileTask(PathService.AppSettingsPath, settings), synchronous);
 
         private void CloseApplicationHandler(object sender, FormClosedEventArgs e)
         {
@@ -541,13 +556,13 @@ namespace SharpEncrypt.Forms
             {
                 try
                 {
-                    var pubKey = RSAKeyReader.GetParameters(@public);
+                    var pubKey = RSAKeyReaderHelper.GetParameters(@public);
                     using (var dialog = new SaveFileDialog())
                     {
                         dialog.Filter = ResourceManager.GetString("RSAKeyFilter");
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
-                            RSAKeyWriter.Write(dialog.FileName, pubKey);
+                            RSAKeyWriterHelper.Write(dialog.FileName, pubKey);
                         }
                     }
                 }
@@ -567,9 +582,9 @@ namespace SharpEncrypt.Forms
                 string.Empty,
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                var (publicKey, privateKey) = RSAHelper.GetNewKeyPair();
-                RSAKeyWriter.Write(@public, publicKey);
-                RSAKeyWriter.Write(@private, privateKey);
+                var (publicKey, privateKey) = RSAKeyPairHelper.GetNewKeyPair();
+                RSAKeyWriterHelper.Write(@public, publicKey);
+                RSAKeyWriterHelper.Write(@private, privateKey);
                 //encrypt the rsa priv key (IMPORTANT)
             }
         }
@@ -623,10 +638,5 @@ namespace SharpEncrypt.Forms
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
 
         #endregion
-
-        private void ViewJobsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
