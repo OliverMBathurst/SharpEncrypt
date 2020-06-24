@@ -12,7 +12,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ReadSecuredFileList;
 
-        public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(List<FileDataGridItemModel>) };
+        public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(IEnumerable<FileDataGridItemModel>) };
     
         public ReadSecuredFilesList(string path)
         {

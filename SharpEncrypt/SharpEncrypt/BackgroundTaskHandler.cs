@@ -42,6 +42,8 @@ namespace SharpEncrypt
                 throw new ArgumentNullException(nameof(task));
 
             Tasks.Enqueue(task);
+            if (!BackgroundWorker.IsBusy)
+                BackgroundWorker.RunWorkerAsync();
             if (synchronous)
                 task.InnerTask.Wait();
         }

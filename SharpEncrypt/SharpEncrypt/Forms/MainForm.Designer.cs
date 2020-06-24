@@ -1,4 +1,6 @@
-﻿namespace SharpEncrypt.Forms
+﻿using System;
+
+namespace SharpEncrypt.Forms
 {
     partial class MainForm
     {
@@ -39,7 +41,7 @@
             this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopSecuringAndRemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShareKeysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +54,7 @@
             this.ShareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptTemporarilyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveFolderFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
@@ -178,6 +180,7 @@
             this.RecentFilesGrid.RowHeadersWidth = 62;
             this.RecentFilesGrid.RowTemplate.ContextMenuStrip = this.FileMenuStrip;
             this.RecentFilesGrid.RowTemplate.Height = 28;
+            this.RecentFilesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RecentFilesGrid.Size = new System.Drawing.Size(1054, 366);
             this.RecentFilesGrid.TabIndex = 1;
             // 
@@ -218,61 +221,61 @@
             this.FileMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
-            this.RemoveFromListButKeepSecuredToolStripMenuItem,
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem,
             this.StopSecuringAndRemoveFromListToolStripMenuItem,
             this.ShareKeysToolStripMenuItem1,
             this.ShowInFolderToolStripMenuItem,
             this.RenameToOriginalToolStripMenuItem,
             this.ClearRecentFilesListToolStripMenuItem});
             this.FileMenuStrip.Name = "contextMenuStrip1";
-            this.FileMenuStrip.Size = new System.Drawing.Size(364, 228);
+            this.FileMenuStrip.Size = new System.Drawing.Size(389, 228);
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
             this.OpenToolStripMenuItem.Text = "Open";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
-            // RemoveFromListButKeepSecuredToolStripMenuItem
+            // RemoveFileFromListButKeepSecuredToolStripMenuItem
             // 
-            this.RemoveFromListButKeepSecuredToolStripMenuItem.Name = "RemoveFromListButKeepSecuredToolStripMenuItem";
-            this.RemoveFromListButKeepSecuredToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
-            this.RemoveFromListButKeepSecuredToolStripMenuItem.Text = "Remove from list but keep secured";
-            this.RemoveFromListButKeepSecuredToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListButKeepSecuredToolStripMenuItem_Click);
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem.Name = "RemoveFileFromListButKeepSecuredToolStripMenuItem";
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem.Text = "Remove file from list but keep secured";
+            this.RemoveFileFromListButKeepSecuredToolStripMenuItem.Click += new System.EventHandler(this.RemoveFileFromListButKeepSecuredToolStripMenuItem_Click);
             // 
             // StopSecuringAndRemoveFromListToolStripMenuItem
             // 
             this.StopSecuringAndRemoveFromListToolStripMenuItem.Name = "StopSecuringAndRemoveFromListToolStripMenuItem";
-            this.StopSecuringAndRemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.StopSecuringAndRemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
             this.StopSecuringAndRemoveFromListToolStripMenuItem.Text = "Stop securing and remove from list";
             this.StopSecuringAndRemoveFromListToolStripMenuItem.Click += new System.EventHandler(this.StopSecuringAndRemoveFromListToolStripMenuItem_Click);
             // 
             // ShareKeysToolStripMenuItem1
             // 
             this.ShareKeysToolStripMenuItem1.Name = "ShareKeysToolStripMenuItem1";
-            this.ShareKeysToolStripMenuItem1.Size = new System.Drawing.Size(363, 32);
+            this.ShareKeysToolStripMenuItem1.Size = new System.Drawing.Size(388, 32);
             this.ShareKeysToolStripMenuItem1.Text = "Share keys";
             this.ShareKeysToolStripMenuItem1.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem1_Click);
             // 
             // ShowInFolderToolStripMenuItem
             // 
             this.ShowInFolderToolStripMenuItem.Name = "ShowInFolderToolStripMenuItem";
-            this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
             this.ShowInFolderToolStripMenuItem.Text = "Show in folder";
             this.ShowInFolderToolStripMenuItem.Click += new System.EventHandler(this.ShowInFolderToolStripMenuItem_Click);
             // 
             // RenameToOriginalToolStripMenuItem
             // 
             this.RenameToOriginalToolStripMenuItem.Name = "RenameToOriginalToolStripMenuItem";
-            this.RenameToOriginalToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.RenameToOriginalToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
             this.RenameToOriginalToolStripMenuItem.Text = "Rename to original";
             this.RenameToOriginalToolStripMenuItem.Click += new System.EventHandler(this.RenameToOriginalToolStripMenuItem_Click);
             // 
             // ClearRecentFilesListToolStripMenuItem
             // 
             this.ClearRecentFilesListToolStripMenuItem.Name = "ClearRecentFilesListToolStripMenuItem";
-            this.ClearRecentFilesListToolStripMenuItem.Size = new System.Drawing.Size(363, 32);
+            this.ClearRecentFilesListToolStripMenuItem.Size = new System.Drawing.Size(388, 32);
             this.ClearRecentFilesListToolStripMenuItem.Text = "Clear Recent Files list";
             this.ClearRecentFilesListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFilesListToolStripMenuItem_Click);
             // 
@@ -308,6 +311,7 @@
             this.SecuredFoldersGrid.RowHeadersWidth = 62;
             this.SecuredFoldersGrid.RowTemplate.ContextMenuStrip = this.FolderMenuStrip;
             this.SecuredFoldersGrid.RowTemplate.Height = 28;
+            this.SecuredFoldersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SecuredFoldersGrid.Size = new System.Drawing.Size(1054, 366);
             this.SecuredFoldersGrid.TabIndex = 0;
             // 
@@ -326,51 +330,51 @@
             this.ShareKeysToolStripMenuItem,
             this.DecryptPermanentlyToolStripMenuItem,
             this.DecryptTemporarilyToolStripMenuItem,
-            this.RemoveFromListToolStripMenuItem,
+            this.RemoveFolderFromListToolStripMenuItem,
             this.OpenExplorerHereToolStripMenuItem,
             this.AddSecuredFolderToolStripMenuItem});
             this.FolderMenuStrip.Name = "folderMenuStrip";
-            this.FolderMenuStrip.Size = new System.Drawing.Size(361, 196);
+            this.FolderMenuStrip.Size = new System.Drawing.Size(413, 196);
             // 
             // ShareKeysToolStripMenuItem
             // 
             this.ShareKeysToolStripMenuItem.Name = "ShareKeysToolStripMenuItem";
-            this.ShareKeysToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.ShareKeysToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
             this.ShareKeysToolStripMenuItem.Text = "Share keys";
             this.ShareKeysToolStripMenuItem.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem_Click);
             // 
             // DecryptPermanentlyToolStripMenuItem
             // 
             this.DecryptPermanentlyToolStripMenuItem.Name = "DecryptPermanentlyToolStripMenuItem";
-            this.DecryptPermanentlyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.DecryptPermanentlyToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
             this.DecryptPermanentlyToolStripMenuItem.Text = "Decrypt permanently";
             this.DecryptPermanentlyToolStripMenuItem.Click += new System.EventHandler(this.DecryptPermanentlyToolStripMenuItem_Click);
             // 
             // DecryptTemporarilyToolStripMenuItem
             // 
             this.DecryptTemporarilyToolStripMenuItem.Name = "DecryptTemporarilyToolStripMenuItem";
-            this.DecryptTemporarilyToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.DecryptTemporarilyToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
             this.DecryptTemporarilyToolStripMenuItem.Text = "Decrypt temporarily";
             this.DecryptTemporarilyToolStripMenuItem.Click += new System.EventHandler(this.DecryptTemporarilyToolStripMenuItem_Click);
             // 
-            // RemoveFromListToolStripMenuItem
+            // RemoveFolderFromListToolStripMenuItem
             // 
-            this.RemoveFromListToolStripMenuItem.Name = "RemoveFromListToolStripMenuItem";
-            this.RemoveFromListToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
-            this.RemoveFromListToolStripMenuItem.Text = "Remove from list but keep secured";
-            this.RemoveFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFromListToolStripMenuItem_Click);
+            this.RemoveFolderFromListToolStripMenuItem.Name = "RemoveFolderFromListToolStripMenuItem";
+            this.RemoveFolderFromListToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
+            this.RemoveFolderFromListToolStripMenuItem.Text = "Remove folder from list but keep secured";
+            this.RemoveFolderFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFolderFromListToolStripMenuItem_Click);
             // 
             // OpenExplorerHereToolStripMenuItem
             // 
             this.OpenExplorerHereToolStripMenuItem.Name = "OpenExplorerHereToolStripMenuItem";
-            this.OpenExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.OpenExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
             this.OpenExplorerHereToolStripMenuItem.Text = "Open Explorer here";
             this.OpenExplorerHereToolStripMenuItem.Click += new System.EventHandler(this.OpenExplorerHereToolStripMenuItem_Click);
             // 
             // AddSecuredFolderToolStripMenuItem
             // 
             this.AddSecuredFolderToolStripMenuItem.Name = "AddSecuredFolderToolStripMenuItem";
-            this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(360, 32);
+            this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(412, 32);
             this.AddSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
             this.AddSecuredFolderToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFolderToolStripMenuItem_Click);
             // 
@@ -496,7 +500,7 @@
             this.DecryptFileToolStripMenuItem,
             this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
@@ -933,7 +937,6 @@
             this.PerformLayout();
 
         }
-
         #endregion
 
         private System.Windows.Forms.TabControl Tabs;
@@ -978,13 +981,13 @@
         private System.Windows.Forms.ToolStripMenuItem ShareKeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptPermanentlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptTemporarilyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RemoveFromListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveFolderFromListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenExplorerHereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddSecuredFolderToolStripMenuItem;
         private System.Windows.Forms.DataGridView SecuredFoldersGrid;
         private System.Windows.Forms.ContextMenuStrip FileMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RemoveFromListButKeepSecuredToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveFileFromListButKeepSecuredToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StopSecuringAndRemoveFromListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ShareKeysToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ShowInFolderToolStripMenuItem;

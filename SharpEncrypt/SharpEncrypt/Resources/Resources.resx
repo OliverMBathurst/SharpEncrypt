@@ -229,9 +229,6 @@
   <data name="FileMenuStripItem" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="FilesListFileName" xml:space="preserve">
-    <value>FilesList.BIN</value>
-  </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
   </data>
@@ -337,6 +334,12 @@
   <data name="RecentFiles" xml:space="preserve">
     <value>Recent Files</value>
   </data>
+  <data name="RemoveFileFromListButKeepSecuredToolStripMenuItem" xml:space="preserve">
+    <value>Remove file from list but keep secured</value>
+  </data>
+  <data name="RemoveFolderFromListToolStripMenuItem" xml:space="preserve">
+    <value>Remove folder from list but keep secured</value>
+  </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
     <value>Rename to original</value>
   </data>
@@ -360,6 +363,9 @@
   </data>
   <data name="SecureDeleteToolStripMenuItem" xml:space="preserve">
     <value>Secure Delete</value>
+  </data>
+  <data name="SecuredFilesListFileName" xml:space="preserve">
+    <value>FilesList.BIN</value>
   </data>
   <data name="SecuredFolders" xml:space="preserve">
     <value>Secured Folders</value>

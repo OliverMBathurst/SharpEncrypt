@@ -199,8 +199,11 @@
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Tasks\ReadSecuredFilesList.cs" />
+    <Compile Include="Tasks\ReadSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />
-    <Compile Include="Tasks\WriteSecuredFileReference.cs" />
+    <Compile Include="Tasks\SecureFolderTask.cs" />
+    <Compile Include="Tasks\WriteSecuredFileReferenceTask.cs" />
+    <Compile Include="Tasks\WriteSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\WriteSettingsFileTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>

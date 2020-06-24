@@ -18,11 +18,11 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
-        public string FilesListFile 
+        public string SecuredFilesListFile 
         {
             get
             {
-                return Path.Combine(AppDirectory, ResourceManager.GetString("FilesListFileName"));
+                return Path.Combine(AppDirectory, ResourceManager.GetString("SecuredFilesListFileName"));
             }
         }
 

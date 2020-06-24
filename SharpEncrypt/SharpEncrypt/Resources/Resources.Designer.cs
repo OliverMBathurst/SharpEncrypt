@@ -394,15 +394,6 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FilesList.BIN.
-        /// </summary>
-        internal static string FilesListFileName {
-            get {
-                return ResourceManager.GetString("FilesListFileName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Folder.
         /// </summary>
         internal static string Folder {
@@ -718,6 +709,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove file from list but keep secured.
+        /// </summary>
+        internal static string RemoveFileFromListButKeepSecuredToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("RemoveFileFromListButKeepSecuredToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove folder from list but keep secured.
+        /// </summary>
+        internal static string RemoveFolderFromListToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("RemoveFolderFromListToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename to original.
         /// </summary>
         internal static string RenameToOriginalToolStripMenuItem1 {
@@ -786,6 +795,15 @@ namespace SharpEncrypt.Resources {
         internal static string SecureDeleteToolStripMenuItem {
             get {
                 return ResourceManager.GetString("SecureDeleteToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FilesList.BIN.
+        /// </summary>
+        internal static string SecuredFilesListFileName {
+            get {
+                return ResourceManager.GetString("SecuredFilesListFileName", resourceCulture);
             }
         }
         
