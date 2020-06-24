@@ -3,6 +3,8 @@
     public enum TaskType
     {
         WriteSettingsFileTask,
-        ReadSettingsFileTask
+        ReadSettingsFileTask,
+        WriteSecuredFileReference,
+        ReadSecuredFileList
     }
 }

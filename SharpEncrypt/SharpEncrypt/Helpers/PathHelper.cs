@@ -18,6 +18,22 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
+        public string FilesListFile 
+        {
+            get
+            {
+                return Path.Combine(AppDirectory, ResourceManager.GetString("FilesListFileName"));
+            }
+        }
+
+        public string SecuredFoldersListFileName
+        {
+            get
+            {
+                return Path.Combine(AppDirectory, ResourceManager.GetString("SecuredFoldersListFileName"));
+            }
+        }
+
         public string UserKeysDirectory
         {
             get

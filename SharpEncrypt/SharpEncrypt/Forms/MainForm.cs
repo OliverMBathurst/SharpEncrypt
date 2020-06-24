@@ -1,6 +1,9 @@
-﻿using SharpEncrypt.Exceptions;
+﻿using OTPLibrary;
+using SecureEraseLibrary;
+using SharpEncrypt.Exceptions;
 using SharpEncrypt.ExtensionClasses;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 using SharpEncrypt.Tasks;
 using System;
 using System.Collections.Generic;
@@ -21,11 +24,18 @@ namespace SharpEncrypt.Forms
         
         private delegate void SettingsChangeDelegate(string settingsPropertyName, object value);
         private delegate void SettingsWriterDelegate(SharpEncryptSettings settings, bool synchronous);
+        private delegate void FileSecured(string filePath, string newFilePath);
+        private delegate void FolderSecured(string dirPath);
+        private delegate void SecuredFileDataGridChanged(FileDataGridItemModel model, bool added);
 
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
         private readonly BackgroundTaskHandler TaskHandler = new BackgroundTaskHandler();
         private readonly PathHelper PathService = new PathHelper();
+
+        private event FileSecured OnFileSecured;
+        private event FolderSecured OnFolderSecured;
+        private event SecuredFileDataGridChanged OnFileDataGridViewChanged;
 
         private string Password { get; set; }
 
@@ -34,9 +44,14 @@ namespace SharpEncrypt.Forms
         public MainForm() 
         {
             InitializeComponent();
+            TaskHandler.Run();
+
             DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
             DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
             FormClosing += FormClosingHandler;
+            OnFileSecured += MainForm_OnFileSecured;
+            OnFolderSecured += MainForm_OnFolderSecured;
+            OnFileDataGridViewChanged += MainForm_OnFileDataGridViewChanged;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -52,6 +67,7 @@ namespace SharpEncrypt.Forms
                     var fileToSecure = dialog.FileName;
                     //secure file
                     //add it to datagridview
+                    OnFileSecured?.Invoke(fileToSecure, fileToSecure);
                 }
             }
         }
@@ -70,11 +86,10 @@ namespace SharpEncrypt.Forms
 
         private void LoadApplication()
         {
-            TaskHandler.Run();
             SetApplicationSettings();
             if (Settings.LanguageCode != Constants.DefaultLanguage)
                 ChangeLanguage(Settings.LanguageCode);
-
+            LoadRecentFilesList();
             SetSessionPassword();            
         }
 
@@ -120,6 +135,25 @@ namespace SharpEncrypt.Forms
             WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Checked = Settings.WipeFreeSpaceAfterSecureDelete;
             if (Debug.Checked)
                 DebugMenuStrip.Enabled = true;
+        }
+
+        private void LoadRecentFilesList()
+        {
+            var filePath = PathService.FilesListFile;
+
+            var task = new ReadSecuredFilesList(filePath);
+            TaskHandler.AddJob(task, true);
+            if(task.Result.Value is List<FileDataGridItemModel> models)
+            {
+                foreach (var model in models.Where(x => File.Exists(x.Secured)))
+                    AddFileToSecuredFilesDataGrid(model, false);
+
+                var removedFiles = models.Where(x => !File.Exists(x.Secured));
+                if (removedFiles.Any())
+                {
+                    TaskHandler.AddJob(new WriteSecuredFileReference(filePath, removedFiles, false) , true);
+                }
+            }
         }
 
         private static void CloseApplication()
@@ -340,6 +374,27 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void MainForm_OnFileDataGridViewChanged(FileDataGridItemModel model, bool added)
+        {
+            TaskHandler.AddJob(new WriteSecuredFileReference(PathService.FilesListFile, new List<FileDataGridItemModel> { model }, added));
+        }
+
+        private void MainForm_OnFolderSecured(string dirPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void MainForm_OnFileSecured(string filePath, string newFilePath)
+        {
+            AddFileToSecuredFilesDataGrid(new FileDataGridItemModel
+            {
+                File = Path.GetFileName(filePath),
+                Time = DateTime.Now,
+                Secured = newFilePath,
+                Algorithm = CipherType.AES
+            });
+        }
+
         private void SettingsChangeHandler(string settingsPropertyName, object value)
         {
             var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
@@ -469,7 +524,7 @@ namespace SharpEncrypt.Forms
 
         private void AddSecuredFolderToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            //open folder dialog
         }
 
         private void SecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -589,9 +644,41 @@ namespace SharpEncrypt.Forms
             }
         }
 
+        private void GenerateKeyForFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var openFileDialog = GetAllFilesDialog())
+            {
+                openFileDialog.Title = ResourceManager.GetString("SelectReferenceFile");
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var referenceFilePath = openFileDialog.FileName;
+                    using (var saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Title = ResourceManager.GetString("SaveKeyFile");
+                        saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
+                        if(saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            OTPHelper.GenerateKey(saveFileDialog.FileName, referenceFilePath);
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Misc
+
+        private void AddFileToSecuredFilesDataGrid(FileDataGridItemModel model, bool invoke = true)
+        {
+            var row = new DataGridViewRow();
+            foreach (var prop in typeof(FileDataGridItemModel).GetProperties())
+                row.Cells.Add(new DataGridViewTextBoxCell { Value = prop.GetValue(model) });
+
+            RecentFilesGrid.Rows.Add(row);
+            if(invoke)
+                OnFileDataGridViewChanged?.Invoke(model, true);
+        }
 
         private OpenFileDialog GetAllFilesDialog()
         {

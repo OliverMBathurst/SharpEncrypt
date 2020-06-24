@@ -229,8 +229,14 @@
   <data name="FileMenuStripItem" xml:space="preserve">
     <value>File</value>
   </data>
+  <data name="FilesListFileName" xml:space="preserve">
+    <value>FilesList.BIN</value>
+  </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
+  </data>
+  <data name="GenerateKeyForFileToolStripMenuItem" xml:space="preserve">
+    <value>Generate Key For File</value>
   </data>
   <data name="GenerateNewKeyPairToolStripMenuItem" xml:space="preserve">
     <value>Generate New Key Pair</value>
@@ -346,6 +352,9 @@
   <data name="RSAPubKeyFile" xml:space="preserve">
     <value>RSAPubKey.serk</value>
   </data>
+  <data name="SaveKeyFile" xml:space="preserve">
+    <value>Save Key File</value>
+  </data>
   <data name="Secured" xml:space="preserve">
     <value>Secured</value>
   </data>
@@ -354,6 +363,9 @@
   </data>
   <data name="SecuredFolders" xml:space="preserve">
     <value>Secured Folders</value>
+  </data>
+  <data name="SecuredFoldersListFileName" xml:space="preserve">
+    <value>FoldersList.BIN</value>
   </data>
   <data name="SecuredFoldersToolStripMenuItem" xml:space="preserve">
     <value>Secured Folders</value>
@@ -364,6 +376,9 @@
   <data name="SecureToolStripMenuItem" xml:space="preserve">
     <value>Secure</value>
   </data>
+  <data name="SelectReferenceFile" xml:space="preserve">
+    <value>Select Reference File</value>
+  </data>
   <data name="SelectSecuredFile" xml:space="preserve">
     <value>Select a secured file to open.</value>
   </data>
@@ -372,6 +387,9 @@
   </data>
   <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
     <value>SharpEncrypt OTP Encrypted File (*.seotpf)</value>
+  </data>
+  <data name="SharpEncryptOTPKeyFilter" xml:space="preserve">
+    <value>SharpEncrypt OTP Key (*.seotpk)|*.seotpk</value>
   </data>
   <data name="SharpEncryptSettingsFileName" xml:space="preserve">
     <value>SharpEncryptSettings.BIN</value>

@@ -198,7 +198,9 @@
     <Compile Include="Forms\ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\ReadSecuredFilesList.cs" />
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />
+    <Compile Include="Tasks\WriteSecuredFileReference.cs" />
     <Compile Include="Tasks\WriteSettingsFileTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
@@ -308,6 +310,10 @@
     <ProjectReference Include="..\..\AESLibrary\AESLibrary.csproj">
       <Project>{5066CDEC-5BF2-459A-984D-0A2950AB10B3}</Project>
       <Name>AESLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OTPLibrary\OTPLibrary.csproj">
+      <Project>{4AAA7701-6F5E-4E60-9891-3386AC511F9B}</Project>
+      <Name>OTPLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SecureEraseLibrary\SecureEraseLibrary.csproj">
       <Project>{2BEA89AC-AD4F-479A-8E97-6E93E7A3A2FD}</Project>

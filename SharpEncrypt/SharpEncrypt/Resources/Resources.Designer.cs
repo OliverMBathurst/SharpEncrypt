@@ -394,11 +394,29 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FilesList.BIN.
+        /// </summary>
+        internal static string FilesListFileName {
+            get {
+                return ResourceManager.GetString("FilesListFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Folder.
         /// </summary>
         internal static string Folder {
             get {
                 return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate Key For File.
+        /// </summary>
+        internal static string GenerateKeyForFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("GenerateKeyForFileToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -745,6 +763,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Key File.
+        /// </summary>
+        internal static string SaveKeyFile {
+            get {
+                return ResourceManager.GetString("SaveKeyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secured.
         /// </summary>
         internal static string Secured {
@@ -768,6 +795,15 @@ namespace SharpEncrypt.Resources {
         internal static string SecuredFolders {
             get {
                 return ResourceManager.GetString("SecuredFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FoldersList.BIN.
+        /// </summary>
+        internal static string SecuredFoldersListFileName {
+            get {
+                return ResourceManager.GetString("SecuredFoldersListFileName", resourceCulture);
             }
         }
         
@@ -799,6 +835,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Reference File.
+        /// </summary>
+        internal static string SelectReferenceFile {
+            get {
+                return ResourceManager.GetString("SelectReferenceFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a secured file to open..
         /// </summary>
         internal static string SelectSecuredFile {
@@ -822,6 +867,15 @@ namespace SharpEncrypt.Resources {
         internal static string SharpEncryptOTPEncryptedFile {
             get {
                 return ResourceManager.GetString("SharpEncryptOTPEncryptedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt OTP Key (*.seotpk)|*.seotpk.
+        /// </summary>
+        internal static string SharpEncryptOTPKeyFilter {
+            get {
+                return ResourceManager.GetString("SharpEncryptOTPKeyFilter", resourceCulture);
             }
         }
         

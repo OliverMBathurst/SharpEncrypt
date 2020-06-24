@@ -71,6 +71,7 @@
             this.OneTimePadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SecureFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GenerateKeyForFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LanguageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EnglishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -492,24 +493,32 @@
             // 
             this.OneTimePadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SecureFileToolStripMenuItem,
-            this.DecryptFileToolStripMenuItem});
+            this.DecryptFileToolStripMenuItem,
+            this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
             // 
             this.SecureFileToolStripMenuItem.Name = "SecureFileToolStripMenuItem";
-            this.SecureFileToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.SecureFileToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.SecureFileToolStripMenuItem.Text = "Secure File";
             this.SecureFileToolStripMenuItem.Click += new System.EventHandler(this.SecureFileToolStripMenuItem_Click);
             // 
             // DecryptFileToolStripMenuItem
             // 
             this.DecryptFileToolStripMenuItem.Name = "DecryptFileToolStripMenuItem";
-            this.DecryptFileToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.DecryptFileToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
             this.DecryptFileToolStripMenuItem.Text = "Decrypt File";
             this.DecryptFileToolStripMenuItem.Click += new System.EventHandler(this.DecryptFileToolStripMenuItem_Click);
+            // 
+            // GenerateKeyForFileToolStripMenuItem
+            // 
+            this.GenerateKeyForFileToolStripMenuItem.Name = "GenerateKeyForFileToolStripMenuItem";
+            this.GenerateKeyForFileToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
+            this.GenerateKeyForFileToolStripMenuItem.Text = "Generate Key For File";
+            this.GenerateKeyForFileToolStripMenuItem.Click += new System.EventHandler(this.GenerateKeyForFileToolStripMenuItem_Click);
             // 
             // OptionsToolStripMenuItem
             // 
@@ -1015,6 +1024,7 @@
         private System.Windows.Forms.ToolStripMenuItem ResetAllSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ValidateContainerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ViewCompletedJobsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GenerateKeyForFileToolStripMenuItem;
     }
 }
 

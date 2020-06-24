@@ -8,7 +8,7 @@ namespace SharpEncrypt.Models
     {
         public string File { get; set; }
 
-        public long Time { get; set; }
+        public DateTime Time { get; set; }
 
         public string Secured { get; set; }
 
