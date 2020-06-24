@@ -5,7 +5,7 @@
         WriteSettingsFileTask,
         ReadSettingsFileTask,
         WriteSecuredFileReferenceTask,
-        ReadSecuredFileList,
+        ReadSecuredFileListTask,
         SecureFolderTask,
         ReadSecuredFoldersListTask,
         WriteSecuredFoldersListTask

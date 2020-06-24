@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class ReadSecuredFilesList : SharpEncryptTask
+    internal sealed class ReadSecuredFilesListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.ReadSecuredFileList;
+        public override TaskType TaskType => TaskType.ReadSecuredFileListTask;
 
         public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(IEnumerable<FileDataGridItemModel>) };
     
-        public ReadSecuredFilesList(string path)
+        public ReadSecuredFilesListTask(string path)
         {
             InnerTask = new Task(() =>
             {

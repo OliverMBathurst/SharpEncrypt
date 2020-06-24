@@ -29,7 +29,7 @@ namespace SharpEncrypt.Forms
         private delegate void SettingsWriterDelegate(SharpEncryptSettings settings, bool synchronous);
         private delegate void FileSecured(string filePath, string newFilePath);
         private delegate void FolderSecured(string dirPath);
-        private delegate void SecuredFileDataGridAdded(FileDataGridItemModel model, bool added);
+        private delegate void SecuredFileAdded(FileDataGridItemModel model, bool added);
         private delegate void ReadSecuredFileList(IEnumerable<FileDataGridItemModel> models);
         private delegate void ReadSecuredFolderList(IEnumerable<string> folders);
 
@@ -40,7 +40,7 @@ namespace SharpEncrypt.Forms
 
         private event FileSecured OnFileSecured;
         private event FolderSecured OnFolderSecured;
-        private event SecuredFileDataGridAdded OnFileDataGridViewAdded;
+        private event SecuredFileAdded OnSecuredFileAdded;
         private event ReadSecuredFileList OnSecureFileListRead;
         private event ReadSecuredFolderList OnSecuredFolderListRead;
 
@@ -56,7 +56,7 @@ namespace SharpEncrypt.Forms
             FormClosing += FormClosingHandler;
             OnFileSecured += MainForm_OnFileSecured;
             OnFolderSecured += MainForm_OnFolderSecured;
-            OnFileDataGridViewAdded += MainForm_OnFileDataGridViewAdded;
+            OnSecuredFileAdded += MainForm_OnFileDataGridViewAdded;
             OnSecureFileListRead += MainForm_OnSecureFileListRead;
             OnSecuredFolderListRead += MainForm_OnSecuredFolderListRead;
 
@@ -155,7 +155,7 @@ namespace SharpEncrypt.Forms
 
         private void LoadRecentFilesList()
         {
-            TaskHandler.AddJob(new ReadSecuredFilesList(PathHelper.SecuredFilesListFile));
+            TaskHandler.AddJob(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
         }
 
         private static void CloseApplication()
@@ -169,8 +169,11 @@ namespace SharpEncrypt.Forms
 
         private void ClearRecentFilesListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RecentFilesGrid.Rows.Clear();
-            RecentFilesGrid.Refresh();
+            RecentFilesGrid.Invoke(new Action(() =>
+            {
+                RecentFilesGrid.Rows.Clear();
+                RecentFilesGrid.Refresh();
+            }));            
         }
 
         private void RemoveFileFromListButKeepSecuredToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,10 +197,13 @@ namespace SharpEncrypt.Forms
 
             TaskHandler.AddJob(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removals, false));
 
-            foreach (DataGridViewRow row in RecentFilesGrid.SelectedRows)
-                RecentFilesGrid.Rows.Remove(row);
+            RecentFilesGrid.Invoke(new Action(() => 
+            {
+                foreach (DataGridViewRow row in RecentFilesGrid.SelectedRows)
+                    RecentFilesGrid.Rows.Remove(row);
 
-            RecentFilesGrid.Refresh();
+                RecentFilesGrid.Refresh();
+            }));            
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -231,10 +237,13 @@ namespace SharpEncrypt.Forms
 
         private void RemoveFolderFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
-                SecuredFoldersGrid.Rows.Remove(row);
+            SecuredFoldersGrid.Invoke(new Action(() =>
+            {
+                foreach (DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
+                    SecuredFoldersGrid.Rows.Remove(row);
 
-            SecuredFoldersGrid.Refresh();
+                SecuredFoldersGrid.Refresh();
+            }));
         }
 
         private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
@@ -378,7 +387,7 @@ namespace SharpEncrypt.Forms
                 case TaskType.SecureFolderTask when task.Result.Value is string folderPath:
                     OnFolderSecured?.Invoke(folderPath);
                     break;
-                case TaskType.ReadSecuredFileList when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
+                case TaskType.ReadSecuredFileListTask when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
                     OnSecureFileListRead?.Invoke(models);
                     break;
                 case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<string> folders:
@@ -715,26 +724,33 @@ namespace SharpEncrypt.Forms
 
         private void AddSecuredFolderRow(string folderPath)
         {
-            var newRow = new DataGridViewRow();
-            newRow.Cells.Add(new DataGridViewTextBoxCell { Value = folderPath });
-            SecuredFoldersGrid.Rows.Add(newRow);
+            SecuredFoldersGrid.Invoke(new Action(() =>
+            {
+                var newRow = new DataGridViewRow();
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = folderPath });
+                SecuredFoldersGrid.Rows.Add(newRow);
+            }));
         }
 
         private void AddFileToRecentFilesDataGrid(IList<FileDataGridItemModel> models, bool invoke = true)
         {
             var rows = new DataGridViewRow[models.Count];
+            var props = typeof(FileDataGridItemModel).GetProperties();
+
             for (var i = 0; i < models.Count; i++)
             {
                 var row = new DataGridViewRow();
-                foreach (var prop in typeof(FileDataGridItemModel).GetProperties())
+                foreach (var prop in props)
                     row.Cells.Add(new DataGridViewTextBoxCell { Value = prop.GetValue(models[i]) });
                 
                 rows[i] = row;
                 if (invoke)
-                    OnFileDataGridViewAdded?.Invoke(models[i], true);
+                    OnSecuredFileAdded?.Invoke(models[i], true);
             }
+
             SecuredFiles.AddRange(models);
-            RecentFilesGrid.Rows.AddRange(rows);
+
+            RecentFilesGrid.Invoke(new Action(() => RecentFilesGrid.Rows.AddRange(rows)));
         }
 
         private OpenFileDialog GetAllFilesDialog()

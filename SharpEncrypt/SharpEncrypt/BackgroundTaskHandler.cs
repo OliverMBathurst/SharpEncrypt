@@ -100,7 +100,7 @@ namespace SharpEncrypt
 
         private void BackgroundWorkerWork(object sender, DoWorkEventArgs e)
         {
-            while (!BackgroundWorker.CancellationPending)
+            while (true)
             {
                 if (Tasks.TryDequeue(out var task))
                 {

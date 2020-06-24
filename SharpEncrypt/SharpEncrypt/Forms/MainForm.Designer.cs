@@ -161,6 +161,7 @@ namespace SharpEncrypt.Forms
             this.RecentFilesGrid.AllowUserToAddRows = false;
             this.RecentFilesGrid.AllowUserToDeleteRows = false;
             this.RecentFilesGrid.AllowUserToOrderColumns = true;
+            this.RecentFilesGrid.AllowUserToResizeRows = false;
             this.RecentFilesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RecentFilesGrid.BackgroundColor = System.Drawing.Color.White;
             this.RecentFilesGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -180,6 +181,8 @@ namespace SharpEncrypt.Forms
             this.RecentFilesGrid.RowHeadersWidth = 62;
             this.RecentFilesGrid.RowTemplate.ContextMenuStrip = this.FileMenuStrip;
             this.RecentFilesGrid.RowTemplate.Height = 28;
+            this.RecentFilesGrid.RowTemplate.ReadOnly = true;
+            this.RecentFilesGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.RecentFilesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.RecentFilesGrid.Size = new System.Drawing.Size(1054, 366);
             this.RecentFilesGrid.TabIndex = 1;
@@ -295,6 +298,7 @@ namespace SharpEncrypt.Forms
             this.SecuredFoldersGrid.AllowUserToAddRows = false;
             this.SecuredFoldersGrid.AllowUserToDeleteRows = false;
             this.SecuredFoldersGrid.AllowUserToOrderColumns = true;
+            this.SecuredFoldersGrid.AllowUserToResizeRows = false;
             this.SecuredFoldersGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SecuredFoldersGrid.BackgroundColor = System.Drawing.Color.White;
             this.SecuredFoldersGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
