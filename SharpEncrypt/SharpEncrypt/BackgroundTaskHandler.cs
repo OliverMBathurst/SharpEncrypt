@@ -22,9 +22,12 @@ namespace SharpEncrypt
 
         public BackgroundTaskHandler()
         {
-            BackgroundWorker.DoWork += BackgroundWorkerWork;
+            BackgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorkerWork);
             TaskCompletedEvent += BackgroundTaskHandler_TaskCompletedEvent;
+            BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
         }
+
+        public bool IsRunning { get; private set; }
 
         public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTask.SharpEncryptTask.InnerTask == null || CurrentTask.SharpEncryptTask.InnerTask.IsCompleted);
 
@@ -36,7 +39,7 @@ namespace SharpEncrypt
 
         public List<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new List<(SharpEncryptTask task, DateTime time)>();
         
-        public void AddJob(SharpEncryptTask task, bool synchronous = false) 
+        public void AddJob(SharpEncryptTask task) 
         {
             if (task == null)
                 throw new ArgumentNullException(nameof(task));
@@ -44,8 +47,6 @@ namespace SharpEncrypt
             Tasks.Enqueue(task);
             if (!BackgroundWorker.IsBusy)
                 BackgroundWorker.RunWorkerAsync();
-            if (synchronous)
-                task.InnerTask.Wait();
         }
 
         public void CancelWorker()
@@ -71,6 +72,12 @@ namespace SharpEncrypt
         }
 
         #region Events
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if(!Tasks.IsEmpty)
+                BackgroundWorker.RunWorkerAsync();
+        }
+
         private void BackgroundTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
         {
             CompletedTasks.Add((task, DateTime.Now));
@@ -100,8 +107,9 @@ namespace SharpEncrypt
 
         private void BackgroundWorkerWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            while (!BackgroundWorker.CancellationPending && !Tasks.IsEmpty)
             {
+                IsRunning = true;
                 if (Tasks.TryDequeue(out var task))
                 {
                     OnTaskDequeued(task);
@@ -115,6 +123,7 @@ namespace SharpEncrypt
                         OnCurrentTasksCompleted();
                 }
             }
+            IsRunning = false;
         }
     }
 }
