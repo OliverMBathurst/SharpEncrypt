@@ -32,7 +32,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -43,6 +43,36 @@
     <StartupObject>SharpEncrypt.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AESLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\AESLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FileGeneratorLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\FileGeneratorLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FileIOLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\FileIOLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GutmannLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\GutmannLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="OTPLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\OTPLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SecureEraseLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\SecureEraseLibrary.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -307,21 +337,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\AESLibrary\AESLibrary.csproj">
-      <Project>{5066CDEC-5BF2-459A-984D-0A2950AB10B3}</Project>
-      <Name>AESLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OTPLibrary\OTPLibrary.csproj">
-      <Project>{4AAA7701-6F5E-4E60-9891-3386AC511F9B}</Project>
-      <Name>OTPLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SecureEraseLibrary\SecureEraseLibrary.csproj">
-      <Project>{2BEA89AC-AD4F-479A-8E97-6E93E7A3A2FD}</Project>
-      <Name>SecureEraseLibrary</Name>
-    </ProjectReference>
+    <AdditionalFiles Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
@@ -335,6 +351,14 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="lib\AESLibrary.dll" />
+    <EmbeddedResource Include="lib\FileGeneratorLibrary.dll" />
+    <EmbeddedResource Include="lib\FileIOLibrary.dll" />
+    <EmbeddedResource Include="lib\GutmannLibrary.dll" />
+    <EmbeddedResource Include="lib\OTPLibrary.dll" />
+    <EmbeddedResource Include="lib\SecureEraseLibrary.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

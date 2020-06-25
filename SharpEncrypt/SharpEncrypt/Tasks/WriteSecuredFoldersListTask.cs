@@ -4,6 +4,7 @@ using SharpEncrypt.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
@@ -15,30 +16,33 @@ namespace SharpEncrypt.Tasks
 
         public WriteSecuredFoldersListTask(string filePath, IEnumerable<string> directories, bool add = true)
         {
-            var dirs = new List<string>();
-            if (File.Exists(filePath))
+            InnerTask = new Task(() =>
             {
-                using (var fs = new FileStream(filePath, FileMode.Open))
+                var dirs = new List<string>();
+                if (File.Exists(filePath))
                 {
-                    if(new BinaryFormatter().Deserialize(fs) is List<string> folders)
+                    using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        dirs = folders;
+                        if (new BinaryFormatter().Deserialize(fs) is List<string> folders)
+                        {
+                            dirs = folders;
+                        }
                     }
                 }
-            }
 
-            foreach (var dir in directories)
-            {
-                if (add)
-                    dirs.Add(dir);
-                else
-                    dirs.Remove(dir);
-            }
+                foreach (var dir in directories)
+                {
+                    if (add)
+                        dirs.Add(dir);
+                    else
+                        dirs.Remove(dir);
+                }
 
-            using (var fs = new FileStream(filePath, FileMode.Create))
-            {
-                new BinaryFormatter().Serialize(fs, dirs);
-            }
+                using (var fs = new FileStream(filePath, FileMode.Create))
+                {
+                    new BinaryFormatter().Serialize(fs, dirs);
+                }
+            });
         }
     }
 }
