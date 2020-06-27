@@ -101,6 +101,7 @@ namespace SharpEncrypt.Forms
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidateContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewCompletedJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WipeFreeDiskSpaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AdvancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -728,7 +729,8 @@ namespace SharpEncrypt.Forms
             // 
             this.DebugMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ValidateContainerToolStripMenuItem,
-            this.ViewCompletedJobsToolStripMenuItem});
+            this.ViewCompletedJobsToolStripMenuItem,
+            this.LoggingToolStripMenuItem});
             this.DebugMenuStrip.Enabled = false;
             this.DebugMenuStrip.Name = "DebugMenuStrip";
             this.DebugMenuStrip.Size = new System.Drawing.Size(82, 29);
@@ -747,6 +749,13 @@ namespace SharpEncrypt.Forms
             this.ViewCompletedJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.ViewCompletedJobsToolStripMenuItem.Text = "View Completed Jobs";
             this.ViewCompletedJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewJobsToolStripMenuItem_Click);
+            // 
+            // LoggingToolStripMenuItem
+            // 
+            this.LoggingToolStripMenuItem.Name = "LoggingToolStripMenuItem";
+            this.LoggingToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.LoggingToolStripMenuItem.Text = "Logging";
+            this.LoggingToolStripMenuItem.Click += new System.EventHandler(this.LoggingToolStripMenuItem_Click);
             // 
             // DiskToolsToolStripMenuItem
             // 
@@ -1032,6 +1041,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem ValidateContainerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ViewCompletedJobsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GenerateKeyForFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LoggingToolStripMenuItem;
     }
 }
 

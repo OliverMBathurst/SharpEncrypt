@@ -27,15 +27,13 @@ namespace SharpEncrypt
             BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
         }
 
-        public bool IsRunning { get; private set; }
-
-        public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTask.SharpEncryptTask.InnerTask == null || CurrentTask.SharpEncryptTask.InnerTask.IsCompleted);
+        public bool HasCompletedJobs => Tasks.IsEmpty && (Current.Task.InnerTask == null || Current.Task.InnerTask.IsCompleted);
 
         public int TaskCount => Tasks.Count;
 
         public bool IsBusy => BackgroundWorker.IsBusy;
 
-        public (SharpEncryptTask SharpEncryptTask, CancellationTokenSource CancelToken) CurrentTask { get; private set; }
+        public (SharpEncryptTask Task, CancellationTokenSource CancelToken) Current { get; private set; }
 
         public List<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new List<(SharpEncryptTask task, DateTime time)>();
         
@@ -61,8 +59,8 @@ namespace SharpEncrypt
             while (!Tasks.IsEmpty)
                 Tasks.TryDequeue(out _);
 
-            if (CurrentTask.SharpEncryptTask.InnerTask != null)
-                CurrentTask.CancelToken.Cancel();            
+            if (Current.Task.InnerTask != null)
+                Current.CancelToken.Cancel();            
         }
 
         public void Run()
@@ -109,21 +107,28 @@ namespace SharpEncrypt
         {
             while (!BackgroundWorker.CancellationPending && !Tasks.IsEmpty)
             {
-                IsRunning = true;
                 if (Tasks.TryDequeue(out var task))
                 {
                     OnTaskDequeued(task);
                     var cancellationTokenSource = new CancellationTokenSource();
-                    CurrentTask = (task, cancellationTokenSource);
-                    CurrentTask.SharpEncryptTask.InnerTask.Start();
-                    CurrentTask.SharpEncryptTask.InnerTask.Wait(cancellationTokenSource.Token);
-                    OnTaskCompleted(CurrentTask.SharpEncryptTask);
+                    Current = (task, cancellationTokenSource);
+
+                    try
+                    {
+                        Current.Task.InnerTask.Start();
+                        Current.Task.InnerTask.Wait(cancellationTokenSource.Token);
+                    }
+                    catch (Exception exception)
+                    {
+                        Current.Task.Exception = exception;
+                    }
+
+                    OnTaskCompleted(Current.Task);
 
                     if (Tasks.IsEmpty)
                         OnCurrentTasksCompleted();
                 }
             }
-            IsRunning = false;
         }
     }
 }

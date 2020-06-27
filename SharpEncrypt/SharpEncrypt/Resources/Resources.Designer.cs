@@ -151,6 +151,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string AnErrorHasOccurred {
+            get {
+                return ResourceManager.GetString("AnErrorHasOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anonymous Rename.
         /// </summary>
         internal static string AnonymousRenameToolStripMenuItem {
@@ -255,6 +264,15 @@ namespace SharpEncrypt.Resources {
         internal static string DebugMenuStrip {
             get {
                 return ResourceManager.GetString("DebugMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug.
+        /// </summary>
+        internal static string DebugToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DebugToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -507,6 +525,33 @@ namespace SharpEncrypt.Resources {
         internal static string KeyPairDisclaimer {
             get {
                 return ResourceManager.GetString("KeyPairDisclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to log.txt.
+        /// </summary>
+        internal static string LogFileName {
+            get {
+                return ResourceManager.GetString("LogFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        internal static string LoggingDir {
+            get {
+                return ResourceManager.GetString("LoggingDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging.
+        /// </summary>
+        internal static string LoggingToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("LoggingToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -849,6 +894,24 @@ namespace SharpEncrypt.Resources {
         internal static string SecureToolStripMenuItem {
             get {
                 return ResourceManager.GetString("SecureToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select File.
+        /// </summary>
+        internal static string SelectFile {
+            get {
+                return ResourceManager.GetString("SelectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Key File.
+        /// </summary>
+        internal static string SelectKeyFile {
+            get {
+                return ResourceManager.GetString("SelectKeyFile", resourceCulture);
             }
         }
         

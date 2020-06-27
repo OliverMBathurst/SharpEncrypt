@@ -11,8 +11,6 @@ namespace SharpEncrypt.Tasks
     internal sealed class ReadSecuredFilesListTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.ReadSecuredFileListTask;
-
-        public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(IEnumerable<FileDataGridItemModel>) };
     
         public ReadSecuredFilesListTask(string path)
         {
@@ -24,7 +22,7 @@ namespace SharpEncrypt.Tasks
                     {
                         if(new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> models)
                         {
-                            Result.Value = models;
+                            Value = models;
                         }
                     }
                 }

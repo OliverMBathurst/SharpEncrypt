@@ -34,6 +34,16 @@ namespace SharpEncrypt.Helpers
             }
         }
 
+        public string LoggingFilePath
+        {
+            get
+            {
+                var dir = Path.Combine(AppDirectory, ResourceManager.GetString("LoggingDir"));
+                CreateDirs(dir);
+                return Path.Combine(dir, ResourceManager.GetString("LogFileName"));
+            }
+        }
+
         public string UserKeysDirectory
         {
             get

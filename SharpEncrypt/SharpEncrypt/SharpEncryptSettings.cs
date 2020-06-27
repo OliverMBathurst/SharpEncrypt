@@ -16,5 +16,7 @@ namespace SharpEncrypt
         public bool UseADifferentPasswordForEachFile { get; set; } = false;
 
         public bool WipeFreeSpaceAfterSecureDelete { get; set; } = false;
+
+        public bool Logging { get; set; } = false;
     }
 }

@@ -12,8 +12,6 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFileReferenceTask;
 
-        public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(bool) };
-
         public WriteSecuredFileReferenceTask(string path, IEnumerable<FileDataGridItemModel> models, bool add = true)
         {
             InnerTask = new Task(() => 

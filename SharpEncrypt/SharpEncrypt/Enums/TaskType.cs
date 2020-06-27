@@ -8,6 +8,8 @@
         ReadSecuredFileListTask,
         SecureFolderTask,
         ReadSecuredFoldersListTask,
-        WriteSecuredFoldersListTask
+        WriteSecuredFoldersListTask,
+        OneTimePadTransformTask,
+        LoggingTask
     }
 }

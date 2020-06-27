@@ -147,6 +147,9 @@
   <data name="AllFilesFilter" xml:space="preserve">
     <value>All Files (*.*)|*.*</value>
   </data>
+  <data name="AnErrorHasOccurred" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="AnonymousRenameToolStripMenuItem" xml:space="preserve">
     <value>Anonymous Rename</value>
   </data>
@@ -182,6 +185,9 @@
     <value>Debug</value>
   </data>
   <data name="DebugMenuStrip" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="DebugToolStripMenuItem" xml:space="preserve">
     <value>Debug</value>
   </data>
   <data name="DecryptFileToolStripMenuItem" xml:space="preserve">
@@ -267,6 +273,15 @@
   </data>
   <data name="KeyPairDisclaimer" xml:space="preserve">
     <value>Generating a new key pair will overwrite any existing keys, continue?</value>
+  </data>
+  <data name="LogFileName" xml:space="preserve">
+    <value>log.txt</value>
+  </data>
+  <data name="LoggingDir" xml:space="preserve">
+    <value>Logs</value>
+  </data>
+  <data name="LoggingToolStripMenuItem" xml:space="preserve">
+    <value>Logging</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -381,6 +396,12 @@
   </data>
   <data name="SecureToolStripMenuItem" xml:space="preserve">
     <value>Secure</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Select File</value>
+  </data>
+  <data name="SelectKeyFile" xml:space="preserve">
+    <value>Select Key File</value>
   </data>
   <data name="SelectReferenceFile" xml:space="preserve">
     <value>Select Reference File</value>

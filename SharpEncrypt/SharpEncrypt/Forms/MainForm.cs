@@ -34,6 +34,7 @@ namespace SharpEncrypt.Forms
         private delegate void ReadSecuredFileList(IEnumerable<FileDataGridItemModel> models);
         private delegate void ReadSecuredFolderList(IEnumerable<string> folders);
         private delegate void SettingsFileRead(SharpEncryptSettings settings);
+        private delegate void TaskExceptionOccurred(Exception exception);
 
         private readonly SettingsWriterDelegate DefaultSettingsWriterDelegate;
         private readonly SettingsChangeDelegate DefaultSettingsChangeDelegate;
@@ -46,6 +47,7 @@ namespace SharpEncrypt.Forms
         private event ReadSecuredFileList OnSecureFileListRead;
         private event ReadSecuredFolderList OnSecuredFolderListRead;
         private event SettingsFileRead OnSettingsFileRead;
+        private event TaskExceptionOccurred OnTaskException;
 
         #endregion
 
@@ -65,11 +67,12 @@ namespace SharpEncrypt.Forms
             OnSecureFileListRead += MainForm_OnSecureFileListRead;
             OnSecuredFolderListRead += MainForm_OnSecuredFolderListRead;
             OnSettingsFileRead += MainForm_OnSettingsFileRead;
+            OnTaskException += MainForm_OnTaskException;
 
             TaskHandler.TaskCompletedEvent += TaskHandler_TaskCompletedEvent;
 
             TaskHandler.Run();                        
-        }       
+        }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
 
@@ -120,7 +123,7 @@ namespace SharpEncrypt.Forms
 
             if (!File.Exists(settingsFilePath))
             {
-                DefaultSettingsWriterDelegate.DynamicInvoke(new SharpEncryptSettings(), false);
+                DefaultSettingsWriterDelegate.DynamicInvoke(new SharpEncryptSettings());
                 SetUIOptions();
             }
             else
@@ -137,6 +140,7 @@ namespace SharpEncrypt.Forms
                 IncludeSubfolders.Checked = Settings.IncludeSubfolders;
                 UseADifferentPasswordForEachFile.Checked = Settings.UseADifferentPasswordForEachFile;
                 WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Checked = Settings.WipeFreeSpaceAfterSecureDelete;
+                LoggingToolStripMenuItem.Checked = Settings.Logging;
 
                 if (Debug.Checked)
                     DebugMenuStrip.Enabled = true;
@@ -335,12 +339,27 @@ namespace SharpEncrypt.Forms
                 }
             }
 
-            //rest of logic
+            using (var openFileDialog = GetAllFilesDialog())
+            {
+                openFileDialog.Title = ResourceManager.GetString("SelectFile");
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (var keyFileOpenFileDialog = new OpenFileDialog())
+                    {
+                        keyFileOpenFileDialog.Title = ResourceManager.GetString("SelectKeyFile");
+                        keyFileOpenFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
+                        if(keyFileOpenFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            TaskHandler.AddJob(new OneTimePadEncryptTask(openFileDialog.FileName, keyFileOpenFileDialog.FileName));
+                        }
+                    }
+                }
+            }
         }
 
         private void DecryptFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //TODO
         }
 
         private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e) => SetSessionPassword();
@@ -365,7 +384,7 @@ namespace SharpEncrypt.Forms
             {
                 var newSettingsObj = new SharpEncryptSettings();
                 var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
-                DefaultSettingsWriterDelegate.DynamicInvoke(newSettingsObj, false);
+                DefaultSettingsWriterDelegate.DynamicInvoke(newSettingsObj);
 
                 Settings = newSettingsObj;
 
@@ -433,14 +452,13 @@ namespace SharpEncrypt.Forms
                 openFileDialog.Title = ResourceManager.GetString("SelectReferenceFile");
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    var referenceFilePath = openFileDialog.FileName;
                     using (var saveFileDialog = new SaveFileDialog())
                     {
                         saveFileDialog.Title = ResourceManager.GetString("SaveKeyFile");
                         saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            OTPHelper.GenerateKey(saveFileDialog.FileName, referenceFilePath);
+                            OTPHelper.GenerateKey(saveFileDialog.FileName, openFileDialog.FileName);
                         }
                     }
                 }
@@ -514,6 +532,10 @@ namespace SharpEncrypt.Forms
             }
         }
 
+        private void LoggingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DefaultSettingsChangeDelegate.DynamicInvoke("Logging", ToggleChecked(LoggingToolStripMenuItem));
+        }
         #endregion
 
         #region Flag Menu Items
@@ -558,21 +580,42 @@ namespace SharpEncrypt.Forms
 
         private void TaskHandler_TaskCompletedEvent(SharpEncryptTask task)
         {
-            switch (task.TaskType) 
+            if(task.Exception != null)
             {
-                case TaskType.SecureFolderTask when task.Result.Value is string folderPath:
-                    OnFolderSecured?.Invoke(folderPath);
-                    break;
-                case TaskType.ReadSecuredFileListTask when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
-                    OnSecureFileListRead?.Invoke(models);
-                    break;
-                case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<string> folders:
-                    OnSecuredFolderListRead?.Invoke(folders);
-                    break;
-                case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettings settings:
-                    OnSettingsFileRead?.Invoke(settings);
-                    break;
+                OnTaskException?.Invoke(task.Exception);
             }
+            else
+            {
+                switch (task.TaskType)
+                {
+                    case TaskType.SecureFolderTask when task.Value is string folderPath:
+                        OnFolderSecured?.Invoke(folderPath);
+                        break;
+                    case TaskType.ReadSecuredFileListTask when task.Value is IEnumerable<FileDataGridItemModel> models:
+                        OnSecureFileListRead?.Invoke(models);
+                        break;
+                    case TaskType.ReadSecuredFoldersListTask when task.Value is IEnumerable<string> folders:
+                        OnSecuredFolderListRead?.Invoke(folders);
+                        break;
+                    case TaskType.ReadSettingsFileTask when task.Value is SharpEncryptSettings settings:
+                        OnSettingsFileRead?.Invoke(settings);
+                        break;
+                }
+            }
+        }
+
+        private void MainForm_OnTaskException(Exception exception)
+        {
+            if (Settings.Logging)
+                TaskHandler.AddJob(new LoggingTask(PathHelper.LoggingFilePath, exception.StackTrace));
+
+            InvokeOnControl(new MethodInvoker(() =>
+            {
+                MessageBox.Show(
+                    exception.StackTrace, 
+                    ResourceManager.GetString("AnErrorHasOccurred"), 
+                    MessageBoxButtons.OK);
+            }));
         }
 
         private void MainForm_OnSettingsFileRead(SharpEncryptSettings settings)
@@ -648,7 +691,7 @@ namespace SharpEncrypt.Forms
                 else
                 {
                     prop.SetValue(Settings, value);
-                    DefaultSettingsWriterDelegate.DynamicInvoke(Settings, false);
+                    DefaultSettingsWriterDelegate.DynamicInvoke(Settings);
                 }
             }
         }

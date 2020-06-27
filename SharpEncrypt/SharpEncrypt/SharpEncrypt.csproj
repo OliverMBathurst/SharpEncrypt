@@ -90,6 +90,7 @@
     <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ContainerHelper.cs" />
     <Compile Include="Controls\DriveSelectionControl.cs">
       <SubType>UserControl</SubType>
@@ -141,7 +142,9 @@
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
-    <Compile Include="Models\SharpEncryptTaskResult.cs" />
+    <Compile Include="Tasks\LoggingTask.cs" />
+    <Compile Include="Tasks\OneTimePadEncryptTask.cs" />
+    <Compile Include="AbstractClasses\SharpEncryptTaskResult.cs" />
     <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Helpers\RSAKeyWriterHelper.cs" />
     <Compile Include="Forms\MainForm.cs">

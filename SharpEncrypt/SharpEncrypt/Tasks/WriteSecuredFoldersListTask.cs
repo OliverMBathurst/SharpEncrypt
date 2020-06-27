@@ -1,6 +1,5 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
-using SharpEncrypt.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -11,8 +10,6 @@ namespace SharpEncrypt.Tasks
     internal sealed class WriteSecuredFoldersListTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.WriteSecuredFoldersListTask;
-
-        public override SharpEncryptTaskResult Result { get; } = new SharpEncryptTaskResult { Type = typeof(bool) };
 
         public WriteSecuredFoldersListTask(string filePath, IEnumerable<string> directories, bool add = true)
         {
