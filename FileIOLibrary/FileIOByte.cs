@@ -5,67 +5,129 @@ using System.Resources;
 
 namespace FileIOLibrary
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class FileIOByte : IEquatable<FileIOByte>
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
-        private const char on = '1', off = '0';
-        private string byteString = "00000000";
+        private const char ON = '1', OFF = '0';
+        private Bit[] mBits;
 
-        public FileIOByte(string stringRepresentation) => ByteString = stringRepresentation;
+        /// <summary>
+        ///
+        /// </summary>
+        public FileIOByte(string stringRepresentation) => SetBits(stringRepresentation);
 
-        public Bit[] ToArray() => GetBits();
-
-        public string ByteString 
+        /// <summary>
+        ///
+        /// </summary>
+        public FileIOByte(Bit[] bits)
         {
-            get => byteString;
-            set 
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-                if (value.Length != 8)
-                    throw new ArgumentException(ResourceManager.GetString("WrongStringLength", CultureInfo.CurrentCulture));
-                for (var i = 0; i < value.Length; i++)
-                    if (value[i] != on && value[i] != off)
-                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidCharAt", CultureInfo.CurrentCulture), i));
-                byteString = value;
-            }
+            if (bits == null)
+                throw new ArgumentNullException(nameof(bits));
+            if (bits.Length != 8)
+                throw new ArgumentException(ResourceManager.GetString("WrongStringLength", CultureInfo.CurrentCulture));
+            mBits = bits;
         }
 
-        public override string ToString() => ByteString;
+        /// <summary>
+        ///
+        /// </summary>
+        public Bit[] GetBits() => mBits;
 
+        /// <summary>
+        ///
+        /// </summary>
         public int ToInt(EndianMode mode = EndianMode.Big)
         {
             var sum = 0;
             for(var i = 0; i < 8; i++)
-                sum += ByteString[i] == on ? (int)Math.Pow(2, mode == EndianMode.Big ? (8 - (i + 1)) : i) : 0;
+                sum += mBits[i].Value == true ? (int)Math.Pow(2, mode == EndianMode.Big ? (8 - (i + 1)) : i) : 0;
             return sum;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public void Not()
         {
-            var str = string.Empty;
             for (var i = 0; i < 8; i++)
-                str += ByteString[i] == on ? off : on;
-            ByteString = str;
+            {
+                if (mBits[i].Value)
+                {
+                    mBits[i].Value = false;
+                }
+                else
+                {
+                    mBits[i].Value = true;
+                }
+            }
         }
 
-        private Bit[] GetBits() 
-        {
-            var bitsArray = new Bit[8];          
-            for(var i = 0; i < 8; i++)
-                bitsArray[i] = new Bit(ByteString[i] == on);
-            return bitsArray;
-        }
-
+        /// <summary>
+        ///
+        /// </summary>
         public bool Equals(FileIOByte other)
         {
             if (other != null)
-                return other.ByteString.SequenceEqual(ByteString);
+                return other.GetBits().SequenceEqual(GetBits());
             return false;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        public static FileIOByte DefaultByte
+            => new FileIOByte(new [] { new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit()});
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static FileIOByte New => DefaultByte;
+
+        /// <summary>
+        ///
+        /// </summary>
         public override bool Equals(object obj) => obj is FileIOByte b && Equals(b);
 
+        /// <summary>
+        ///
+        /// </summary>
         public override int GetHashCode() => base.GetHashCode();
+
+        /// <summary>
+        ///
+        /// </summary>
+        public override string ToString() => string.Join(string.Empty, mBits);
+
+        /// <summary>
+        ///
+        /// </summary>
+        private void SetBits(string byteString)
+        {
+            if (byteString == null)
+                throw new ArgumentNullException(nameof(byteString));
+            if (byteString.Length != 8)
+                throw new ArgumentException(Resources.WrongStringLength);
+            
+            var bits = new Bit[8];
+            for (var i = 0; i < byteString.Length; i++)
+            {
+                switch (byteString[i])
+                {
+                    case ON:
+                        bits[i] = new Bit(true);
+                        break;
+                    case OFF:
+                        bits[i] = new Bit(false);
+                        break;
+                    default:
+                        throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.InvalidCharAt, i));            
+                }
+            }
+
+            mBits = bits;
+        }
     }
 }

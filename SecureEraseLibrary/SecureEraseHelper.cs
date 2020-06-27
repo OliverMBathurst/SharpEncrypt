@@ -9,12 +9,18 @@ using System.Security.Cryptography;
 
 namespace SecureEraseLibrary
 {
+    /// <summary>
+    ///
+    /// </summary>
     public static class SecureEraseHelper
     {
         private readonly static char[] _alphabet = new []{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-        private const long BUFFER_LENGTH = 1024L;
+        private const int BUFFER_LENGTH = 1024;
 
-        public static void WriteZeros(string path, int passes = 1)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void WriteZeros(string path, int passes = 1, int bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -23,14 +29,14 @@ namespace SecureEraseLibrary
 
             using (var fs = new FileStream(path, FileMode.Open))
             {
-                var byteArr = CreateByteArray(1024, 0);
+                var byteArr = CreateByteArray(bufferLength, 0);
                 for (var i = 0; i < passes; i++)
                 {
                     fs.Seek(0, SeekOrigin.Begin);                    
                     var remainingLength = fs.Length;
                     while (remainingLength > 0)
                     {
-                        if (remainingLength < 1024)
+                        if (remainingLength < byteArr.Length)
                             byteArr = CreateByteArray(remainingLength, 0);
 
                         fs.Write(byteArr, 0, byteArr.Length);
@@ -40,7 +46,10 @@ namespace SecureEraseLibrary
             }
         }
 
-        public static void Write255s(string path, int passes = 1)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void Write255s(string path, int passes = 1, int bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -51,16 +60,15 @@ namespace SecureEraseLibrary
             {
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    var byteArr = CreateByteArray(1024, 255);
+                    var byteArr = CreateByteArray(bufferLength, 255);
                     for (var i = 0; i < passes; i++)
                     {
                         fs.Seek(0, SeekOrigin.Begin);                        
                         var remainingLength = fs.Length;
                         while (remainingLength > 0)
                         {
-                            if (remainingLength < 1024)
+                            if (remainingLength < byteArr.Length)
                                 byteArr = CreateByteArray(remainingLength, 255);
-
 
                             fs.Write(byteArr, 0, byteArr.Length);
                             remainingLength -= byteArr.Length;
@@ -70,6 +78,9 @@ namespace SecureEraseLibrary
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void WriteRandomData(string path, int passes = 1, long bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
@@ -100,7 +111,10 @@ namespace SecureEraseLibrary
             }
         }
 
-        public static void SDeleteDriveWipe(char driveLetter, string tempDirectory = "", bool postDelete = true, int passes = 1)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void SDeleteDriveWipe(char driveLetter, string tempDirectory = "", bool postDelete = true, int passes = 1, int bufferLength = BUFFER_LENGTH)
         {
             var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(driveLetter, CultureInfo.CurrentCulture));
             if (!drives.Any())
@@ -116,23 +130,29 @@ namespace SecureEraseLibrary
             
             var tmpFile = FileGeneratorHelper.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorHelper.GetRandomExtension());
             FileGeneratorHelper.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
-            WriteZeros(tmpFile, passes);
-            Write255s(tmpFile, passes);
-            WriteRandomData(tmpFile, passes);
+            WriteZeros(tmpFile, passes, bufferLength);
+            Write255s(tmpFile, passes, bufferLength);
+            WriteRandomData(tmpFile, passes, bufferLength);
             if (postDelete)
                 File.Delete(tmpFile);
         }
 
-        public static void SDeleteFileWipe(string filePath, bool postDelete = true)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void SDeleteFileWipe(string filePath, bool postDelete = true, int bufferLength = BUFFER_LENGTH)
         {
-            WriteZeros(filePath);
-            Write255s(filePath);
-            WriteRandomData(filePath);
+            WriteZeros(filePath, bufferLength: bufferLength);
+            Write255s(filePath, bufferLength: bufferLength);
+            WriteRandomData(filePath, bufferLength: bufferLength);
             filePath = SDeleteFileRename(filePath);
             if (postDelete)
                 File.Delete(filePath);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string SDeleteFileRename(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -161,6 +181,9 @@ namespace SecureEraseLibrary
             return path;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void ObfuscateFileProperties(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -177,6 +200,9 @@ namespace SecureEraseLibrary
             File.SetLastWriteTimeUtc(path, unixTime);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void ObfuscateDirectoryProperties(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -193,6 +219,9 @@ namespace SecureEraseLibrary
             Directory.SetLastWriteTimeUtc(path, unixTime);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string ObfuscateFileName(string path, int passes = 8)
         {
             if (string.IsNullOrEmpty(path))
@@ -214,6 +243,9 @@ namespace SecureEraseLibrary
             return currentPath;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void ShredDirectory(string path, CipherType cipherType, bool recurse = false, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory)
@@ -241,6 +273,9 @@ namespace SecureEraseLibrary
             Directory.Delete(path);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void ShredFile(string path, CipherType cipherType, bool nameObfuscation = true, bool propertyObfuscation = true)
         {
             if ((File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory)
@@ -262,6 +297,9 @@ namespace SecureEraseLibrary
             File.Delete(path);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string ObfuscateDirectoryName(string path, int passes = 8)
         {
             if (string.IsNullOrEmpty(path))
@@ -270,20 +308,23 @@ namespace SecureEraseLibrary
             if (!Directory.Exists(path)) throw new DirectoryNotFoundException(path);
             {
                 var parent = Directory.GetParent(path).FullName;
-                var obfuscatedPath = path;
                 for(var i = 0; i < passes; i++)
-                {                    
+                {
                     var randName = FileGeneratorHelper.GetRandomNameWithoutExtension();
-                    while (Directory.Exists(Path.Combine(parent, randName)))
+                    string combined;
+                    while (Directory.Exists(combined = Path.Combine(parent, randName)))
                         randName = FileGeneratorHelper.GetRandomNameWithoutExtension();
 
-                    Directory.Move(obfuscatedPath, randName);
-                    obfuscatedPath = Path.Combine(parent, randName);
+                    Directory.Move(path, combined);
+                    path = combined;
                 }
-                return obfuscatedPath;
+                return path;
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private static byte[] CreateByteArray(long length, int number)
         {
             var value = Convert.ToByte(number);

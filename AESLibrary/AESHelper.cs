@@ -9,8 +9,11 @@ namespace AESLibrary
 {
     public static class AESHelper
     {
-        private const long BUFFER_LENGTH = 1024L;
+        private const int BUFFER_LENGTH = 1024;
 
+        /// <summary>
+        ///
+        /// </summary>
         public static bool TryGetKey(string path, out AESKey key)
         {
             using (var fs = new FileStream(path, FileMode.Open))
@@ -27,7 +30,10 @@ namespace AESLibrary
             }
         }
 
-        public static void EncryptFile(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void EncryptFile(AESKey aesKey, string inputPath, string outputPath, int bufferLength = BUFFER_LENGTH)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
@@ -70,7 +76,10 @@ namespace AESLibrary
             }
         }
 
-        public static void DecryptFile(AESKey aesKey, string inputPath, string outputPath, long bufferLength = BUFFER_LENGTH)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void DecryptFile(AESKey aesKey, string inputPath, string outputPath, int bufferLength = BUFFER_LENGTH)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
@@ -113,7 +122,10 @@ namespace AESLibrary
             }
         }
 
-        public static void DecryptFile(AESKey aesKey, string filePath)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void DecryptFile(AESKey aesKey, string filePath, int bufferLength = BUFFER_LENGTH)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
@@ -139,14 +151,14 @@ namespace AESLibrary
 
                 using (var decryptor = rif.CreateDecryptor(key, iv))
                 {
-                    var bytes = new byte[SynchronizedReadWriter.DefaultBufferLength];
+                    var bytes = new byte[bufferLength];
                     while (!readWriter.WriteComplete)
                     {
                         readWriter.Read();
                         using (var ms = new MemoryStream(readWriter.GetBuffer()))
                         {
-                            if (readWriter.GetBuffer().Length < bytes.Length)
-                                bytes = new byte[readWriter.GetBuffer().Length];
+                            if (ms.Length < bytes.Length)
+                                bytes = new byte[ms.Length];
 
                             using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                             {                               
@@ -160,7 +172,10 @@ namespace AESLibrary
             }
         }
 
-        public static void EncryptFile(AESKey aesKey, string filePath)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void EncryptFile(AESKey aesKey, string filePath, int bufferLength = BUFFER_LENGTH)
         {
             if(aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
@@ -176,8 +191,6 @@ namespace AESLibrary
             if (!iv.Any())
                 throw new ByteArrayLengthException(Resources.iv);
 
-            var readWriter = new SynchronizedReadWriter(filePath);
-
             using (var rif = new RijndaelManaged())
             {
                 rif.Key = key;
@@ -186,9 +199,10 @@ namespace AESLibrary
 
                 using (var encryptor = rif.CreateEncryptor(key, iv))
                 {
+                    var readWriter = new SynchronizedReadWriter(filePath);
                     while (!readWriter.WriteComplete)
                     {
-                        readWriter.Read();
+                        readWriter.Read(bufferLength);
                         using (var ms = new MemoryStream())
                         {
                             using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
@@ -203,6 +217,9 @@ namespace AESLibrary
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static byte[] PasswordEncrypt(AESKey key, string password)
         {
             using (var ms = new MemoryStream())
@@ -214,6 +231,9 @@ namespace AESLibrary
             return Array.Empty<byte>();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static AESKey WriteNewKey(string path)
         {
             var key = GetNewAESKey();
@@ -224,20 +244,17 @@ namespace AESLibrary
             return key;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static AESKey GetNewAESKey()
-        {
-            using (var key = GenerateKey())
-                return new AESKey(key);
-        }
-
-        private static RijndaelManaged GenerateKey()
         {
             using (var key = new RijndaelManaged())
             {
                 key.GenerateKey();
                 key.GenerateIV();
-                return key;
-            }            
+                return new AESKey(key);
+            }
         }
     }
 }

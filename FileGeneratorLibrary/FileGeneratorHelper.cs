@@ -5,10 +5,22 @@ using System.Security.Cryptography;
 
 namespace FileGeneratorLibrary
 {
+    /// <summary>
+    /// This class is used for miscellaneous file and directory tasks such as writing dummy files and obtaining unique file/directory names.
+    /// </summary>
     public static class FileGeneratorHelper
     {
-        private const long BUFFER_LENGTH = 1024L;
+        private const int BUFFER_LENGTH = 1024;
 
+        /// <summary>
+        /// Creates a new file 
+        /// </summary>
+        /// <param name="filePath">
+        /// The filepath of the file to be written.
+        /// </param>
+        /// <param name="length">
+        /// The length of the file to be written.
+        /// </param>
         public static void CreateDummyFile(string filePath, long length)
         {
             using (var fs = File.Create(filePath))
@@ -17,7 +29,10 @@ namespace FileGeneratorLibrary
             }
         }
 
-        public static void WriteNewFile(string path, long length, bool random = true, bool postDelete = true, long bufferLength = BUFFER_LENGTH)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void WriteNewFile(string path, long length, bool random = true, bool postDelete = true, int bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -31,22 +46,17 @@ namespace FileGeneratorLibrary
                 using (var bw = new BinaryWriter(File.Open(genFilePath, FileMode.Open)))
                 {
                     var buffer = new byte[bufferLength];
-                    var remainingLength = length;
 
-                    var completed = false;
-                    while (!completed)
+                    while (length > 0)
                     {
-                        if (remainingLength < buffer.Length)
-                            buffer = new byte[remainingLength];
+                        if (length < buffer.Length)
+                            buffer = new byte[length];
                                                 
                         if (random)
                             provider.GetNonZeroBytes(buffer);
                         bw.Write(buffer);
 
-                        remainingLength -= buffer.Length;
-
-                        if (remainingLength == 0L)
-                            completed = true;
+                        length -= buffer.Length;
                     }
                 }
             }
@@ -55,6 +65,9 @@ namespace FileGeneratorLibrary
                 File.Delete(genFilePath);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string CreateUniqueFileForDirectory(string directoryPath, string extension)
         {
             var uniqueFilePath = CreateUniqueFilePathForDirectory(directoryPath, extension);
@@ -64,6 +77,9 @@ namespace FileGeneratorLibrary
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string CreateUniqueFilePathForDirectory(string directoryPath, string extension)
         {
             if (string.IsNullOrEmpty(directoryPath))
@@ -80,18 +96,52 @@ namespace FileGeneratorLibrary
             return path;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string GetRandomNameWithoutExtension() => Path.GetRandomFileName().Split('.')[0];
 
+        /// <summary>
+        ///
+        /// </summary>
         public static string GetRandomExtension() => Path.GetRandomFileName().Split('.')[1];
 
+        /// <summary>
+        /// Used to obtain a random file name (with extension).
+        /// </summary>
+        /// <returns>
+        /// Returns a random file name with an extension. 
+        /// </returns>
         public static string GetRandomNameWithExtension() => Path.GetRandomFileName();
 
-        ///<summary>
-        ///<c>GetAnonymousName()</c> should not be used to generate names for the renaming of sensitive files.
-        ///The file name string that is returned by this method leaks metadata (the epoch time at which the file name was generated), use <c>GetRandomName()</c> instead.
-        ///<summary>
+        /// <summary>
+        /// <c>GetAnonymousName()</c> should not be used to generate names for the renaming of sensitive files.
+        /// The file name string that is returned by this method leaks metadata (the epoch time at which the file name was generated), use <c>GetRandomName()</c> instead.
+        /// <summary>
+        /// <returns>
+        /// The epoch time at the time of method execution, represented as a string.
+        /// </returns>
+        [Obsolete("The file name string that is returned by this method leaks metadata (the epoch time at which the file name was generated), use GetRandomName() instead")]
         public static string GetAnonymousName() => Convert.ToInt64((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds).ToString(CultureInfo.CurrentCulture);
 
+        /// <summary>
+        /// Writes a file to the root directory path of the DriveInfo object.
+        /// </summary>
+        /// <param name="driveInfo">
+        /// A <see cref="DriveInfo"/> object representing the drive to be written to.
+        /// </param>
+        /// <param name="size">
+        /// A long object representing the size of the file to be written.
+        /// </param>
+        /// <param name="random">
+        /// A bool object, its value determining whether the file is written to with cryptographically secure bytes or not.
+        /// </param>
+        /// /// <param name="postDelete">
+        /// A bool object, its value determining whether the file is deleted upon write completion.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+		/// The <param name="driveInfo"/> parameter object is null.
+		/// </exception>
         public static void WriteNewFile(DriveInfo driveInfo, long size, bool random = true, bool postDelete = true)
         {
             if (driveInfo == null)

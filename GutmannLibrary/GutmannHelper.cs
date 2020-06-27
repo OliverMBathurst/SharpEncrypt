@@ -16,8 +16,11 @@ namespace GutmannLibrary
             109, 182, 219
         };
 
-        private const long BUFFER_LENGTH = 1024L;
+        private const int BUFFER_LENGTH = 1024;
 
+        /// <summary>
+        ///
+        /// </summary>
         public static void WipeFile(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -30,7 +33,10 @@ namespace GutmannLibrary
             RandomWipe(path);
         }
 
-        public static void RandomWipe(string path, int passes = 4, long bufferLength = BUFFER_LENGTH)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void RandomWipe(string path, int passes = 4, int bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -60,7 +66,10 @@ namespace GutmannLibrary
             }
         }
 
-        public static void GutmannPatternWipe(string path, long bufferLength = BUFFER_LENGTH)
+        /// <summary>
+        ///
+        /// </summary>
+        public static void GutmannPatternWipe(string path, int bufferLength = BUFFER_LENGTH)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -86,6 +95,9 @@ namespace GutmannLibrary
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private static byte[] Fill(byte[] array, int number)
         {
             var value = (byte)number;
