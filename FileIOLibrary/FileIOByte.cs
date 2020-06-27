@@ -42,7 +42,7 @@ namespace FileIOLibrary
         public int ToInt(EndianMode mode = EndianMode.Big)
         {
             var sum = 0;
-            for(var i = 0; i < 8; i++)
+            for (var i = 0; i < 8; i++)
                 sum += mBits[i].Value == true ? (int)Math.Pow(2, mode == EndianMode.Big ? (8 - (i + 1)) : i) : 0;
             return sum;
         }
@@ -74,6 +74,17 @@ namespace FileIOLibrary
                 return other.GetBits().SequenceEqual(GetBits());
             return false;
         }
+
+        /// <summary>
+        /// Returns the Bit object at the specified index of the FileIOByte's Bit array.
+        /// </summary>
+        /// <param name="index">
+        /// The index of the Bit object to return.
+        /// </param>
+        /// <returns>
+        /// The Bit object at the specified index.
+        /// </returns>
+        public Bit this[int index] => mBits[index];
 
         /// <summary>
         ///
