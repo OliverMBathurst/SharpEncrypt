@@ -8,8 +8,6 @@ namespace SharpEncrypt
 
         public static string DefaultLanguage => "en-GB";
 
-        public static int KeySize = 252;
-
         public static byte[] GetGuidBytes() => Encoding.ASCII.GetBytes(GuidIdentifier);
     }
 }
