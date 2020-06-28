@@ -943,7 +943,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf).
+        ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf)|*seotpf.
         /// </summary>
         internal static string SharpEncryptOTPEncryptedFile {
             get {

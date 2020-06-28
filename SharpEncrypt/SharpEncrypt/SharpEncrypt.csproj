@@ -231,6 +231,7 @@
     <Compile Include="Forms\ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\OTPSaveKeyOfFileTask.cs" />
     <Compile Include="Tasks\ReadSecuredFilesListTask.cs" />
     <Compile Include="Tasks\ReadSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />

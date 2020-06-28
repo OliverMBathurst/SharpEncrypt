@@ -29,7 +29,7 @@ namespace SharpEncrypt.Helpers
                     return false;
             }
 
-            if (FindEndGUIDBytes(filePath, guidBytes.Length, guidBytes, out var keyEndBytesRead))
+            if (FindKeyEndByteOffset(filePath, guidBytes.Length, guidBytes, out var keyEndBytesRead))
             {
                 using (var fs = new FileStream(filePath, FileMode.Open))
                 {
@@ -98,36 +98,39 @@ namespace SharpEncrypt.Helpers
             Containerize(filePath, keyBytes);
         }
 
-        private static bool FindEndGUIDBytes(string filePath, int bytesRead, byte[] guidBytes, out int startByte)
+        private static bool FindKeyEndByteOffset(string filePath, int bytesRead, byte[] guidBytes, out int startByte)
         {
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException(nameof(filePath));
             if (!File.Exists(filePath))
                 throw new FileNotFoundException(filePath);
 
-            startByte = 0;
+            startByte = bytesRead;
             using (var fs = new FileStream(filePath, FileMode.Open))
             {
-                for (var c = 0; c < bytesRead; c++)
-                    fs.ReadByte();
-
-                var buff = new byte[guidBytes.Length - 1];
-                var otherBytes = guidBytes.Skip(1);
-
-                int read;
-                while((read = fs.ReadByte()) != -1)
+                using (var buffStream = new BufferedStream(fs))
                 {
-                    bytesRead++;
-                    if(read == guidBytes[0])
+                    for (var c = 0; c < bytesRead; c++)
+                        buffStream.ReadByte();
+
+                    var buff = new byte[guidBytes.Length - 1];
+                    var otherBytes = guidBytes.Skip(1);
+
+                    int read;
+                    while ((read = buffStream.ReadByte()) != -1)
                     {
-                        var pos = fs.Position;
-                        fs.Read(buff, 0, buff.Length);
-                        if (buff.SequenceEqual(otherBytes))
+                        bytesRead++;
+                        if (read == guidBytes[0])
                         {
-                            startByte = bytesRead - 1;
-                            return true;
+                            var pos = buffStream.Position;
+                            buffStream.Read(buff, 0, buff.Length);
+                            if (buff.SequenceEqual(otherBytes))
+                            {
+                                startByte = bytesRead - 1;
+                                return true;
+                            }
+                            buffStream.Seek(pos, SeekOrigin.Begin);
                         }
-                        fs.Seek(pos, SeekOrigin.Begin);
                     }
                 }
             }

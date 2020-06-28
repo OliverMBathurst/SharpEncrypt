@@ -13,6 +13,7 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() =>
             {
+                //append the extension to file (use filegeneratorhelper to get a unique name if file already exists.1.axx)
                 if (string.IsNullOrEmpty(keyFilePath))
                 {
                     OTPHelper.EncryptWithoutKey(filePath);

@@ -10,6 +10,7 @@
         ReadSecuredFoldersListTask,
         WriteSecuredFoldersListTask,
         OneTimePadTransformTask,
-        LoggingTask
+        LoggingTask,
+        OTPSaveKeyOfFileTask
     }
 }

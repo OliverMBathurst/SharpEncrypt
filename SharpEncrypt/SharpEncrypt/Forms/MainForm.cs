@@ -359,7 +359,23 @@ namespace SharpEncrypt.Forms
 
         private void DecryptFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = ResourceManager.GetString("SelectFile");
+                openFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPEncryptedFile");
+                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (var openKeyFileDialog = new OpenFileDialog())
+                    {
+                        openKeyFileDialog.Title = ResourceManager.GetString("SelectKeyFile");
+                        openKeyFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
+                        if(openKeyFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            TaskHandler.AddJob(new OneTimePadEncryptTask(openFileDialog.FileName, openKeyFileDialog.FileName));
+                        }
+                    }
+                }
+            }
         }
 
         private void ChangeSessionPasswordToolStripMenuItem_Click(object sender, EventArgs e) => SetSessionPassword();
@@ -458,7 +474,7 @@ namespace SharpEncrypt.Forms
                         saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            OTPHelper.GenerateKey(saveFileDialog.FileName, openFileDialog.FileName);
+                            TaskHandler.AddJob(new OTPSaveKeyOfFileTask(saveFileDialog.FileName, openFileDialog.FileName));
                         }
                     }
                 }
