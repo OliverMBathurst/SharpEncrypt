@@ -752,6 +752,7 @@ namespace SharpEncrypt.Forms
             // 
             // LoggingToolStripMenuItem
             // 
+            this.LoggingToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.LoggingToolStripMenuItem.Name = "LoggingToolStripMenuItem";
             this.LoggingToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.LoggingToolStripMenuItem.Text = "Logging";

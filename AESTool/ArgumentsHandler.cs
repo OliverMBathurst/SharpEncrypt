@@ -1,8 +1,6 @@
 ﻿using AESLibrary;
-using SecureEraseLibrary;
 using System;
 using System.Globalization;
-using System.IO;
 using System.Resources;
 
 namespace AESTool
@@ -64,26 +62,27 @@ namespace AESTool
                 {
                     if (!AESHelper.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("NotAKey", CultureInfo.CurrentCulture), keyPath));
                     {
-                        if (string.IsNullOrEmpty(outputPath))
+                        if (encrypt)
                         {
-                            if (encrypt)
+                            if (string.IsNullOrEmpty(outputPath))
+                            {
                                 AESHelper.EncryptFile(key, inputPath);
+                            }
                             else
-                                AESHelper.DecryptFile(key, inputPath);
+                            {
+                                AESHelper.EncryptFile(key, inputPath, outputPath);
+                            }
                         }
                         else
                         {
-                            var fileName = Path.GetFileName(inputPath);
-
-                            if (encrypt)
-                                AESHelper.EncryptFile(key, inputPath, outputPath);
+                            if (string.IsNullOrEmpty(outputPath))
+                            {
+                                AESHelper.DecryptFile(key, inputPath);
+                            }
                             else
-                                AESHelper.EncryptFile(key, inputPath, outputPath);
-
-                            SecureEraseHelper.ObfuscateFileProperties(inputPath);
-                            SecureEraseHelper.WriteRandomData(inputPath);
-                            File.Delete(SecureEraseHelper.ObfuscateFileName(inputPath));
-                            File.Move(outputPath, fileName);
+                            {
+                                AESHelper.DecryptFile(key, inputPath, outputPath);
+                            }
                         }
                     }
                 }

@@ -415,6 +415,9 @@
   <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
     <value>SharpEncrypt OTP Encrypted File (*.seotpf)|*seotpf</value>
   </data>
+  <data name="SharpEncryptOTPEncryptedFileExtension" xml:space="preserve">
+    <value>.seotpf</value>
+  </data>
   <data name="SharpEncryptOTPKeyFilter" xml:space="preserve">
     <value>SharpEncrypt OTP Key (*.seotpk)|*.seotpk</value>
   </data>

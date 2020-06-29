@@ -952,6 +952,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .seotpf.
+        /// </summary>
+        internal static string SharpEncryptOTPEncryptedFileExtension {
+            get {
+                return ResourceManager.GetString("SharpEncryptOTPEncryptedFileExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SharpEncrypt OTP Key (*.seotpk)|*.seotpk.
         /// </summary>
         internal static string SharpEncryptOTPKeyFilter {

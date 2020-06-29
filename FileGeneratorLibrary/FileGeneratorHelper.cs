@@ -148,5 +148,22 @@ namespace FileGeneratorLibrary
                 throw new ArgumentNullException(nameof(driveInfo));
             WriteNewFile(driveInfo.RootDirectory.FullName, size, random, postDelete);
         }
+
+        public static string GetValidFileNameForDirectory(string filePath, string fileExtension)
+        {
+            var dir = Path.GetDirectoryName(filePath);
+            var fileName = Path.GetFileName(filePath);
+
+            var proposed = Path.Combine(dir, $"{fileName}{fileExtension}");
+            if (!File.Exists(proposed)) return proposed;
+            {
+                for(var i = 0; i < 1000; i++)
+                {
+                    if (!File.Exists(proposed = Path.Combine(dir, $"{fileName}.{i}{fileExtension}")))
+                        return proposed;
+                }
+            }
+            return null;
+        }
     }
 }
