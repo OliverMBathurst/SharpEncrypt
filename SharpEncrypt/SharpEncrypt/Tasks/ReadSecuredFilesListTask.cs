@@ -12,7 +12,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ReadSecuredFileListTask;
     
-        public ReadSecuredFilesListTask(string path)
+        public ReadSecuredFilesListTask(string path) : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
             {
@@ -22,7 +22,7 @@ namespace SharpEncrypt.Tasks
                     {
                         if(new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> models)
                         {
-                            Value = models;
+                            Result.Value = models;
                         }
                     }
                 }

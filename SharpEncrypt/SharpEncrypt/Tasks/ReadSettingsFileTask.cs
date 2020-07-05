@@ -10,13 +10,13 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ReadSettingsFileTask;
 
-        public ReadSettingsFileTask(string path)
+        public ReadSettingsFileTask(string path) : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
             {                                
                 using (var fs = File.Open(path, FileMode.Open))
                 {
-                    Value = new BinaryFormatter().Deserialize(fs);
+                    Result.Value = new BinaryFormatter().Deserialize(fs);
                 }
             });
         }

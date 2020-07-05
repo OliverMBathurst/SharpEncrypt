@@ -11,7 +11,8 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFoldersListTask;
 
-        public WriteSecuredFoldersListTask(string filePath, IEnumerable<string> directories, bool add = true)
+        public WriteSecuredFoldersListTask(string filePath, bool add, params string[] directories)
+            : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {

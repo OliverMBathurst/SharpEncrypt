@@ -123,6 +123,9 @@
   <data name="ACriticalErrorHasOccurred" xml:space="preserve">
     <value>A critical error has occurred.</value>
   </data>
+  <data name="ActiveTasks" xml:space="preserve">
+    <value>Active Tasks</value>
+  </data>
   <data name="AddedNJobs" xml:space="preserve">
     <value>Added {0} jobs.</value>
   </data>
@@ -174,6 +177,9 @@
   </data>
   <data name="Completed" xml:space="preserve">
     <value>Completed</value>
+  </data>
+  <data name="CompletedJobs" xml:space="preserve">
+    <value>Completed Jobs</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
@@ -250,6 +256,9 @@
   <data name="GoToPasswordManagement" xml:space="preserve">
     <value>Go to password management.</value>
   </data>
+  <data name="GridView" xml:space="preserve">
+    <value>Grid View</value>
+  </data>
   <data name="HDDWipeDialog" xml:space="preserve">
     <value>Drive Wipe Dialog</value>
   </data>
@@ -270,6 +279,9 @@
   </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key, please generate a new key-pair.</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Jobs</value>
   </data>
   <data name="KeyPairDisclaimer" xml:space="preserve">
     <value>Generating a new key pair will overwrite any existing keys, continue?</value>

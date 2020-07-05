@@ -10,6 +10,7 @@ namespace SharpEncrypt.Tasks
         public override TaskType TaskType => TaskType.LoggingTask;
 
         public LoggingTask(string logFilePath, string logMessage)
+            : base(ResourceType.File, logFilePath)
         {
             InnerTask = new Task(() =>
             {

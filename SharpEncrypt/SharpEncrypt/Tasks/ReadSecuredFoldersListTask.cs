@@ -11,7 +11,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ReadSecuredFoldersListTask;
 
-        public ReadSecuredFoldersListTask(string filePath)
+        public ReadSecuredFoldersListTask(string filePath) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() => 
             {
@@ -27,7 +27,7 @@ namespace SharpEncrypt.Tasks
                     }
                 }
 
-                Value = filesList;
+                Result.Value = filesList;
             });
         }
     }

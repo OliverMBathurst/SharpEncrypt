@@ -98,7 +98,7 @@ namespace SharpEncrypt.Forms
                 }
             }
 
-            using (var viewJobsDialog = new GenericGridForm(columns, rows))
+            using (var viewJobsDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("Jobs")))
             {
                 viewJobsDialog.ShowDialog();
             }

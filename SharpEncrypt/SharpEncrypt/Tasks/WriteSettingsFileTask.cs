@@ -11,6 +11,7 @@ namespace SharpEncrypt.Tasks
         public override TaskType TaskType => TaskType.WriteSettingsFileTask;
 
         public WriteSettingsFileTask(string path, SharpEncryptSettings settings)
+            : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
             {

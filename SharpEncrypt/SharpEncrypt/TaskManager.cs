@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace SharpEncrypt
 {
@@ -13,11 +14,13 @@ namespace SharpEncrypt
         #region Delegates and events
         public delegate void ShortTaskCompletedEvent(SharpEncryptTask task);
         public delegate void LongTaskCompletedEvent(SharpEncryptTask task);
+        public delegate void GenericTaskCompletedEvent(SharpEncryptTask task);
         public delegate void TaskDequeuedEvent(SharpEncryptTask task);
         public delegate void TaskManagerCompletedEvent();
 
         public event ShortTaskCompletedEvent ShortTaskCompleted;
         public event LongTaskCompletedEvent LongTaskCompleted;
+        public event GenericTaskCompletedEvent GenericTaskCompleted;
         public event TaskDequeuedEvent TaskDequeued;
         public event TaskManagerCompletedEvent TaskManagerCompleted;
         #endregion
@@ -28,6 +31,7 @@ namespace SharpEncrypt
             ShortTaskHandler.TaskDequeued += GenericTaskDequeued;
         }
 
+        #region Properties
         public bool Cancelled { get; private set; } = false;
 
         public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
@@ -36,8 +40,10 @@ namespace SharpEncrypt
 
         public int TaskCount => ShortTaskHandler.TaskCount + TaskHandlers.Count;
 
-        public void SetCancellationFlag() => Cancelled = true;
-        
+        public IEnumerable<SharpEncryptTask> Tasks => ShortTaskHandler.Tasks.Concat(TaskHandlers.SelectMany(x => x.Value.Tasks));
+
+        #endregion
+
         #region Event methods
 
         private void GenericTaskDequeued(SharpEncryptTask task)
@@ -48,12 +54,14 @@ namespace SharpEncrypt
         private void ShortTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
         {
             ShortTaskCompleted?.Invoke(task);
+            GenericTaskCompleted?.Invoke(task);
             AfterTaskCompleted(task);
         }
 
         private void LongTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
         {
             LongTaskCompleted?.Invoke(task);
+            GenericTaskCompleted?.Invoke(task);
             AfterTaskCompleted(task);
         }
 
@@ -64,7 +72,9 @@ namespace SharpEncrypt
 
         #endregion
 
-        public void AddJob(SharpEncryptTask sharpEncryptTask)
+        #region Methods
+
+        public void AddTask(SharpEncryptTask sharpEncryptTask)
         {
             if (Cancelled)
                 return;
@@ -73,7 +83,7 @@ namespace SharpEncrypt
                 throw new ArgumentNullException(nameof(sharpEncryptTask));
 
             if (!sharpEncryptTask.IsLongRunning) {
-                ShortTaskHandler.AddJob(sharpEncryptTask);
+                ShortTaskHandler.AddTask(sharpEncryptTask);
             }
             else
             {
@@ -85,7 +95,7 @@ namespace SharpEncrypt
 
                     TaskHandlers.TryAdd(newLongTaskHandler.Identifier, newLongTaskHandler);
 
-                    newLongTaskHandler.AddJob(sharpEncryptTask);
+                    newLongTaskHandler.AddTask(sharpEncryptTask);
                 }
             }
         }
@@ -105,5 +115,9 @@ namespace SharpEncrypt
                 TaskManagerCompleted?.Invoke();
             }
         }
+
+        public void SetCancellationFlag() => Cancelled = true;
+
+        #endregion
     }
 }

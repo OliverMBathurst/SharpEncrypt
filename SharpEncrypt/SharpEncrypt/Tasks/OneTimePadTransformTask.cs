@@ -18,6 +18,7 @@ namespace SharpEncrypt.Tasks
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
     
         public OneTimePadTransformTask(string filePath, string keyFilePath = "")
+            : base(ResourceType.File, filePath, keyFilePath)
         {
             InnerTask = new Task(() =>
             {

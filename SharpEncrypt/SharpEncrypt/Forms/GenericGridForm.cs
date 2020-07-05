@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace SharpEncrypt.Forms
 {
     public partial class GenericGridForm : Form
     {
+        private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly IEnumerable<string> Columns;
         private readonly List<List<object>> Rows;
 
-        public GenericGridForm(IEnumerable<string> columns, List<List<object>> rows)
+        public GenericGridForm(IEnumerable<string> columns, List<List<object>> rows, string title = "")
         {
+            InitializeComponent();
             Columns = columns;
             Rows = rows;
-            InitializeComponent();
+
+            Text = string.IsNullOrEmpty(title) ? ResourceManager.GetString("GridView") : title;
         }
 
         private void GenericGridForm_Load(object sender, EventArgs e)
         {
+
             foreach(var column in Columns)
                 GridView.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = column });
 

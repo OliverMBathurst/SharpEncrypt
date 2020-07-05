@@ -100,6 +100,7 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidateContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewActiveJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewCompletedJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,6 +123,7 @@ namespace SharpEncrypt.Forms
             this.HomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.OpenHomeFolder = new System.Windows.Forms.Button();
             this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -135,6 +137,7 @@ namespace SharpEncrypt.Forms
             // 
             // Tabs
             // 
+            this.Tabs.AllowDrop = true;
             this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -159,6 +162,7 @@ namespace SharpEncrypt.Forms
             // 
             // RecentFilesGrid
             // 
+            this.RecentFilesGrid.AllowDrop = true;
             this.RecentFilesGrid.AllowUserToAddRows = false;
             this.RecentFilesGrid.AllowUserToDeleteRows = false;
             this.RecentFilesGrid.AllowUserToOrderColumns = true;
@@ -296,6 +300,7 @@ namespace SharpEncrypt.Forms
             // 
             // SecuredFoldersGrid
             // 
+            this.SecuredFoldersGrid.AllowDrop = true;
             this.SecuredFoldersGrid.AllowUserToAddRows = false;
             this.SecuredFoldersGrid.AllowUserToDeleteRows = false;
             this.SecuredFoldersGrid.AllowUserToOrderColumns = true;
@@ -729,6 +734,7 @@ namespace SharpEncrypt.Forms
             // 
             this.DebugMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ValidateContainerToolStripMenuItem,
+            this.ViewActiveJobsToolStripMenuItem,
             this.ViewCompletedJobsToolStripMenuItem,
             this.LoggingToolStripMenuItem});
             this.DebugMenuStrip.Enabled = false;
@@ -743,12 +749,19 @@ namespace SharpEncrypt.Forms
             this.ValidateContainerToolStripMenuItem.Text = "Validate Container";
             this.ValidateContainerToolStripMenuItem.Click += new System.EventHandler(this.ValidateContainerToolStripMenuItem_Click);
             // 
+            // ViewActiveJobsToolStripMenuItem
+            // 
+            this.ViewActiveJobsToolStripMenuItem.Name = "ViewActiveJobsToolStripMenuItem";
+            this.ViewActiveJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.ViewActiveJobsToolStripMenuItem.Text = "View Active Jobs";
+            this.ViewActiveJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewActiveJobsToolStripMenuItem_Click);
+            // 
             // ViewCompletedJobsToolStripMenuItem
             // 
             this.ViewCompletedJobsToolStripMenuItem.Name = "ViewCompletedJobsToolStripMenuItem";
             this.ViewCompletedJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
             this.ViewCompletedJobsToolStripMenuItem.Text = "View Completed Jobs";
-            this.ViewCompletedJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewJobsToolStripMenuItem_Click);
+            this.ViewCompletedJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewCompletedJobsToolStripMenuItem_Click);
             // 
             // LoggingToolStripMenuItem
             // 
@@ -915,6 +928,11 @@ namespace SharpEncrypt.Forms
             this.OpenHomeFolder.UseVisualStyleBackColor = false;
             this.OpenHomeFolder.Click += new System.EventHandler(this.OpenHomeFolder_Click);
             // 
+            // NotifyIcon
+            // 
+            this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+            this.NotifyIcon.Text = "SharpEncrypt";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1043,6 +1061,8 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem ViewCompletedJobsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GenerateKeyForFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LoggingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ViewActiveJobsToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon NotifyIcon;
     }
 }
 

@@ -22,7 +22,6 @@ namespace SharpEncrypt.Forms
     internal partial class MainForm : Form
     {
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
-        private readonly List<FileDataGridItemModel> SecuredFiles = new List<FileDataGridItemModel>();
         private readonly TaskManager TaskManager = new TaskManager();
 
         #region Delegates and Events
@@ -59,7 +58,11 @@ namespace SharpEncrypt.Forms
             InitializeComponent();
             DefaultSettingsWriterDelegate = new SettingsWriterDelegate(SettingsWriterHandler);
             DefaultSettingsChangeDelegate = new SettingsChangeDelegate(SettingsChangeHandler);
+
             FormClosing += FormClosingHandler;
+            Resize += MainForm_Resize;
+            NotifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+
             OnFileSecured += MainForm_OnFileSecured;
             OnFolderSecured += MainForm_OnFolderSecured;
             OnSecuredFileAdded += MainForm_OnSecureFilesAdded;
@@ -68,6 +71,12 @@ namespace SharpEncrypt.Forms
             OnSettingsFileRead += MainForm_OnSettingsFileRead;
             OnTaskException += MainForm_OnTaskException;
 
+            RecentFilesGrid.DragDrop += RecentFilesGrid_DragDrop;
+            RecentFilesGrid.DragEnter += RecentFilesGrid_DragEnter;
+
+            SecuredFoldersGrid.DragDrop += SecuredFoldersGrid_DragDrop;
+            SecuredFoldersGrid.DragEnter += SecuredFoldersGrid_DragEnter;
+
             TaskManager.ShortTaskCompleted += TaskHandler_OnShortTaskCompletedEvent;
             TaskManager.LongTaskCompleted += TaskHandler_OnLongTaskCompletedEvent;
         }
@@ -75,6 +84,34 @@ namespace SharpEncrypt.Forms
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
 
         #region Misc methods
+
+        private static void SecureFolders(params string[] folders)
+        {
+            if (folders != null)
+            {
+                foreach (var folder in folders)
+                {
+                    if (Directory.Exists(folder))
+                    {
+                        //logic here
+                    }
+                }
+            }
+        }
+
+        private static void SecureFiles(params string[] filePaths)
+        {
+            if (filePaths != null)
+            {
+                foreach (var filePath in filePaths)
+                {
+                    if (File.Exists(filePath))
+                    {
+                        //logic here
+                    }
+                }
+            }
+        }
 
         private void AddSecured()
         {
@@ -126,7 +163,7 @@ namespace SharpEncrypt.Forms
             }
             else
             {
-                TaskManager.AddJob(new ReadSettingsFileTask(settingsFilePath));
+                TaskManager.AddTask(new ReadSettingsFileTask(settingsFilePath));
             }            
         }
 
@@ -147,17 +184,27 @@ namespace SharpEncrypt.Forms
 
         private void LoadSecuredFoldersList()
         {
-            TaskManager.AddJob(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName));
+            TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName));
         }
 
         private void LoadRecentFilesList()
         {
-            TaskManager.AddJob(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
+            TaskManager.AddTask(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
         }
 
         private static void CloseApplication()
         {
             Application.Exit();
+        }
+
+        private static string[] ExtractPaths(DragEventArgs args)
+        {
+            var paths = args.Data.GetData(DataFormats.FileDrop, false);
+            if (paths is string[] filePaths)
+            {
+                return filePaths;
+            }
+            return null;
         }
 
         #endregion
@@ -175,24 +222,17 @@ namespace SharpEncrypt.Forms
 
         private void RemoveFileFromListButKeepSecuredToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var selectedRows = RecentFilesGrid.SelectedRows;
-            var removals = new List<FileDataGridItemModel>();
+            var removals = new List<string>();
 
-            foreach (DataGridViewRow selectedRow in selectedRows)
+            foreach (DataGridViewRow selectedRow in RecentFilesGrid.SelectedRows)
             {
                 if (selectedRow.Cells[2].Value is string securedFilePath)
                 {
-                    var files = SecuredFiles.Where(x => x.Secured == securedFilePath);
-                    if (files.Any())
-                    {
-                        var file = files.First();
-                        removals.Add(file);
-                        SecuredFiles.Remove(file);
-                    }
+                    removals.Add(securedFilePath);
                 }
             }
 
-            TaskManager.AddJob(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removals, false));
+            TaskManager.AddTask(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removals));
 
             InvokeOnControl(new MethodInvoker(delegate ()
             {
@@ -234,9 +274,9 @@ namespace SharpEncrypt.Forms
 
         private void RemoveFolderFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var DirectoryURIs = new List<string>();
+            var directoryURIs = new List<string>();
             foreach(DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
-                DirectoryURIs.Add(row.Cells[0].Value as string);
+                directoryURIs.Add(row.Cells[0].Value as string);
 
             InvokeOnControl(new MethodInvoker(delegate ()
             {
@@ -246,7 +286,7 @@ namespace SharpEncrypt.Forms
                 SecuredFoldersGrid.Refresh();
             }));
 
-            TaskManager.AddJob(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, DirectoryURIs, false));
+            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, false, directoryURIs.ToArray()));
         }
 
         private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
@@ -306,7 +346,7 @@ namespace SharpEncrypt.Forms
                 var result = secureFolderDialog.ShowDialog();
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(secureFolderDialog.SelectedPath))
                 {
-                    TaskManager.AddJob(new SecureFolderTask(secureFolderDialog.SelectedPath));
+                    TaskManager.AddTask(new SecureFolderTask(secureFolderDialog.SelectedPath));
                 }
             }
         }
@@ -348,7 +388,7 @@ namespace SharpEncrypt.Forms
                         keyFileOpenFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if(keyFileOpenFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            TaskManager.AddJob(new OneTimePadTransformTask(openFileDialog.FileName, keyFileOpenFileDialog.FileName));
+                            TaskManager.AddTask(new OneTimePadTransformTask(openFileDialog.FileName, keyFileOpenFileDialog.FileName));
                         }
                     }
                 }
@@ -369,7 +409,7 @@ namespace SharpEncrypt.Forms
                         openKeyFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if(openKeyFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            TaskManager.AddJob(new OneTimePadTransformTask(openFileDialog.FileName, openKeyFileDialog.FileName));
+                            TaskManager.AddTask(new OneTimePadTransformTask(openFileDialog.FileName, openKeyFileDialog.FileName));
                         }
                     }
                 }
@@ -472,7 +512,7 @@ namespace SharpEncrypt.Forms
                         saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            TaskManager.AddJob(new OTPSaveKeyOfFileTask(saveFileDialog.FileName, openFileDialog.FileName));
+                            TaskManager.AddTask(new OTPSaveKeyOfFileTask(saveFileDialog.FileName, openFileDialog.FileName));
                         }
                     }
                 }
@@ -536,11 +576,19 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void ViewJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewActiveJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var activeTasksForm = new ActiveTasksForm(TaskManager))
+            {
+                activeTasksForm.ShowDialog();
+            }
+        }
+
+        private void ViewCompletedJobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var columns = new[] { ResourceManager.GetString("TaskType"), ResourceManager.GetString("Completed") };
             var rows = TaskManager.CompletedTasks.Select(x => new List<object> { x.Task.TaskType, x.Time.ToString(CultureInfo.CurrentCulture) }).ToList();
-            using (var completedJobsDialog = new GenericGridForm(columns, rows))
+            using (var completedJobsDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("CompletedJobs")))
             {
                 completedJobsDialog.ShowDialog();
             }
@@ -592,26 +640,67 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            NotifyIcon.Visible = false;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = false;
+                NotifyIcon.Visible = true;
+                NotifyIcon.Text = ResourceManager.GetString("AppName");
+                NotifyIcon.BalloonTipText = ResourceManager.GetString("AppName");
+                NotifyIcon.ShowBalloonTip(500);
+                Hide();
+            }
+        }
+
+        private void SecuredFoldersGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void SecuredFoldersGrid_DragDrop(object sender, DragEventArgs e)
+        {
+            SecureFolders(ExtractPaths(e));
+        }
+
+        private void RecentFilesGrid_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void RecentFilesGrid_DragDrop(object sender, DragEventArgs e)
+        {
+            SecureFiles(ExtractPaths(e));
+        }
+
         private void TaskHandler_OnShortTaskCompletedEvent(SharpEncryptTask task)
         {
-            if(task.Exception != null)
+            if(task.Result.Exception != null)
             {
-                OnTaskException?.Invoke(task.Exception);
+                OnTaskException?.Invoke(task.Result.Exception);
             }
             else
             {
                 switch (task.TaskType)
                 {
-                    case TaskType.SecureFolderTask when task.Value is string folderPath:
+                    case TaskType.SecureFolderTask when task.Result.Value is string folderPath:
                         OnFolderSecured?.Invoke(folderPath);
                         break;
-                    case TaskType.ReadSecuredFileListTask when task.Value is IEnumerable<FileDataGridItemModel> models:
+                    case TaskType.ReadSecuredFileListTask when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
                         OnSecureFileListRead?.Invoke(models);
                         break;
-                    case TaskType.ReadSecuredFoldersListTask when task.Value is IEnumerable<string> folders:
+                    case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<string> folders:
                         OnSecuredFolderListRead?.Invoke(folders);
                         break;
-                    case TaskType.ReadSettingsFileTask when task.Value is SharpEncryptSettings settings:
+                    case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettings settings:
                         OnSettingsFileRead?.Invoke(settings);
                         break;
                 }
@@ -620,9 +709,9 @@ namespace SharpEncrypt.Forms
 
         private void TaskHandler_OnLongTaskCompletedEvent(SharpEncryptTask task)
         {
-            if (task.Exception != null)
+            if (task.Result.Exception != null)
             {
-                OnTaskException?.Invoke(task.Exception);
+                OnTaskException?.Invoke(task.Result.Exception);
             }
             else
             {
@@ -635,7 +724,7 @@ namespace SharpEncrypt.Forms
         private void MainForm_OnTaskException(Exception exception)
         {
             if (Settings.Logging)
-                TaskManager.AddJob(new LoggingTask(PathHelper.LoggingFilePath, exception.StackTrace));
+                TaskManager.AddTask(new LoggingTask(PathHelper.LoggingFilePath, exception.StackTrace));
 
             InvokeOnControl(new MethodInvoker(() =>
             {
@@ -659,10 +748,10 @@ namespace SharpEncrypt.Forms
             foreach(var existingFolder in folders.Where(x => Directory.Exists(x)))
                 AddSecuredFolderRow(existingFolder);
 
-            var removedFolders = folders.Where(x => !Directory.Exists(x));
+            var removedFolders = folders.Where(x => !Directory.Exists(x)).ToArray();
 
             if (removedFolders.Any())
-                TaskManager.AddJob(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, removedFolders, false));
+                TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, false, removedFolders));
         }
 
         private void MainForm_OnSecureFileListRead(IEnumerable<FileDataGridItemModel> models)
@@ -672,17 +761,17 @@ namespace SharpEncrypt.Forms
 
             var removedFiles = models.Where(x => !File.Exists(x.Secured)).ToList();
             if (removedFiles.Any())
-                TaskManager.AddJob(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removedFiles, false));
+                TaskManager.AddTask(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removedFiles, false));
         }
 
         private void MainForm_OnSecureFilesAdded(IEnumerable<FileDataGridItemModel> models)
         {
-            TaskManager.AddJob(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, models));
+            TaskManager.AddTask(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, models));
         }
 
         private void MainForm_OnFolderSecured(string folderPath)
         {
-            TaskManager.AddJob(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, new List<string> { folderPath }));
+            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, true, folderPath));
             AddSecuredFolderRow(folderPath);
         }
 
@@ -725,7 +814,7 @@ namespace SharpEncrypt.Forms
         }
 
         private void SettingsWriterHandler(SharpEncryptSettings settings)
-            => TaskManager.AddJob(new WriteSettingsFileTask(PathHelper.AppSettingsPath, settings));
+            => TaskManager.AddTask(new WriteSettingsFileTask(PathHelper.AppSettingsPath, settings));
 
         private void CloseApplicationHandler(object sender, FormClosedEventArgs e)
         {
@@ -834,8 +923,6 @@ namespace SharpEncrypt.Forms
                 
                 rows[i] = row;
             }
-
-            SecuredFiles.AddRange(models);
 
             InvokeOnControl(new MethodInvoker(delegate() { RecentFilesGrid.Rows.AddRange(rows); }));
         }

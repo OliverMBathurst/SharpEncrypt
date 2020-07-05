@@ -11,7 +11,7 @@ namespace SharpEncrypt.Tasks
 
         public override TaskType TaskType => TaskType.OTPSaveKeyOfFileTask;
 
-        public OTPSaveKeyOfFileTask(string keyPath, string filePath)
+        public OTPSaveKeyOfFileTask(string keyPath, string filePath) : base(ResourceType.File, keyPath, filePath)
         {
             InnerTask = new Task(() =>
             {

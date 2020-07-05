@@ -79,6 +79,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Tasks.
+        /// </summary>
+        internal static string ActiveTasks {
+            get {
+                return ResourceManager.GetString("ActiveTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added {0} jobs..
         /// </summary>
         internal static string AddedNJobs {
@@ -228,6 +237,15 @@ namespace SharpEncrypt.Resources {
         internal static string Completed {
             get {
                 return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed Jobs.
+        /// </summary>
+        internal static string CompletedJobs {
+            get {
+                return ResourceManager.GetString("CompletedJobs", resourceCulture);
             }
         }
         
@@ -457,6 +475,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grid View.
+        /// </summary>
+        internal static string GridView {
+            get {
+                return ResourceManager.GetString("GridView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drive Wipe Dialog.
         /// </summary>
         internal static string HDDWipeDialog {
@@ -516,6 +543,15 @@ namespace SharpEncrypt.Resources {
         internal static string InvalidKey {
             get {
                 return ResourceManager.GetString("InvalidKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jobs.
+        /// </summary>
+        internal static string Jobs {
+            get {
+                return ResourceManager.GetString("Jobs", resourceCulture);
             }
         }
         
