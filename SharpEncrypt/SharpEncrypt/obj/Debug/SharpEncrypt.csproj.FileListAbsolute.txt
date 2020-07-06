@@ -19,7 +19,6 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\Sh
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ImportPublicKeyForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.MainForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.PasswordInputDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.TaskProgressForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Properties.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ShowOnceDialog.resources
@@ -50,3 +49,5 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\tr
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ActiveTasksForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources

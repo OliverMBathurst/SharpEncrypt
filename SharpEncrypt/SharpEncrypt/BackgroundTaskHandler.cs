@@ -18,12 +18,14 @@ namespace SharpEncrypt
         public delegate void BackgroundWorkerDisabledEvent(Guid guid);
         public delegate void TaskDequeuedEvent(SharpEncryptTask task);
         public delegate void TaskCompletedEvent(SharpEncryptTask task);
+        public delegate void ExceptionOccurredEvent(Exception exception);
         public delegate void CurrentTasksCompletedEvent();
 
         public event TaskCompletedEvent TaskCompleted;
         public event TaskDequeuedEvent TaskDequeued;
         public event CurrentTasksCompletedEvent TasksCompleted;
         public event BackgroundWorkerDisabledEvent BackgroundWorkerDisabled;
+        public event ExceptionOccurredEvent ExceptionOccurred;
         #endregion
 
         public BackgroundTaskHandler(bool disableAfterJob = true)
@@ -66,10 +68,16 @@ namespace SharpEncrypt
         public void AddTask(SharpEncryptTask task) 
         {
             if (Disabled)
-                throw new BackgroundTaskHandlerDisabledException();
+            {
+                ExceptionOccurred?.Invoke(new BackgroundTaskHandlerDisabledException());
+                return;
+            }
 
             if (task == null)
-                throw new ArgumentNullException(nameof(task));
+            {
+                ExceptionOccurred?.Invoke(new ArgumentNullException(nameof(task)));
+                return;
+            }
 
             mTasks.Enqueue(task);
             if (!BackgroundWorker.IsBusy)

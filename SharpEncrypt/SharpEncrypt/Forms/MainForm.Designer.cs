@@ -103,10 +103,14 @@ namespace SharpEncrypt.Forms
             this.ViewActiveJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewCompletedJobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CancelAllFutureTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WipeFreeDiskSpaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AdvancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AdvancedDiskWipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AdvancedMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.ForceExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IndividualSettingsResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +128,9 @@ namespace SharpEncrypt.Forms
             this.OpenHomeFolder = new System.Windows.Forms.Button();
             this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -133,6 +140,7 @@ namespace SharpEncrypt.Forms
             this.FolderMenuStrip.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
+            this.NotifyIconContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tabs
@@ -397,6 +405,7 @@ namespace SharpEncrypt.Forms
             this.FileMenuStripItem,
             this.DebugMenuStrip,
             this.DiskToolsToolStripMenuItem,
+            this.AdvancedMenuStrip,
             this.HelpMenuStrip});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
@@ -736,7 +745,8 @@ namespace SharpEncrypt.Forms
             this.ValidateContainerToolStripMenuItem,
             this.ViewActiveJobsToolStripMenuItem,
             this.ViewCompletedJobsToolStripMenuItem,
-            this.LoggingToolStripMenuItem});
+            this.LoggingToolStripMenuItem,
+            this.CancelAllFutureTasksToolStripMenuItem});
             this.DebugMenuStrip.Enabled = false;
             this.DebugMenuStrip.Name = "DebugMenuStrip";
             this.DebugMenuStrip.Size = new System.Drawing.Size(82, 29);
@@ -745,21 +755,21 @@ namespace SharpEncrypt.Forms
             // ValidateContainerToolStripMenuItem
             // 
             this.ValidateContainerToolStripMenuItem.Name = "ValidateContainerToolStripMenuItem";
-            this.ValidateContainerToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.ValidateContainerToolStripMenuItem.Size = new System.Drawing.Size(291, 34);
             this.ValidateContainerToolStripMenuItem.Text = "Validate Container";
             this.ValidateContainerToolStripMenuItem.Click += new System.EventHandler(this.ValidateContainerToolStripMenuItem_Click);
             // 
             // ViewActiveJobsToolStripMenuItem
             // 
             this.ViewActiveJobsToolStripMenuItem.Name = "ViewActiveJobsToolStripMenuItem";
-            this.ViewActiveJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.ViewActiveJobsToolStripMenuItem.Size = new System.Drawing.Size(291, 34);
             this.ViewActiveJobsToolStripMenuItem.Text = "View Active Jobs";
             this.ViewActiveJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewActiveJobsToolStripMenuItem_Click);
             // 
             // ViewCompletedJobsToolStripMenuItem
             // 
             this.ViewCompletedJobsToolStripMenuItem.Name = "ViewCompletedJobsToolStripMenuItem";
-            this.ViewCompletedJobsToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.ViewCompletedJobsToolStripMenuItem.Size = new System.Drawing.Size(291, 34);
             this.ViewCompletedJobsToolStripMenuItem.Text = "View Completed Jobs";
             this.ViewCompletedJobsToolStripMenuItem.Click += new System.EventHandler(this.ViewCompletedJobsToolStripMenuItem_Click);
             // 
@@ -767,9 +777,16 @@ namespace SharpEncrypt.Forms
             // 
             this.LoggingToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.LoggingToolStripMenuItem.Name = "LoggingToolStripMenuItem";
-            this.LoggingToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.LoggingToolStripMenuItem.Size = new System.Drawing.Size(291, 34);
             this.LoggingToolStripMenuItem.Text = "Logging";
             this.LoggingToolStripMenuItem.Click += new System.EventHandler(this.LoggingToolStripMenuItem_Click);
+            // 
+            // CancelAllFutureTasksToolStripMenuItem
+            // 
+            this.CancelAllFutureTasksToolStripMenuItem.Name = "CancelAllFutureTasksToolStripMenuItem";
+            this.CancelAllFutureTasksToolStripMenuItem.Size = new System.Drawing.Size(291, 34);
+            this.CancelAllFutureTasksToolStripMenuItem.Text = "Cancel All Future Tasks";
+            this.CancelAllFutureTasksToolStripMenuItem.Click += new System.EventHandler(this.CancelAllFutureTasksToolStripMenuItem_Click);
             // 
             // DiskToolsToolStripMenuItem
             // 
@@ -802,6 +819,29 @@ namespace SharpEncrypt.Forms
             this.AdvancedDiskWipeToolStripMenuItem.Size = new System.Drawing.Size(278, 34);
             this.AdvancedDiskWipeToolStripMenuItem.Text = "Advanced Disk Wipe";
             this.AdvancedDiskWipeToolStripMenuItem.Click += new System.EventHandler(this.AdvancedDiskWipeToolStripMenuItem_Click);
+            // 
+            // AdvancedMenuStrip
+            // 
+            this.AdvancedMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ForceExitToolStripMenuItem,
+            this.IndividualSettingsResetToolStripMenuItem});
+            this.AdvancedMenuStrip.Name = "AdvancedMenuStrip";
+            this.AdvancedMenuStrip.Size = new System.Drawing.Size(107, 29);
+            this.AdvancedMenuStrip.Text = "Advanced";
+            // 
+            // ForceExitToolStripMenuItem
+            // 
+            this.ForceExitToolStripMenuItem.Name = "ForceExitToolStripMenuItem";
+            this.ForceExitToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
+            this.ForceExitToolStripMenuItem.Text = "Force Exit";
+            this.ForceExitToolStripMenuItem.Click += new System.EventHandler(this.ForceExitToolStripMenuItem_Click);
+            // 
+            // IndividualSettingsResetToolStripMenuItem
+            // 
+            this.IndividualSettingsResetToolStripMenuItem.Name = "IndividualSettingsResetToolStripMenuItem";
+            this.IndividualSettingsResetToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
+            this.IndividualSettingsResetToolStripMenuItem.Text = "Individual Settings Reset";
+            this.IndividualSettingsResetToolStripMenuItem.Click += new System.EventHandler(this.IndividualSettingsResetToolStripMenuItem_Click);
             // 
             // HelpMenuStrip
             // 
@@ -930,8 +970,32 @@ namespace SharpEncrypt.Forms
             // 
             // NotifyIcon
             // 
+            this.NotifyIcon.ContextMenuStrip = this.NotifyIconContextMenu;
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
             this.NotifyIcon.Text = "SharpEncrypt";
+            // 
+            // NotifyIconContextMenu
+            // 
+            this.NotifyIconContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.NotifyIconContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowToolStripMenuItem,
+            this.ExitToolStripMenuItem1});
+            this.NotifyIconContextMenu.Name = "NotifyIconContextMenu";
+            this.NotifyIconContextMenu.Size = new System.Drawing.Size(129, 68);
+            // 
+            // ShowToolStripMenuItem
+            // 
+            this.ShowToolStripMenuItem.Name = "ShowToolStripMenuItem";
+            this.ShowToolStripMenuItem.Size = new System.Drawing.Size(128, 32);
+            this.ShowToolStripMenuItem.Text = "Show";
+            this.ShowToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
+            // 
+            // ExitToolStripMenuItem1
+            // 
+            this.ExitToolStripMenuItem1.Name = "ExitToolStripMenuItem1";
+            this.ExitToolStripMenuItem1.Size = new System.Drawing.Size(128, 32);
+            this.ExitToolStripMenuItem1.Text = "Exit";
+            this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -965,6 +1029,7 @@ namespace SharpEncrypt.Forms
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
+            this.NotifyIconContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1063,6 +1128,13 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem LoggingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ViewActiveJobsToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon NotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem AdvancedMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ForceExitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CancelAllFutureTasksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IndividualSettingsResetToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip NotifyIconContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ShowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem1;
     }
 }
 

@@ -23,6 +23,7 @@ namespace SharpEncrypt.Forms
     {
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly TaskManager TaskManager = new TaskManager();
+        private SharpEncryptSettings _settings = new SharpEncryptSettings();
 
         #region Delegates and Events
         private delegate void SettingsChangeDelegate(string settingsPropertyName, object value);
@@ -51,7 +52,13 @@ namespace SharpEncrypt.Forms
 
         private string Password { get; set; }
 
-        private SharpEncryptSettings Settings { get; set; }
+        public SharpEncryptSettings Settings {
+            get => _settings;
+            private set {
+                _settings = value;
+                SetUIOptions();
+            }
+        }
 
         public MainForm() 
         {
@@ -79,6 +86,7 @@ namespace SharpEncrypt.Forms
 
             TaskManager.ShortTaskCompleted += TaskHandler_OnShortTaskCompletedEvent;
             TaskManager.LongTaskCompleted += TaskHandler_OnLongTaskCompletedEvent;
+            TaskManager.ExceptionOccurred += TaskManager_ExceptionOccurred;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -158,8 +166,7 @@ namespace SharpEncrypt.Forms
 
             if (!File.Exists(settingsFilePath))
             {
-                DefaultSettingsWriterDelegate.DynamicInvoke(new SharpEncryptSettings());
-                SetUIOptions();
+                DefaultSettingsWriterDelegate.DynamicInvoke(Settings);
             }
             else
             {
@@ -178,7 +185,13 @@ namespace SharpEncrypt.Forms
                 LoggingToolStripMenuItem.Checked = Settings.Logging;
 
                 if (Debug.Checked)
+                {
                     DebugMenuStrip.Enabled = true;
+                }
+                else
+                {
+                    DebugMenuStrip.Enabled = false;
+                }
             }));
         }
 
@@ -562,7 +575,6 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Debug menu items
-
         private void ValidateContainerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using(var openFileDialog = GetSEEFFilesDialog())
@@ -597,6 +609,11 @@ namespace SharpEncrypt.Forms
         private void LoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DefaultSettingsChangeDelegate.DynamicInvoke("Logging", ToggleChecked(LoggingToolStripMenuItem));
+        }
+
+        private void CancelAllFutureTasksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaskManager.SetCancellationFlag();
         }
         #endregion
 
@@ -640,12 +657,22 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void TaskManager_ExceptionOccurred(Exception exception)
+        {
+            InvokeOnControl(new MethodInvoker(delegate ()
+            {
+                MessageBox.Show(
+                    string.Format(CultureInfo.CurrentCulture, 
+                    ResourceManager.GetString("AnExceptionHasOccurred"), 
+                    exception.StackTrace),
+                    ResourceManager.GetString("Error"),
+                    MessageBoxButtons.OK);
+            }));
+        }
+
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            Show();
-            WindowState = FormWindowState.Normal;
-            ShowInTaskbar = true;
-            NotifyIcon.Visible = false;
+            ShowApplication();
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -740,7 +767,6 @@ namespace SharpEncrypt.Forms
             Settings = settings;
             if (Settings.LanguageCode != Constants.DefaultLanguage)
                 ChangeLanguage(Settings.LanguageCode);
-            SetUIOptions();
         }
 
         private void MainForm_OnSecuredFolderListRead(IEnumerable<string> folders)
@@ -816,11 +842,6 @@ namespace SharpEncrypt.Forms
         private void SettingsWriterHandler(SharpEncryptSettings settings)
             => TaskManager.AddTask(new WriteSettingsFileTask(PathHelper.AppSettingsPath, settings));
 
-        private void CloseApplicationHandler(object sender, FormClosedEventArgs e)
-        {
-            CloseApplication();
-        }
-
         private void FormClosingHandler(object sender, FormClosingEventArgs e)
         {
             OnExitRequested();
@@ -830,11 +851,10 @@ namespace SharpEncrypt.Forms
         {
             if (!TaskManager.HasCompletedJobs)
             {
-                using (var taskHandlerForm = new TaskProgressForm(TaskManager))
-                {
-                    taskHandlerForm.FormClosed += CloseApplicationHandler;
-                    taskHandlerForm.Show();
-                }
+                MessageBox.Show(
+                    ResourceManager.GetString("ThereAreActiveTasks"),
+                    ResourceManager.GetString("ActiveJobsWarning"),
+                    MessageBoxButtons.OK);
             }
             else
             {
@@ -897,6 +917,14 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Misc
+
+        private void ShowApplication()
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            NotifyIcon.Visible = false;
+        }
 
         private void InvokeOnControl(Delegate method) => Invoke(method);
 
@@ -971,6 +999,55 @@ namespace SharpEncrypt.Forms
 
         private void TurkishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("tr-TR");
 
+        #endregion
+
+        #region Advanced menu items
+
+        private void ForceExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Settings.ForceExitDisclaimerHide)
+            {
+                using (var showOnceDialog = new ShowOnceDialog(
+                    ResourceManager.GetString("AreYouSure?"),
+                    "ForceExitDisclaimerHide",
+                    DefaultSettingsChangeDelegate))
+                {
+                    if(showOnceDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        CloseApplication();
+                    }
+                }
+            }
+            else
+            {
+                CloseApplication();
+            }
+        }
+
+        private void IndividualSettingsResetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var individualSettingsResetDialog = new IndividualSettingsResetDialog<SharpEncryptSettings>(Settings, new SharpEncryptSettings()))
+            {
+                if(individualSettingsResetDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Settings = individualSettingsResetDialog.Result;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Notify icon methods
+        private void ExitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowApplication();
+            OnExitRequested();
+        }
+
+        private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowApplication();
+        }
         #endregion
     }
 }

@@ -100,6 +100,12 @@
     <Compile Include="Forms\ActiveTasksForm.Designer.cs">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IndividualSettingsResetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IndividualSettingsResetDialog.Designer.cs">
+      <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ContainerHelper.cs" />
     <Compile Include="Controls\DriveSelectionControl.cs">
@@ -142,12 +148,6 @@
     </Compile>
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\TaskProgressForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TaskProgressForm.Designer.cs">
-      <DependentUpon>TaskProgressForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
@@ -271,14 +271,14 @@
     <EmbeddedResource Include="Forms\ImportPublicKeyForm.resx">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IndividualSettingsResetDialog.resx">
+      <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordInputDialog.resx">
       <DependentUpon>PasswordInputDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TaskProgressForm.resx">
-      <DependentUpon>TaskProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

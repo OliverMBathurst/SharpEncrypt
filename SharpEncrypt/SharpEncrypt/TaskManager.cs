@@ -16,6 +16,7 @@ namespace SharpEncrypt
         public delegate void LongTaskCompletedEvent(SharpEncryptTask task);
         public delegate void GenericTaskCompletedEvent(SharpEncryptTask task);
         public delegate void TaskDequeuedEvent(SharpEncryptTask task);
+        public delegate void ExceptionOccurredEvent(Exception exception);
         public delegate void TaskManagerCompletedEvent();
 
         public event ShortTaskCompletedEvent ShortTaskCompleted;
@@ -23,12 +24,14 @@ namespace SharpEncrypt
         public event GenericTaskCompletedEvent GenericTaskCompleted;
         public event TaskDequeuedEvent TaskDequeued;
         public event TaskManagerCompletedEvent TaskManagerCompleted;
+        public event ExceptionOccurredEvent ExceptionOccurred;
         #endregion
 
         public TaskManager()
         {
             ShortTaskHandler.TaskCompleted += ShortTaskHandler_TaskCompletedEvent;
             ShortTaskHandler.TaskDequeued += GenericTaskDequeued;
+            ShortTaskHandler.ExceptionOccurred += ExceptionHandler;
         }
 
         #region Properties
@@ -45,6 +48,11 @@ namespace SharpEncrypt
         #endregion
 
         #region Event methods
+
+        private void ExceptionHandler(Exception exception)
+        {
+            ExceptionOccurred?.Invoke(exception);
+        }
 
         private void GenericTaskDequeued(SharpEncryptTask task)
         {
@@ -82,20 +90,22 @@ namespace SharpEncrypt
             if (sharpEncryptTask == null)
                 throw new ArgumentNullException(nameof(sharpEncryptTask));
 
-            if (!sharpEncryptTask.IsLongRunning) {
+            if (!sharpEncryptTask.IsLongRunning)
+            {
                 ShortTaskHandler.AddTask(sharpEncryptTask);
             }
             else
             {
-                using (var newLongTaskHandler = new BackgroundTaskHandler())
+                using (var taskHandlerForTask = new BackgroundTaskHandler())
                 {
-                    newLongTaskHandler.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
-                    newLongTaskHandler.TaskCompleted += LongTaskHandler_TaskCompletedEvent;
-                    newLongTaskHandler.TaskDequeued += GenericTaskDequeued;
+                    taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
+                    taskHandlerForTask.TaskCompleted += LongTaskHandler_TaskCompletedEvent;
+                    taskHandlerForTask.TaskDequeued += GenericTaskDequeued;
+                    taskHandlerForTask.ExceptionOccurred += ExceptionHandler;
 
-                    TaskHandlers.TryAdd(newLongTaskHandler.Identifier, newLongTaskHandler);
-
-                    newLongTaskHandler.AddTask(sharpEncryptTask);
+                    TaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
+                    
+                    taskHandlerForTask.AddTask(sharpEncryptTask);
                 }
             }
         }

@@ -9,6 +9,8 @@ namespace SharpEncrypt
 
         public bool OTPDisclaimerHide { get; set; } = false;
 
+        public bool ForceExitDisclaimerHide { get; set; } = false;
+
         public bool DebugEnabled { get; set; } = false;
 
         public bool IncludeSubfolders { get; set; } = false;

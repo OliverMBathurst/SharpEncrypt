@@ -79,6 +79,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Jobs Warning.
+        /// </summary>
+        internal static string ActiveJobsWarning {
+            get {
+                return ResourceManager.GetString("ActiveJobsWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active Tasks.
         /// </summary>
         internal static string ActiveTasks {
@@ -135,6 +144,15 @@ namespace SharpEncrypt.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
+        internal static string AdvancedMenuStrip {
+            get {
+                return ResourceManager.GetString("AdvancedMenuStrip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
         internal static string AdvancedToolStripMenuItem {
             get {
                 return ResourceManager.GetString("AdvancedToolStripMenuItem", resourceCulture);
@@ -165,6 +183,15 @@ namespace SharpEncrypt.Resources {
         internal static string AnErrorHasOccurred {
             get {
                 return ResourceManager.GetString("AnErrorHasOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exception has occurred: {0}.
+        /// </summary>
+        internal static string AnExceptionHasOccurred {
+            get {
+                return ResourceManager.GetString("AnExceptionHasOccurred", resourceCulture);
             }
         }
         
@@ -210,6 +237,15 @@ namespace SharpEncrypt.Resources {
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel All Future Tasks.
+        /// </summary>
+        internal static string CancelAllFutureTasksToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("CancelAllFutureTasksToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -268,11 +304,29 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Value.
+        /// </summary>
+        internal static string CurrentValue {
+            get {
+                return ResourceManager.GetString("CurrentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Debug.
         /// </summary>
         internal static string Debug {
             get {
                 return ResourceManager.GetString("Debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debug Enabled.
+        /// </summary>
+        internal static string DebugEnabled {
+            get {
+                return ResourceManager.GetString("DebugEnabled", resourceCulture);
             }
         }
         
@@ -318,6 +372,15 @@ namespace SharpEncrypt.Resources {
         internal static string DecryptTemporarilyToolStripMenuItem {
             get {
                 return ResourceManager.GetString("DecryptTemporarilyToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Value.
+        /// </summary>
+        internal static string DefaultValue {
+            get {
+                return ResourceManager.GetString("DefaultValue", resourceCulture);
             }
         }
         
@@ -394,11 +457,29 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string ExitToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ExitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string ExitToolStripMenuItem1 {
+            get {
+                return ResourceManager.GetString("ExitToolStripMenuItem1", resourceCulture);
             }
         }
         
@@ -435,6 +516,24 @@ namespace SharpEncrypt.Resources {
         internal static string Folder {
             get {
                 return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force Exit Disclaimer Hide.
+        /// </summary>
+        internal static string ForceExitDisclaimerHide {
+            get {
+                return ResourceManager.GetString("ForceExitDisclaimerHide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force Exit.
+        /// </summary>
+        internal static string ForceExitToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ForceExitToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -538,6 +637,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Individual Settings Reset Dialog.
+        /// </summary>
+        internal static string IndividualSettingsResetDialog {
+            get {
+                return ResourceManager.GetString("IndividualSettingsResetDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Individual Settings Reset.
+        /// </summary>
+        internal static string IndividualSettingsResetToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("IndividualSettingsResetToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid key, please generate a new key-pair..
         /// </summary>
         internal static string InvalidKey {
@@ -565,11 +682,29 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language Code.
+        /// </summary>
+        internal static string LanguageCode {
+            get {
+                return ResourceManager.GetString("LanguageCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to log.txt.
         /// </summary>
         internal static string LogFileName {
             get {
                 return ResourceManager.GetString("LogFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging.
+        /// </summary>
+        internal static string Logging {
+            get {
+                return ResourceManager.GetString("Logging", resourceCulture);
             }
         }
         
@@ -709,6 +844,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to One Time Pad Disclaimer Hide.
+        /// </summary>
+        internal static string OTPDisclaimerHide {
+            get {
+                return ResourceManager.GetString("OTPDisclaimerHide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string Password {
@@ -741,6 +885,15 @@ namespace SharpEncrypt.Resources {
         internal static string PasswordRestrictedChars {
             get {
                 return ResourceManager.GetString("PasswordRestrictedChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property.
+        /// </summary>
+        internal static string Property {
+            get {
+                return ResourceManager.GetString("Property", resourceCulture);
             }
         }
         
@@ -817,11 +970,38 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset All.
+        /// </summary>
+        internal static string ResetAll {
+            get {
+                return ResourceManager.GetString("ResetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset all settings.
         /// </summary>
         internal static string ResetAllSettingsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ResetAllSettingsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        internal static string Result {
+            get {
+                return ResourceManager.GetString("Result", resourceCulture);
             }
         }
         
@@ -1033,6 +1213,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string ShowToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ShowToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop Securing.
         /// </summary>
         internal static string StopSecuringToolStripMenuItem {
@@ -1078,6 +1267,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are active tasks, to exit please use &apos;Force Exit&apos;. Active tasks can be viewed by selecting &apos;Active Tasks&apos; in the Debug menu..
+        /// </summary>
+        internal static string ThereAreActiveTasks {
+            get {
+                return ResourceManager.GetString("ThereAreActiveTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         internal static string Time {
@@ -1092,6 +1290,15 @@ namespace SharpEncrypt.Resources {
         internal static string TotalSize {
             get {
                 return ResourceManager.GetString("TotalSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use A Different Password For Each File.
+        /// </summary>
+        internal static string UseADifferentPasswordForEachFile {
+            get {
+                return ResourceManager.GetString("UseADifferentPasswordForEachFile", resourceCulture);
             }
         }
         
@@ -1173,6 +1380,15 @@ namespace SharpEncrypt.Resources {
         internal static string WipeFreeDiskSpaceToolStripMenuItem {
             get {
                 return ResourceManager.GetString("WipeFreeDiskSpaceToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wipe Free Space After Secure Delete.
+        /// </summary>
+        internal static string WipeFreeSpaceAfterSecureDelete {
+            get {
+                return ResourceManager.GetString("WipeFreeSpaceAfterSecureDelete", resourceCulture);
             }
         }
         
