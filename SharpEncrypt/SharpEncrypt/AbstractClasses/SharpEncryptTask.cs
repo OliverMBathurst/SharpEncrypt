@@ -12,7 +12,7 @@ namespace SharpEncrypt.AbstractClasses
 
         public virtual Guid Identifier { get; } = Guid.NewGuid();
 
-        public virtual bool IsLongRunning { get; set; } = false;
+        public virtual bool IsSpecial { get; set; } = true;
 
         public virtual TaskType TaskType { get; } = TaskType.Undefined;
 

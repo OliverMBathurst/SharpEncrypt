@@ -16,10 +16,10 @@ namespace SharpEncrypt.Forms
             InitializeComponent();
             TaskManager = taskManager ?? throw new ArgumentNullException(nameof(taskManager));
             LoadTasks();
-            TaskManager.GenericTaskCompleted += TaskManager_GenericTaskCompleted;
+            TaskManager.TaskCompleted += TaskCompleted;
         }
 
-        private void TaskManager_GenericTaskCompleted(SharpEncryptTask task)
+        private void TaskCompleted(SharpEncryptTask task)
         {
             foreach(DataGridViewRow row in ActiveJobsGridView.Rows)
             {
@@ -39,7 +39,7 @@ namespace SharpEncrypt.Forms
         {
             foreach(var task in TaskManager.Tasks)
             {
-                ActiveJobsGridView.Rows.Add(task.Identifier, task.TaskType, task.IsLongRunning);
+                ActiveJobsGridView.Rows.Add(task.Identifier, task.TaskType, task.IsSpecial);
             }
         }
     }

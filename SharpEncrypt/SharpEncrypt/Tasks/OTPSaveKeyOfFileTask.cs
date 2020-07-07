@@ -7,7 +7,7 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class OTPSaveKeyOfFileTask : SharpEncryptTask
     {
-        public override bool IsLongRunning => true;
+        public override bool IsSpecial => false;
 
         public override TaskType TaskType => TaskType.OTPSaveKeyOfFileTask;
 

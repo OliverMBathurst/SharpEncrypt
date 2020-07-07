@@ -253,7 +253,7 @@
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />
     <Compile Include="Tasks\SecureDeleteFileTask.cs" />
     <Compile Include="Tasks\SecureFolderTask.cs" />
-    <Compile Include="Tasks\WriteSecuredFileReferenceTask.cs" />
+    <Compile Include="Tasks\WriteSecuredFileListTask.cs" />
     <Compile Include="Tasks\WriteSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\WriteSettingsFileTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">

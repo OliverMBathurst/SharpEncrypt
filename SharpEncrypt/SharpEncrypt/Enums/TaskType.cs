@@ -4,7 +4,7 @@
     {
         WriteSettingsFileTask,
         ReadSettingsFileTask,
-        WriteSecuredFileReferenceTask,
+        WriteSecuredFileListTask,
         ReadSecuredFilesListTask,
         SecureFolderTask,
         ReadSecuredFoldersListTask,

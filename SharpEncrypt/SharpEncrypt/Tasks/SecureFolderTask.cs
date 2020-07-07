@@ -6,7 +6,7 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class SecureFolderTask : SharpEncryptTask
     {
-        public override bool IsLongRunning => true;
+        public override bool IsSpecial => false;
 
         public override TaskType TaskType => TaskType.SecureFolderTask;
 

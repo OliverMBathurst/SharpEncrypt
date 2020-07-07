@@ -15,17 +15,17 @@ namespace SharpEncrypt
         private readonly ConcurrentQueue<SharpEncryptTask> mTasks = new ConcurrentQueue<SharpEncryptTask>();
 
         #region Delegates and events
-        public delegate void BackgroundWorkerDisabledEvent(Guid guid);
-        public delegate void TaskDequeuedEvent(SharpEncryptTask task);
-        public delegate void TaskCompletedEvent(SharpEncryptTask task);
-        public delegate void ExceptionOccurredEvent(Exception exception);
-        public delegate void CurrentTasksCompletedEvent();
+        public delegate void BackgroundWorkerDisabledEventHandler(Guid guid);
+        public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
+        public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
+        public delegate void ExceptionOccurredEventHandler(Exception exception);
+        public delegate void CurrentTasksCompletedEventHandler();
 
-        public event TaskCompletedEvent TaskCompleted;
-        public event TaskDequeuedEvent TaskDequeued;
-        public event CurrentTasksCompletedEvent TasksCompleted;
-        public event BackgroundWorkerDisabledEvent BackgroundWorkerDisabled;
-        public event ExceptionOccurredEvent ExceptionOccurred;
+        public event TaskCompletedEventHandler TaskCompleted;
+        public event TaskDequeuedEventHandler TaskDequeued;
+        public event CurrentTasksCompletedEventHandler TasksCompleted;
+        public event BackgroundWorkerDisabledEventHandler BackgroundWorkerDisabled;
+        public event ExceptionOccurredEventHandler ExceptionOccurred;
         #endregion
 
         public BackgroundTaskHandler(bool disableAfterJob = true)

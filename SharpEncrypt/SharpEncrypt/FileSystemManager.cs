@@ -7,8 +7,8 @@ namespace SharpEncrypt
     {
         private readonly List<FileSystemWatcher> Watchers = new List<FileSystemWatcher>();
 
-        public delegate void FileDeletedEvent(string filePath);
-        public event FileDeletedEvent FileDeleted;
+        public delegate void FileDeletedEventHandler(string filePath);
+        public event FileDeletedEventHandler FileDeleted;
 
         public void AddFiles(IEnumerable<string> filePaths)
         {

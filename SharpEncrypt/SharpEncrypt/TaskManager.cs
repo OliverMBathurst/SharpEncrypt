@@ -9,30 +9,26 @@ namespace SharpEncrypt
 {
     public sealed class TaskManager : IDisposable
     {
-        private readonly BackgroundTaskHandler ShortTaskHandler = new BackgroundTaskHandler(false);
-        private readonly ConcurrentDictionary<Guid, BackgroundTaskHandler> TaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskHandler>();
+        private readonly BackgroundTaskHandler SpecialTaskHandler = new BackgroundTaskHandler(false);
+        private readonly ConcurrentDictionary<Guid, BackgroundTaskHandler> GenericTaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskHandler>();
 
         #region Delegates and events
-        public delegate void ShortTaskCompletedEvent(SharpEncryptTask task);
-        public delegate void LongTaskCompletedEvent(SharpEncryptTask task);
-        public delegate void GenericTaskCompletedEvent(SharpEncryptTask task);
-        public delegate void TaskDequeuedEvent(SharpEncryptTask task);
-        public delegate void ExceptionOccurredEvent(Exception exception);
-        public delegate void TaskManagerCompletedEvent();
+        public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
+        public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
+        public delegate void ExceptionOccurredEventHandler(Exception exception);
+        public delegate void TaskManagerCompletedEventHandler();
 
-        public event ShortTaskCompletedEvent ShortTaskCompleted;
-        public event LongTaskCompletedEvent LongTaskCompleted;
-        public event GenericTaskCompletedEvent GenericTaskCompleted;
-        public event TaskDequeuedEvent TaskDequeued;
-        public event TaskManagerCompletedEvent TaskManagerCompleted;
-        public event ExceptionOccurredEvent ExceptionOccurred;
+        public event TaskCompletedEventHandler TaskCompleted;
+        public event TaskDequeuedEventHandler TaskDequeued;
+        public event TaskManagerCompletedEventHandler TaskManagerCompleted;
+        public event ExceptionOccurredEventHandler ExceptionOccurred;
         #endregion
 
         public TaskManager()
         {
-            ShortTaskHandler.TaskCompleted += ShortTaskHandler_TaskCompletedEvent;
-            ShortTaskHandler.TaskDequeued += GenericTaskDequeued;
-            ShortTaskHandler.ExceptionOccurred += ExceptionHandler;
+            SpecialTaskHandler.TaskCompleted += OnTaskCompleted;
+            SpecialTaskHandler.TaskDequeued += OnTaskDequeued;
+            SpecialTaskHandler.ExceptionOccurred += OnException;
         }
 
         #region Properties
@@ -40,43 +36,35 @@ namespace SharpEncrypt
 
         public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
 
-        public bool HasCompletedJobs => ShortTaskHandler.HasCompletedJobs && TaskHandlers.All(x => x.Value.HasCompletedJobs);
+        public bool HasCompletedJobs => SpecialTaskHandler.HasCompletedJobs && GenericTaskHandlers.All(x => x.Value.HasCompletedJobs);
 
-        public int TaskCount => ShortTaskHandler.TaskCount + TaskHandlers.Count;
+        public int TaskCount => SpecialTaskHandler.TaskCount + GenericTaskHandlers.Count;
 
-        public IEnumerable<SharpEncryptTask> Tasks => ShortTaskHandler.Tasks.Concat(TaskHandlers.SelectMany(x => x.Value.Tasks));
+        public IEnumerable<SharpEncryptTask> Tasks => SpecialTaskHandler.Tasks.Concat(GenericTaskHandlers.SelectMany(x => x.Value.Tasks));
 
         #endregion
 
         #region Event methods
 
-        private void ExceptionHandler(Exception exception)
+        private void OnException(Exception exception)
         {
             ExceptionOccurred?.Invoke(exception);
         }
 
-        private void GenericTaskDequeued(SharpEncryptTask task)
+        private void OnTaskDequeued(SharpEncryptTask task)
         {
             TaskDequeued?.Invoke(task);
         }
 
-        private void ShortTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
+        private void OnTaskCompleted(SharpEncryptTask task)
         {
-            ShortTaskCompleted?.Invoke(task);
-            GenericTaskCompleted?.Invoke(task);
-            AfterTaskCompleted(task);
-        }
-
-        private void LongTaskHandler_TaskCompletedEvent(SharpEncryptTask task)
-        {
-            LongTaskCompleted?.Invoke(task);
-            GenericTaskCompleted?.Invoke(task);
+            TaskCompleted?.Invoke(task);
             AfterTaskCompleted(task);
         }
 
         private void OnBackgroundWorkerDisabled(Guid guid)
         {
-            TaskHandlers.TryRemove(guid, out _);
+            GenericTaskHandlers.TryRemove(guid, out _);
         }
 
         #endregion
@@ -87,30 +75,30 @@ namespace SharpEncrypt
         {
             if (Cancelled)
             {
-                ExceptionHandler(new TaskManagerDisabledException());
+                OnException(new TaskManagerDisabledException());
                 return;
             }
 
             if (sharpEncryptTask == null)
             {
-                ExceptionHandler(new ArgumentNullException(nameof(sharpEncryptTask)));
+                OnException(new ArgumentNullException(nameof(sharpEncryptTask)));
                 return;
             }
 
-            if (!sharpEncryptTask.IsLongRunning)
+            if (sharpEncryptTask.IsSpecial)
             {
-                ShortTaskHandler.AddTask(sharpEncryptTask);
+                SpecialTaskHandler.AddTask(sharpEncryptTask);
             }
             else
             {
                 using (var taskHandlerForTask = new BackgroundTaskHandler())
                 {
                     taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
-                    taskHandlerForTask.TaskCompleted += LongTaskHandler_TaskCompletedEvent;
-                    taskHandlerForTask.TaskDequeued += GenericTaskDequeued;
-                    taskHandlerForTask.ExceptionOccurred += ExceptionHandler;
+                    taskHandlerForTask.TaskCompleted += OnTaskCompleted;
+                    taskHandlerForTask.TaskDequeued += OnTaskDequeued;
+                    taskHandlerForTask.ExceptionOccurred += OnException;
 
-                    TaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
+                    GenericTaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
                     
                     taskHandlerForTask.AddTask(sharpEncryptTask);
                 }
@@ -119,15 +107,15 @@ namespace SharpEncrypt
 
         public void Dispose()
         {
-            ShortTaskHandler.Dispose();
-            foreach (var keyValuePair in TaskHandlers)
+            SpecialTaskHandler.Dispose();
+            foreach (var keyValuePair in GenericTaskHandlers)
                 keyValuePair.Value.Dispose();
         }
 
         private void AfterTaskCompleted(SharpEncryptTask task)
         {
             CompletedTasks.Add((task, DateTime.Now));
-            if(Cancelled && ShortTaskHandler.TaskCount == 0 && TaskHandlers.IsEmpty)
+            if(Cancelled && SpecialTaskHandler.TaskCount == 0 && GenericTaskHandlers.IsEmpty)
             {
                 TaskManagerCompleted?.Invoke();
             }

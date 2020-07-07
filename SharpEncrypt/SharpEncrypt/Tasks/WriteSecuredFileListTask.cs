@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class WriteSecuredFileReferenceTask : SharpEncryptTask
+    internal sealed class WriteSecuredFileListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.WriteSecuredFileReferenceTask;
+        public override TaskType TaskType => TaskType.WriteSecuredFileListTask;
 
-        public WriteSecuredFileReferenceTask(string path, IEnumerable<FileDataGridItemModel> models, bool add)
+        public WriteSecuredFileListTask(string path, IEnumerable<FileDataGridItemModel> models, bool add)
             : base(ResourceType.File, path)
         {
             InnerTask = new Task(() => 

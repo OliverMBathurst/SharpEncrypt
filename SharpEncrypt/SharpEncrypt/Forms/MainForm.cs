@@ -30,27 +30,27 @@ namespace SharpEncrypt.Forms
 
         #region Delegates and Events
 
-        private delegate void SettingsChangeEvent(string settingsPropertyName, object value);
-        private delegate void SettingsWriteEvent(SharpEncryptSettings settings);
-        private delegate void FileSecuredEvent(string filePath, string newFilePath);
-        private delegate void FolderSecuredEvent(string dirPath);
-        private delegate void SecuredFilesAddedEvent(IEnumerable<FileDataGridItemModel> model);
-        private delegate void ReadSecuredFileListEvent(IEnumerable<FileDataGridItemModel> models);
-        private delegate void ReadSecuredFolderListEvent(IEnumerable<string> folders);
-        private delegate void ExcludedResourceListReadEvent(IEnumerable<ExcludedResource> exclusions);
-        private delegate void SettingsFileReadEvent(SharpEncryptSettings settings);
-        private delegate void TaskExceptionOccurredEvent(Exception exception);
+        private delegate void SettingsChangeEventHandler(string settingsPropertyName, object value);
+        private delegate void SettingsWriteEventHandler(SharpEncryptSettings settings);
+        private delegate void FileSecuredEventHandler(string filePath, string newFilePath);
+        private delegate void FolderSecuredEventHandler(string dirPath);
+        private delegate void SecuredFilesAddedEventHandler(IEnumerable<FileDataGridItemModel> model);
+        private delegate void ReadSecuredFileListEventHandler(IEnumerable<FileDataGridItemModel> models);
+        private delegate void ReadSecuredFolderListEventHandler(IEnumerable<string> folders);
+        private delegate void ExcludedResourceListReadEventHandler(IEnumerable<ExcludedResource> exclusions);
+        private delegate void SettingsFileReadEventHandler(SharpEncryptSettings settings);
+        private delegate void TaskExceptionOccurredEventHandler(Exception exception);
 
-        private event SettingsWriteEvent OnSettingsWriteRequired;
-        private event SettingsChangeEvent OnSettingsChangeRequired;
-        private event FileSecuredEvent OnFileSecured;
-        private event FolderSecuredEvent OnFolderSecured;
-        private event SecuredFilesAddedEvent OnSecuredFileAdded;
-        private event ReadSecuredFileListEvent OnSecureFileListRead;
-        private event ReadSecuredFolderListEvent OnSecuredFolderListRead;
-        private event SettingsFileReadEvent OnSettingsFileRead;
-        private event TaskExceptionOccurredEvent OnTaskException;
-        private event ExcludedResourceListReadEvent OnExcludedResourcesListRead;
+        private event SettingsWriteEventHandler SettingsWriteRequired;
+        private event SettingsChangeEventHandler SettingsChangeRequired;
+        private event FileSecuredEventHandler FileSecured;
+        private event FolderSecuredEventHandler FolderSecured;
+        private event SecuredFilesAddedEventHandler SecuredFileAdded;
+        private event ReadSecuredFileListEventHandler SecureFileListRead;
+        private event ReadSecuredFolderListEventHandler SecuredFolderListRead;
+        private event SettingsFileReadEventHandler SettingsFileRead;
+        private event TaskExceptionOccurredEventHandler TaskException;
+        private event ExcludedResourceListReadEventHandler ExcludedResourcesListRead;
         #endregion
 
         private string Password { get; set; }
@@ -66,20 +66,20 @@ namespace SharpEncrypt.Forms
         public MainForm() 
         {
             InitializeComponent();
-            OnSettingsWriteRequired += SettingsWriterHandler;
-            OnSettingsChangeRequired += SettingsChangeHandler;
+            SettingsWriteRequired += SettingsWriterHandler;
+            SettingsChangeRequired += SettingsChangeHandler;
 
             FormClosing += FormClosingHandler;
             Resize += FormResize;
             NotifyIcon.DoubleClick += NotifyIcon_DoubleClick;
 
-            OnFileSecured += FileSecured;
-            OnFolderSecured += FolderSecured;
-            OnSecuredFileAdded += SecureFilesAdded;
-            OnSecureFileListRead += SecureFileListRead;
-            OnSecuredFolderListRead += SecuredFolderListRead;
-            OnSettingsFileRead += SettingsFileRead;
-            OnTaskException += ExceptionHandler;
+            FileSecured += OnFileSecured;
+            FolderSecured += OnFolderSecured;
+            SecuredFileAdded += SecureFilesAdded;
+            SecureFileListRead += OnSecureFileListRead;
+            SecuredFolderListRead += OnSecuredFolderListRead;
+            SettingsFileRead += OnSettingsFileRead;
+            TaskException += ExceptionHandler;
 
             RecentFilesGrid.DragDrop += RecentFilesGrid_DragDrop;
             RecentFilesGrid.DragEnter += RecentFilesGrid_DragEnter;
@@ -87,11 +87,10 @@ namespace SharpEncrypt.Forms
             SecuredFoldersGrid.DragDrop += SecuredFoldersGrid_DragDrop;
             SecuredFoldersGrid.DragEnter += SecuredFoldersGrid_DragEnter;
 
-            TaskManager.ShortTaskCompleted += OnShortTaskCompletedEvent;
-            TaskManager.LongTaskCompleted += OnLongTaskCompletedEvent;
+            TaskManager.TaskCompleted += TaskCompleted;
             TaskManager.ExceptionOccurred += ExceptionHandler;
 
-            OnExcludedResourcesListRead += ExcludedResourcesListRead;
+            ExcludedResourcesListRead += OnExcludedResourcesListRead;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -135,7 +134,7 @@ namespace SharpEncrypt.Forms
                     var fileToSecure = dialog.FileName;
                     //secure file
                     //add it to datagridview
-                    OnFileSecured?.Invoke(fileToSecure, fileToSecure);
+                    FileSecured?.Invoke(fileToSecure, fileToSecure);
                 }
             }
         }
@@ -172,7 +171,7 @@ namespace SharpEncrypt.Forms
 
             if (!File.Exists(settingsFilePath))
             {
-                OnSettingsWriteRequired?.Invoke(Settings);
+                SettingsWriteRequired?.Invoke(Settings);
             }
             else
             {
@@ -264,7 +263,7 @@ namespace SharpEncrypt.Forms
                 RecentFilesGrid.Refresh();
             }));
 
-            TaskManager.AddTask(new WriteResourceExclusionListTask(PathHelper.ExclusionFile, ResourceType.File, true, removals.ToArray()));
+            TaskManager.AddTask(new WriteResourceExclusionListTask(PathHelper.ExclusionFile, true, removals.Select(x => new ExcludedResource { ResourceType = ResourceType.File, URI = x })));
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -328,7 +327,7 @@ namespace SharpEncrypt.Forms
                 SecuredFoldersGrid.Refresh();
             }));
 
-            TaskManager.AddTask(new WriteResourceExclusionListTask(PathHelper.ExclusionFile, ResourceType.Folder, true, directoryURIs.ToArray()));
+            TaskManager.AddTask(new WriteResourceExclusionListTask(PathHelper.ExclusionFile, true, directoryURIs.Select(x => new ExcludedResource { ResourceType = ResourceType.Folder, URI = x })));
         }
 
         private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
@@ -420,7 +419,7 @@ namespace SharpEncrypt.Forms
                     if (showOnceDialog.ShowDialog() != DialogResult.OK)
                     {
                         if (showOnceDialog.IsChecked)
-                            OnSettingsChangeRequired?.Invoke("OTPDisclaimerHide", true);
+                            SettingsChangeRequired?.Invoke("OTPDisclaimerHide", true);
                         return;
                     }
                 }
@@ -487,7 +486,7 @@ namespace SharpEncrypt.Forms
             {
                 var newSettingsObj = new SharpEncryptSettings();
                 var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
-                OnSettingsWriteRequired?.Invoke(newSettingsObj);
+                SettingsWriteRequired?.Invoke(newSettingsObj);
 
                 Settings = newSettingsObj;
 
@@ -644,7 +643,7 @@ namespace SharpEncrypt.Forms
 
         private void LoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnSettingsChangeRequired?.Invoke("Logging", ToggleChecked(LoggingToolStripMenuItem));
+            SettingsChangeRequired?.Invoke("Logging", ToggleChecked(LoggingToolStripMenuItem));
         }
 
         private void CancelAllFutureTasksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -657,17 +656,17 @@ namespace SharpEncrypt.Forms
         private void DebugToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleEnablement(DebugMenuStrip);
-            OnSettingsChangeRequired?.Invoke("DebugEnabled", ToggleChecked(Debug));
+            SettingsChangeRequired?.Invoke("DebugEnabled", ToggleChecked(Debug));
         }
 
         private void UseADifferentPasswordForEachFileToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnSettingsChangeRequired?.Invoke("UseADifferentPasswordForEachFile", ToggleChecked(UseADifferentPasswordForEachFile));
+            => SettingsChangeRequired?.Invoke("UseADifferentPasswordForEachFile", ToggleChecked(UseADifferentPasswordForEachFile));
 
         private void IncludeToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnSettingsChangeRequired?.Invoke("IncludeSubfolders", ToggleChecked(IncludeSubfolders));
+            => SettingsChangeRequired?.Invoke("IncludeSubfolders", ToggleChecked(IncludeSubfolders));
 
         private void WipeDiskSpaceAfterSecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnSettingsChangeRequired?.Invoke("WipeFreeSpaceAfterSecureDelete", ToggleChecked(WipeDiskSpaceAfterSecureDeleteToolStripMenuItem));
+            => SettingsChangeRequired?.Invoke("WipeFreeSpaceAfterSecureDelete", ToggleChecked(WipeDiskSpaceAfterSecureDeleteToolStripMenuItem));
 
         private static bool ToggleChecked(ToolStripMenuItem item)
         {
@@ -693,7 +692,7 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
-        private void ExcludedResourcesListRead(IEnumerable<ExcludedResource> exclusions)
+        private void OnExcludedResourcesListRead(IEnumerable<ExcludedResource> exclusions)
         {
             var removed = exclusions.Where(x => x.ResourceType == ResourceType.File ? !File.Exists(x.URI) : !Directory.Exists(x.URI));
             ExcludedResources.AddRange(exclusions.Where(x => !removed.Any(z => z.URI.Equals(x.URI, StringComparison.InvariantCulture))));
@@ -739,47 +738,33 @@ namespace SharpEncrypt.Forms
             SecureFiles(ExtractPaths(e));
         }
 
-        private void OnShortTaskCompletedEvent(SharpEncryptTask task)
+        private void TaskCompleted(SharpEncryptTask task)
         {
-            if(task.Result.Exception != null)
+            if (task.Result.Exception != null)
             {
-                OnTaskException?.Invoke(task.Result.Exception);
+                TaskException?.Invoke(task.Result.Exception);
             }
             else
             {
                 switch (task.TaskType)
                 {
                     case TaskType.ReadSecuredFilesListTask when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
-                        OnSecureFileListRead?.Invoke(models);
+                        SecureFileListRead?.Invoke(models);
                         break;
                     case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<string> folders:
-                        OnSecuredFolderListRead?.Invoke(folders);
+                        SecuredFolderListRead?.Invoke(folders);
                         break;
                     case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettings settings:
-                        OnSettingsFileRead?.Invoke(settings);
+                        SettingsFileRead?.Invoke(settings);
                         break;
                     case TaskType.WriteSecuredFoldersListTask when task.Result.Value is IEnumerable<string> addedDirs:
                         AddFoldersToSecuredFoldersDataGrid(addedDirs.ToArray());
                         break;
                     case TaskType.ReadResourceExclusionListTask when task.Result.Value is IEnumerable<ExcludedResource> exclusions:
-                        OnExcludedResourcesListRead?.Invoke(exclusions);
+                        ExcludedResourcesListRead?.Invoke(exclusions);
                         break;
-                }
-            }
-        }
-
-        private void OnLongTaskCompletedEvent(SharpEncryptTask task)
-        {
-            if (task.Result.Exception != null)
-            {
-                OnTaskException?.Invoke(task.Result.Exception);
-            }
-            else
-            {
-                switch (task.TaskType)
-                {
                     case TaskType.SecureFolderTask when task.Result.Value is string folderPath:
-                        OnFolderSecured?.Invoke(folderPath);
+                        FolderSecured?.Invoke(folderPath);
                         break;
                 }
             }
@@ -801,14 +786,14 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void SettingsFileRead(SharpEncryptSettings settings)
+        private void OnSettingsFileRead(SharpEncryptSettings settings)
         {
             Settings = settings;
             if (Settings.LanguageCode != Constants.DefaultLanguage)
                 ChangeLanguage(Settings.LanguageCode);
         }
 
-        private void SecuredFolderListRead(IEnumerable<string> folders)
+        private void OnSecuredFolderListRead(IEnumerable<string> folders)
         {
             var existingFolders = folders.Where(x => Directory.Exists(x)).ToArray();
             FileSystemManager.AddFolders(existingFolders);
@@ -821,7 +806,7 @@ namespace SharpEncrypt.Forms
                 TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, false, removedFolders));
         }
 
-        private void SecureFileListRead(IEnumerable<FileDataGridItemModel> models)
+        private void OnSecureFileListRead(IEnumerable<FileDataGridItemModel> models)
         {
             var existing = models.Where(x => File.Exists(x.Secured)).ToList();
             FileSystemManager.AddFiles(existing.Select(x => x.Secured));
@@ -830,20 +815,20 @@ namespace SharpEncrypt.Forms
 
             var removedFiles = models.Where(x => !File.Exists(x.Secured)).ToList();
             if (removedFiles.Any())
-                TaskManager.AddTask(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, removedFiles, false));
+                TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, removedFiles, false));
         }
 
         private void SecureFilesAdded(IEnumerable<FileDataGridItemModel> models)
         {
-            TaskManager.AddTask(new WriteSecuredFileReferenceTask(PathHelper.SecuredFilesListFile, models, true));
+            TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, models, true));
         }
 
-        private void FolderSecured(string folderPath)
+        private void OnFolderSecured(string folderPath)
         {
             TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, true, folderPath));
         }
 
-        private void FileSecured(string filePath, string newFilePath)
+        private void OnFileSecured(string filePath, string newFilePath)
         {
             var listOfModel = new []
             {
@@ -857,7 +842,7 @@ namespace SharpEncrypt.Forms
             };           
 
             AddFilesToRecentFilesDataGrid(listOfModel);
-            OnSecuredFileAdded?.Invoke(listOfModel);
+            SecuredFileAdded?.Invoke(listOfModel);
         }
 
         private void SettingsChangeHandler(string settingsPropertyName, object value)
@@ -876,7 +861,7 @@ namespace SharpEncrypt.Forms
                 else
                 {
                     prop.SetValue(Settings, value);
-                    OnSettingsWriteRequired?.Invoke(Settings);
+                    SettingsWriteRequired?.Invoke(Settings);
                 }
             }
         }
@@ -1073,7 +1058,7 @@ namespace SharpEncrypt.Forms
                     if(showOnceDialog.ShowDialog() == DialogResult.OK)
                     {
                         if (showOnceDialog.IsChecked)
-                            OnSettingsChangeRequired?.Invoke("ForceExitDisclaimerHide", true);
+                            SettingsChangeRequired?.Invoke("ForceExitDisclaimerHide", true);
                         CloseApplication();
                     }
                 }

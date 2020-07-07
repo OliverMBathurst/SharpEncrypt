@@ -13,7 +13,7 @@ namespace SharpEncrypt.Tasks
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
 
-        public override bool IsLongRunning => true;
+        public override bool IsSpecial => false;
 
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
     

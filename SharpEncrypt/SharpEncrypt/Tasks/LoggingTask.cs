@@ -7,6 +7,8 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class LoggingTask : SharpEncryptTask
     {
+        public override bool IsSpecial => false;
+
         public override TaskType TaskType => TaskType.LoggingTask;
 
         public LoggingTask(string logFilePath, string logMessage)
