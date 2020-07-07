@@ -13,10 +13,16 @@ namespace SharpEncrypt.Tasks
         public ReadSettingsFileTask(string path) : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
-            {                                
-                using (var fs = File.Open(path, FileMode.Open))
+            {
+                if (File.Exists(path))
                 {
-                    Result.Value = new BinaryFormatter().Deserialize(fs);
+                    using (var fs = new FileStream(path, FileMode.Open))
+                    {
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is SharpEncryptSettings settings)
+                        {
+                            Result.Value = settings;
+                        }
+                    }
                 }
             });
         }

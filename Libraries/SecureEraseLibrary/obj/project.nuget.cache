@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AAlemXwNREQxbkA2OFYGvcTz3pbxagaORibgLTEIQgB3Q85JDZUq38cvwuXLAfPeN+rODHP9UbAgX9tzZRjD8w==",
+  "dgSpecHash": "lKul6FAuoSG25jttLA/7nbTKoY+P5MdSDz2x8Ee8haPulj0p3uYcF2HfqegPHjR/dbo24CnmcwHCh4Gyxg9eLg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",

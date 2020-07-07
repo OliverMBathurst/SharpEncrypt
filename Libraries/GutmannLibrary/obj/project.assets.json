@@ -615,11 +615,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\GutmannLibrary\\GutmannLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\GutmannLibrary\\GutmannLibrary.csproj",
       "projectName": "GutmannLibrary",
-      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\GutmannLibrary\\GutmannLibrary.csproj",
+      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\GutmannLibrary\\GutmannLibrary.csproj",
       "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\GutmannLibrary\\obj\\",
+      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\GutmannLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

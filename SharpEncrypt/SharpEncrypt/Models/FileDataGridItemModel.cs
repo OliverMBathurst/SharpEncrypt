@@ -4,7 +4,7 @@ using System;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class FileDataGridItemModel
+    internal sealed class FileDataGridItemModel : IEquatable<FileDataGridItemModel>
     {
         public string File { get; set; }
 
@@ -13,5 +13,20 @@ namespace SharpEncrypt.Models
         public string Secured { get; set; }
 
         public CipherType Algorithm { get; set; }
+
+        public bool Equals(FileDataGridItemModel other)
+        {
+            return File == other.File
+                && Time.Ticks == other.Time.Ticks
+                && Secured == other.Secured
+                && Algorithm == other.Algorithm;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is FileDataGridItemModel model && Equals(model);
+        }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

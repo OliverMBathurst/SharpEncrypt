@@ -61,52 +61,6 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
-      },
-      "AESLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "FileIOLibrary": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/AESLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/AESLibrary.dll": {}
-        }
-      },
-      "FileGeneratorLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/FileGeneratorLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FileGeneratorLibrary.dll": {}
-        }
-      },
-      "FileIOLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/FileIOLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FileIOLibrary.dll": {}
-        }
-      },
-      "OTPLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "FileIOLibrary": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/OTPLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/OTPLibrary.dll": {}
-        }
       }
     }
   },
@@ -646,35 +600,12 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
-    },
-    "AESLibrary/1.0.0": {
-      "type": "project",
-      "path": "../AESLibrary/AESLibrary.csproj",
-      "msbuildProject": "../AESLibrary/AESLibrary.csproj"
-    },
-    "FileGeneratorLibrary/1.0.0": {
-      "type": "project",
-      "path": "../FileGeneratorLibrary/FileGeneratorLibrary.csproj",
-      "msbuildProject": "../FileGeneratorLibrary/FileGeneratorLibrary.csproj"
-    },
-    "FileIOLibrary/1.0.0": {
-      "type": "project",
-      "path": "../FileIOLibrary/FileIOLibrary.csproj",
-      "msbuildProject": "../FileIOLibrary/FileIOLibrary.csproj"
-    },
-    "OTPLibrary/1.0.0": {
-      "type": "project",
-      "path": "../OTPLibrary/OTPLibrary.csproj",
-      "msbuildProject": "../OTPLibrary/OTPLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "AESLibrary >= 1.0.0",
-      "FileGeneratorLibrary >= 1.0.0",
       "Microsoft.CodeAnalysis.FxCopAnalyzers >= 3.0.0",
-      "NETStandard.Library >= 2.0.3",
-      "OTPLibrary >= 1.0.0"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
@@ -684,11 +615,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
       "projectName": "SecureEraseLibrary",
-      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
+      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\SecureEraseLibrary\\SecureEraseLibrary.csproj",
       "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SecureEraseLibrary\\obj\\",
+      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\SecureEraseLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -706,17 +637,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj": {
-              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\AESLibrary\\AESLibrary.csproj"
-            },
-            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj": {
-              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj"
-            },
-            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj": {
-              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

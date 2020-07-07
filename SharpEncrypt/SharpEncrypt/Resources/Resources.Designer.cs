@@ -997,6 +997,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclusions.BIN.
+        /// </summary>
+        internal static string ResourceExclusionListFile {
+            get {
+                return ResourceManager.GetString("ResourceExclusionListFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result.
         /// </summary>
         internal static string Result {

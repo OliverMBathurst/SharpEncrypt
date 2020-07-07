@@ -131,6 +131,7 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileSystemWatcher = new System.IO.FileSystemWatcher();
             this.Tabs.SuspendLayout();
             this.recentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFilesGrid)).BeginInit();
@@ -141,6 +142,7 @@ namespace SharpEncrypt.Forms
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.NotifyIconContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FileSystemWatcher)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabs
@@ -997,6 +999,12 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
+            // FileSystemWatcher
+            // 
+            this.FileSystemWatcher.EnableRaisingEvents = true;
+            this.FileSystemWatcher.IncludeSubdirectories = true;
+            this.FileSystemWatcher.SynchronizingObject = this;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1030,6 +1038,7 @@ namespace SharpEncrypt.Forms
             this.MenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.NotifyIconContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FileSystemWatcher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1135,6 +1144,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ContextMenuStrip NotifyIconContextMenu;
         private System.Windows.Forms.ToolStripMenuItem ShowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem1;
+        private System.IO.FileSystemWatcher FileSystemWatcher;
     }
 }
 

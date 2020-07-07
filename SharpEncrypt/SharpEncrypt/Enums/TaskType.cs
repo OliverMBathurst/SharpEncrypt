@@ -5,12 +5,16 @@
         WriteSettingsFileTask,
         ReadSettingsFileTask,
         WriteSecuredFileReferenceTask,
-        ReadSecuredFileListTask,
+        ReadSecuredFilesListTask,
         SecureFolderTask,
         ReadSecuredFoldersListTask,
         WriteSecuredFoldersListTask,
         OneTimePadTransformTask,
         LoggingTask,
-        OTPSaveKeyOfFileTask
+        OTPSaveKeyOfFileTask,
+        SecureDeleteFileTask,
+        WriteResourceExclusionListTask,
+        ReadResourceExclusionListTask,
+        Undefined
     }
 }

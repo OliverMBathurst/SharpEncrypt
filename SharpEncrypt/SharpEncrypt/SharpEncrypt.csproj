@@ -94,6 +94,8 @@
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
+    <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
+    <Compile Include="FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,8 +153,10 @@
     </Compile>
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
+    <Compile Include="Models\ExcludedResource.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="TaskManager.cs" />
+    <Compile Include="Tasks\WriteResourceExclusionListTask.cs" />
     <Compile Include="Tasks\LoggingTask.cs" />
     <Compile Include="Tasks\OneTimePadTransformTask.cs" />
     <Compile Include="Models\SharpEncryptTaskResult.cs" />
@@ -243,9 +247,11 @@
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Tasks\OTPSaveKeyOfFileTask.cs" />
+    <Compile Include="Tasks\ReadResourceExclusionListTask.cs" />
     <Compile Include="Tasks\ReadSecuredFilesListTask.cs" />
     <Compile Include="Tasks\ReadSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />
+    <Compile Include="Tasks\SecureDeleteFileTask.cs" />
     <Compile Include="Tasks\SecureFolderTask.cs" />
     <Compile Include="Tasks\WriteSecuredFileReferenceTask.cs" />
     <Compile Include="Tasks\WriteSecuredFoldersListTask.cs" />

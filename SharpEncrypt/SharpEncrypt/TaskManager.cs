@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using SharpEncrypt.Exceptions;
 
 namespace SharpEncrypt
 {
@@ -85,10 +86,16 @@ namespace SharpEncrypt
         public void AddTask(SharpEncryptTask sharpEncryptTask)
         {
             if (Cancelled)
+            {
+                ExceptionHandler(new TaskManagerDisabledException());
                 return;
+            }
 
             if (sharpEncryptTask == null)
-                throw new ArgumentNullException(nameof(sharpEncryptTask));
+            {
+                ExceptionHandler(new ArgumentNullException(nameof(sharpEncryptTask)));
+                return;
+            }
 
             if (!sharpEncryptTask.IsLongRunning)
             {

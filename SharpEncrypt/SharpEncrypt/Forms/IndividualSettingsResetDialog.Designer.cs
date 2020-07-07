@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Resources.Resources));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IndividualSettingsResetDialog));
             this.Cancel = new System.Windows.Forms.Button();
             this.OK = new System.Windows.Forms.Button();
             this.PropertyValuesGrid = new System.Windows.Forms.DataGridView();
@@ -143,6 +143,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IndividualSettingsResetDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Individual Settings Reset Dialog";
             this.Load += new System.EventHandler(this.IndividualSettingsResetDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PropertyValuesGrid)).EndInit();

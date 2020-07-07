@@ -12,9 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AESLibrary\AESLibrary.csproj" />
-    <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj" />
-    <ProjectReference Include="..\OTPLibrary\OTPLibrary.csproj" />
+    <Reference Include="AESLibrary">
+      <HintPath>..\AESLibrary\bin\Release\netstandard2.0\AESLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FileGeneratorLibrary">
+      <HintPath>..\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OTPLibrary">
+      <HintPath>..\OTPLibrary\bin\Release\netstandard2.0\OTPLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

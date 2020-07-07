@@ -1,6 +1,7 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,59 +14,49 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFileReferenceTask;
 
-        public WriteSecuredFileReferenceTask(string path, IEnumerable<FileDataGridItemModel> models, bool add = true)
+        public WriteSecuredFileReferenceTask(string path, IEnumerable<FileDataGridItemModel> models, bool add)
             : base(ResourceType.File, path)
         {
             InnerTask = new Task(() => 
             {
-                var listOfModels = GetModels(path);
-
-                foreach (var model in models)
+                var created = false;
+                if (!File.Exists(path))
                 {
-                    if (add)
-                        listOfModels.Add(model);
-                    else
-                        listOfModels.RemoveAll(x => x.Secured == model.Secured);
+                    using (var _ = File.Create(path)) { }
+                    created = true;
+                    if (!add)
+                        return;
                 }
 
-                WriteModelsToFile(path, listOfModels);
-            });
-        }
-
-        public WriteSecuredFileReferenceTask(string path, IEnumerable<string> securedFilePaths)
-            : base(ResourceType.File, path)
-        {
-            InnerTask = new Task(() => 
-            {
-                var listOfModels = GetModels(path)
-                    .Where(x => !securedFilePaths.Any(z => z == x.Secured))
-                    .ToList();
-
-                WriteModelsToFile(path, listOfModels);
-            });
-        }
-
-        private static List<FileDataGridItemModel> GetModels(string path)
-        {
-            if (File.Exists(path))
-            {
-                using (var fs = new FileStream(path, FileMode.Open))
+                var listOfModels = new List<FileDataGridItemModel>();
+                if (!created)
                 {
-                    if (new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                    using (var fs = new FileStream(path, FileMode.Open))
                     {
-                        return list;
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                        {
+                            listOfModels = list;
+                        }
                     }
                 }
-            }
-            return new List<FileDataGridItemModel>();
-        }
 
-        private static void WriteModelsToFile(string path, List<FileDataGridItemModel> models)
-        {
-            using (var f = new FileStream(path, FileMode.Create))
-            {
-                new BinaryFormatter().Serialize(f, models);
-            }
+                if (add)
+                {
+                    listOfModels.AddRange(models);
+                }
+                else
+                {
+                    if (listOfModels.Any())
+                    {
+                        listOfModels.RemoveAll(x => models.Any(z => z.Secured.Equals(x.Secured, StringComparison.InvariantCulture)));
+                    }
+                }
+                
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    new BinaryFormatter().Serialize(fs, listOfModels.Distinct().ToList());
+                }
+            });
         }
     }
 }

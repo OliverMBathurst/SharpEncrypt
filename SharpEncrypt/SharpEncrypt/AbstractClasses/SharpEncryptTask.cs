@@ -14,7 +14,7 @@ namespace SharpEncrypt.AbstractClasses
 
         public virtual bool IsLongRunning { get; set; } = false;
 
-        public virtual TaskType TaskType { get; }
+        public virtual TaskType TaskType { get; } = TaskType.Undefined;
 
         public virtual Task InnerTask { get; set; }
 

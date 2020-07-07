@@ -7,18 +7,13 @@ namespace SharpEncrypt.Forms
     internal partial class ShowOnceDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-        private readonly string SettingsName;
-        private readonly Delegate SettingChangedDelegate;
 
-        public ShowOnceDialog(
-            string text, 
-            string settingsName, 
-            Delegate settingChangeDelegate)
+        public bool IsChecked { get; private set; }
+
+        public ShowOnceDialog(string text)
         {
             InitializeComponent();
             DialogTextBox.Text = text;
-            SettingsName = settingsName;
-            SettingChangedDelegate = settingChangeDelegate;
         }
 
         private void ShowOnceDialog_Load(object sender, EventArgs e)
@@ -37,9 +32,7 @@ namespace SharpEncrypt.Forms
 
         private void OK_Click(object sender, EventArgs e)
         {
-            if (NeverShowAgain.Checked)
-                SettingChangedDelegate.DynamicInvoke(SettingsName, true);
-
+            IsChecked = NeverShowAgain.Checked;
             DialogResult = DialogResult.OK;
             Close();
         }

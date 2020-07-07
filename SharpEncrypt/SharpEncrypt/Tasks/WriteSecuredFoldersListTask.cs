@@ -1,7 +1,9 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
@@ -16,30 +18,47 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() =>
             {
+                var created = false;
+                if (!File.Exists(filePath))
+                {
+                    using (var _ = File.Create(filePath)) { }
+                    created = true;
+                    if (!add)
+                        return;
+                }
+
                 var dirs = new List<string>();
-                if (File.Exists(filePath))
+                if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (new BinaryFormatter().Deserialize(fs) is List<string> folders)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<string> folders)
                         {
                             dirs = folders;
                         }
                     }
                 }
 
-                foreach (var dir in directories)
+                if (add)
                 {
-                    if (add)
-                        dirs.Add(dir);
-                    else
-                        dirs.Remove(dir);
+                    dirs.AddRange(directories);
+                }
+                else
+                {
+                    if (dirs.Any())
+                    {
+                        dirs.RemoveAll(x => directories.Any(z => z.Equals(x, StringComparison.InvariantCulture)));
+                    }
+                }
+                
+
+                using (var fs = new FileStream(filePath, FileMode.Open))
+                {
+                    new BinaryFormatter().Serialize(fs, dirs.Distinct().ToList());
                 }
 
-                using (var fs = new FileStream(filePath, FileMode.Create))
-                {
-                    new BinaryFormatter().Serialize(fs, dirs);
-                }
+                if (add)
+                    Result.Value = dirs;
             });
         }
     }

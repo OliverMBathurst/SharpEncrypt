@@ -430,6 +430,9 @@
   <data name="ResetAllSettingsToolStripMenuItem" xml:space="preserve">
     <value>Reset all settings</value>
   </data>
+  <data name="ResourceExclusionListFile" xml:space="preserve">
+    <value>Exclusions.BIN</value>
+  </data>
   <data name="Result" xml:space="preserve">
     <value>Result</value>
   </data>

@@ -229,18 +229,18 @@ namespace SecureEraseLibrary
             if (!File.Exists(path))
                 throw new FileNotFoundException(path);
 
-            var currentPath = path;
             var dir = Path.GetDirectoryName(path);
             for (var i = 0; i < passes; i++)
             {
                 var rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
-                while (File.Exists(Path.Combine(dir, rand)))
+                string currentPath;
+                while (File.Exists(currentPath = Path.Combine(dir, rand)))
                     rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
 
-                File.Move(currentPath, rand);
-                currentPath = Path.Combine(dir, rand);
+                File.Move(path, currentPath);
+                path = currentPath;
             }
-            return currentPath;
+            return path;
         }
 
         /// <summary>

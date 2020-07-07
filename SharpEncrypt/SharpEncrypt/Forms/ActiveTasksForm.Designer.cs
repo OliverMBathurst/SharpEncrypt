@@ -85,6 +85,7 @@
             this.Controls.Add(this.ActiveJobsGridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActiveTasksForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ActiveTasksForm";
             this.Load += new System.EventHandler(this.ActiveTasksForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ActiveJobsGridView)).EndInit();

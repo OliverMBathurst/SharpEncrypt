@@ -20,7 +20,7 @@ namespace SharpEncrypt.Tasks
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if(new BinaryFormatter().Deserialize(fs) is List<string> paths)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<string> paths)
                         {
                             filesList = paths;
                         }

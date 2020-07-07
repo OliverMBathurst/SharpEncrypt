@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GOkUZZTRPFtd++E0UhJhHG7IgCTRkGtMdAn5Y+rzSZUXUXPPwUhKR2i2+UbV9q6Nn4kMfjkFmZLly6ymB33lNg==",
+  "dgSpecHash": "jbDePgVQUtofUfJk8fPWb/I9IawbsPg3uYmjBFHRlWVII7J1FIPAdp8i7dMECE3Xtg214pUtbD9HmCpzet+UOw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\GutmannLibrary\\GutmannLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\GutmannLibrary\\GutmannLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",

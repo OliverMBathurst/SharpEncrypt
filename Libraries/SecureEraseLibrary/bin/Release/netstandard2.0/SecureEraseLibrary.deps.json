@@ -9,11 +9,11 @@
     ".NETStandard,Version=v2.0/": {
       "SecureEraseLibrary/1.0.0": {
         "dependencies": {
-          "AESLibrary": "1.0.0",
-          "FileGeneratorLibrary": "1.0.0",
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "3.0.0",
           "NETStandard.Library": "2.0.3",
-          "OTPLibrary": "1.0.0"
+          "AESLibrary": "1.0.0.0",
+          "FileGeneratorLibrary": "1.0.0.0",
+          "OTPLibrary": "1.0.0.0"
         },
         "runtime": {
           "SecureEraseLibrary.dll": {}
@@ -37,30 +37,36 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
-      "AESLibrary/1.0.0": {
-        "dependencies": {
-          "FileIOLibrary": "1.0.0"
-        },
+      "AESLibrary/1.0.0.0": {
         "runtime": {
-          "AESLibrary.dll": {}
+          "AESLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
-      "FileGeneratorLibrary/1.0.0": {
+      "FileGeneratorLibrary/1.0.0.0": {
         "runtime": {
-          "FileGeneratorLibrary.dll": {}
+          "FileGeneratorLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
-      "FileIOLibrary/1.0.0": {
+      "OTPLibrary/1.0.0.0": {
         "runtime": {
-          "FileIOLibrary.dll": {}
+          "OTPLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
-      "OTPLibrary/1.0.0": {
-        "dependencies": {
-          "FileIOLibrary": "1.0.0"
-        },
+      "FileIOLibrary/1.0.0.0": {
         "runtime": {
-          "OTPLibrary.dll": {}
+          "FileIOLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -120,23 +126,23 @@
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
-    "AESLibrary/1.0.0": {
-      "type": "project",
+    "AESLibrary/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "FileGeneratorLibrary/1.0.0": {
-      "type": "project",
+    "FileGeneratorLibrary/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "FileIOLibrary/1.0.0": {
-      "type": "project",
+    "OTPLibrary/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "OTPLibrary/1.0.0": {
-      "type": "project",
+    "FileIOLibrary/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
