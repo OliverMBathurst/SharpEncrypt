@@ -16,10 +16,7 @@ namespace SharpEncrypt.Models
 
         public bool Equals(FileDataGridItemModel other)
         {
-            return File == other.File
-                && Time.Ticks == other.Time.Ticks
-                && Secured == other.Secured
-                && Algorithm == other.Algorithm;
+            return Secured.Equals(other.Secured, StringComparison.InvariantCulture);
         }
 
         public override bool Equals(object obj)

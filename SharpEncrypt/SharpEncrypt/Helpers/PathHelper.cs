@@ -18,11 +18,19 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
-        public string ExclusionFile
+        public string ExcludedFilesFile
         {
             get
             {
-                return Path.Combine(AppDirectory, ResourceManager.GetString("ResourceExclusionListFile"));
+                return Path.Combine(AppDirectory, ResourceManager.GetString("ExcludedFilesFile"));
+            }
+        }
+
+        public string ExcludedFoldersFile
+        {
+            get
+            {
+                return Path.Combine(AppDirectory, ResourceManager.GetString("ExcludedFoldersFile"));
             }
         }
 

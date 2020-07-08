@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class WriteResourceExclusionListTask : SharpEncryptTask
+    internal sealed class WriteFileExclusionListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.WriteResourceExclusionListTask;
+        public override TaskType TaskType => TaskType.WriteFileExclusionListTask;
 
-        public WriteResourceExclusionListTask(string filePath, bool add, IEnumerable<ExcludedResource> excludedResources)
+        public WriteFileExclusionListTask(string filePath, bool add, IEnumerable<FileDataGridItemModel> excludedFiles)
             : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
@@ -27,33 +27,33 @@ namespace SharpEncrypt.Tasks
                         return;
                 }
 
-                var resources = new List<ExcludedResource>();
+                var files = new List<FileDataGridItemModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<ExcludedResource> deserialized)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> deserialized)
                         {
-                            resources = deserialized;
+                            files = deserialized;
                         }
                     }
                 }
 
                 if (add)
                 {
-                    resources.AddRange(excludedResources);
+                    files.AddRange(excludedFiles);
                 }
                 else
                 {
-                    if (resources.Any())
+                    if (files.Any())
                     {
-                        resources.RemoveAll(x => excludedResources.Any(z => z.Equals(x)));
+                        files.RemoveAll(x => excludedFiles.Any(z => z.Equals(x)));
                     }
                 }
 
                 using (var fs = new FileStream(filePath, FileMode.Open))
                 {
-                    new BinaryFormatter().Serialize(fs, resources.Distinct().ToList());
+                    new BinaryFormatter().Serialize(fs, files.Distinct().ToList());
                 }
             });
         }

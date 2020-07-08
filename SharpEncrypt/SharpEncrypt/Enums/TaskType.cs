@@ -13,8 +13,11 @@
         LoggingTask,
         OTPSaveKeyOfFileTask,
         SecureDeleteFileTask,
-        WriteResourceExclusionListTask,
-        ReadResourceExclusionListTask,
+        WriteFileExclusionListTask,
+        WriteFolderExclusionListTask,
+        ReadFileExclusionListTask,
+        ReadFolderExclusionListTask,
+        GenericDeleteTask,
         Undefined
     }
 }

@@ -1,5 +1,7 @@
 ﻿using SharpEncrypt.AbstractClasses;
+using SharpEncrypt.ExtensionClasses;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Resources;
 using System.Windows.Forms;
@@ -21,13 +23,16 @@ namespace SharpEncrypt.Forms
 
         private void TaskCompleted(SharpEncryptTask task)
         {
+            var removals = new List<DataGridViewRow>();
             foreach(DataGridViewRow row in ActiveJobsGridView.Rows)
             {
-                if(row.Cells[0].Value is Guid guid && guid == task.Identifier)
+                if(row.Cells[0].Value is Guid guid && guid.Equals(task.Identifier))
                 {
-                    ActiveJobsGridView.Rows.Remove(row);
+                    removals.Add(row);
                 }
             }
+
+            ActiveJobsGridView.Rows.RemoveAll(removals);
         }
 
         private void ActiveTasksForm_Load(object sender, EventArgs e)

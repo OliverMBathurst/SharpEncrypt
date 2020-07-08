@@ -181,8 +181,17 @@
   <data name="CancelAllFutureTasksToolStripMenuItem" xml:space="preserve">
     <value>Cancel All Future Tasks</value>
   </data>
+  <data name="ChangeSessionPasswordToolStripMenuItem" xml:space="preserve">
+    <value>Change Session Password</value>
+  </data>
   <data name="ClearJobs" xml:space="preserve">
     <value>Clear Jobs</value>
+  </data>
+  <data name="ClearRecentFilesListToolStripMenuItem" xml:space="preserve">
+    <value>Clear Recent Files Grid</value>
+  </data>
+  <data name="ClearSecuredFoldersGridToolStripMenuItem" xml:space="preserve">
+    <value>Clear Secured Folders Grid</value>
   </data>
   <data name="ClickToShare" xml:space="preserve">
     <value>Click to select encrypted files to share keys with others.</value>
@@ -226,6 +235,9 @@
   <data name="DefaultValue" xml:space="preserve">
     <value>Default Value</value>
   </data>
+  <data name="DeleteGridExclusionLists" xml:space="preserve">
+    <value>Delete Grid Exclusion Lists</value>
+  </data>
   <data name="Dialog" xml:space="preserve">
     <value>Dialog</value>
   </data>
@@ -252,6 +264,12 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="ExcludedFilesFile" xml:space="preserve">
+    <value>FileExclusions.BIN</value>
+  </data>
+  <data name="ExcludedFoldersFile" xml:space="preserve">
+    <value>FolderExclusions.BIN</value>
   </data>
   <data name="ExitToolStripMenuItem" xml:space="preserve">
     <value>Exit</value>
@@ -298,6 +316,12 @@
   <data name="HelpMenuStrip" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="HideExcludedSecuredFilesToolStripMenuItem" xml:space="preserve">
+    <value>Hide Excluded Secured Files</value>
+  </data>
+  <data name="HideExcludedSecuredFoldersToolStripMenuItem" xml:space="preserve">
+    <value>Hide Excluded Secured Folders</value>
+  </data>
   <data name="Identity" xml:space="preserve">
     <value>Identity</value>
   </data>
@@ -308,7 +332,7 @@
     <value>Import Public Key</value>
   </data>
   <data name="IncludeSubfolders" xml:space="preserve">
-    <value>Include subfolders</value>
+    <value>Include Subfolders</value>
   </data>
   <data name="IndividualSettingsResetDialog" xml:space="preserve">
     <value>Individual Settings Reset Dialog</value>
@@ -419,7 +443,7 @@
     <value>Remove folder from list but keep secured</value>
   </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
-    <value>Rename to original</value>
+    <value>Rename To Original Name</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -428,10 +452,7 @@
     <value>Reset All</value>
   </data>
   <data name="ResetAllSettingsToolStripMenuItem" xml:space="preserve">
-    <value>Reset all settings</value>
-  </data>
-  <data name="ResourceExclusionListFile" xml:space="preserve">
-    <value>Exclusions.BIN</value>
+    <value>Reset All Settings</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Result</value>
@@ -450,6 +471,12 @@
   </data>
   <data name="Secured" xml:space="preserve">
     <value>Secured</value>
+  </data>
+  <data name="SecureDeleteFile" xml:space="preserve">
+    <value>Secure Delete File</value>
+  </data>
+  <data name="SecureDeleteFolder" xml:space="preserve">
+    <value>Secure Delete Folder</value>
   </data>
   <data name="SecureDeleteToolStripMenuItem" xml:space="preserve">
     <value>Secure Delete</value>
@@ -501,6 +528,12 @@
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
+  </data>
+  <data name="ShowAllSecuredFiles" xml:space="preserve">
+    <value>Show Excluded Secured Files</value>
+  </data>
+  <data name="ShowAllSecuredFolders" xml:space="preserve">
+    <value>Show Excluded Secured Folders</value>
   </data>
   <data name="ShowHelpToolStripMenuItem" xml:space="preserve">
     <value>Show Help</value>
@@ -557,7 +590,7 @@
     <value>View Jobs</value>
   </data>
   <data name="WipeDiskSpaceAfterSecureDeleteToolStripMenuItem" xml:space="preserve">
-    <value>Wipe free disk space after secure delete</value>
+    <value>Wipe Free Disk Space After A Secure Delete</value>
   </data>
   <data name="WipeFreeDiskSpaceToolStripMenuItem" xml:space="preserve">
     <value>Wipe Free Disk Space</value>

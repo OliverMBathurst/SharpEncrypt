@@ -175,12 +175,24 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="SecureDeleteToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="SecureDeleteFile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAHBJREFUSEvt
         jrENwCAMBD0K22T/DdJlDGK36PTyoxQpOOkaMGfi8AUjvdO5WGd1t8Ua69qGHnf8F/RDpQ1FlDYUUdpQ
         RGlDEaUNRZQ2FFHaUERpQxGlDUWUNhRR2lBEafOkFCJr1uZKO0tqpmYPO0S88aHHaWfFw+wAAAAASUVO
         RK5CYII=
+</value>
+  </data>
+  <data name="SecureDeleteFolder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAZNJREFUeF7t
+        1rFNAwEQBdFLoBqKpAiQKAZXQidICHaDywaZAMPO6j9pUrT/jM4+IiIiIiIiIiIi/tlj9fnL9d+MH7jF
+        wz/Lh3DFLR/+WT6Eb/zFwz9b/SHQ4E2NR0dvajw6elPj0dGbGo+O3tR4dPSmxqOjNzUeHb2piIgIDfoi
+        M6VHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6N
+        MqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6N
+        MqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlB6NMqVHo0zp0ShTejTKlN57
+        RcMM9e16bxWNM9S3671UNM5Q3673UH1UNHByfXPfvsJzRSMn91StcV9dKho6sdeqb16lB/V/1eTXUd/W
+        N95Va/V7tb/c+hfGhJ+ofUPf0jeteedHRERERERERMQ0x/EFmmB4gPqT3msAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="OptionsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -2173,11 +2185,8 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <metadata name="FileSystemWatcher.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>433, 66</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>324</value>
+    <value>392</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

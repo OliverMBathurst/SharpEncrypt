@@ -42,6 +42,9 @@
   <PropertyGroup>
     <StartupObject>SharpEncrypt.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AESLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,6 +98,7 @@
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
     <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
+    <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
@@ -153,10 +157,12 @@
     </Compile>
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
-    <Compile Include="Models\ExcludedResource.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="TaskManager.cs" />
-    <Compile Include="Tasks\WriteResourceExclusionListTask.cs" />
+    <Compile Include="Tasks\GenericDeleteFileTask.cs" />
+    <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
+    <Compile Include="Tasks\WriteFolderExclusionListTask.cs" />
+    <Compile Include="Tasks\WriteFileExclusionListTask.cs" />
     <Compile Include="Tasks\LoggingTask.cs" />
     <Compile Include="Tasks\OneTimePadTransformTask.cs" />
     <Compile Include="Models\SharpEncryptTaskResult.cs" />
@@ -247,7 +253,7 @@
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Tasks\OTPSaveKeyOfFileTask.cs" />
-    <Compile Include="Tasks\ReadResourceExclusionListTask.cs" />
+    <Compile Include="Tasks\ReadFileExclusionListTask.cs" />
     <Compile Include="Tasks\ReadSecuredFilesListTask.cs" />
     <Compile Include="Tasks\ReadSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\ReadSettingsFileTask.cs" />
@@ -330,6 +336,7 @@
     <EmbeddedResource Include="Resources\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resources.ru.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -374,7 +381,9 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="lib\AESLibrary.dll" />
     <EmbeddedResource Include="lib\FileGeneratorLibrary.dll" />

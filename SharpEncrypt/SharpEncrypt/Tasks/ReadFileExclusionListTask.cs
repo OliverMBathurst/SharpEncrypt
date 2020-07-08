@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class ReadResourceExclusionListTask : SharpEncryptTask
+    internal sealed class ReadFileExclusionListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.ReadResourceExclusionListTask;
+        public override TaskType TaskType => TaskType.ReadFileExclusionListTask;
 
-        public ReadResourceExclusionListTask(string filePath) : base(ResourceType.File, filePath)
+        public ReadFileExclusionListTask(string filePath) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {
@@ -20,9 +20,9 @@ namespace SharpEncrypt.Tasks
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<ExcludedResource> resources)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> models)
                         {
-                            Result.Value = resources;
+                            Result.Value = models;
                         }
                     }
                 }

@@ -14,7 +14,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFileListTask;
 
-        public WriteSecuredFileListTask(string path, IEnumerable<FileDataGridItemModel> models, bool add)
+        public WriteSecuredFileListTask(string path, bool add, params FileDataGridItemModel[] models)
             : base(ResourceType.File, path)
         {
             InnerTask = new Task(() => 

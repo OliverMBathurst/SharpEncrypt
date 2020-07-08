@@ -250,11 +250,38 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Session Password.
+        /// </summary>
+        internal static string ChangeSessionPasswordToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ChangeSessionPasswordToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear Jobs.
         /// </summary>
         internal static string ClearJobs {
             get {
                 return ResourceManager.GetString("ClearJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Recent Files Grid.
+        /// </summary>
+        internal static string ClearRecentFilesListToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ClearRecentFilesListToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Secured Folders Grid.
+        /// </summary>
+        internal static string ClearSecuredFoldersGridToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ClearSecuredFoldersGridToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -385,6 +412,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Grid Exclusion Lists.
+        /// </summary>
+        internal static string DeleteGridExclusionLists {
+            get {
+                return ResourceManager.GetString("DeleteGridExclusionLists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dialog.
         /// </summary>
         internal static string Dialog {
@@ -462,6 +498,24 @@ namespace SharpEncrypt.Resources {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FileExclusions.BIN.
+        /// </summary>
+        internal static string ExcludedFilesFile {
+            get {
+                return ResourceManager.GetString("ExcludedFilesFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FolderExclusions.BIN.
+        /// </summary>
+        internal static string ExcludedFoldersFile {
+            get {
+                return ResourceManager.GetString("ExcludedFoldersFile", resourceCulture);
             }
         }
         
@@ -601,6 +655,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Excluded Secured Files.
+        /// </summary>
+        internal static string HideExcludedSecuredFilesToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("HideExcludedSecuredFilesToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Excluded Secured Folders.
+        /// </summary>
+        internal static string HideExcludedSecuredFoldersToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("HideExcludedSecuredFoldersToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identity.
         /// </summary>
         internal static string Identity {
@@ -628,7 +700,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Include subfolders.
+        ///   Looks up a localized string similar to Include Subfolders.
         /// </summary>
         internal static string IncludeSubfolders {
             get {
@@ -961,7 +1033,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rename to original.
+        ///   Looks up a localized string similar to Rename To Original Name.
         /// </summary>
         internal static string RenameToOriginalToolStripMenuItem1 {
             get {
@@ -988,20 +1060,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset all settings.
+        ///   Looks up a localized string similar to Reset All Settings.
         /// </summary>
         internal static string ResetAllSettingsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ResetAllSettingsToolStripMenuItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Exclusions.BIN.
-        /// </summary>
-        internal static string ResourceExclusionListFile {
-            get {
-                return ResourceManager.GetString("ResourceExclusionListFile", resourceCulture);
             }
         }
         
@@ -1056,6 +1119,24 @@ namespace SharpEncrypt.Resources {
         internal static string Secured {
             get {
                 return ResourceManager.GetString("Secured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure Delete File.
+        /// </summary>
+        internal static string SecureDeleteFile {
+            get {
+                return ResourceManager.GetString("SecureDeleteFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secure Delete Folder.
+        /// </summary>
+        internal static string SecureDeleteFolder {
+            get {
+                return ResourceManager.GetString("SecureDeleteFolder", resourceCulture);
             }
         }
         
@@ -1209,6 +1290,24 @@ namespace SharpEncrypt.Resources {
         internal static string Show {
             get {
                 return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Excluded Secured Files.
+        /// </summary>
+        internal static string ShowAllSecuredFiles {
+            get {
+                return ResourceManager.GetString("ShowAllSecuredFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Excluded Secured Folders.
+        /// </summary>
+        internal static string ShowAllSecuredFolders {
+            get {
+                return ResourceManager.GetString("ShowAllSecuredFolders", resourceCulture);
             }
         }
         
@@ -1375,7 +1474,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wipe free disk space after secure delete.
+        ///   Looks up a localized string similar to Wipe Free Disk Space After A Secure Delete.
         /// </summary>
         internal static string WipeDiskSpaceAfterSecureDeleteToolStripMenuItem {
             get {
