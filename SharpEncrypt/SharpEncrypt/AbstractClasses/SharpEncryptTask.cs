@@ -14,6 +14,9 @@ namespace SharpEncrypt.AbstractClasses
 
         public virtual bool IsSpecial { get; set; } = true;
 
+        //whether only one task of this type should be running at any one point or not
+        public virtual bool IsExclusive { get; set; } = false;
+
         public virtual TaskType TaskType { get; } = TaskType.Undefined;
 
         public virtual Task InnerTask { get; set; }

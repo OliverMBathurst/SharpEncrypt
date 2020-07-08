@@ -106,6 +106,12 @@
     <Compile Include="Forms\ActiveTasksForm.Designer.cs">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GenericTextViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GenericTextViewer.Designer.cs">
+      <DependentUpon>GenericTextViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\IndividualSettingsResetDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,8 @@
     <Compile Include="TaskManager.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
     <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
+    <Compile Include="Tasks\ReadLogFileTask.cs" />
+    <Compile Include="Tasks\ShredDirectoryTask.cs" />
     <Compile Include="Tasks\WriteFolderExclusionListTask.cs" />
     <Compile Include="Tasks\WriteFileExclusionListTask.cs" />
     <Compile Include="Tasks\LoggingTask.cs" />
@@ -276,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GenericGridForm.resx">
       <DependentUpon>GenericGridForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GenericTextViewer.resx">
+      <DependentUpon>GenericTextViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HardDriveWipeDialog.resx">
       <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>

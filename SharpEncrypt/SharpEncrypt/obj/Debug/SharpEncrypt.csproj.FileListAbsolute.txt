@@ -51,3 +51,4 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\Sh
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ActiveTasksForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.GenericTextViewer.resources

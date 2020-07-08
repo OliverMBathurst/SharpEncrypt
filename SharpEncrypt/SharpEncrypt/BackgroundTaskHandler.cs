@@ -51,7 +51,7 @@ namespace SharpEncrypt
 
         public (SharpEncryptTask Task, CancellationTokenSource CancelToken) Current { get; private set; }
 
-        public IEnumerable<SharpEncryptTask> Tasks
+        public IEnumerable<SharpEncryptTask> ActiveTasks
         {
             get
             {

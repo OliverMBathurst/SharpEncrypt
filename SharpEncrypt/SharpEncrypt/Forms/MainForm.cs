@@ -41,6 +41,7 @@ namespace SharpEncrypt.Forms
         private delegate void ExcludedFoldersListReadEventHandler(IEnumerable<string> folderUris);
         private delegate void SettingsFileReadEventHandler(SharpEncryptSettings settings);
         private delegate void TaskExceptionOccurredEventHandler(Exception exception);
+        private delegate void LogFileReadEventHandler(string[] lines);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
         private event SettingsChangeEventHandler SettingsChangeRequired;
@@ -52,6 +53,7 @@ namespace SharpEncrypt.Forms
         private event TaskExceptionOccurredEventHandler TaskException;
         private event ExcludedFilesListReadEventHandler ExcludedFilesListRead;
         private event ExcludedFoldersListReadEventHandler ExcludedFoldersListRead;
+        private event LogFileReadEventHandler LogFileRead;
         #endregion
 
         private string Password { get; set; }
@@ -67,31 +69,34 @@ namespace SharpEncrypt.Forms
         public MainForm() 
         {
             InitializeComponent();
-            SettingsWriteRequired += SettingsWriterHandler;
+            SettingsWriteRequired += SettingsWriteHandler;
             SettingsChangeRequired += SettingsChangeHandler;
 
             FormClosing += FormClosingHandler;
             Resize += FormResize;
-            NotifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+            NotifyIcon.DoubleClick += OnNotifyIconDoubleClicked;
 
             FileSecured += OnFileSecured;
             FolderSecured += OnFolderSecured;
             SecuredFileListRead += OnSecuredFileListRead;
             SecuredFolderListRead += OnSecuredFolderListRead;
             SettingsFileRead += OnSettingsFileRead;
-            TaskException += ExceptionHandler;
+            TaskException += OnException;
 
-            RecentFilesGrid.DragDrop += RecentFilesGrid_DragDrop;
-            RecentFilesGrid.DragEnter += RecentFilesGrid_DragEnter;
+            RecentFilesGrid.DragDrop += OnRecentFilesGridDragDrop;
+            RecentFilesGrid.DragEnter += OnRecentFilesGridDragEnter;
 
             SecuredFoldersGrid.DragDrop += SecuredFoldersGrid_DragDrop;
             SecuredFoldersGrid.DragEnter += SecuredFoldersGrid_DragEnter;
 
-            TaskManager.TaskCompleted += TaskCompleted;
-            TaskManager.ExceptionOccurred += ExceptionHandler;
+            TaskManager.TaskCompleted += OnTaskCompleted;
+            TaskManager.ExceptionOccurred += OnException;
+            TaskManager.DuplicateExclusiveTask += OnDuplicateExclusiveTaskDetected;
 
             ExcludedFilesListRead += OnExcludedFilesListRead;
             ExcludedFoldersListRead += OnExcludedFoldersListRead;
+
+            LogFileRead += OnLogFileRead;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -441,7 +446,16 @@ namespace SharpEncrypt.Forms
 
         private void SecureDeleteFolder_Click(object sender, EventArgs e)
         {
-
+            using (var folderBrowser = new FolderBrowserDialog())
+            {
+                if(folderBrowser.ShowDialog() == DialogResult.OK)
+                {
+                    if (!string.IsNullOrEmpty(folderBrowser.SelectedPath))
+                    {
+                        TaskManager.AddTask(new ShredDirectoryTask(folderBrowser.SelectedPath, Settings.IncludeSubfolders));
+                    }
+                }
+            }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -649,6 +663,12 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Debug menu items
+
+        private void ViewLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaskManager.AddTask(new ReadLogFileTask(PathHelper.LoggingFilePath));
+        }
+
         private void ValidateContainerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using(var openFileDialog = GetSEEFFilesDialog())
@@ -737,6 +757,25 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void OnDuplicateExclusiveTaskDetected(SharpEncryptTask task)
+        {
+            InvokeOnControl(new MethodInvoker(() =>
+            {
+                MessageBox.Show(
+                    ResourceManager.GetString("ADuplicateTaskHasBeenDetected"),
+                    ResourceManager.GetString("Error"),
+                    MessageBoxButtons.OK);
+            }));
+        }
+
+        private void OnLogFileRead(string[] lines)
+        {
+            using (var textViewer = new GenericTextViewer(lines))
+            {
+                textViewer.ShowDialog();
+            }
+        }
+
         private void OnExcludedFoldersListRead(IEnumerable<string> exclusions)
         {
             var removed = exclusions.Where(x => !Directory.Exists(x));
@@ -753,7 +792,7 @@ namespace SharpEncrypt.Forms
                 TaskManager.AddTask(new WriteFileExclusionListTask(PathHelper.ExcludedFilesFile, false, removed));
         }
 
-        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
+        private void OnNotifyIconDoubleClicked(object sender, EventArgs e)
         {
             ShowApplication();
         }
@@ -781,17 +820,17 @@ namespace SharpEncrypt.Forms
             SecureFolders(ExtractPaths(e));
         }
 
-        private void RecentFilesGrid_DragEnter(object sender, DragEventArgs e)
+        private void OnRecentFilesGridDragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
 
-        private void RecentFilesGrid_DragDrop(object sender, DragEventArgs e)
+        private void OnRecentFilesGridDragDrop(object sender, DragEventArgs e)
         {
             SecureFiles(ExtractPaths(e));
         }
 
-        private void TaskCompleted(SharpEncryptTask task)
+        private void OnTaskCompleted(SharpEncryptTask task)
         {
             if (task.Result.Exception != null)
             {
@@ -819,11 +858,14 @@ namespace SharpEncrypt.Forms
                     case TaskType.SecureFolderTask when task.Result.Value is string folderPath:
                         FolderSecured?.Invoke(folderPath);
                         break;
+                    case TaskType.ReadLogFileTask when task.Result.Value is string[] lines:
+                        LogFileRead?.Invoke(lines);
+                        break;
                 }
             }
         }
 
-        private void ExceptionHandler(Exception exception)
+        private void OnException(Exception exception)
         {
             if (Settings.Logging)
                 TaskManager.AddTask(new LoggingTask(PathHelper.LoggingFilePath, exception.StackTrace));
@@ -911,7 +953,7 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void SettingsWriterHandler(SharpEncryptSettings settings)
+        private void SettingsWriteHandler(SharpEncryptSettings settings)
             => TaskManager.AddTask(new WriteSettingsFileTask(PathHelper.AppSettingsPath, settings));
 
         private void FormClosingHandler(object sender, FormClosingEventArgs e)
@@ -923,10 +965,13 @@ namespace SharpEncrypt.Forms
         {
             if (!TaskManager.HasCompletedJobs)
             {
-                MessageBox.Show(
-                    ResourceManager.GetString("ThereAreActiveTasks"),
-                    ResourceManager.GetString("ActiveJobsWarning"),
-                    MessageBoxButtons.OK);
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    MessageBox.Show(
+                        ResourceManager.GetString("ThereAreActiveTasks"),
+                        ResourceManager.GetString("ActiveJobsWarning"),
+                        MessageBoxButtons.OK);
+                }));
             }
             else
             {

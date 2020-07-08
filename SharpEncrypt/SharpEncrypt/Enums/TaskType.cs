@@ -18,6 +18,8 @@
         ReadFileExclusionListTask,
         ReadFolderExclusionListTask,
         GenericDeleteTask,
+        ReadLogFileTask,
+        ShredDirectoryTask,
         Undefined
     }
 }

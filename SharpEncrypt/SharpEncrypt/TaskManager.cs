@@ -15,6 +15,7 @@ namespace SharpEncrypt
         #region Delegates and events
         public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
         public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
+        public delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
         public delegate void TaskManagerCompletedEventHandler();
 
@@ -22,6 +23,7 @@ namespace SharpEncrypt
         public event TaskDequeuedEventHandler TaskDequeued;
         public event TaskManagerCompletedEventHandler TaskManagerCompleted;
         public event ExceptionOccurredEventHandler ExceptionOccurred;
+        public event DuplicateExclusiveTaskEventHandler DuplicateExclusiveTask;
         #endregion
 
         public TaskManager()
@@ -40,7 +42,7 @@ namespace SharpEncrypt
 
         public int TaskCount => SpecialTaskHandler.TaskCount + GenericTaskHandlers.Count;
 
-        public IEnumerable<SharpEncryptTask> Tasks => SpecialTaskHandler.Tasks.Concat(GenericTaskHandlers.SelectMany(x => x.Value.Tasks));
+        public IEnumerable<SharpEncryptTask> Tasks => SpecialTaskHandler.ActiveTasks.Concat(GenericTaskHandlers.SelectMany(x => x.Value.ActiveTasks));
 
         #endregion
 
@@ -83,6 +85,16 @@ namespace SharpEncrypt
             {
                 OnException(new ArgumentNullException(nameof(sharpEncryptTask)));
                 return;
+            }
+
+            if (sharpEncryptTask.IsExclusive)
+            {
+                if(GenericTaskHandlers.SelectMany(x => x.Value.ActiveTasks)
+                    .Concat(SpecialTaskHandler.ActiveTasks)
+                    .Any(x => x.TaskType == sharpEncryptTask.TaskType))
+                {
+                    DuplicateExclusiveTask?.Invoke(sharpEncryptTask);
+                }
             }
 
             if (sharpEncryptTask.IsSpecial)

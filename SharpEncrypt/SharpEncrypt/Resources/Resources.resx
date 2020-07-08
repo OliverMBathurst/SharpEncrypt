@@ -141,6 +141,9 @@
   <data name="AddSecuredFolderToolStripMenuItem1" xml:space="preserve">
     <value>Add Secured Folder</value>
   </data>
+  <data name="ADuplicateTaskHasBeenDetected" xml:space="preserve">
+    <value>A task of the same type has been detected.</value>
+  </data>
   <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
@@ -227,10 +230,10 @@
     <value>Decrypt File</value>
   </data>
   <data name="DecryptPermanentlyToolStripMenuItem" xml:space="preserve">
-    <value>Decrypt permanently</value>
+    <value>Decrypt Permanently</value>
   </data>
   <data name="DecryptTemporarilyToolStripMenuItem" xml:space="preserve">
-    <value>Decrypt temporarily</value>
+    <value>Decrypt Temporarily</value>
   </data>
   <data name="DefaultValue" xml:space="preserve">
     <value>Default Value</value>
@@ -388,6 +391,9 @@
   <data name="OneTimePadToolStripMenuItem" xml:space="preserve">
     <value>One Time Pad</value>
   </data>
+  <data name="OpenExplorerHereToolStripMenuItem" xml:space="preserve">
+    <value>Open Explorer Here</value>
+  </data>
   <data name="OpenHomeFolder" xml:space="preserve">
     <value>Click to open a file from the default secure folder.</value>
   </data>
@@ -437,10 +443,10 @@
     <value>Recent Files</value>
   </data>
   <data name="RemoveFileFromListButKeepSecuredToolStripMenuItem" xml:space="preserve">
-    <value>Remove file from list but keep secured</value>
+    <value>Remove File From List But Keep Secured</value>
   </data>
   <data name="RemoveFolderFromListToolStripMenuItem" xml:space="preserve">
-    <value>Remove folder from list but keep secured</value>
+    <value>Remove Folder From List But Keep Secured</value>
   </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
     <value>Rename To Original Name</value>
@@ -512,7 +518,7 @@
     <value>Select a secured file to open.</value>
   </data>
   <data name="ShareKeysToolStripMenuItem" xml:space="preserve">
-    <value>Share keys</value>
+    <value>Share Keys</value>
   </data>
   <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
     <value>SharpEncrypt OTP Encrypted File (*.seotpf)|*seotpf</value>
@@ -538,8 +544,14 @@
   <data name="ShowHelpToolStripMenuItem" xml:space="preserve">
     <value>Show Help</value>
   </data>
+  <data name="ShowInFolderToolStripMenuItem" xml:space="preserve">
+    <value>Show In Folder Tool Strip Menu Item</value>
+  </data>
   <data name="ShowToolStripMenuItem" xml:space="preserve">
     <value>Show</value>
+  </data>
+  <data name="StopSecuringAndRemoveFromListToolStripMenuItem" xml:space="preserve">
+    <value>Stop Securing And Remove From List</value>
   </data>
   <data name="StopSecuringToolStripMenuItem" xml:space="preserve">
     <value>Stop Securing</value>
@@ -555,6 +567,9 @@
   </data>
   <data name="TaskType" xml:space="preserve">
     <value>Task Type</value>
+  </data>
+  <data name="TextViewer" xml:space="preserve">
+    <value>Text Viewer</value>
   </data>
   <data name="ThereAreActiveTasks" xml:space="preserve">
     <value>There are active tasks, to exit please use 'Force Exit'. Active tasks can be viewed by selecting 'Active Tasks' in the Debug menu.</value>
@@ -588,6 +603,9 @@
   </data>
   <data name="ViewJobsToolStripMenuItem" xml:space="preserve">
     <value>View Jobs</value>
+  </data>
+  <data name="ViewLogToolStripMenuItem" xml:space="preserve">
+    <value>View Log</value>
   </data>
   <data name="WipeDiskSpaceAfterSecureDeleteToolStripMenuItem" xml:space="preserve">
     <value>Wipe Free Disk Space After A Secure Delete</value>

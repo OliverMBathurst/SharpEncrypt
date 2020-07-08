@@ -133,6 +133,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A task of the same type has been detected..
+        /// </summary>
+        internal static string ADuplicateTaskHasBeenDetected {
+            get {
+                return ResourceManager.GetString("ADuplicateTaskHasBeenDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
         internal static string Advanced {
@@ -385,7 +394,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypt permanently.
+        ///   Looks up a localized string similar to Decrypt Permanently.
         /// </summary>
         internal static string DecryptPermanentlyToolStripMenuItem {
             get {
@@ -394,7 +403,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypt temporarily.
+        ///   Looks up a localized string similar to Decrypt Temporarily.
         /// </summary>
         internal static string DecryptTemporarilyToolStripMenuItem {
             get {
@@ -871,6 +880,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Explorer Here.
+        /// </summary>
+        internal static string OpenExplorerHereToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OpenExplorerHereToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to open a file from the default secure folder..
         /// </summary>
         internal static string OpenHomeFolder {
@@ -1015,7 +1033,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove file from list but keep secured.
+        ///   Looks up a localized string similar to Remove File From List But Keep Secured.
         /// </summary>
         internal static string RemoveFileFromListButKeepSecuredToolStripMenuItem {
             get {
@@ -1024,7 +1042,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove folder from list but keep secured.
+        ///   Looks up a localized string similar to Remove Folder From List But Keep Secured.
         /// </summary>
         internal static string RemoveFolderFromListToolStripMenuItem {
             get {
@@ -1240,7 +1258,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share keys.
+        ///   Looks up a localized string similar to Share Keys.
         /// </summary>
         internal static string ShareKeysToolStripMenuItem {
             get {
@@ -1321,11 +1339,29 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show In Folder Tool Strip Menu Item.
+        /// </summary>
+        internal static string ShowInFolderToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ShowInFolderToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show.
         /// </summary>
         internal static string ShowToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ShowToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Securing And Remove From List.
+        /// </summary>
+        internal static string StopSecuringAndRemoveFromListToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("StopSecuringAndRemoveFromListToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -1371,6 +1407,15 @@ namespace SharpEncrypt.Resources {
         internal static string TaskType {
             get {
                 return ResourceManager.GetString("TaskType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Viewer.
+        /// </summary>
+        internal static string TextViewer {
+            get {
+                return ResourceManager.GetString("TextViewer", resourceCulture);
             }
         }
         
@@ -1470,6 +1515,15 @@ namespace SharpEncrypt.Resources {
         internal static string ViewJobsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ViewJobsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Log.
+        /// </summary>
+        internal static string ViewLogToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ViewLogToolStripMenuItem", resourceCulture);
             }
         }
         
