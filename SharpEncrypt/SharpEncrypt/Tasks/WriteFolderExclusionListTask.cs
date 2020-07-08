@@ -47,7 +47,7 @@ namespace SharpEncrypt.Tasks
                 {
                     if (folders.Any())
                     {
-                        folders.RemoveAll(x => excludedFolders.Any(z => z.Equals(x, StringComparison.InvariantCulture)));
+                        folders.RemoveAll(x => excludedFolders.Any(z => z.Equals(x, StringComparison.Ordinal)));
                     }
                 }
 

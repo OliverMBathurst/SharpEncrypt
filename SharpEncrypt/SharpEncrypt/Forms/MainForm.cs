@@ -276,7 +276,7 @@ namespace SharpEncrypt.Forms
                 RecentFilesGrid.Refresh();
             }));
 
-            var pruned = removals.Where(x => !ExcludedFiles.Any(z => z.Secured.Equals(x.Secured, StringComparison.InvariantCulture))).ToArray();
+            var pruned = removals.Where(x => !ExcludedFiles.Any(z => z.Secured.Equals(x.Secured, StringComparison.Ordinal))).ToArray();
             TaskManager.AddTask(new WriteFileExclusionListTask(PathHelper.ExcludedFilesFile, true, pruned));
         }
 
@@ -355,7 +355,7 @@ namespace SharpEncrypt.Forms
                 SecuredFoldersGrid.Refresh();
             }));
 
-            var pruned = directoryURIs.Where(x => !ExcludedFolders.Any(z => z.Equals(x, StringComparison.InvariantCulture)));
+            var pruned = directoryURIs.Where(x => !ExcludedFolders.Any(z => z.Equals(x, StringComparison.Ordinal)));
             TaskManager.AddTask(new WriteFolderExclusionListTask(PathHelper.ExcludedFoldersFile, true, pruned));
         }
 
@@ -1063,7 +1063,7 @@ namespace SharpEncrypt.Forms
             {
                 foreach (var path in paths)
                 {
-                    if (!ExcludedFolders.Any(x => x.Equals(path, StringComparison.InvariantCulture)))
+                    if (!ExcludedFolders.Any(x => x.Equals(path, StringComparison.Ordinal)))
                     {
                         var newRow = new DataGridViewRow();
                         newRow.Cells.Add(new DataGridViewTextBoxCell { Value = path });
@@ -1082,7 +1082,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (row.Cells[0].Value is string folderPath)
                     {
-                        if(folders.Any(x => x.Equals(folderPath, StringComparison.InvariantCulture)))
+                        if(folders.Any(x => x.Equals(folderPath, StringComparison.Ordinal)))
                         {
                             rows.Add(row);
                         }
@@ -1102,7 +1102,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (row.Cells[2].Value is string securedFilePath)
                     {
-                        if (models.Any(x => x.Secured.Equals(securedFilePath, StringComparison.InvariantCulture)))
+                        if (models.Any(x => x.Secured.Equals(securedFilePath, StringComparison.Ordinal)))
                         {
                             rows.Add(row);
                         }
@@ -1120,7 +1120,7 @@ namespace SharpEncrypt.Forms
 
         private void AddFileModelsToRecentFilesDataGrid(params FileDataGridItemModel[] models)
         {
-            AddFileModelsToGrid(models.Where(x => !ExcludedFiles.Any(z => z.Secured.Equals(x.Secured, StringComparison.InvariantCulture))).ToArray());
+            AddFileModelsToGrid(models.Where(x => !ExcludedFiles.Any(z => z.Secured.Equals(x.Secured, StringComparison.Ordinal))).ToArray());
         }
 
         private void AddFileModelsToGrid(params FileDataGridItemModel[] models)

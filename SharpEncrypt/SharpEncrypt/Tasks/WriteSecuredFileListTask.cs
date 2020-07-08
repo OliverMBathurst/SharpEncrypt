@@ -48,7 +48,7 @@ namespace SharpEncrypt.Tasks
                 {
                     if (listOfModels.Any())
                     {
-                        listOfModels.RemoveAll(x => models.Any(z => z.Secured.Equals(x.Secured, StringComparison.InvariantCulture)));
+                        listOfModels.RemoveAll(x => models.Any(z => z.Secured.Equals(x.Secured, StringComparison.Ordinal)));
                     }
                 }
                 
