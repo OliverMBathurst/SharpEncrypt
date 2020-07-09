@@ -1,3 +1,3 @@
-# Security-Tools
+# SharpEncrypt
 
-A collection of security tools and libraries.
+An advanced encryption tool alike AxCrypt.
