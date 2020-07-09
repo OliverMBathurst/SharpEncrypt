@@ -98,8 +98,10 @@
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
     <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
+    <Compile Include="ExtensionClasses\BindingListExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
-    <Compile Include="FileSystemManager.cs" />
+    <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
+    <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,22 +151,18 @@
     <Compile Include="Forms\GenericGridForm.Designer.cs">
       <DependentUpon>GenericGridForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HardDriveWipeDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HardDriveWipeDialog.Designer.cs">
-      <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ImportPublicKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\CurrentTaskInstance.cs" />
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
-    <Compile Include="TaskManager.cs" />
+    <Compile Include="Models\FolderDataGridItemModel.cs" />
+    <Compile Include="Managers\TaskManager.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
     <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
     <Compile Include="Tasks\ReadLogFileTask.cs" />
@@ -287,9 +285,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GenericTextViewer.resx">
       <DependentUpon>GenericTextViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HardDriveWipeDialog.resx">
-      <DependentUpon>HardDriveWipeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportPublicKeyForm.resx">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>

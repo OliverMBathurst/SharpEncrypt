@@ -1,5 +1,6 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFoldersListTask;
 
-        public WriteSecuredFoldersListTask(string filePath, bool add, params string[] directories)
+        public WriteSecuredFoldersListTask(string filePath, bool add, params FolderDataGridItemModel[] models)
             : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
@@ -27,12 +28,12 @@ namespace SharpEncrypt.Tasks
                         return;
                 }
 
-                var dirs = new List<string>();
+                var dirs = new List<FolderDataGridItemModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<string> folders)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> folders)
                         {
                             dirs = folders;
                         }
@@ -41,13 +42,13 @@ namespace SharpEncrypt.Tasks
 
                 if (add)
                 {
-                    dirs.AddRange(directories);
+                    dirs.AddRange(models);
                 }
                 else
                 {
                     if (dirs.Any())
                     {
-                        dirs.RemoveAll(x => directories.Any(z => z.Equals(x, StringComparison.Ordinal)));
+                        dirs.RemoveAll(x => models.Any(z => z.URI.Equals(x.URI, StringComparison.Ordinal)));
                     }
                 }
                 

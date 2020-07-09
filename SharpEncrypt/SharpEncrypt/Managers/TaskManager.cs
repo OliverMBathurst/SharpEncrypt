@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using SharpEncrypt.Exceptions;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Managers
 {
     public sealed class TaskManager : IDisposable
     {

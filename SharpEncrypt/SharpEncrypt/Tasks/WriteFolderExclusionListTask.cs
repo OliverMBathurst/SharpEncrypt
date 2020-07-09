@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks
 {
@@ -13,7 +14,7 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteFolderExclusionListTask;
 
-        public WriteFolderExclusionListTask(string filePath, bool add, IEnumerable<string> excludedFolders)
+        public WriteFolderExclusionListTask(string filePath, bool add, IEnumerable<FolderDataGridItemModel> models)
             : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
@@ -27,12 +28,12 @@ namespace SharpEncrypt.Tasks
                         return;
                 }
 
-                var folders = new List<string>();
+                var folders = new List<FolderDataGridItemModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<string> deserialized)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> deserialized)
                         {
                             folders = deserialized;
                         }
@@ -41,13 +42,13 @@ namespace SharpEncrypt.Tasks
 
                 if (add)
                 {
-                    folders.AddRange(excludedFolders);
+                    folders.AddRange(models);
                 }
                 else
                 {
                     if (folders.Any())
                     {
-                        folders.RemoveAll(x => excludedFolders.Any(z => z.Equals(x, StringComparison.Ordinal)));
+                        folders.RemoveAll(x => models.Any(z => z.URI.Equals(x.URI, StringComparison.Ordinal)));
                     }
                 }
 

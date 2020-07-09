@@ -27,7 +27,7 @@ namespace SharpEncrypt.Forms
             AddJob.Text = ResourceManager.GetString("AddJob");
             ClearJobs.Text = ResourceManager.GetString("ClearJobs");
             ViewJobs.Text = ResourceManager.GetString("ViewJobs");
-            ControlsPanel.Controls.Add(DriveSelectionControl);            
+            ControlsPanel.Controls.Add(DriveSelectionControl); 
         }
 
         private void Cancel_Click(object sender, EventArgs e)

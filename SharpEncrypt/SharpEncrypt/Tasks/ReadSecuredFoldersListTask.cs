@@ -1,5 +1,6 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -15,19 +16,19 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() => 
             {
-                var filesList = new List<string>();
+                var foldersList = new List<FolderDataGridItemModel>();
                 if (File.Exists(filePath))
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<string> paths)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> paths)
                         {
-                            filesList = paths;
+                            foldersList = paths;
                         }
                     }
                 }
 
-                Result.Value = filesList;
+                Result.Value = foldersList;
             });
         }
     }

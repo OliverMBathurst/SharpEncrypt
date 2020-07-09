@@ -1,5 +1,7 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
@@ -14,7 +16,7 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() => {
                 //logic here
-                Result.Value = folderPath;
+                Result.Value = new FolderDataGridItemModel { URI = folderPath, Time = DateTime.Now };
             });
         }
     }

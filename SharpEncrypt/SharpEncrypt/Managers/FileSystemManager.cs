@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Managers
 {
     internal sealed class FileSystemManager
     {
@@ -15,52 +15,68 @@ namespace SharpEncrypt
         public delegate void FolderDeletedEventHandler(string folderPath);
         public delegate void FileRenamedEventHandler(string oldPath, string newPath);
         public delegate void FolderRenamedEventHandler(string oldPath, string newPath);
+        public delegate void ExceptionOccurredEventHandler(Exception exception);
 
         public event FileDeletedEventHandler FileDeleted;
         public event FolderDeletedEventHandler FolderDeleted;
         public event FileRenamedEventHandler FileRenamed;
         public event FolderRenamedEventHandler FolderRenamed;
+        public event ExceptionOccurredEventHandler Exception;
 
         #endregion
 
-        public void AddFiles(IEnumerable<string> filePaths)
+        public void AddPaths(IEnumerable<string> paths)
         {
-            foreach(var filePath in filePaths.Distinct())
+            foreach(var path in paths.Distinct())
             {
-                using (var watcher = new FileSystemWatcher { Path = filePath })
+                if (path != null)
                 {
-                    watcher.Changed += FileChanged;
-                    Watchers.Add(filePath, watcher);
+                    var dirPath = string.Empty;
+                    if (Directory.Exists(path))
+                    {
+                        dirPath = path;
+                    }
+                    else if (File.Exists(path))
+                    {
+                        var fileDir = Path.GetDirectoryName(path);
+                        if (fileDir == null)
+                        {
+                            var pathRoot = Path.GetPathRoot(path);
+                            if (!string.IsNullOrEmpty(pathRoot))
+                            {
+                                dirPath = pathRoot;
+                            }
+                        }
+                        else if (fileDir.Length > 0)
+                        {
+                            dirPath = fileDir;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(dirPath))
+                    {
+                        var watcher = new FileSystemWatcher
+                        {
+                            Path = dirPath,
+                            IncludeSubdirectories = true,
+                            EnableRaisingEvents = true
+                        };
+
+                        watcher.NotifyFilter = NotifyFilters.DirectoryName;
+                        watcher.Changed += FolderChanged;
+                        watcher.Error += Error;
+                        Watchers.Add(dirPath, watcher);
+                    }
                 }
             }
         }
 
-        public void AddFolders(IEnumerable<string> folderPaths)
+        private void Error(object sender, ErrorEventArgs e)
         {
-            foreach(var folderPath in folderPaths.Distinct())
-            {
-                using (var watcher = new FileSystemWatcher { Path = folderPath, IncludeSubdirectories = true })
-                {
-                    watcher.Changed += FolderChanged;
-                    Watchers.Add(folderPath, watcher);
-                }
-            }
+            Exception?.Invoke(e.GetException());            
         }
 
         #region Event handlers
-        private void FileChanged(object sender, FileSystemEventArgs e)
-        {
-            switch (e.ChangeType)
-            {
-                case WatcherChangeTypes.Deleted:
-                    OnFileDeleted(e.FullPath);
-                    break;
-                case WatcherChangeTypes.Renamed:
-                    OnFileRenamed(e.FullPath);
-                    break;
-            }
-        }
-
         private void FolderChanged(object sender, FileSystemEventArgs e)
         {
             switch (e.ChangeType)
@@ -76,11 +92,6 @@ namespace SharpEncrypt
         #endregion
 
         #region Misc methods
-        private void OnFileDeleted(string filePath)
-        {
-            Watchers.Remove(filePath);
-            FileDeleted?.Invoke(filePath);
-        }
 
         private void OnFolderDeleted(string folderPath)
         {
@@ -88,7 +99,7 @@ namespace SharpEncrypt
             FolderDeleted?.Invoke(folderPath);
         }
 
-        private void OnFileRenamed(string filePath)
+        private void OnFolderRenamed(string folderPath)
         {
             //get original name of file
             //get changed name
@@ -97,31 +108,20 @@ namespace SharpEncrypt
             //create overloaded constructor in WriteSecuredFileListTask
             //This one will set the inner task to both add entries and remove others, before writing the collection to securedFileList
             //Create an object of that task with the old name (to remove) and the new one (to add) as arguments, add it to the taskmanager
-            
+
             //get the key value pair to get the key (original file name)
-            var kvp = Watchers.First(x => x.Value.Path.Equals(filePath, StringComparison.Ordinal));
+            var kvp = Watchers.First(x => x.Value.Path.Equals(folderPath, StringComparison.Ordinal));
             //invoke with orig. file name and new file name
-            FileRenamed?.Invoke(kvp.Key, filePath);
+            FileRenamed?.Invoke(kvp.Key, folderPath);
             //remove old watcher
             Watchers.Remove(kvp.Key);
 
             //create and add new watcher for the renamed file
-            using (var watcher = new FileSystemWatcher { Path = filePath })
+            using (var watcher = new FileSystemWatcher { Path = folderPath })
             {
-                watcher.Changed += FileChanged;
-                Watchers.Add(filePath, watcher);
+                watcher.Changed += FolderChanged;
+                Watchers.Add(folderPath, watcher);
             }
-        }
-
-        private void OnFolderRenamed(string folderPath)
-        {
-            //get original name of folder
-            //get changed name
-            //change dictionary key to reflect new path
-            //update ui with the new name
-            //create overloaded constructor in WriteSecuredFoldersListTask
-            //This one will set the inner task to both add entries and remove others, before writing the collection to securedFileList
-            //Create an object of that task with the old name (to remove) and the new one (to add) as arguments, add it to the taskmanager
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace SharpEncrypt.Tasks
 
         public override TaskType TaskType => TaskType.LoggingTask;
 
-        public LoggingTask(string logFilePath, string logMessage)
+        public LoggingTask(string logFilePath, Exception exception)
             : base(ResourceType.File, logFilePath)
         {
             InnerTask = new Task(() =>
@@ -20,7 +21,7 @@ namespace SharpEncrypt.Tasks
                 {
                     using (var sw = new StreamWriter(fs))
                     {
-                        sw.WriteLine(logMessage);
+                        sw.WriteLine(exception.StackTrace ?? exception.Message);     
                     }
                 }
             });

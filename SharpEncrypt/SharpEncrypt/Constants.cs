@@ -9,5 +9,7 @@ namespace SharpEncrypt
         public static string DefaultLanguage => "en-GB";
 
         public static byte[] GetGuidBytes() => Encoding.ASCII.GetBytes(GuidIdentifier);
+
+        public static string ProjectURL => "https://github.com/OliverMBathurst/SharpEncrypt";
     }
 }

@@ -32,7 +32,6 @@
             this.ActiveJobsGridView = new System.Windows.Forms.DataGridView();
             this.Guid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsLongRunning = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveJobsGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,8 +43,7 @@
             this.ActiveJobsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ActiveJobsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Guid,
-            this.TaskType,
-            this.IsLongRunning});
+            this.TaskType});
             this.ActiveJobsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ActiveJobsGridView.Location = new System.Drawing.Point(0, 0);
             this.ActiveJobsGridView.Name = "ActiveJobsGridView";
@@ -58,6 +56,7 @@
             // 
             // Guid
             // 
+            this.Guid.DataPropertyName = "Identifier";
             this.Guid.HeaderText = "Guid";
             this.Guid.MinimumWidth = 8;
             this.Guid.Name = "Guid";
@@ -65,17 +64,11 @@
             // 
             // TaskType
             // 
+            this.TaskType.DataPropertyName = "TaskType";
             this.TaskType.HeaderText = "Task Type";
             this.TaskType.MinimumWidth = 8;
             this.TaskType.Name = "TaskType";
             this.TaskType.ReadOnly = true;
-            // 
-            // IsLongRunning
-            // 
-            this.IsLongRunning.HeaderText = "IsLongRunning";
-            this.IsLongRunning.MinimumWidth = 8;
-            this.IsLongRunning.Name = "IsLongRunning";
-            this.IsLongRunning.ReadOnly = true;
             // 
             // ActiveTasksForm
             // 
@@ -98,6 +91,5 @@
         private System.Windows.Forms.DataGridView ActiveJobsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Guid;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsLongRunning;
     }
 }

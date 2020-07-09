@@ -52,6 +52,7 @@ namespace SharpEncrypt.Forms
             this.securedFolders = new System.Windows.Forms.TabPage();
             this.SecuredFoldersGrid = new System.Windows.Forms.DataGridView();
             this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FolderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,8 +115,6 @@ namespace SharpEncrypt.Forms
             this.ViewLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DiskToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WipeFreeDiskSpaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AdvancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AdvancedDiskWipeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AdvancedMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ForceExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IndividualSettingsResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,6 +210,7 @@ namespace SharpEncrypt.Forms
             // FileColumnHeader
             // 
             this.FileColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FileColumnHeader.DataPropertyName = "File";
             this.FileColumnHeader.HeaderText = "File";
             this.FileColumnHeader.MinimumWidth = 8;
             this.FileColumnHeader.Name = "FileColumnHeader";
@@ -219,6 +219,7 @@ namespace SharpEncrypt.Forms
             // TimeColumnHeader
             // 
             this.TimeColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TimeColumnHeader.DataPropertyName = "Time";
             this.TimeColumnHeader.HeaderText = "Time";
             this.TimeColumnHeader.MinimumWidth = 8;
             this.TimeColumnHeader.Name = "TimeColumnHeader";
@@ -227,6 +228,7 @@ namespace SharpEncrypt.Forms
             // SecuredColumnHeader
             // 
             this.SecuredColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SecuredColumnHeader.DataPropertyName = "Secured";
             this.SecuredColumnHeader.HeaderText = "Secured";
             this.SecuredColumnHeader.MinimumWidth = 8;
             this.SecuredColumnHeader.Name = "SecuredColumnHeader";
@@ -235,6 +237,7 @@ namespace SharpEncrypt.Forms
             // AlgorithmColumnHeader
             // 
             this.AlgorithmColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AlgorithmColumnHeader.DataPropertyName = "Algorithm";
             this.AlgorithmColumnHeader.HeaderText = "Algorithm";
             this.AlgorithmColumnHeader.MinimumWidth = 8;
             this.AlgorithmColumnHeader.Name = "AlgorithmColumnHeader";
@@ -342,7 +345,8 @@ namespace SharpEncrypt.Forms
             this.SecuredFoldersGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SecuredFoldersGrid.ColumnHeadersHeight = 34;
             this.SecuredFoldersGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Folder});
+            this.Folder,
+            this.Time});
             this.SecuredFoldersGrid.ContextMenuStrip = this.FolderMenuStrip;
             this.SecuredFoldersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SecuredFoldersGrid.GridColor = System.Drawing.Color.White;
@@ -360,10 +364,19 @@ namespace SharpEncrypt.Forms
             // Folder
             // 
             this.Folder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Folder.DataPropertyName = "URI";
             this.Folder.HeaderText = "Folder";
             this.Folder.MinimumWidth = 8;
             this.Folder.Name = "Folder";
             this.Folder.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "Time";
+            this.Time.MinimumWidth = 8;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
             // 
             // FolderMenuStrip
             // 
@@ -864,8 +877,7 @@ namespace SharpEncrypt.Forms
             // DiskToolsToolStripMenuItem
             // 
             this.DiskToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.WipeFreeDiskSpaceToolStripMenuItem,
-            this.AdvancedToolStripMenuItem});
+            this.WipeFreeDiskSpaceToolStripMenuItem});
             this.DiskToolsToolStripMenuItem.Name = "DiskToolsToolStripMenuItem";
             this.DiskToolsToolStripMenuItem.Size = new System.Drawing.Size(108, 29);
             this.DiskToolsToolStripMenuItem.Text = "Disk Tools";
@@ -877,21 +889,6 @@ namespace SharpEncrypt.Forms
             this.WipeFreeDiskSpaceToolStripMenuItem.Size = new System.Drawing.Size(284, 34);
             this.WipeFreeDiskSpaceToolStripMenuItem.Text = "Wipe Free Disk Space";
             this.WipeFreeDiskSpaceToolStripMenuItem.Click += new System.EventHandler(this.WipeFreeDiskSpaceToolStripMenuItem_Click);
-            // 
-            // AdvancedToolStripMenuItem
-            // 
-            this.AdvancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AdvancedDiskWipeToolStripMenuItem});
-            this.AdvancedToolStripMenuItem.Name = "AdvancedToolStripMenuItem";
-            this.AdvancedToolStripMenuItem.Size = new System.Drawing.Size(284, 34);
-            this.AdvancedToolStripMenuItem.Text = "Advanced";
-            // 
-            // AdvancedDiskWipeToolStripMenuItem
-            // 
-            this.AdvancedDiskWipeToolStripMenuItem.Name = "AdvancedDiskWipeToolStripMenuItem";
-            this.AdvancedDiskWipeToolStripMenuItem.Size = new System.Drawing.Size(278, 34);
-            this.AdvancedDiskWipeToolStripMenuItem.Text = "Advanced Disk Wipe";
-            this.AdvancedDiskWipeToolStripMenuItem.Click += new System.EventHandler(this.AdvancedDiskWipeToolStripMenuItem_Click);
             // 
             // AdvancedMenuStrip
             // 
@@ -1138,8 +1135,6 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DiskToolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem WipeFreeDiskSpaceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AdvancedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AdvancedDiskWipeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem WipeDiskSpaceAfterSecureDeleteToolStripMenuItem;
         private System.Windows.Forms.Label AppLabel;
         private System.Windows.Forms.PictureBox Logo;
@@ -1163,17 +1158,12 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem ShowInFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameToOriginalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearRecentFilesListToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
         private System.Windows.Forms.Button PasswordManagement;
         private System.Windows.Forms.ToolTip OpenSecuredToolTip;
         private System.Windows.Forms.ToolTip AddSecuredFileToolTip;
         private System.Windows.Forms.ToolTip ShareToolTip;
         private System.Windows.Forms.ToolTip PasswordManagementToolTip;
         private System.Windows.Forms.ToolTip HomeFolderToolTip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FileColumnHeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumnHeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SecuredColumnHeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
         private System.Windows.Forms.ToolStripMenuItem EnglishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeutschGermanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NetherlandsDutchToolStripMenuItem;
@@ -1216,6 +1206,12 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem HideExcludedSecuredFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ClearSecuredFoldersGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ViewLogToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FileColumnHeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumnHeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SecuredColumnHeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
     }
 }
 

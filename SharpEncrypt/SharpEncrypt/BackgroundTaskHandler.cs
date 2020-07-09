@@ -6,6 +6,7 @@ using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt
 {
@@ -41,7 +42,7 @@ namespace SharpEncrypt
 
         public bool DisableAfterJob { get; private set; }
 
-        public bool HasCompletedJobs => mTasks.IsEmpty && (Current.Task.InnerTask == null || Current.Task.InnerTask.IsCompleted);
+        public bool HasCompletedJobs => mTasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
 
         public int TaskCount => mTasks.Count + (IsProcessingTask ? 1 : 0);
 
@@ -49,15 +50,15 @@ namespace SharpEncrypt
 
         public bool Disabled { get; private set; } = false;
 
-        public (SharpEncryptTask Task, CancellationTokenSource CancelToken) Current { get; private set; }
+        public CurrentTaskInstance CurrentTaskInstance { get; private set; }
 
         public IEnumerable<SharpEncryptTask> ActiveTasks
         {
             get
             {
                 var tasks = mTasks.ToList();
-                if (Current.Task != null && !Current.Task.InnerTask.IsCompleted)
-                    tasks.Add(Current.Task);
+                if (CurrentTaskInstance.Task != null && !CurrentTaskInstance.Task.InnerTask.IsCompleted)
+                    tasks.Add(CurrentTaskInstance.Task);
                 return tasks;
             }
         }
@@ -96,8 +97,8 @@ namespace SharpEncrypt
             while (!mTasks.IsEmpty)
                 mTasks.TryDequeue(out _);
 
-            if (Current.Task.InnerTask != null)
-                Current.CancelToken.Cancel();            
+            if (CurrentTaskInstance.Task.InnerTask != null)
+                CurrentTaskInstance.Token.Cancel();            
         }               
 
         public void Dispose()
@@ -114,7 +115,7 @@ namespace SharpEncrypt
                     IsProcessingTask = true;
                     OnTaskDequeued(task);
                     var cancellationTokenSource = new CancellationTokenSource();
-                    Current = (task, cancellationTokenSource);
+                    CurrentTaskInstance = new CurrentTaskInstance { Task = task, Token = cancellationTokenSource };
 
                     try
                     {
