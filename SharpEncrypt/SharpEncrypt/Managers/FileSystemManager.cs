@@ -1,127 +1,164 @@
-﻿using System;
+﻿using SharpEncrypt.ExtensionClasses;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 
 namespace SharpEncrypt.Managers
 {
     internal sealed class FileSystemManager
     {
-        private readonly Dictionary<string, FileSystemWatcher> Watchers = new Dictionary<string, FileSystemWatcher>();
+        private readonly List<FileSystemWatcher> Watchers = new List<FileSystemWatcher>();
 
         #region Delegates and events
 
-        public delegate void FileDeletedEventHandler(string filePath);
-        public delegate void FolderDeletedEventHandler(string folderPath);
-        public delegate void FileRenamedEventHandler(string oldPath, string newPath);
-        public delegate void FolderRenamedEventHandler(string oldPath, string newPath);
+        public delegate void ItemDeletedEventHandler(string path);
+        public delegate void ItemRenamedEventHandler(string newPath, string oldPath);
+        public delegate void ItemCreatedEventHandler(string itemPath, bool subfolderItem);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
 
-        public event FileDeletedEventHandler FileDeleted;
-        public event FolderDeletedEventHandler FolderDeleted;
-        public event FileRenamedEventHandler FileRenamed;
-        public event FolderRenamedEventHandler FolderRenamed;
+        public event ItemDeletedEventHandler ItemDeleted;
+        public event ItemRenamedEventHandler ItemRenamed;
+        public event ItemCreatedEventHandler ItemCreated;
         public event ExceptionOccurredEventHandler Exception;
 
         #endregion
 
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void AddPaths(IEnumerable<string> paths)
         {
             foreach(var path in paths.Distinct())
             {
-                if (path != null)
+                var watcher = GetWatcher(path);
+                if(watcher != null)
                 {
-                    var dirPath = string.Empty;
-                    if (Directory.Exists(path))
-                    {
-                        dirPath = path;
-                    }
-                    else if (File.Exists(path))
-                    {
-                        var fileDir = Path.GetDirectoryName(path);
-                        if (fileDir == null)
-                        {
-                            var pathRoot = Path.GetPathRoot(path);
-                            if (!string.IsNullOrEmpty(pathRoot))
-                            {
-                                dirPath = pathRoot;
-                            }
-                        }
-                        else if (fileDir.Length > 0)
-                        {
-                            dirPath = fileDir;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(dirPath))
-                    {
-                        var watcher = new FileSystemWatcher
-                        {
-                            Path = dirPath,
-                            IncludeSubdirectories = true,
-                            EnableRaisingEvents = true
-                        };
-
-                        watcher.NotifyFilter = NotifyFilters.DirectoryName;
-                        watcher.Changed += FolderChanged;
-                        watcher.Error += Error;
-                        Watchers.Add(dirPath, watcher);
-                    }
+                    Watchers.Add(watcher);
                 }
             }
         }
 
-        private void Error(object sender, ErrorEventArgs e)
+        #region Event handlers
+
+        private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            Exception?.Invoke(e.GetException());            
+            OnItemRenamed(e.FullPath, e.OldFullPath);
         }
 
-        #region Event handlers
-        private void FolderChanged(object sender, FileSystemEventArgs e)
+        private void Watcher_Deleted(object sender, FileSystemEventArgs e)
         {
-            switch (e.ChangeType)
+            OnItemDeleted(e.FullPath);
+        }
+
+        private void Watcher_Created(object sender, FileSystemEventArgs e)
+        {
+            OnItemCreated(e.FullPath);
+        }
+
+        private void Watcher_Error(object sender, ErrorEventArgs e)
+        {
+            if(sender is FileSystemWatcher watcher && !watcher.Path.Exists())
             {
-                case WatcherChangeTypes.Deleted:
-                    OnFolderDeleted(e.FullPath);
-                    break;
-                case WatcherChangeTypes.Renamed:
-                    OnFolderRenamed(e.FullPath);
-                    break;
+                OnFolderDeleted(watcher.Path);
+            }
+            else
+            {
+                OnException(e.GetException());
             }
         }
+
         #endregion
 
         #region Misc methods
 
-        private void OnFolderDeleted(string folderPath)
-        {
-            Watchers.Remove(folderPath);
-            FolderDeleted?.Invoke(folderPath);
+        private void OnItemDeleted(string path)
+        {            
+            ItemDeleted?.Invoke(path);
         }
 
-        private void OnFolderRenamed(string folderPath)
+        private void OnItemCreated(string path)
         {
-            //get original name of file
-            //get changed name
-            //change dictionary key to reflect new path
-            //update ui with the new name
-            //create overloaded constructor in WriteSecuredFileListTask
-            //This one will set the inner task to both add entries and remove others, before writing the collection to securedFileList
-            //Create an object of that task with the old name (to remove) and the new one (to add) as arguments, add it to the taskmanager
+            var inSubfolder = !Watchers.Any(x => x.Path.Equals(Path.GetDirectoryName(path), StringComparison.Ordinal));
+            ItemCreated?.Invoke(path, inSubfolder);
+        }
 
-            //get the key value pair to get the key (original file name)
-            var kvp = Watchers.First(x => x.Value.Path.Equals(folderPath, StringComparison.Ordinal));
-            //invoke with orig. file name and new file name
-            FileRenamed?.Invoke(kvp.Key, folderPath);
-            //remove old watcher
-            Watchers.Remove(kvp.Key);
+        private void OnItemRenamed(string newPath, string oldPath)
+        {
+            ItemRenamed?.Invoke(newPath, oldPath);
+        }
 
-            //create and add new watcher for the renamed file
-            using (var watcher = new FileSystemWatcher { Path = folderPath })
+        private void OnException(Exception e)
+        {
+            Exception?.Invoke(e);
+        }
+
+        private void OnFolderDeleted(string path)
+        {
+            Watchers.RemoveAll(x => x.Path.Equals(path, StringComparison.Ordinal));
+            ItemDeleted?.Invoke(path);
+        }
+
+        private FileSystemWatcher GetWatcher(string path)
+        {
+            if (path != null)
             {
-                watcher.Changed += FolderChanged;
-                Watchers.Add(folderPath, watcher);
+                var dirPath = string.Empty;
+                var isDir = false;
+                if (Directory.Exists(path))
+                {
+                    dirPath = path;
+                    isDir = true;
+                }
+                else if (File.Exists(path))
+                {
+                    var fileDir = Path.GetDirectoryName(path);
+                    if (fileDir == null)
+                    {
+                        var pathRoot = Path.GetPathRoot(path);
+                        if (!string.IsNullOrEmpty(pathRoot))
+                        {
+                            dirPath = pathRoot;
+                        }
+                    }
+                    else if (fileDir.Length > 0)
+                    {
+                        dirPath = fileDir;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(dirPath))
+                {
+                    var watcher = new FileSystemWatcher
+                    {
+                        Path = dirPath,
+                        IncludeSubdirectories = true,
+                        EnableRaisingEvents = true
+                    };
+
+                    if (!isDir)
+                    {
+                        var filePath = Path.GetFileName(path);
+                        watcher.Filter = filePath.Length > 0 ? filePath : "*.*";
+                    }
+
+                    watcher.Created += Watcher_Created;
+                    watcher.Error += Watcher_Error;
+                    watcher.Deleted += Watcher_Deleted;
+                    watcher.Renamed += Watcher_Renamed;
+
+                    watcher.NotifyFilter = NotifyFilters.Attributes |
+                        NotifyFilters.CreationTime |
+                        NotifyFilters.FileName |
+                        NotifyFilters.LastAccess |
+                        NotifyFilters.LastWrite |
+                        NotifyFilters.Size |
+                        NotifyFilters.Security;
+
+                    return watcher;
+                }
             }
+
+            return null;
         }
 
         #endregion

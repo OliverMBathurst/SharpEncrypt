@@ -1,5 +1,4 @@
-﻿using SecureEraseLibrary;
-using SharpEncrypt.AbstractClasses;
+﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.ExtensionClasses;
@@ -24,26 +23,30 @@ namespace SharpEncrypt.Forms
     internal partial class MainForm : Form
     {
         private readonly ComponentResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
-
-        private readonly List<FileDataGridItemModel> ExcludedFiles = new List<FileDataGridItemModel>();
-        private readonly List<FolderDataGridItemModel> ExcludedFolders = new List<FolderDataGridItemModel>();
-
-        private readonly BindingList<FileDataGridItemModel> DisplaySecuredFiles = new BindingList<FileDataGridItemModel>();
-        private readonly BindingList<FolderDataGridItemModel> DisplaySecuredFolders = new BindingList<FolderDataGridItemModel>();
-
-        private readonly List<FileDataGridItemModel> SecuredFiles = new List<FileDataGridItemModel>();
-        private readonly List<FolderDataGridItemModel> SecuredFolders = new List<FolderDataGridItemModel>();
-
         private readonly FileSystemManager FileSystemManager = new FileSystemManager();
         private readonly TaskManager TaskManager = new TaskManager();
         private readonly PathHelper PathHelper = new PathHelper();
         private SharpEncryptSettings _settings = new SharpEncryptSettings();
 
+        #region Collections
+        //Lists of excluded file and folder model objects the user has requested not to see
+        private readonly List<FileDataGridItemModel> ExcludedFiles = new List<FileDataGridItemModel>();
+        private readonly List<FolderDataGridItemModel> ExcludedFolders = new List<FolderDataGridItemModel>();
+
+        //Lists of models to display in their respective grids
+        private readonly BindingList<FileDataGridItemModel> DisplaySecuredFiles = new BindingList<FileDataGridItemModel>();
+        private readonly BindingList<FolderDataGridItemModel> DisplaySecuredFolders = new BindingList<FolderDataGridItemModel>();
+
+        //Master lists containing all secured file and folder models
+        private readonly List<FileDataGridItemModel> SecuredFiles = new List<FileDataGridItemModel>();
+        private readonly List<FolderDataGridItemModel> SecuredFolders = new List<FolderDataGridItemModel>();
+        #endregion
+
         #region Delegates and Events
 
         private delegate void SettingsChangeEventHandler(string settingsPropertyName, object value);
         private delegate void SettingsWriteEventHandler(SharpEncryptSettings settings);
-        private delegate void FileSecuredEventHandler(string filePath, string newFilePath);
+        private delegate void FileSecuredEventHandler(FileDataGridItemModel model);
         private delegate void FolderSecuredEventHandler(FolderDataGridItemModel model);
         private delegate void ReadSecuredFileListEventHandler(IEnumerable<FileDataGridItemModel> models);
         private delegate void ReadSecuredFolderListEventHandler(IEnumerable<FolderDataGridItemModel> models);
@@ -67,7 +70,7 @@ namespace SharpEncrypt.Forms
 
         #endregion
 
-        private string Password { get; set; }
+        private string SessionPassword { get; set; }
 
         public SharpEncryptSettings Settings {
             get => _settings;
@@ -118,10 +121,9 @@ namespace SharpEncrypt.Forms
             AppLabel.MouseDoubleClick += ApplicationLabelDoubleClicked;
 
             FileSystemManager.Exception += OnException;
-            FileSystemManager.FileDeleted += FileDeleted;
-            FileSystemManager.FileRenamed += FileRenamed;
-            FileSystemManager.FolderDeleted += FolderDeleted;
-            FileSystemManager.FolderRenamed += FolderRenamed;
+            FileSystemManager.ItemDeleted += ItemDeleted;
+            FileSystemManager.ItemRenamed += ItemRenamed;
+            FileSystemManager.ItemCreated += ItemCreated;
         }
 
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
@@ -162,10 +164,7 @@ namespace SharpEncrypt.Forms
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var fileToSecure = dialog.FileName;
-                    //secure file
-                    //add it to datagridview
-                    FileSecured?.Invoke(fileToSecure, fileToSecure);
+                    TaskManager.AddTask(new SecureFileTask(dialog.FileName));
                 }
             }
         }
@@ -244,7 +243,7 @@ namespace SharpEncrypt.Forms
 
         private void LoadSecuredFoldersList()
         {
-            TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName));
+            TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFile));
         }
 
         private void LoadSecuredFilesList()
@@ -457,7 +456,7 @@ namespace SharpEncrypt.Forms
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Password = dialog.Password;
+                    SessionPassword = dialog.Password;
                 }
             }
         }
@@ -795,6 +794,9 @@ namespace SharpEncrypt.Forms
                     case TaskType.ReadLogFileTask when task.Result.Value is string[] lines:
                         LogFileRead?.Invoke(lines);
                         break;
+                    case TaskType.SecureFileTask when task.Result.Value is FileDataGridItemModel model:
+                        FileSecured?.Invoke(model);
+                        break;
                 }
             }
         }
@@ -833,7 +835,7 @@ namespace SharpEncrypt.Forms
             var removedFolders = folders.Where(x => !Directory.Exists(x.URI)).ToArray();
 
             if (removedFolders.Any())
-                TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, false, removedFolders));
+                TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, false, removedFolders));
         }
 
         private void OnSecuredFileListRead(IEnumerable<FileDataGridItemModel> models)
@@ -851,23 +853,18 @@ namespace SharpEncrypt.Forms
 
         private void OnFolderSecured(FolderDataGridItemModel folderModel)
         {
-            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFileName, true, folderModel));
+            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, true, folderModel));
             FileSystemManager.AddPaths(new[] { folderModel.URI });
+            SecuredFolders.Add(folderModel);
             AddFoldersToSecuredFoldersDataGrid_NoCheck(folderModel);
         }
 
-        private void OnFileSecured(string filePath, string newFilePath)
+        private void OnFileSecured(FileDataGridItemModel model)
         {
-            var model = new FileDataGridItemModel
-            {
-                File = Path.GetFileName(filePath),
-                Time = DateTime.Now,
-                Secured = newFilePath,
-                Algorithm = CipherType.AES
-            };
-
+            TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, true, model));
+            FileSystemManager.AddPaths(new[] { model.Secured });
+            SecuredFiles.Add(model);
             AddFileModelsToRecentFilesDataGrid_NoCheck(model);
-            TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, true, model));                       
         }
 
         private void SettingsChangeHandler(string settingsPropertyName, object value)
@@ -1237,25 +1234,50 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Secured resources events
-        private void FolderRenamed(string oldPath, string newPath)
+
+        private void ItemRenamed(string newPath, string oldPath)
         {
-            throw new NotImplementedException();
+           //update UI, update secured files file
         }
 
-        private void FolderDeleted(string folderPath)
+        private void ItemDeleted(string path)
         {
-            throw new NotImplementedException();
+            var fileModel = SecuredFiles.FirstOrDefault(x => x.Secured.Equals(path, StringComparison.Ordinal));
+            if(fileModel == null)
+            {
+                var folderModel = SecuredFolders.FirstOrDefault(x => x.URI.Equals(path, StringComparison.Ordinal));
+                if (folderModel != null)
+                {
+                    InvokeOnControl(new MethodInvoker(() =>
+                    {
+                        DisplaySecuredFolders.Remove(folderModel);
+                        SecuredFolders.Remove(folderModel);
+                        ExcludedFolders.Remove(folderModel);
+                    }));
+                    TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, false, folderModel));
+                }
+            }
+            else
+            {
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    DisplaySecuredFiles.Remove(fileModel);
+                    SecuredFiles.Remove(fileModel);
+                    ExcludedFiles.Remove(fileModel);
+                }));
+
+                TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, false, fileModel));
+            }
         }
 
-        private void FileRenamed(string oldPath, string newPath)
+        private void ItemCreated(string path, bool inSubfolder)
         {
-            throw new NotImplementedException();
+            if (inSubfolder && !Settings.IncludeSubfolders)
+                return;
+            //add folder to recentfilesgrid
+            //secure folder here
         }
 
-        private void FileDeleted(string filePath)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }

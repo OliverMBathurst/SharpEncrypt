@@ -30,7 +30,7 @@ namespace SharpEncrypt.Managers
         {
             SpecialTaskHandler.TaskCompleted += OnTaskCompleted;
             SpecialTaskHandler.TaskDequeued += OnTaskDequeued;
-            SpecialTaskHandler.ExceptionOccurred += OnException;
+            SpecialTaskHandler.Exception += OnException;
         }
 
         #region Properties
@@ -108,7 +108,7 @@ namespace SharpEncrypt.Managers
                     taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
                     taskHandlerForTask.TaskCompleted += OnTaskCompleted;
                     taskHandlerForTask.TaskDequeued += OnTaskDequeued;
-                    taskHandlerForTask.ExceptionOccurred += OnException;
+                    taskHandlerForTask.Exception += OnException;
 
                     GenericTaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
                     

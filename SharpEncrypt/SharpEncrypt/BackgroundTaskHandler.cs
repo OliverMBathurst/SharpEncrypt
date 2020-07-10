@@ -26,15 +26,15 @@ namespace SharpEncrypt
         public event TaskDequeuedEventHandler TaskDequeued;
         public event CurrentTasksCompletedEventHandler TasksCompleted;
         public event BackgroundWorkerDisabledEventHandler BackgroundWorkerDisabled;
-        public event ExceptionOccurredEventHandler ExceptionOccurred;
+        public event ExceptionOccurredEventHandler Exception;
         #endregion
 
         public BackgroundTaskHandler(bool disableAfterJob = true)
         {
             DisableAfterJob = disableAfterJob;
 
-            BackgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorkerWork);
-            BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
+            BackgroundWorker.DoWork += BackgroundWorkerWork;
+            BackgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
         }
 
         #region Properties
@@ -70,13 +70,13 @@ namespace SharpEncrypt
         {
             if (Disabled)
             {
-                ExceptionOccurred?.Invoke(new BackgroundTaskHandlerDisabledException());
+                Exception?.Invoke(new BackgroundTaskHandlerDisabledException());
                 return;
             }
 
             if (task == null)
             {
-                ExceptionOccurred?.Invoke(new ArgumentNullException(nameof(task)));
+                Exception?.Invoke(new ArgumentNullException(nameof(task)));
                 return;
             }
 

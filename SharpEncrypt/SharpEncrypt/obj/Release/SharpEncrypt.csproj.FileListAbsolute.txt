@@ -5,7 +5,6 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Controls.DriveSelectionControl.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.HardDriveWipeDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.ImportPublicKeyForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.MainForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.PasswordInputDialog.resources
@@ -47,4 +46,6 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.AdvancedHardDriveWipeDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.AdvancedHardDriveWipeOptionsDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.GenericGridForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.TaskProgressForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.ActiveTasksForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.GenericTextViewer.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Release\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources

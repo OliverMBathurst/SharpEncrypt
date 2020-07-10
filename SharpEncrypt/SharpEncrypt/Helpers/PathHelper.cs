@@ -42,7 +42,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        public string SecuredFoldersListFileName
+        public string SecuredFoldersListFile
         {
             get
             {

@@ -20,6 +20,7 @@
         GenericDeleteTask,
         ReadLogFileTask,
         ShredDirectoryTask,
+        SecureFileTask,
         Undefined
     }
 }
