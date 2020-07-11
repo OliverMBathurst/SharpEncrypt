@@ -14,7 +14,7 @@ namespace SharpEncrypt.Managers
         #region Delegates and events
 
         public delegate void ItemDeletedEventHandler(string path);
-        public delegate void ItemRenamedEventHandler(string newPath, string oldPath);
+        public delegate void ItemRenamedEventHandler(string newPath, string oldPath, bool subFolderItem);
         public delegate void ItemCreatedEventHandler(string itemPath, bool subfolderItem);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
 
@@ -78,13 +78,12 @@ namespace SharpEncrypt.Managers
 
         private void OnItemCreated(string path)
         {
-            var inSubfolder = !Watchers.Any(x => x.Path.Equals(Path.GetDirectoryName(path), StringComparison.Ordinal));
-            ItemCreated?.Invoke(path, inSubfolder);
+            ItemCreated?.Invoke(path, IsInSubfolder(path));
         }
 
         private void OnItemRenamed(string newPath, string oldPath)
         {
-            ItemRenamed?.Invoke(newPath, oldPath);
+            ItemRenamed?.Invoke(newPath, oldPath, IsInSubfolder(newPath));
         }
 
         private void OnException(Exception e)
@@ -96,6 +95,11 @@ namespace SharpEncrypt.Managers
         {
             Watchers.RemoveAll(x => x.Path.Equals(path, StringComparison.Ordinal));
             ItemDeleted?.Invoke(path);
+        }
+
+        private bool IsInSubfolder(string path)
+        {
+            return !Watchers.Any(x => x.Path.Equals(Path.GetDirectoryName(path), StringComparison.Ordinal));
         }
 
         private FileSystemWatcher GetWatcher(string path)

@@ -12,7 +12,7 @@ namespace SharpEncrypt.Tasks
 
         public override TaskType TaskType => TaskType.SecureFolderTask;
 
-        public SecureFolderTask(string folderPath) : base(ResourceType.Folder, folderPath)
+        public SecureFolderTask(string folderPath, bool includeSubFolders) : base(ResourceType.Folder, folderPath)
         {
             InnerTask = new Task(() => {
                 //logic here

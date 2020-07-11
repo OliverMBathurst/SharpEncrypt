@@ -43,7 +43,15 @@ namespace SharpEncrypt.ExtensionClasses
                     list.Remove(obj);
                 }
             }
-                
+        }
+
+        public static void RemoveAll<T>(this BindingList<T> list, Func<T, bool> predicate)
+        {
+            foreach(var element in list)
+            {
+                if (predicate(element))
+                    list.Remove(element);
+            }
         }
     }
 }

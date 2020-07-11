@@ -206,11 +206,13 @@
     <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="Models\FolderDataGridItemModel.cs" />
     <Compile Include="Managers\TaskManager.cs" />
+    <Compile Include="Models\OnSecuredFileRenamedTaskResult.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
     <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
     <Compile Include="Tasks\ReadLogFileTask.cs" />
     <Compile Include="Tasks\SecureFileTask.cs" />
     <Compile Include="Tasks\ShredDirectoryTask.cs" />
+    <Compile Include="Tasks\OnSecuredFileRenamedTask.cs" />
     <Compile Include="Tasks\WriteFolderExclusionListTask.cs" />
     <Compile Include="Tasks\WriteFileExclusionListTask.cs" />
     <Compile Include="Tasks\LoggingTask.cs" />

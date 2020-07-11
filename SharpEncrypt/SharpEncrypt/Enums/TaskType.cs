@@ -21,6 +21,7 @@
         ReadLogFileTask,
         ShredDirectoryTask,
         SecureFileTask,
+        OnSecuredFileRenamedTask,
         Undefined
     }
 }
