@@ -70,6 +70,32 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
+        public string OTPPasswordStoreFile 
+        {
+            get
+            {
+                return Path.Combine(PasswordStoresDirectory, ResourceManager.GetString("OTPPasswordStoreFile"));
+            }
+        }
+
+        public string AESPasswordStoreFile
+        {
+            get
+            {
+                return Path.Combine(PasswordStoresDirectory, ResourceManager.GetString("AESPasswordStoreFile"));
+            }
+        }
+
+        public string PasswordStoresDirectory
+        {
+            get
+            {
+                var dir = Path.Combine(AppDirectory, ResourceManager.GetString("PasswordStoresDir"));
+                CreateDirs(dir);
+                return dir;
+            }
+        }
+
         public string ImportedKeysDirectory
         {
             get
@@ -98,7 +124,13 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
-        public string AppSettingsPath => Path.Combine(AppDirectory, ResourceManager.GetString("SharpEncryptSettingsFileName"));
+        public string AppSettingsPath
+        {
+            get
+            {
+                return Path.Combine(AppDirectory, ResourceManager.GetString("SharpEncryptSettingsFileName"));
+            }
+        }
 
         private static void CreateDirs(params string[] paths)
         {

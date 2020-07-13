@@ -47,6 +47,9 @@ namespace SharpEncrypt.ExtensionClasses
 
         public static void RemoveAll<T>(this BindingList<T> list, Func<T, bool> predicate)
         {
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+
             foreach(var element in list)
             {
                 if (predicate(element))

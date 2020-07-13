@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpEncrypt.Enums;
+using System;
 
 namespace SharpEncrypt
 {
@@ -8,6 +9,8 @@ namespace SharpEncrypt
         public string LanguageCode { get; set; } = "en-GB";
 
         public bool OTPDisclaimerHide { get; set; } = false;
+
+        public bool PasswordStartupPromptHide { get; set; } = false;
 
         public bool ForceExitDisclaimerHide { get; set; } = false;
 
@@ -20,5 +23,9 @@ namespace SharpEncrypt
         public bool WipeFreeSpaceAfterSecureDelete { get; set; } = false;
 
         public bool Logging { get; set; } = false;
+
+        public StoreType StoreType { get; set; } = StoreType.OTP;
+
+        public string OTPStoreKeyFilePath { get; set; } = string.Empty;
     }
 }

@@ -47,6 +47,7 @@ namespace SharpEncrypt.Forms
             this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToOriginalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearRecentFilesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddSecuredFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowAllSecuredFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.HideExcludedSecuredFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securedFolders = new System.Windows.Forms.TabPage();
@@ -94,16 +95,24 @@ namespace SharpEncrypt.Forms
             this.RussianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SwedishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TurkishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.IncludeSubfolders = new System.Windows.Forms.ToolStripMenuItem();
-            this.Debug = new System.Windows.Forms.ToolStripMenuItem();
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.KeyManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportMyPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.UseADifferentPasswordForEachFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.PasswordManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenPasswordManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ManagementStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AESPasswordBasedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OTPKeyBasedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeSessionPasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearSessionPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetAllSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.Debug = new System.Windows.Forms.ToolStripMenuItem();
+            this.IncludeSubfolders = new System.Windows.Forms.ToolStripMenuItem();
+            this.DoNotPromptForPasswordOnStartup = new System.Windows.Forms.ToolStripMenuItem();
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UseADifferentPasswordForEachFile = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ValidateContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -254,10 +263,11 @@ namespace SharpEncrypt.Forms
             this.ShowInFolderToolStripMenuItem,
             this.RenameToOriginalToolStripMenuItem,
             this.ClearRecentFilesListToolStripMenuItem,
+            this.AddSecuredFileToolStripMenuItem,
             this.ShowAllSecuredFiles,
             this.HideExcludedSecuredFilesToolStripMenuItem});
             this.FileMenuStrip.Name = "contextMenuStrip1";
-            this.FileMenuStrip.Size = new System.Drawing.Size(401, 292);
+            this.FileMenuStrip.Size = new System.Drawing.Size(401, 324);
             // 
             // OpenToolStripMenuItem
             // 
@@ -307,6 +317,13 @@ namespace SharpEncrypt.Forms
             this.ClearRecentFilesListToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
             this.ClearRecentFilesListToolStripMenuItem.Text = "Clear Recent Files Grid";
             this.ClearRecentFilesListToolStripMenuItem.Click += new System.EventHandler(this.ClearRecentFilesListToolStripMenuItem_Click);
+            // 
+            // AddSecuredFileToolStripMenuItem
+            // 
+            this.AddSecuredFileToolStripMenuItem.Name = "AddSecuredFileToolStripMenuItem";
+            this.AddSecuredFileToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
+            this.AddSecuredFileToolStripMenuItem.Text = "Add Secured File";
+            this.AddSecuredFileToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFileToolStripMenuItem_Click);
             // 
             // ShowAllSecuredFiles
             // 
@@ -589,7 +606,7 @@ namespace SharpEncrypt.Forms
             this.DecryptFileToolStripMenuItem,
             this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
@@ -617,13 +634,17 @@ namespace SharpEncrypt.Forms
             // 
             this.OptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LanguageToolStripMenuItem,
-            this.IncludeSubfolders,
-            this.Debug,
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem,
             this.KeyManagementToolStripMenuItem,
-            this.UseADifferentPasswordForEachFile,
+            this.PasswordManagementToolStripMenuItem,
             this.ChangeSessionPasswordToolStripMenuItem,
-            this.ResetAllSettingsToolStripMenuItem});
+            this.ClearSessionPassword,
+            this.ResetAllSettingsToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.Debug,
+            this.IncludeSubfolders,
+            this.DoNotPromptForPasswordOnStartup,
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem,
+            this.UseADifferentPasswordForEachFile});
             this.OptionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("OptionsToolStripMenuItem.Image")));
             this.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem";
             this.OptionsToolStripMenuItem.Size = new System.Drawing.Size(319, 34);
@@ -724,30 +745,6 @@ namespace SharpEncrypt.Forms
             this.TurkishToolStripMenuItem.Text = "Türkçe (Turkish)";
             this.TurkishToolStripMenuItem.Click += new System.EventHandler(this.TurkishToolStripMenuItem_Click);
             // 
-            // IncludeSubfolders
-            // 
-            this.IncludeSubfolders.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.IncludeSubfolders.Name = "IncludeSubfolders";
-            this.IncludeSubfolders.Size = new System.Drawing.Size(457, 34);
-            this.IncludeSubfolders.Text = "Include Subfolders";
-            this.IncludeSubfolders.Click += new System.EventHandler(this.IncludeToolStripMenuItem_Click);
-            // 
-            // Debug
-            // 
-            this.Debug.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.Debug.Name = "Debug";
-            this.Debug.Size = new System.Drawing.Size(457, 34);
-            this.Debug.Text = "Debug";
-            this.Debug.Click += new System.EventHandler(this.DebugToolStripMenuItem_Click);
-            // 
-            // WipeDiskSpaceAfterSecureDeleteToolStripMenuItem
-            // 
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Name = "WipeDiskSpaceAfterSecureDeleteToolStripMenuItem";
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Size = new System.Drawing.Size(457, 34);
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Text = "Wipe Free Disk Space After A Secure Delete";
-            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Click += new System.EventHandler(this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem_Click);
-            // 
             // KeyManagementToolStripMenuItem
             // 
             this.KeyManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -779,13 +776,48 @@ namespace SharpEncrypt.Forms
             this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate New Key Pair";
             this.GenerateNewKeyPairToolStripMenuItem.Click += new System.EventHandler(this.GenerateNewKeyPairToolStripMenuItem_Click);
             // 
-            // UseADifferentPasswordForEachFile
+            // PasswordManagementToolStripMenuItem
             // 
-            this.UseADifferentPasswordForEachFile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.UseADifferentPasswordForEachFile.Name = "UseADifferentPasswordForEachFile";
-            this.UseADifferentPasswordForEachFile.Size = new System.Drawing.Size(457, 34);
-            this.UseADifferentPasswordForEachFile.Text = "Use A Different Password For Each File";
-            this.UseADifferentPasswordForEachFile.Click += new System.EventHandler(this.UseADifferentPasswordForEachFileToolStripMenuItem_Click);
+            this.PasswordManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenPasswordManagerToolStripMenuItem,
+            this.ManagementStoreToolStripMenuItem});
+            this.PasswordManagementToolStripMenuItem.Name = "PasswordManagementToolStripMenuItem";
+            this.PasswordManagementToolStripMenuItem.Size = new System.Drawing.Size(457, 34);
+            this.PasswordManagementToolStripMenuItem.Text = "Password Management";
+            // 
+            // OpenPasswordManagerToolStripMenuItem
+            // 
+            this.OpenPasswordManagerToolStripMenuItem.Name = "OpenPasswordManagerToolStripMenuItem";
+            this.OpenPasswordManagerToolStripMenuItem.Size = new System.Drawing.Size(345, 34);
+            this.OpenPasswordManagerToolStripMenuItem.Text = "Open Password Manager";
+            this.OpenPasswordManagerToolStripMenuItem.Click += new System.EventHandler(this.OpenPasswordManagerToolStripMenuItem_Click);
+            // 
+            // ManagementStoreToolStripMenuItem
+            // 
+            this.ManagementStoreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AESPasswordBasedToolStripMenuItem,
+            this.OTPKeyBasedToolStripMenuItem});
+            this.ManagementStoreToolStripMenuItem.Name = "ManagementStoreToolStripMenuItem";
+            this.ManagementStoreToolStripMenuItem.Size = new System.Drawing.Size(345, 34);
+            this.ManagementStoreToolStripMenuItem.Text = "Password Management Store";
+            // 
+            // AESPasswordBasedToolStripMenuItem
+            // 
+            this.AESPasswordBasedToolStripMenuItem.CheckOnClick = true;
+            this.AESPasswordBasedToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.AESPasswordBasedToolStripMenuItem.Name = "AESPasswordBasedToolStripMenuItem";
+            this.AESPasswordBasedToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
+            this.AESPasswordBasedToolStripMenuItem.Text = "AES Password-Based";
+            this.AESPasswordBasedToolStripMenuItem.Click += new System.EventHandler(this.AESPasswordBasedToolStripMenuItem_Click);
+            // 
+            // OTPKeyBasedToolStripMenuItem
+            // 
+            this.OTPKeyBasedToolStripMenuItem.CheckOnClick = true;
+            this.OTPKeyBasedToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.OTPKeyBasedToolStripMenuItem.Name = "OTPKeyBasedToolStripMenuItem";
+            this.OTPKeyBasedToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
+            this.OTPKeyBasedToolStripMenuItem.Text = "OTP Key-Based";
+            this.OTPKeyBasedToolStripMenuItem.Click += new System.EventHandler(this.OTPKeyBasedToolStripMenuItem_Click);
             // 
             // ChangeSessionPasswordToolStripMenuItem
             // 
@@ -794,12 +826,69 @@ namespace SharpEncrypt.Forms
             this.ChangeSessionPasswordToolStripMenuItem.Text = "Change Session Password";
             this.ChangeSessionPasswordToolStripMenuItem.Click += new System.EventHandler(this.ChangeSessionPasswordToolStripMenuItem_Click);
             // 
+            // ClearSessionPassword
+            // 
+            this.ClearSessionPassword.Name = "ClearSessionPassword";
+            this.ClearSessionPassword.Size = new System.Drawing.Size(457, 34);
+            this.ClearSessionPassword.Text = "Clear Session Password";
+            this.ClearSessionPassword.Click += new System.EventHandler(this.ClearSessionPassword_Click);
+            // 
             // ResetAllSettingsToolStripMenuItem
             // 
             this.ResetAllSettingsToolStripMenuItem.Name = "ResetAllSettingsToolStripMenuItem";
             this.ResetAllSettingsToolStripMenuItem.Size = new System.Drawing.Size(457, 34);
             this.ResetAllSettingsToolStripMenuItem.Text = "Reset All Settings";
             this.ResetAllSettingsToolStripMenuItem.Click += new System.EventHandler(this.ResetAllSettingsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(454, 6);
+            // 
+            // Debug
+            // 
+            this.Debug.CheckOnClick = true;
+            this.Debug.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Debug.Name = "Debug";
+            this.Debug.Size = new System.Drawing.Size(457, 34);
+            this.Debug.Text = "Debug";
+            this.Debug.Click += new System.EventHandler(this.DebugToolStripMenuItem_Click);
+            // 
+            // IncludeSubfolders
+            // 
+            this.IncludeSubfolders.CheckOnClick = true;
+            this.IncludeSubfolders.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.IncludeSubfolders.Name = "IncludeSubfolders";
+            this.IncludeSubfolders.Size = new System.Drawing.Size(457, 34);
+            this.IncludeSubfolders.Text = "Include Subfolders";
+            this.IncludeSubfolders.Click += new System.EventHandler(this.IncludeToolStripMenuItem_Click);
+            // 
+            // DoNotPromptForPasswordOnStartup
+            // 
+            this.DoNotPromptForPasswordOnStartup.CheckOnClick = true;
+            this.DoNotPromptForPasswordOnStartup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.DoNotPromptForPasswordOnStartup.Name = "DoNotPromptForPasswordOnStartup";
+            this.DoNotPromptForPasswordOnStartup.Size = new System.Drawing.Size(457, 34);
+            this.DoNotPromptForPasswordOnStartup.Text = "Do Not Prompt For Password On Startup";
+            this.DoNotPromptForPasswordOnStartup.Click += new System.EventHandler(this.DoNotPromptForPasswordOnStartup_Click);
+            // 
+            // WipeDiskSpaceAfterSecureDeleteToolStripMenuItem
+            // 
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.CheckOnClick = true;
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Name = "WipeDiskSpaceAfterSecureDeleteToolStripMenuItem";
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Size = new System.Drawing.Size(457, 34);
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Text = "Wipe Free Disk Space After A Secure Delete";
+            this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Click += new System.EventHandler(this.WipeDiskSpaceAfterSecureDeleteToolStripMenuItem_Click);
+            // 
+            // UseADifferentPasswordForEachFile
+            // 
+            this.UseADifferentPasswordForEachFile.CheckOnClick = true;
+            this.UseADifferentPasswordForEachFile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.UseADifferentPasswordForEachFile.Name = "UseADifferentPasswordForEachFile";
+            this.UseADifferentPasswordForEachFile.Size = new System.Drawing.Size(457, 34);
+            this.UseADifferentPasswordForEachFile.Text = "Use A Different Password For Each File";
+            this.UseADifferentPasswordForEachFile.Click += new System.EventHandler(this.UseADifferentPasswordForEachFileToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
@@ -1212,6 +1301,15 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.ToolStripMenuItem AddSecuredFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DoNotPromptForPasswordOnStartup;
+        private System.Windows.Forms.ToolStripMenuItem PasswordManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenPasswordManagerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ManagementStoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AESPasswordBasedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OTPKeyBasedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem ClearSessionPassword;
     }
 }
 

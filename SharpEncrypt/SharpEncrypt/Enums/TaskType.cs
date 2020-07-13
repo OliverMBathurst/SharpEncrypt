@@ -22,6 +22,9 @@
         ShredDirectoryTask,
         SecureFileTask,
         OnSecuredFileRenamedTask,
+        OpenOTPPasswordStoreTask,
+        OpenAESPasswordStoreTask,
+        CreateOTPPasswordStoreKeyTask,
         Undefined
     }
 }

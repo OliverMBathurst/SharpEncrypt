@@ -24,6 +24,9 @@ namespace SharpEncrypt.Tasks
                         }
                     }
                 }
+
+                if (Result.Value == null)
+                    Result.Value = new SharpEncryptSettings();
             });
         }
     }

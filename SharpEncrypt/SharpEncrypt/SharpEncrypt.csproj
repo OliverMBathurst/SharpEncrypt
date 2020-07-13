@@ -136,14 +136,30 @@
     <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Enums\ResourceType.cs" />
+    <Compile Include="Enums\StoreType.cs" />
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
+    <Compile Include="Exceptions\CouldNotDeserializeKeyFileException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
+    <Compile Include="Exceptions\OTPKeyFileNotAvailableException.cs" />
+    <Compile Include="Exceptions\OTPPasswordStoreFirstUseException.cs" />
     <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
     <Compile Include="ExtensionClasses\BindingListExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\StringExtensions.cs" />
+    <Compile Include="Forms\PasswordManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PasswordManagerForm.Designer.cs">
+      <DependentUpon>PasswordManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WaitingForDriveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
+      <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
@@ -200,16 +216,24 @@
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstance.cs" />
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
     <Compile Include="Models\FolderDataGridItemModel.cs" />
     <Compile Include="Managers\TaskManager.cs" />
+    <Compile Include="Models\KeyFileStoreFileTupleModel.cs" />
     <Compile Include="Models\OnSecuredFileRenamedTaskResult.cs" />
+    <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
+    <Compile Include="Models\PasswordModel.cs" />
+    <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
+    <Compile Include="Tasks\OpenAESPasswordStoreTask.cs" />
+    <Compile Include="Tasks\OpenOTPPasswordStoreTask.cs" />
     <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
     <Compile Include="Tasks\ReadLogFileTask.cs" />
+    <Compile Include="Tasks\SavePasswordsTask.cs" />
     <Compile Include="Tasks\SecureFileTask.cs" />
     <Compile Include="Tasks\ShredDirectoryTask.cs" />
     <Compile Include="Tasks\OnSecuredFileRenamedTask.cs" />
@@ -343,6 +367,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordInputDialog.resx">
       <DependentUpon>PasswordInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PasswordManagerForm.resx">
+      <DependentUpon>PasswordManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WaitingForDriveForm.resx">
+      <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

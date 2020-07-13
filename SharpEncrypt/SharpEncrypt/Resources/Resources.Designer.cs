@@ -124,6 +124,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Secured File.
+        /// </summary>
+        internal static string AddSecuredFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AddSecuredFileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Secured Folder.
         /// </summary>
         internal static string AddSecuredFolderToolStripMenuItem1 {
@@ -165,6 +174,33 @@ namespace SharpEncrypt.Resources {
         internal static string AdvancedToolStripMenuItem {
             get {
                 return ResourceManager.GetString("AdvancedToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AES Password-Based.
+        /// </summary>
+        internal static string AESPasswordBasedToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AESPasswordBasedToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AESPasswordStore.aesstore.
+        /// </summary>
+        internal static string AESPasswordStoreFile {
+            get {
+                return ResourceManager.GetString("AESPasswordStoreFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A key must be created to use this store, this key should be stored on removable media and kept a safe place. If a key is copied from a hard drive to a removable disk, this hard drive&apos;s free space should be wiped..
+        /// </summary>
+        internal static string AKeyMustBeSavedForThisOTPStore {
+            get {
+                return ResourceManager.GetString("AKeyMustBeSavedForThisOTPStore", resourceCulture);
             }
         }
         
@@ -291,6 +327,15 @@ namespace SharpEncrypt.Resources {
         internal static string ClearSecuredFoldersGridToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ClearSecuredFoldersGridToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Session Password.
+        /// </summary>
+        internal static string ClearSessionPassword {
+            get {
+                return ResourceManager.GetString("ClearSessionPassword", resourceCulture);
             }
         }
         
@@ -457,6 +502,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do Not Prompt For Password On Startup.
+        /// </summary>
+        internal static string DoNotPromptForPasswordOnStartup {
+            get {
+                return ResourceManager.GetString("DoNotPromptForPasswordOnStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drive.
         /// </summary>
         internal static string Drive {
@@ -570,6 +624,15 @@ namespace SharpEncrypt.Resources {
         internal static string FileMenuStripItem {
             get {
                 return ResourceManager.GetString("FileMenuStripItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Use.
+        /// </summary>
+        internal static string FirstUseDialogTitle {
+            get {
+                return ResourceManager.GetString("FirstUseDialogTitle", resourceCulture);
             }
         }
         
@@ -808,6 +871,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Management Store.
+        /// </summary>
+        internal static string ManagementStoreToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ManagementStoreToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name {
@@ -898,6 +970,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Password Manager.
+        /// </summary>
+        internal static string OpenPasswordManagerToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OpenPasswordManagerToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Secured.
         /// </summary>
         internal static string OpenSecuredToolStripMenuItem {
@@ -943,11 +1024,47 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OTP Key-Based.
+        /// </summary>
+        internal static string OTPKeyBasedToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OTPKeyBasedToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OTPPasswordStore.seotppf.
+        /// </summary>
+        internal static string OTPPasswordStoreFile {
+            get {
+                return ResourceManager.GetString("OTPPasswordStoreFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OTP Store Key File Path.
+        /// </summary>
+        internal static string OTPStoreKeyFilePath {
+            get {
+                return ResourceManager.GetString("OTPStoreKeyFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Generator.
+        /// </summary>
+        internal static string PasswordGenerator {
+            get {
+                return ResourceManager.GetString("PasswordGenerator", resourceCulture);
             }
         }
         
@@ -970,11 +1087,47 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Management.
+        /// </summary>
+        internal static string PasswordManagementToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("PasswordManagementToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Manager.
+        /// </summary>
+        internal static string PasswordManager {
+            get {
+                return ResourceManager.GetString("PasswordManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords must not contain any restricted characters: {0}.
         /// </summary>
         internal static string PasswordRestrictedChars {
             get {
                 return ResourceManager.GetString("PasswordRestrictedChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Startup Prompt Hide.
+        /// </summary>
+        internal static string PasswordStartupPromptHide {
+            get {
+                return ResourceManager.GetString("PasswordStartupPromptHide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Stores.
+        /// </summary>
+        internal static string PasswordStoresDir {
+            get {
+                return ResourceManager.GetString("PasswordStoresDir", resourceCulture);
             }
         }
         
@@ -1092,6 +1245,15 @@ namespace SharpEncrypt.Resources {
         internal static string Result {
             get {
                 return ResourceManager.GetString("Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        internal static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
             }
         }
         
@@ -1294,6 +1456,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt Password Store File (*.seotppf)|*.seotppf.
+        /// </summary>
+        internal static string SharpEncryptPasswordStoreFile {
+            get {
+                return ResourceManager.GetString("SharpEncryptPasswordStoreFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt Password Store File Key (*.seotppfk)|*.seotppfk.
+        /// </summary>
+        internal static string SharpEncryptPasswordStoreFileKey {
+            get {
+                return ResourceManager.GetString("SharpEncryptPasswordStoreFileKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SharpEncryptSettings.BIN.
         /// </summary>
         internal static string SharpEncryptSettingsFileName {
@@ -1371,6 +1551,15 @@ namespace SharpEncrypt.Resources {
         internal static string StopSecuringToolStripMenuItem {
             get {
                 return ResourceManager.GetString("StopSecuringToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Store Type.
+        /// </summary>
+        internal static string StoreType {
+            get {
+                return ResourceManager.GetString("StoreType", resourceCulture);
             }
         }
         
@@ -1524,6 +1713,15 @@ namespace SharpEncrypt.Resources {
         internal static string ViewLogToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ViewLogToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for drive {0}.
+        /// </summary>
+        internal static string WaitingForDrive {
+            get {
+                return ResourceManager.GetString("WaitingForDrive", resourceCulture);
             }
         }
         
