@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitingForDriveForm));
             this.OK = new System.Windows.Forms.Button();
             this.Retry = new System.Windows.Forms.Button();
             this.Label = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.Controls.Add(this.Retry);
             this.Controls.Add(this.OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitingForDriveForm";
             this.Text = "WaitingForDriveForm";
             this.Load += new System.EventHandler(this.WaitingForDriveForm_Load);

@@ -160,6 +160,7 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>

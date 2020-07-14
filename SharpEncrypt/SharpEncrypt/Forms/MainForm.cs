@@ -1054,8 +1054,7 @@ namespace SharpEncrypt.Forms
                 {
                     using (var waitingForDriveForm = new WaitingForDriveForm(tuple))
                     {
-                        if(waitingForDriveForm.ShowDialog() == DialogResult.OK
-                            && waitingForDriveForm.DriveFound)
+                        if(waitingForDriveForm.ShowDialog() == DialogResult.OK)
                         {
                             TaskManager.AddTask(new OpenOTPPasswordStoreTask(tuple.StoreFile, tuple.KeyFile));
                         }

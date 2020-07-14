@@ -10,5 +10,9 @@ namespace SharpEncrypt.Models
         public string Password { get; set; }
 
         public string Notes { get; set; }
+
+        public DateTime Created { get; set; } = DateTime.Now;
+
+        public DateTime Modified { get; set; } = DateTime.Now;
     }
 }

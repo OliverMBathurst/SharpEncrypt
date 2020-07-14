@@ -129,6 +129,9 @@
   <data name="ActiveTasks" xml:space="preserve">
     <value>Active Tasks</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="AddedNJobs" xml:space="preserve">
     <value>Added {0} jobs.</value>
   </data>
@@ -253,6 +256,9 @@
   <data name="DefaultValue" xml:space="preserve">
     <value>Default Value</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="DeleteGridExclusionLists" xml:space="preserve">
     <value>Delete Grid Exclusion Lists</value>
   </data>
@@ -318,6 +324,9 @@
   </data>
   <data name="ForceExitToolStripMenuItem" xml:space="preserve">
     <value>Force Exit</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
   </data>
   <data name="GenerateKeyForFileToolStripMenuItem" xml:space="preserve">
     <value>Generate Key For File</value>
@@ -493,6 +502,9 @@
   <data name="RecentFiles" xml:space="preserve">
     <value>Recent Files</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="RemoveFileFromListButKeepSecuredToolStripMenuItem" xml:space="preserve">
     <value>Remove File From List But Keep Secured</value>
   </data>
@@ -528,6 +540,9 @@
   </data>
   <data name="SaveKeyFile" xml:space="preserve">
     <value>Save Key File</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="Secured" xml:space="preserve">
     <value>Secured</value>
@@ -642,6 +657,9 @@
   </data>
   <data name="TotalSize" xml:space="preserve">
     <value>Total Size (GB)</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
   </data>
   <data name="UseADifferentPasswordForEachFile" xml:space="preserve">
     <value>Use A Different Password For Each File</value>

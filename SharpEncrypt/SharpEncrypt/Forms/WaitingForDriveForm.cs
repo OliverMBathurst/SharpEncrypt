@@ -20,11 +20,9 @@ namespace SharpEncrypt.Forms
             _model = model;
         }
 
-        public bool DriveFound { get; private set; } = false;
-
         private void WaitingForDriveForm_Load(object sender, EventArgs e)
         {
-            var waitingFor = string.Format(CultureInfo.InvariantCulture, ResourceManager.GetString("WaitingForDrive"), _model.KeyFile[0]);
+            var waitingFor = string.Format(CultureInfo.InvariantCulture, ResourceManager.GetString("WaitingForDrive"), $"{_model.KeyFile[0]}\\");
             Text = waitingFor;
             Label.Text = waitingFor;
             OK.Text = ResourceManager.GetString("OK");
@@ -33,7 +31,7 @@ namespace SharpEncrypt.Forms
 
         private void OK_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.Abort;
             Close();
         }
 
@@ -41,7 +39,7 @@ namespace SharpEncrypt.Forms
         {
             if(DriveInfo.GetDrives().Any(x => x.Name[0].Equals(_model.KeyFile[0])))
             {
-                DriveFound = true;
+                DialogResult = DialogResult.OK;
                 Close();
             }
         }

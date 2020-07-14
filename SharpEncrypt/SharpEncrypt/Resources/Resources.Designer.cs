@@ -97,6 +97,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added {0} jobs..
         /// </summary>
         internal static string AddedNJobs {
@@ -466,6 +475,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete Grid Exclusion Lists.
         /// </summary>
         internal static string DeleteGridExclusionLists {
@@ -660,6 +678,15 @@ namespace SharpEncrypt.Resources {
         internal static string ForceExitToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ForceExitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        internal static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
             }
         }
         
@@ -1186,6 +1213,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove File From List But Keep Secured.
         /// </summary>
         internal static string RemoveFileFromListButKeepSecuredToolStripMenuItem {
@@ -1290,6 +1326,15 @@ namespace SharpEncrypt.Resources {
         internal static string SaveKeyFile {
             get {
                 return ResourceManager.GetString("SaveKeyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
@@ -1632,6 +1677,15 @@ namespace SharpEncrypt.Resources {
         internal static string TotalSize {
             get {
                 return ResourceManager.GetString("TotalSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo.
+        /// </summary>
+        internal static string Undo {
+            get {
+                return ResourceManager.GetString("Undo", resourceCulture);
             }
         }
         

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SharpEncrypt.Helpers;
+using System;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 
@@ -9,19 +9,17 @@ namespace SharpEncrypt.Forms
     internal partial class PasswordInputDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-        private readonly char[] SpecialChars = new[] { '<', '>', '?', '!', '£', '$', '%', '^', '&', '*', '(', ')' };
-        private readonly char[] Alphabet = new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-        private readonly char[] Numerics = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        private readonly char[] RestrictedChars = new[] { '<', '>', '\'', '\\' };
-        private readonly Random Random = new Random();
-        private readonly bool CanUseSessionPassword;
+        private readonly PasswordHelper PasswordHelper = new PasswordHelper();
+        private readonly bool CanUseSessionPassword, CanHaveRestrictedChars, IsDisplayOnly;
         private readonly string SessionPassword;
 
         public string Password { get; private set; }
 
-        public PasswordInputDialog(bool canUseSessionPassword = false, string sessionPassword = "")
+        public PasswordInputDialog(bool canUseSessionPassword = false, bool canHaveRestrictedChars = false, bool isDisplayOnly = false, string sessionPassword = "")
         {
             CanUseSessionPassword = canUseSessionPassword;
+            CanHaveRestrictedChars = canHaveRestrictedChars;
+            IsDisplayOnly = isDisplayOnly;
             SessionPassword = sessionPassword;
             InitializeComponent();
         }
@@ -47,25 +45,8 @@ namespace SharpEncrypt.Forms
         }
 
         private void PasswordInputBox_TextChanged(object sender, EventArgs e)
-        {            
-            var value = 0;
-
-            var regularCharCount = PasswordInputBox.Text.Where(x => Alphabet.Contains(x)).Count();
-            if (regularCharCount >= 8)
-                value = 40;
-            else
-                value = regularCharCount * 5;
-
-            var specialCharCount = PasswordInputBox.Text.Where(x => SpecialChars.Contains(x)).Count();
-            value += specialCharCount * 10;
-
-            var numericsCount = PasswordInputBox.Text.Where(x => Numerics.Contains(x)).Count();
-            value += numericsCount * 8;
-
-            if (value > 100)
-                value = 100;
-
-            PasswordStrengthProgressBar.Value = value;
+        {
+            PasswordStrengthProgressBar.Value = PasswordHelper.GetPasswordStrength(PasswordInputBox.Text);
         }
 
         private void ShowPassword_Click(object sender, EventArgs e)
@@ -78,42 +59,57 @@ namespace SharpEncrypt.Forms
 
         private void OK_Click(object sender, EventArgs e)
         {
-            if (UseSessionPassword.Enabled && UseSessionPassword.Checked)
+            if (IsDisplayOnly)
             {
-                if (string.IsNullOrEmpty(SessionPassword))
-                {
-                    MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
-                }
-                else
-                {
-                    Password = SessionPassword;
-                    DialogResult = DialogResult.OK;
-                }
+                Password = PasswordInputBox.Text;
+                DialogResult = DialogResult.OK;
+                Close();
             }
             else
             {
-                if (string.IsNullOrEmpty(PasswordInputBox.Text))
+                if (UseSessionPassword.Enabled && UseSessionPassword.Checked)
                 {
-                    MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
-                }
-                else
-                {
-                    if (!PasswordInputBox.Text.Any(x => RestrictedChars.Contains(x)))
+                    if (string.IsNullOrEmpty(SessionPassword))
                     {
-                        Password = PasswordInputBox.Text;
-                        DialogResult = DialogResult.OK;
+                        MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
                     }
                     else
                     {
-                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
-                            ResourceManager.GetString("PasswordRestrictedChars"), 
-                            string.Join(", ", RestrictedChars)));
+                        Password = SessionPassword;
+                        DialogResult = DialogResult.OK;
+                        Close();
                     }
                 }
-            }            
+                else
+                {
+                    if (string.IsNullOrEmpty(PasswordInputBox.Text))
+                    {
+                        MessageBox.Show(ResourceManager.GetString("PasswordIsEmpty"));
+                    }
+                    else
+                    {
+                        if (CanHaveRestrictedChars || PasswordHelper.IsValid(PasswordInputBox.Text))
+                        {
+                            Password = PasswordInputBox.Text;
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
+                                ResourceManager.GetString("PasswordRestrictedChars"),
+                                string.Join(", ", PasswordHelper.GetRestrictedChars())));
+                        }
+                    }
+                }
+            }
         }
 
-        private void Cancel_Click(object sender, EventArgs e) => DialogResult = DialogResult.Cancel;
+        private void Cancel_Click(object sender, EventArgs e) 
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        } 
 
         private void Copy_Click(object sender, EventArgs e)
         {
@@ -123,18 +119,12 @@ namespace SharpEncrypt.Forms
 
         private void New_Click(object sender, EventArgs e)
         {
-            var passwordString = string.Empty;
-            while(passwordString.Length < 12)
-            {
-                if (Random.Next(2) == 1)
-                    passwordString += Alphabet[Random.Next(Alphabet.Length)];
-                else
-                    passwordString += SpecialChars[Random.Next(SpecialChars.Length)];
-            }
-
-            PasswordGeneratorField.Text = passwordString;
+            PasswordGeneratorField.Text = PasswordHelper.GeneratePassword();
         }
 
-        private void CopyGenerated_Click(object sender, EventArgs e) => Clipboard.SetText(PasswordGeneratorField.Text);
+        private void CopyGenerated_Click(object sender, EventArgs e) { 
+            if(!string.IsNullOrEmpty(PasswordGeneratorField.Text))
+                Clipboard.SetText(PasswordGeneratorField.Text);
+        } 
     }
 }
