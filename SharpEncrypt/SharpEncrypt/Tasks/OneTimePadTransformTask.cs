@@ -3,6 +3,7 @@ using OTPLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
+using System;
 using System.IO;
 using System.Resources;
 using System.Threading.Tasks;
@@ -17,14 +18,27 @@ namespace SharpEncrypt.Tasks
 
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
     
-        public OneTimePadTransformTask(string filePath, string keyFilePath = "")
+        public OneTimePadTransformTask(string filePath, string keyFilePath = "", bool encrypt = true)
             : base(ResourceType.File, filePath, keyFilePath)
         {
             InnerTask = new Task(() =>
             {
-                var newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(filePath, ResourceManager.GetString("SharpEncryptOTPEncryptedFileExtension"));
-                if (newFileName == null)
-                    throw new NoSuitableNameFoundException();
+                var ext = ResourceManager.GetString("SharpEncryptOTPEncryptedFileExtension");
+
+                string newFileName;
+
+                if (encrypt)
+                {
+                    newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(filePath, ext);
+                    if (newFileName == null)
+                        throw new NoSuitableNameFoundException();
+                }
+                else
+                {
+                    if (!filePath.EndsWith(ext, StringComparison.Ordinal))
+                        throw new InvalidEncryptedFileException();
+                    newFileName = filePath.Replace(ext, string.Empty);
+                }
 
                 File.Move(filePath, newFileName);
 

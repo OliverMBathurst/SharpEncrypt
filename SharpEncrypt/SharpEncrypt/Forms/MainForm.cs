@@ -467,9 +467,12 @@ namespace SharpEncrypt.Forms
                 {
                     if (showOnceDialog.ShowDialog() != DialogResult.OK)
                     {
+                        return;
+                    }
+                    else
+                    {
                         if (showOnceDialog.IsChecked)
                             SettingsChangeRequired?.Invoke("OTPDisclaimerHide", true);
-                        return;
                     }
                 }
             }
@@ -506,7 +509,7 @@ namespace SharpEncrypt.Forms
                         openKeyFileDialog.Filter = ResourceManager.GetString("SharpEncryptOTPKeyFilter");
                         if(openKeyFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            TaskManager.AddTask(new OneTimePadTransformTask(openFileDialog.FileName, openKeyFileDialog.FileName));
+                            TaskManager.AddTask(new OneTimePadTransformTask(openFileDialog.FileName, openKeyFileDialog.FileName, false));
                         }
                     }
                 }

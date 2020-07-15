@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UW9MrM61j/NKcaY9bxujUClLYHDF/Wfn4JG7SCAwfZmfi0dQ8BcV/8ApB8ik0ghgjYG7oTWzP6QN0nG9C3PYSQ==",
+  "dgSpecHash": "o4dve3d0OcX1H8i25Lv+oEYxDPriMTLSOazj1ASbqzt4zM7uliim2lMykANu9g1k0gSZeI7bKEDM0oxV3FKwEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",

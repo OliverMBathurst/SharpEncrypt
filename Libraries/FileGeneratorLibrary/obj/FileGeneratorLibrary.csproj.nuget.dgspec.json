@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj": {}
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
         "projectName": "FileGeneratorLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\FileGeneratorLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileGeneratorLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileGeneratorLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -64,7 +64,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

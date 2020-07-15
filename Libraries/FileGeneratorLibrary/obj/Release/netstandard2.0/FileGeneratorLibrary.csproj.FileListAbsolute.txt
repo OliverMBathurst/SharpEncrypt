@@ -7,3 +7,12 @@ C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Release\netst
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\Libraries\FileGeneratorLibrary\obj\Release\netstandard2.0\FileGeneratorLibrary.pdb

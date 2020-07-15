@@ -140,6 +140,7 @@
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\CouldNotDeserializeKeyFileException.cs" />
+    <Compile Include="Exceptions\InvalidEncryptedFileException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
     <Compile Include="Exceptions\OTPKeyFileNotAvailableException.cs" />
     <Compile Include="Exceptions\OTPPasswordStoreFirstUseException.cs" />
