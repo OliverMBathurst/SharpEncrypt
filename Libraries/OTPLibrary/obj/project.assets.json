@@ -61,16 +61,6 @@
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
-      },
-      "FileIOLibrary/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "compile": {
-          "bin/placeholder/FileIOLibrary.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FileIOLibrary.dll": {}
-        }
       }
     }
   },
@@ -610,16 +600,10 @@
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
-    },
-    "FileIOLibrary/1.0.0": {
-      "type": "project",
-      "path": "../FileIOLibrary/FileIOLibrary.csproj",
-      "msbuildProject": "../FileIOLibrary/FileIOLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "FileIOLibrary >= 1.0.0",
       "Microsoft.CodeAnalysis.FxCopAnalyzers >= 3.0.0",
       "NETStandard.Library >= 2.0.3"
     ]
@@ -631,11 +615,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\OTPLibrary\\OTPLibrary.csproj",
       "projectName": "OTPLibrary",
-      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\OTPLibrary.csproj",
+      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\OTPLibrary\\OTPLibrary.csproj",
       "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\OTPLibrary\\obj\\",
+      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\OTPLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -653,11 +637,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj": {
-              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\FileIOLibrary\\FileIOLibrary.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -692,7 +672,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

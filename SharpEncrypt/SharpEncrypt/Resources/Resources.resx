@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="0OutOfNSelected" xml:space="preserve">
+    <value>{0} out of {1} selected</value>
+  </data>
   <data name="AboutToolStripMenuItem" xml:space="preserve">
     <value>About</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="AddJob" xml:space="preserve">
     <value>Add Job</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
   <data name="AddSecuredFile" xml:space="preserve">
     <value>Add a file to be secured.</value>
@@ -166,7 +172,7 @@
     <value>AESPasswordStore.aesstore</value>
   </data>
   <data name="AKeyMustBeSavedForThisOTPStore" xml:space="preserve">
-    <value>A key must be created to use this store, this key should be stored on removable media and kept a safe place. If a key is copied from a hard drive to a removable disk, this hard drive's free space should be wiped.</value>
+    <value>A key must be created to use this store, this key should be stored on removable media and kept a safe place. If a key is copied from a hard drive to a removable disk, the hard drive's free space should be wiped.</value>
   </data>
   <data name="Algorithm" xml:space="preserve">
     <value>Algorithm</value>
@@ -228,6 +234,9 @@
   </data>
   <data name="CreatedByCredits" xml:space="preserve">
     <value>Created by Oliver Bathurst 2020</value>
+  </data>
+  <data name="CreationTime" xml:space="preserve">
+    <value>Creation Time</value>
   </data>
   <data name="CurrentValue" xml:space="preserve">
     <value>Current Value</value>
@@ -334,6 +343,9 @@
   <data name="GenerateNewKeyPairToolStripMenuItem" xml:space="preserve">
     <value>Generate New Key Pair</value>
   </data>
+  <data name="GenerateNewPassword" xml:space="preserve">
+    <value>Generate New Password</value>
+  </data>
   <data name="Generator" xml:space="preserve">
     <value>Generator</value>
   </data>
@@ -385,6 +397,12 @@
   <data name="LanguageCode" xml:space="preserve">
     <value>Language Code</value>
   </data>
+  <data name="LastAccess" xml:space="preserve">
+    <value>Last Access</value>
+  </data>
+  <data name="LastModified" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
   <data name="LogFileName" xml:space="preserve">
     <value>log.txt</value>
   </data>
@@ -417,6 +435,9 @@
   </data>
   <data name="NotAValidContainer" xml:space="preserve">
     <value>{0} is not a valid container.</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -465,6 +486,9 @@
   </data>
   <data name="PasswordInputDialogTitle" xml:space="preserve">
     <value>Password Input Dialog</value>
+  </data>
+  <data name="PasswordInvalid" xml:space="preserve">
+    <value>The current password is invalid.</value>
   </data>
   <data name="PasswordIsEmpty" xml:space="preserve">
     <value>The provided password is empty.</value>
@@ -655,17 +679,26 @@
   <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
   <data name="TotalSize" xml:space="preserve">
     <value>Total Size (GB)</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
   </data>
+  <data name="URL" xml:space="preserve">
+    <value>URL</value>
+  </data>
   <data name="UseADifferentPasswordForEachFile" xml:space="preserve">
     <value>Use A Different Password For Each File</value>
   </data>
   <data name="UserKeys" xml:space="preserve">
     <value>User Keys</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>UserName</value>
   </data>
   <data name="UseSessionPassword" xml:space="preserve">
     <value>Use session password</value>

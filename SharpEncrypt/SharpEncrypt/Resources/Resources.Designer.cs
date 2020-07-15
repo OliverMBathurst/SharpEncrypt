@@ -61,6 +61,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} out of {1} selected.
+        /// </summary>
+        internal static string _0OutOfNSelected {
+            get {
+                return ResourceManager.GetString("0OutOfNSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         internal static string AboutToolStripMenuItem {
@@ -120,6 +129,15 @@ namespace SharpEncrypt.Resources {
         internal static string AddJob {
             get {
                 return ResourceManager.GetString("AddJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
             }
         }
         
@@ -205,7 +223,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A key must be created to use this store, this key should be stored on removable media and kept a safe place. If a key is copied from a hard drive to a removable disk, this hard drive&apos;s free space should be wiped..
+        ///   Looks up a localized string similar to A key must be created to use this store, this key should be stored on removable media and kept a safe place. If a key is copied from a hard drive to a removable disk, the hard drive&apos;s free space should be wiped..
         /// </summary>
         internal static string AKeyMustBeSavedForThisOTPStore {
             get {
@@ -390,6 +408,15 @@ namespace SharpEncrypt.Resources {
         internal static string CreatedByCredits {
             get {
                 return ResourceManager.GetString("CreatedByCredits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Time.
+        /// </summary>
+        internal static string CreationTime {
+            get {
+                return ResourceManager.GetString("CreationTime", resourceCulture);
             }
         }
         
@@ -709,6 +736,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate New Password.
+        /// </summary>
+        internal static string GenerateNewPassword {
+            get {
+                return ResourceManager.GetString("GenerateNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generator.
         /// </summary>
         internal static string Generator {
@@ -862,6 +898,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Access.
+        /// </summary>
+        internal static string LastAccess {
+            get {
+                return ResourceManager.GetString("LastAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Modified.
+        /// </summary>
+        internal static string LastModified {
+            get {
+                return ResourceManager.GetString("LastModified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to log.txt.
         /// </summary>
         internal static string LogFileName {
@@ -957,6 +1011,15 @@ namespace SharpEncrypt.Resources {
         internal static string NotAValidContainer {
             get {
                 return ResourceManager.GetString("NotAValidContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        internal static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
             }
         }
         
@@ -1101,6 +1164,15 @@ namespace SharpEncrypt.Resources {
         internal static string PasswordInputDialogTitle {
             get {
                 return ResourceManager.GetString("PasswordInputDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current password is invalid..
+        /// </summary>
+        internal static string PasswordInvalid {
+            get {
+                return ResourceManager.GetString("PasswordInvalid", resourceCulture);
             }
         }
         
@@ -1672,6 +1744,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Size (GB).
         /// </summary>
         internal static string TotalSize {
@@ -1690,6 +1771,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to URL.
+        /// </summary>
+        internal static string URL {
+            get {
+                return ResourceManager.GetString("URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use A Different Password For Each File.
         /// </summary>
         internal static string UseADifferentPasswordForEachFile {
@@ -1704,6 +1794,15 @@ namespace SharpEncrypt.Resources {
         internal static string UserKeys {
             get {
                 return ResourceManager.GetString("UserKeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserName.
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

@@ -14,7 +14,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -200,6 +199,7 @@ namespace SharpEncrypt.Forms
 
         private void LoadApplication()
         {
+            SetToolTips();
             SetApplicationSettings();
             LoadExcludedFilesList();
             LoadExcludedFoldersList();
@@ -385,14 +385,7 @@ namespace SharpEncrypt.Forms
 
         private void OpenPasswordManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Settings.StoreType == StoreType.OTP)
-            {
-                TaskManager.AddTask(new OpenOTPPasswordStoreTask(PathHelper.OTPPasswordStoreFile, Settings.OTPStoreKeyFilePath));
-            }
-            else if (Settings.StoreType == StoreType.AES)
-            {
-                TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
-            }
+            OpenPasswordStore();
         }
 
         private void ClearSessionPassword_Click(object sender, EventArgs e)
@@ -423,12 +416,12 @@ namespace SharpEncrypt.Forms
 
         private void AnonymousRenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            TransformFileName(true);
         }
 
         private void RenameToOriginalToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            TransformFileName(false);
         }
 
         private void AddSecuredFolderToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -646,7 +639,7 @@ namespace SharpEncrypt.Forms
 
         private void PasswordManagement_Click(object sender, EventArgs e)
         {
-
+            OpenPasswordStore();
         }
 
         private void OpenHomeFolder_Click(object sender, EventArgs e) => Process.Start(PathHelper.AppDirectory);
@@ -1007,29 +1000,33 @@ namespace SharpEncrypt.Forms
                 ResourceManager.ApplyResources(control, control.Name);
             }
 
-            SetControlText(ResourceManager);
+            SetControlText();
+            SetToolTips();
         }
 
-        private void SetControlText(ResourceManager rm)
+        private void SetControlText()
         {
-            Text = rm.GetString("AppName");
-            AppLabel.Text = rm.GetString("AppName");
-            Tabs.TabPages[0].Text = rm.GetString("RecentFiles");
-            Tabs.TabPages[1].Text = rm.GetString("SecuredFolders");
+            Text = ResourceManager.GetString("AppName");
+            AppLabel.Text = ResourceManager.GetString("AppName");
+            Tabs.TabPages[0].Text = ResourceManager.GetString("RecentFiles");
+            Tabs.TabPages[1].Text = ResourceManager.GetString("SecuredFolders");
 
-            RecentFilesGrid.Columns[0].HeaderText = rm.GetString("File");
-            RecentFilesGrid.Columns[1].HeaderText = rm.GetString("Time");
-            RecentFilesGrid.Columns[2].HeaderText = rm.GetString("Secured");
-            RecentFilesGrid.Columns[3].HeaderText = rm.GetString("Algorithm");
+            RecentFilesGrid.Columns[0].HeaderText = ResourceManager.GetString("File");
+            RecentFilesGrid.Columns[1].HeaderText = ResourceManager.GetString("Time");
+            RecentFilesGrid.Columns[2].HeaderText = ResourceManager.GetString("Secured");
+            RecentFilesGrid.Columns[3].HeaderText = ResourceManager.GetString("Algorithm");
 
-            SecuredFoldersGrid.Columns[0].HeaderText = rm.GetString("Folder");
-            SecuredFoldersGrid.Columns[1].HeaderText = rm.GetString("Time");
+            SecuredFoldersGrid.Columns[0].HeaderText = ResourceManager.GetString("Folder");
+            SecuredFoldersGrid.Columns[1].HeaderText = ResourceManager.GetString("Time");
+        }
 
-            OpenSecuredToolTip.SetToolTip(OpenSecuredGUIButton, rm.GetString("SelectSecuredFile"));
-            AddSecuredFileToolTip.SetToolTip(AddSecuredGUIButton, rm.GetString("AddSecuredFile"));
-            ShareToolTip.SetToolTip(ShareButton, rm.GetString("ClickToShare"));
-            PasswordManagementToolTip.SetToolTip(PasswordManagement, rm.GetString("GoToPasswordManagement"));
-            OpenHomeFolderToolTip.SetToolTip(OpenHomeFolder, rm.GetString("OpenHomeFolder"));
+        private void SetToolTips()
+        {
+            OpenSecuredToolTip.SetToolTip(OpenSecuredGUIButton, ResourceManager.GetString("SelectSecuredFile"));
+            AddSecuredFileToolTip.SetToolTip(AddSecuredGUIButton, ResourceManager.GetString("AddSecuredFile"));
+            ShareToolTip.SetToolTip(ShareButton, ResourceManager.GetString("ClickToShare"));
+            PasswordManagementToolTip.SetToolTip(PasswordManagement, ResourceManager.GetString("GoToPasswordManagement"));
+            OpenHomeFolderToolTip.SetToolTip(OpenHomeFolder, ResourceManager.GetString("OpenHomeFolder"));
         }
 
         #endregion
@@ -1045,6 +1042,48 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Misc
+
+        private void TransformFileName(bool anonymise)
+        {
+            if (!IsPasswordValid)
+            {
+                ShowErrorDialog(ResourceManager.GetString("PasswordInvalid"));
+            }
+            else
+            {
+                using (var openFileDialog = GetAllFilesDialog())
+                {
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        if (anonymise)
+                        {
+                            AnonymousRenameHelper.AnonymiseFile(openFileDialog.FileName, SessionPassword);
+                        }
+                        else
+                        {
+                            AnonymousRenameHelper.DeanonymiseFile(openFileDialog.FileName, SessionPassword);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ShowErrorDialog(string message)
+        {
+            MessageBox.Show(message, ResourceManager.GetString("Error"), MessageBoxButtons.OK);
+        }
+
+        private void OpenPasswordStore()
+        {
+            if (Settings.StoreType == StoreType.OTP)
+            {
+                TaskManager.AddTask(new OpenOTPPasswordStoreTask(PathHelper.OTPPasswordStoreFile, Settings.OTPStoreKeyFilePath));
+            }
+            else if (Settings.StoreType == StoreType.AES)
+            {
+                TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
+            }
+        }
 
         private void OTPPasswordStoreKeyNotFound(KeyFileStoreFileTupleModel tuple)
         {

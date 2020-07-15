@@ -140,7 +140,6 @@ namespace SharpEncrypt.Forms
             this.AddSecuredFileToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ShareToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PasswordManagementToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.HomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.OpenHomeFolder = new System.Windows.Forms.Button();
             this.OpenHomeFolderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -606,7 +605,7 @@ namespace SharpEncrypt.Forms
             this.DecryptFileToolStripMenuItem,
             this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
@@ -1252,7 +1251,6 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolTip AddSecuredFileToolTip;
         private System.Windows.Forms.ToolTip ShareToolTip;
         private System.Windows.Forms.ToolTip PasswordManagementToolTip;
-        private System.Windows.Forms.ToolTip HomeFolderToolTip;
         private System.Windows.Forms.ToolStripMenuItem EnglishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeutschGermanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NetherlandsDutchToolStripMenuItem;

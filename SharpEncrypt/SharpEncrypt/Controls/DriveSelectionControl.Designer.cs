@@ -60,6 +60,7 @@
             this.DriveDataGrid.RowHeadersVisible = false;
             this.DriveDataGrid.RowHeadersWidth = 62;
             this.DriveDataGrid.RowTemplate.Height = 28;
+            this.DriveDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DriveDataGrid.Size = new System.Drawing.Size(897, 566);
             this.DriveDataGrid.TabIndex = 1;
             // 

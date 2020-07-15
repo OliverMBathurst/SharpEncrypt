@@ -33,12 +33,9 @@ namespace OTPLibrary
         /// </summary>
         public static void GenerateKey(string path, long length, int bufferLength = BUFFER_LENGTH)
         {
-            if (File.Exists(path))
-                throw new FileAlreadyExistsException();
-
             using (var provider = new RNGCryptoServiceProvider())
             {
-                using (var fs = new FileStream(path, FileMode.CreateNew))
+                using (var fs = new FileStream(path, FileMode.Create))
                 {
                     var byteArray = new byte[bufferLength];
                     while (length > 0)

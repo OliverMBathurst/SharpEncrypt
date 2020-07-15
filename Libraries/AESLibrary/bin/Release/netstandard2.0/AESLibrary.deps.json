@@ -9,9 +9,9 @@
     ".NETStandard,Version=v2.0/": {
       "AESLibrary/1.0.0": {
         "dependencies": {
-          "FileIOLibrary": "1.0.0",
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "3.0.0",
-          "NETStandard.Library": "2.0.3"
+          "NETStandard.Library": "2.0.3",
+          "FileIOLibrary": "1.0.0.0"
         },
         "runtime": {
           "AESLibrary.dll": {}
@@ -35,9 +35,12 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
-      "FileIOLibrary/1.0.0": {
+      "FileIOLibrary/1.0.0.0": {
         "runtime": {
-          "FileIOLibrary.dll": {}
+          "FileIOLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -97,8 +100,8 @@
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },
-    "FileIOLibrary/1.0.0": {
-      "type": "project",
+    "FileIOLibrary/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

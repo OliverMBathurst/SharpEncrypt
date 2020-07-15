@@ -40,7 +40,7 @@ namespace AESLibrary
 
             var key = aesKey.GetKey();
             var iv = aesKey.GetIV();
-            var keyLength = aesKey.KeyLength;
+            var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
                 throw new KeyLengthException(Resources.key);
@@ -54,6 +54,9 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
+                rif.Mode = aesKey.Mode;
+                rif.Padding = aesKey.Padding;
+                rif.BlockSize = aesKey.BlockSize;
 
                 using (var encryptor = rif.CreateEncryptor(key, iv))
                 {
@@ -86,7 +89,7 @@ namespace AESLibrary
 
             var key = aesKey.GetKey();
             var iv = aesKey.GetIV();
-            var keyLength = aesKey.KeyLength;
+            var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
                 throw new KeyLengthException(Resources.key);
@@ -100,6 +103,9 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
+                rif.Mode = aesKey.Mode;
+                rif.Padding = aesKey.Padding;
+                rif.BlockSize = aesKey.BlockSize;
 
                 using (var decryptor = rif.CreateDecryptor(key, iv))
                 {
@@ -132,7 +138,7 @@ namespace AESLibrary
 
             var key = aesKey.GetKey();
             var iv = aesKey.GetIV();
-            var keyLength = aesKey.KeyLength;
+            var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
                 throw new KeyLengthException(Resources.key);
@@ -148,6 +154,9 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
+                rif.Mode = aesKey.Mode;
+                rif.Padding = aesKey.Padding;
+                rif.BlockSize = aesKey.BlockSize;
 
                 using (var decryptor = rif.CreateDecryptor(key, iv))
                 {
@@ -182,7 +191,7 @@ namespace AESLibrary
 
             var key = aesKey.GetKey();
             var iv = aesKey.GetIV();
-            var keyLength = aesKey.KeyLength;
+            var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
                 throw new KeyLengthException(Resources.key);
@@ -196,6 +205,9 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
+                rif.Mode = aesKey.Mode;
+                rif.Padding = aesKey.Padding;
+                rif.BlockSize = aesKey.BlockSize;
 
                 using (var encryptor = rif.CreateEncryptor(key, iv))
                 {
@@ -247,10 +259,32 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static AESKey GetNewAESKey()
+        public static AESKey WriteNewKey(string path, RijndaelManaged managed)
+        {
+            var key = new AESKey(managed);
+            using (var stream = new FileStream(path, FileMode.CreateNew))
+            {
+                new BinaryFormatter().Serialize(stream, key);
+            }
+            return key;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static AESKey GetNewAESKey(
+            int keySize = 256, 
+            int blockSize = 128,
+            CipherMode cipherMode = CipherMode.CBC,
+            PaddingMode paddingMode = PaddingMode.PKCS7)
         {
             using (var key = new RijndaelManaged())
             {
+                key.Mode = cipherMode;
+                key.Padding = paddingMode;
+                key.KeySize = keySize;
+                key.BlockSize = blockSize;
+
                 key.GenerateKey();
                 key.GenerateIV();
                 return new AESKey(key);

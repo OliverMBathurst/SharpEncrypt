@@ -16,13 +16,20 @@ namespace AESLibrary
 
             keyBytes = managed.Key;
             IVBytes = managed.IV;
-            KeyLength = managed.KeySize;
+            KeySize = managed.KeySize;
+            BlockSize = managed.BlockSize;
         }
+
+        public PaddingMode Padding { get; }
+
+        public CipherMode Mode { get; }
 
         public byte[] GetKey() => keyBytes;
 
         public byte[] GetIV() => IVBytes;
 
-        public int KeyLength { get; }
+        public int KeySize { get; }
+
+        public int BlockSize { get; }
     }
 }

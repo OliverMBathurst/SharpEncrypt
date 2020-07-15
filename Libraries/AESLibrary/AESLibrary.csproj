@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileIOLibrary\FileIOLibrary.csproj" />
+    <Reference Include="FileIOLibrary">
+      <HintPath>..\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

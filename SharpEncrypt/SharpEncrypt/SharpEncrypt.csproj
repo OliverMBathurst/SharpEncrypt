@@ -145,6 +145,7 @@
     <Compile Include="Exceptions\OTPPasswordStoreFirstUseException.cs" />
     <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
     <Compile Include="ExtensionClasses\BindingListExtensions.cs" />
+    <Compile Include="ExtensionClasses\CharExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\StringExtensions.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AnonymousRenameHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
