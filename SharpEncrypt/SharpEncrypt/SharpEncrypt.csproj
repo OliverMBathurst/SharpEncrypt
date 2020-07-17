@@ -140,6 +140,7 @@
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\CouldNotDeserializeKeyFileException.cs" />
+    <Compile Include="Exceptions\FileNotSecuredException.cs" />
     <Compile Include="Exceptions\InvalidEncryptedFileException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
     <Compile Include="Exceptions\OTPKeyFileNotAvailableException.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AnonymousRenameHelper.cs" />
+    <Compile Include="Helpers\FileRenameHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
@@ -222,6 +223,7 @@
     </Compile>
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstance.cs" />
+    <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
@@ -231,14 +233,17 @@
     <Compile Include="Models\OnSecuredFileRenamedTaskResult.cs" />
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
     <Compile Include="Models\PasswordModel.cs" />
+    <Compile Include="Tasks\BulkRenameFolderTask.cs" />
+    <Compile Include="Tasks\DecontainerizeFileTask.cs" />
+    <Compile Include="Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
     <Compile Include="Tasks\OpenAESPasswordStoreTask.cs" />
     <Compile Include="Tasks\OpenOTPPasswordStoreTask.cs" />
     <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
     <Compile Include="Tasks\ReadLogFileTask.cs" />
-    <Compile Include="Tasks\SavePasswordsTask.cs" />
-    <Compile Include="Tasks\SecureFileTask.cs" />
+    <Compile Include="Tasks\OTPSavePasswordsTask.cs" />
+    <Compile Include="Tasks\ContainerizeFileTask.cs" />
     <Compile Include="Tasks\ShredDirectoryTask.cs" />
     <Compile Include="Tasks\OnSecuredFileRenamedTask.cs" />
     <Compile Include="Tasks\WriteFolderExclusionListTask.cs" />

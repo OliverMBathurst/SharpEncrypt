@@ -22,6 +22,8 @@ namespace SharpEncrypt
 
         public bool WipeFreeSpaceAfterSecureDelete { get; set; } = false;
 
+        public bool ReencryptOnLock { get; set; } = true;
+
         public bool Logging { get; set; } = false;
 
         public StoreType StoreType { get; set; } = StoreType.OTP;

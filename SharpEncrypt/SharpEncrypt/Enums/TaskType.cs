@@ -20,11 +20,15 @@
         GenericDeleteTask,
         ReadLogFileTask,
         ShredDirectoryTask,
-        SecureFileTask,
+        ContainerizeFileTask,
+        DecontainerizeFileTask,
         OnSecuredFileRenamedTask,
         OpenOTPPasswordStoreTask,
         OpenAESPasswordStoreTask,
         CreateOTPPasswordStoreKeyTask,
+        RenameFileTask,
+        OTPSavePasswordsTask,
+        BulkRenameFolderTask,
         Undefined
     }
 }

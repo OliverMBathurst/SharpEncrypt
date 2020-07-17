@@ -186,8 +186,11 @@
   <data name="AnExceptionHasOccurred" xml:space="preserve">
     <value>An exception has occurred: {0}</value>
   </data>
+  <data name="AnonymizeFileNameToolStripMenuItem" xml:space="preserve">
+    <value>Anonymize File Name</value>
+  </data>
   <data name="AnonymousRenameToolStripMenuItem" xml:space="preserve">
-    <value>Anonymous Rename</value>
+    <value>Anonymize File Name</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>SharpEncrypt</value>
@@ -198,6 +201,12 @@
   </data>
   <data name="AvailableSize" xml:space="preserve">
     <value>Available Space (GB)</value>
+  </data>
+  <data name="BulkAnonymousRenameToolStripMenuItem" xml:space="preserve">
+    <value>Bulk Anonymize File Names</value>
+  </data>
+  <data name="BulkDeanonymizeFileNamesToolStripMenuItem" xml:space="preserve">
+    <value>Bulk Deanonymize File Names</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -211,8 +220,8 @@
   <data name="ClearJobs" xml:space="preserve">
     <value>Clear Jobs</value>
   </data>
-  <data name="ClearRecentFilesListToolStripMenuItem" xml:space="preserve">
-    <value>Clear Recent Files Grid</value>
+  <data name="ClearSecuredFilesListToolStripMenuItem" xml:space="preserve">
+    <value>Clear Secured Files Grid</value>
   </data>
   <data name="ClearSecuredFoldersGridToolStripMenuItem" xml:space="preserve">
     <value>Clear Secured Folders Grid</value>
@@ -240,6 +249,12 @@
   </data>
   <data name="CurrentValue" xml:space="preserve">
     <value>Current Value</value>
+  </data>
+  <data name="DeanonymiseFileToolStripMenuItem" xml:space="preserve">
+    <value>Deanonymize File Name</value>
+  </data>
+  <data name="DeanonymizeFileNameToolStripMenuItem" xml:space="preserve">
+    <value>Deanonymize File Name</value>
   </data>
   <data name="Debug" xml:space="preserve">
     <value>Debug</value>
@@ -294,6 +309,9 @@
   </data>
   <data name="DuplicateIdentity" xml:space="preserve">
     <value>Duplicate identity found, please use another.</value>
+  </data>
+  <data name="EncryptedFileExtension" xml:space="preserve">
+    <value>.seef</value>
   </data>
   <data name="EncryptedFileFilter" xml:space="preserve">
     <value>SharpEncrypt Encrypted File (*.seef)|*.seef</value>
@@ -523,8 +541,8 @@
   <data name="PublicKeyDoesNotExist" xml:space="preserve">
     <value>A public key does not exist for this user, please generate another.</value>
   </data>
-  <data name="RecentFiles" xml:space="preserve">
-    <value>Recent Files</value>
+  <data name="ReencryptOnLock" xml:space="preserve">
+    <value>Re-encrypt On Lock</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
@@ -579,6 +597,9 @@
   </data>
   <data name="SecureDeleteToolStripMenuItem" xml:space="preserve">
     <value>Secure Delete</value>
+  </data>
+  <data name="SecuredFiles" xml:space="preserve">
+    <value>Secured Files</value>
   </data>
   <data name="SecuredFilesListFileName" xml:space="preserve">
     <value>FilesList.BIN</value>
@@ -660,6 +681,12 @@
   </data>
   <data name="Strength" xml:space="preserve">
     <value>Strength</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TaskCompletedSuccessfully" xml:space="preserve">
+    <value>Task completed successfully.</value>
   </data>
   <data name="TaskProgressForm" xml:space="preserve">
     <value>Task Progress</value>

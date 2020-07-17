@@ -1,140 +1,139 @@
 ﻿using AESLibrary;
-using SecureEraseLibrary;
-using System;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
+using System.Text;
+using SharpEncrypt.Exceptions;
 
 namespace SharpEncrypt.Helpers
 {
     internal static class ContainerHelper
     {
-        public static bool ValidateContainer(string filePath)
+        private const int KEY_SIZE = 256, BLOCK_SIZE = 128, AES_KEY_LENGTH = 544, SALT_LENGTH = 32;
+
+        public static bool ValidateContainer(string filePath, string password)
+            => GetDecryptedAESKey(filePath, password) != null;
+
+        public static void DecontainerizeFile(string filePath, string password)
         {
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException(nameof(filePath));
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(filePath);
+            var key = GetDecryptedAESKey(filePath, password);
 
-            var guidBytes = Constants.GetGuidBytes();
-            using (var fs = new FileStream(filePath, FileMode.Open))
-            {                
-                if (fs.Length < guidBytes.Length * 2)
-                    return false;
-
-                var buffer = new byte[guidBytes.Length];
-                fs.Read(buffer, 0, buffer.Length);
-
-                if (!guidBytes.SequenceEqual(buffer))
-                    return false;
-            }
-
-            if (FindKeyEndByteOffset(filePath, guidBytes.Length, guidBytes, out var keyEndBytesRead))
+            if (key != null)
             {
                 using (var fs = new FileStream(filePath, FileMode.Open))
                 {
-                    var lengthOfKey = keyEndBytesRead - guidBytes.Length;
-
-                    fs.Read(new byte[guidBytes.Length], 0, guidBytes.Length); //read first 32 bytes (guid bytes)
-
-                    //now read in the key
-                    var buffer = new byte[lengthOfKey];
-                    fs.Read(buffer, 0, buffer.Length);
-
-                    using (var ms = new MemoryStream(buffer))
-                    {
-                        if (new BinaryFormatter().Deserialize(ms) is AESKey key)
-                            return true;
-                    }
+                    fs.SetLength(fs.Length - (AES_KEY_LENGTH + SALT_LENGTH));
                 }
+
+                AESHelper.DecryptFile(key, filePath);
             }
-
-            return false;
-        }
-
-        public static void Containerize(string filePath, byte[] encryptedKeyBytes, int bufferLength = 1024)
-        {
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException(nameof(filePath));
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(filePath);
-
-            var destFilePath = $"{Path.GetFileName(filePath)}.seef";
-
-            while (File.Exists(destFilePath))
-                destFilePath += ".seef";
-
-            using (var fs = new FileStream(destFilePath, FileMode.Create))
+            else
             {
-                var guidBytes = Constants.GetGuidBytes();
-                fs.Write(guidBytes, 0, guidBytes.Length);
-                fs.Write(encryptedKeyBytes, 0, encryptedKeyBytes.Length);
-                fs.Write(guidBytes, 0, guidBytes.Length);
-
-                using (var ifs = new FileStream(filePath, FileMode.Open))
-                {
-                    var buffer = new byte[bufferLength];
-                    int read;
-                    while ((read = ifs.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        fs.Write(buffer, 0, read);
-                    }
-                }
-            }
-
-            SecureEraseHelper.SDeleteFileWipe(filePath);
+                throw new InvalidEncryptedFileException();
+            }      
         }
 
-        public static void Containerize(string filePath, AESKey key, string password)
+        public static void ContainerizeFile(string filePath, AESKey key, string password)
         {
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException(nameof(filePath));
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(filePath);
-
             AESHelper.EncryptFile(key, filePath);
 
-            var keyBytes = AESHelper.PasswordEncrypt(key, password);
-            Containerize(filePath, keyBytes);
-        }
-
-        private static bool FindKeyEndByteOffset(string filePath, int bytesRead, byte[] guidBytes, out int startByte)
-        {
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException(nameof(filePath));
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(filePath);
-
-            startByte = bytesRead;
-            using (var fs = new FileStream(filePath, FileMode.Open))
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            var salt = GenerateSalt();
+            using (var passwordKey = new Rfc2898DeriveBytes(passwordBytes, salt, 50000, HashAlgorithmName.SHA512))
             {
-                using (var buffStream = new BufferedStream(fs))
+                using (var AES = new RijndaelManaged())
                 {
-                    for (var c = 0; c < bytesRead; c++)
-                        buffStream.ReadByte();
+                    AES.KeySize = KEY_SIZE;
+                    AES.BlockSize = BLOCK_SIZE;
+                    AES.Key = passwordKey.GetBytes(AES.KeySize / 8);
+                    AES.IV = passwordKey.GetBytes(AES.BlockSize / 8);
 
-                    var buff = new byte[guidBytes.Length - 1];
-                    var otherBytes = guidBytes.Skip(1);
-
-                    int read;
-                    while ((read = buffStream.ReadByte()) != -1)
+                    using (var ms = new MemoryStream())
                     {
-                        bytesRead++;
-                        if (read == guidBytes[0])
+                        using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
                         {
-                            var pos = buffStream.Position;
-                            buffStream.Read(buff, 0, buff.Length);
-                            if (buff.SequenceEqual(otherBytes))
+                            var bytes = GetByteArray(key);
+                            cs.Write(bytes, 0, bytes.Length);
+                            cs.FlushFinalBlock();
+
+                            var encBytes = ms.ToArray();
+                            using (var fs = new FileStream(filePath, FileMode.Append))
                             {
-                                startByte = bytesRead - 1;
-                                return true;
+                                fs.Write(encBytes, 0, encBytes.Length);
+                                fs.Write(salt, 0, salt.Length);
                             }
-                            buffStream.Seek(pos, SeekOrigin.Begin);
                         }
                     }
                 }
             }
-            return false;
+        }
+
+        private static AESKey GetDecryptedAESKey(string filePath, string password)
+        {
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            var salt = new byte[SALT_LENGTH];
+            var decryptedKeyBytes = new byte[AES_KEY_LENGTH];
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
+            {
+                if (fs.Length < (AES_KEY_LENGTH + SALT_LENGTH))
+                    throw new InvalidEncryptedFileException();
+
+                fs.Seek(fs.Length - SALT_LENGTH, SeekOrigin.Begin);
+                fs.Read(salt, 0, salt.Length);
+
+                using (var AES = new RijndaelManaged())
+                {
+                    using (var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000, HashAlgorithmName.SHA512))
+                    {
+                        AES.KeySize = KEY_SIZE;
+                        AES.BlockSize = BLOCK_SIZE;
+                        AES.Key = key.GetBytes(AES.KeySize / 8);
+                        AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+                        var encKeyBytes = new byte[AES_KEY_LENGTH];
+                        fs.Seek(fs.Length - (AES_KEY_LENGTH + SALT_LENGTH), SeekOrigin.Begin);
+                        fs.Read(encKeyBytes, 0, encKeyBytes.Length);
+
+                        using (var ms = new MemoryStream(encKeyBytes))
+                        {
+                            using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Read))
+                            {
+                                cs.Read(decryptedKeyBytes, 0, decryptedKeyBytes.Length);
+                            }
+                        }
+                    }
+                }
+            }
+
+            using (var ms = new MemoryStream(decryptedKeyBytes))
+            {
+                if (new BinaryFormatter().Deserialize(ms) is AESKey aesKey)
+                {
+                    return aesKey;
+                }
+            }
+
+            return null;
+        }
+
+        private static byte[] GetByteArray(object o)
+        {
+            using (var ms = new MemoryStream())
+            {
+                new BinaryFormatter().Serialize(ms, o);
+                return ms.ToArray();
+            }
+        }
+
+        private static byte[] GenerateSalt()
+        {
+            var data = new byte[SALT_LENGTH];
+            using (var rgnCryptoServiceProvider = new RNGCryptoServiceProvider())
+            {
+                rgnCryptoServiceProvider.GetBytes(data);
+            }
+            return data;
         }
     }
 }

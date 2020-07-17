@@ -14,6 +14,8 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.OpenOTPPasswordStoreTask;
 
+        public override bool IsSpecial => false;
+
         public OpenOTPPasswordStoreTask(string filePath, string keyFilePath) 
             : base(ResourceType.File, filePath, keyFilePath)
         {
@@ -25,21 +27,18 @@ namespace SharpEncrypt.Tasks
                     {
                         new BinaryFormatter().Serialize(fs, new List<PasswordModel>());
                     }
-                    Result.Exception = new OTPPasswordStoreFirstUseException();
-                    return;
+                    throw new OTPPasswordStoreFirstUseException();
                 }
 
                 if (!File.Exists(keyFilePath))
                 {
                     Result.Value = new KeyFileStoreFileTupleModel { StoreFile = filePath, KeyFile = keyFilePath };
-                    Result.Exception = new OTPKeyFileNotAvailableException();
-                    return;
+                    throw new OTPKeyFileNotAvailableException();
                 }
 
                 if (new FileInfo(filePath).Length > new FileInfo(keyFilePath).Length)
                 {
-                    Result.Exception = new InvalidKeyException();
-                    return;
+                    throw new InvalidKeyException();
                 }
 
                 OTPHelper.Transform(filePath, keyFilePath);

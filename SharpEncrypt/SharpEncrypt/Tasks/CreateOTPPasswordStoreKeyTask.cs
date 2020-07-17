@@ -10,6 +10,8 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.CreateOTPPasswordStoreKeyTask;
 
+        public override bool IsSpecial => false;
+
         public CreateOTPPasswordStoreKeyTask(string storeFilePath, string keyPath, bool open) : base(ResourceType.File, keyPath)
         {
             InnerTask = new Task(() =>

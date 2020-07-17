@@ -10,23 +10,18 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class SavePasswordsTask : SharpEncryptTask
+    internal sealed class OTPSavePasswordsTask : SharpEncryptTask
     {
-        public SavePasswordsTask(string storePath, string keyPath, List<PasswordModel> models) : base(ResourceType.File, storePath, keyPath)
+        public override TaskType TaskType => TaskType.OTPSavePasswordsTask;
+
+        public OTPSavePasswordsTask(string storePath, string keyPath, List<PasswordModel> models) : base(ResourceType.File, storePath, keyPath)
         {
             InnerTask = new Task(() =>
             {
                 if (!File.Exists(storePath))
-                {
-                    Result.Exception = new FileNotFoundException(nameof(storePath));
-                    return;
-                }
-
+                    throw new FileNotFoundException(nameof(storePath));
                 if (!File.Exists(keyPath))
-                {
-                    Result.Exception = new FileNotFoundException(nameof(keyPath));
-                    return;
-                }
+                   throw new FileNotFoundException(nameof(keyPath));
 
                 OTPHelper.Transform(storePath, keyPath);
 

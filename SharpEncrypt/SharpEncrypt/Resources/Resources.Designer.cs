@@ -268,7 +268,16 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anonymous Rename.
+        ///   Looks up a localized string similar to Anonymize File Name.
+        /// </summary>
+        internal static string AnonymizeFileNameToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("AnonymizeFileNameToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anonymize File Name.
         /// </summary>
         internal static string AnonymousRenameToolStripMenuItem {
             get {
@@ -300,6 +309,24 @@ namespace SharpEncrypt.Resources {
         internal static string AvailableSize {
             get {
                 return ResourceManager.GetString("AvailableSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk Anonymize File Names.
+        /// </summary>
+        internal static string BulkAnonymousRenameToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("BulkAnonymousRenameToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk Deanonymize File Names.
+        /// </summary>
+        internal static string BulkDeanonymizeFileNamesToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("BulkDeanonymizeFileNamesToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -340,11 +367,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Recent Files Grid.
+        ///   Looks up a localized string similar to Clear Secured Files Grid.
         /// </summary>
-        internal static string ClearRecentFilesListToolStripMenuItem {
+        internal static string ClearSecuredFilesListToolStripMenuItem {
             get {
-                return ResourceManager.GetString("ClearRecentFilesListToolStripMenuItem", resourceCulture);
+                return ResourceManager.GetString("ClearSecuredFilesListToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -426,6 +453,24 @@ namespace SharpEncrypt.Resources {
         internal static string CurrentValue {
             get {
                 return ResourceManager.GetString("CurrentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deanonymize File Name.
+        /// </summary>
+        internal static string DeanonymiseFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DeanonymiseFileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deanonymize File Name.
+        /// </summary>
+        internal static string DeanonymizeFileNameToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("DeanonymizeFileNameToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -588,6 +633,15 @@ namespace SharpEncrypt.Resources {
         internal static string DuplicateIdentity {
             get {
                 return ResourceManager.GetString("DuplicateIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .seef.
+        /// </summary>
+        internal static string EncryptedFileExtension {
+            get {
+                return ResourceManager.GetString("EncryptedFileExtension", resourceCulture);
             }
         }
         
@@ -1276,11 +1330,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recent Files.
+        ///   Looks up a localized string similar to Re-encrypt On Lock.
         /// </summary>
-        internal static string RecentFiles {
+        internal static string ReencryptOnLock {
             get {
-                return ResourceManager.GetString("RecentFiles", resourceCulture);
+                return ResourceManager.GetString("ReencryptOnLock", resourceCulture);
             }
         }
         
@@ -1443,6 +1497,15 @@ namespace SharpEncrypt.Resources {
         internal static string SecureDeleteToolStripMenuItem {
             get {
                 return ResourceManager.GetString("SecureDeleteToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secured Files.
+        /// </summary>
+        internal static string SecuredFiles {
+            get {
+                return ResourceManager.GetString("SecuredFiles", resourceCulture);
             }
         }
         
@@ -1686,6 +1749,24 @@ namespace SharpEncrypt.Resources {
         internal static string Strength {
             get {
                 return ResourceManager.GetString("Strength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task completed successfully..
+        /// </summary>
+        internal static string TaskCompletedSuccessfully {
+            get {
+                return ResourceManager.GetString("TaskCompletedSuccessfully", resourceCulture);
             }
         }
         

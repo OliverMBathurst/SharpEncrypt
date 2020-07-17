@@ -9,8 +9,9 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.OpenAESPasswordStoreTask;
 
-        public OpenAESPasswordStoreTask(string filePath, string password) 
-            : base(ResourceType.File, filePath)
+        public override bool IsSpecial => false;
+
+        public OpenAESPasswordStoreTask(string filePath, string password) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {

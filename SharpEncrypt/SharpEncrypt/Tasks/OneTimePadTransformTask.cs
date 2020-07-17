@@ -5,26 +5,21 @@ using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using System;
 using System.IO;
-using System.Resources;
 using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
     internal sealed class OneTimePadTransformTask : SharpEncryptTask
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-
         public override bool IsSpecial => false;
 
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
     
-        public OneTimePadTransformTask(string filePath, string keyFilePath = "", bool encrypt = true)
+        public OneTimePadTransformTask(string filePath, string ext, string keyFilePath = "", bool encrypt = true)
             : base(ResourceType.File, filePath, keyFilePath)
         {
             InnerTask = new Task(() =>
             {
-                var ext = ResourceManager.GetString("SharpEncryptOTPEncryptedFileExtension");
-
                 string newFileName;
 
                 if (encrypt)

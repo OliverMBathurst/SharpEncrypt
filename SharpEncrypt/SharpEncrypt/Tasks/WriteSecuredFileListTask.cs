@@ -14,6 +14,34 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFileListTask;
 
+        public WriteSecuredFileListTask(string path, params string[] paths)
+            : base(ResourceType.File, path)
+        {
+            InnerTask = new Task(() =>
+            {
+                if (!File.Exists(path))
+                    return;
+
+                var listOfModels = new List<FileDataGridItemModel>();
+                
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                    {
+                        listOfModels = list;
+                    }
+                }
+                
+                if (listOfModels.Any())
+                    listOfModels.RemoveAll(x => paths.Contains(x.Secured));
+
+                using (var fs = new FileStream(path, FileMode.Open))
+                {
+                    new BinaryFormatter().Serialize(fs, listOfModels.Distinct().ToList());
+                }
+            });
+        }
+
         public WriteSecuredFileListTask(string path, bool add, params FileDataGridItemModel[] models)
             : base(ResourceType.File, path)
         {

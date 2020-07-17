@@ -232,20 +232,6 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static byte[] PasswordEncrypt(AESKey key, string password)
-        {
-            using (var ms = new MemoryStream())
-            {
-                new BinaryFormatter().Serialize(ms, key);
-                var bytes = ms.ToArray();
-                //encrypt bytes with pw and return
-            }
-            return Array.Empty<byte>();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
         public static AESKey WriteNewKey(string path)
         {
             var key = GetNewAESKey();

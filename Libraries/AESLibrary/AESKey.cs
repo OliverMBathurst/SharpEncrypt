@@ -18,18 +18,20 @@ namespace AESLibrary
             IVBytes = managed.IV;
             KeySize = managed.KeySize;
             BlockSize = managed.BlockSize;
+            Padding = managed.Padding;
+            Mode = managed.Mode;
         }
-
-        public PaddingMode Padding { get; }
-
-        public CipherMode Mode { get; }
 
         public byte[] GetKey() => keyBytes;
 
         public byte[] GetIV() => IVBytes;
 
-        public int KeySize { get; }
+        public int KeySize { get; } = 256;
 
-        public int BlockSize { get; }
+        public int BlockSize { get; } = 128;
+
+        public PaddingMode Padding { get; } = PaddingMode.PKCS7;
+
+        public CipherMode Mode { get; } = CipherMode.CBC;
     }
 }
