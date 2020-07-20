@@ -22,9 +22,9 @@ namespace SharpEncrypt.Helpers
                 {
                     return @params;
                 }
-
-                throw new InvalidKeyException(path);
             }
+
+            throw new InvalidKeyException(path);
         }
 
         public static IDictionary<string, RSAParameters> GetPublicKeys(string filePath)

@@ -1,7 +1,10 @@
-﻿using SharpEncrypt.AbstractClasses;
+﻿using AESLibrary;
+using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
@@ -12,10 +15,28 @@ namespace SharpEncrypt.Tasks
 
         public override TaskType TaskType => TaskType.SecureFolderTask;
 
-        public SecureFolderTask(string folderPath, bool includeSubFolders) : base(ResourceType.Folder, folderPath)
+        public SecureFolderTask(string folderPath, string password, bool includeSubFolders) : base(ResourceType.Folder, folderPath)
         {
             InnerTask = new Task(() => {
-                //logic here
+
+                SecureDirectory(folderPath);
+
+                void SecureDirectory(string dir)
+                {
+                    foreach (var filePath in Directory.GetFiles(dir))
+                    {
+                        ContainerHelper.ContainerizeFile(filePath, AESHelper.GetNewAESKey(), password);
+                    }
+
+                    if (includeSubFolders)
+                    {
+                        foreach (var subFolder in Directory.GetDirectories(dir))
+                        {
+                            SecureDirectory(subFolder);
+                        }
+                    }
+                }
+
                 Result.Value = new FolderDataGridItemModel { URI = folderPath, Time = DateTime.Now };
             });
         }

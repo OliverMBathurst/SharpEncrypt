@@ -26,17 +26,10 @@ namespace SharpEncrypt.Managers
         #endregion
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public void AddPaths(IEnumerable<string> paths)
-        {
-            foreach(var path in paths.Distinct())
-            {
-                var watcher = GetWatcher(path);
-                if(watcher != null)
-                {
-                    Watchers.Add(watcher);
-                }
-            }
-        }
+        public void AddPaths(IEnumerable<string> paths) => AddPathsInternal(paths);
+
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        public void AddPaths(params string[] paths) => AddPathsInternal(paths);
 
         #region Event handlers
 
@@ -70,6 +63,18 @@ namespace SharpEncrypt.Managers
         #endregion
 
         #region Misc methods
+
+        private void AddPathsInternal(IEnumerable<string> paths)
+        {
+            foreach (var path in paths.Distinct())
+            {
+                var watcher = GetWatcher(path);
+                if (watcher != null)
+                {
+                    Watchers.Add(watcher);
+                }
+            }
+        }
 
         private void OnItemDeleted(string path)
         {            

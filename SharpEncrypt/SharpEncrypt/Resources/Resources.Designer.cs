@@ -934,7 +934,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generating a new key pair will overwrite any existing keys, continue?.
+        ///   Looks up a localized string similar to Generating a new key pair will overwrite any existing keys, your current session password will be used to encrypt your private key, continue?.
         /// </summary>
         internal static string KeyPairDisclaimer {
             get {

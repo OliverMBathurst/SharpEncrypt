@@ -410,7 +410,7 @@
     <value>Jobs</value>
   </data>
   <data name="KeyPairDisclaimer" xml:space="preserve">
-    <value>Generating a new key pair will overwrite any existing keys, continue?</value>
+    <value>Generating a new key pair will overwrite any existing keys, your current session password will be used to encrypt your private key, continue?</value>
   </data>
   <data name="LanguageCode" xml:space="preserve">
     <value>Language Code</value>

@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using AESLibrary;
 
 namespace SharpEncrypt.Forms
 {
@@ -79,11 +80,9 @@ namespace SharpEncrypt.Forms
 
         #endregion
 
-        private string HashedSessionPassword { get; set; }
-
         private string SessionPassword { get; set; }
 
-        private bool IsPasswordValid => HashedSessionPassword != null && HashedSessionPassword.Length > 0;
+        private bool IsPasswordValid => SessionPassword != null && SessionPassword.Length > 0;
 
         public SharpEncryptSettings Settings {
             get => _settings;
@@ -158,7 +157,7 @@ namespace SharpEncrypt.Forms
                     {
                         if (Directory.Exists(folder))
                         {
-                            TaskManager.AddTask(new SecureFolderTask(folder, Settings.IncludeSubfolders));
+                            TaskManager.AddTask(new SecureFolderTask(folder, SessionPassword, Settings.IncludeSubfolders));
                         }
                     }
                 }
@@ -316,7 +315,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (securedFile.DataBoundItem is FileDataGridItemModel model)
                     {
-                        TaskManager.AddTask(new RenameFileNameTask(model.Secured, HashedSessionPassword, true));
+                        TaskManager.AddTask(new RenameFileNameTask(model.Secured, SessionPassword, true));
                     }
                 }
             }
@@ -330,7 +329,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (securedFile.DataBoundItem is FileDataGridItemModel model)
                     {
-                        TaskManager.AddTask(new RenameFileNameTask(model.Secured, HashedSessionPassword, false));
+                        TaskManager.AddTask(new RenameFileNameTask(model.Secured, SessionPassword, false));
                     }
                 }
             }
@@ -391,7 +390,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (selectedFolder.DataBoundItem is FolderDataGridItemModel model)
                     {
-                        TaskManager.AddTask(new BulkRenameFolderTask(model.URI, HashedSessionPassword, Settings.IncludeSubfolders, true));
+                        TaskManager.AddTask(new BulkRenameFolderTask(model.URI, SessionPassword, Settings.IncludeSubfolders, true));
                     }
                 }
             }
@@ -405,7 +404,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (selectedFolder.DataBoundItem is FolderDataGridItemModel model)
                     {
-                        TaskManager.AddTask(new BulkRenameFolderTask(model.URI, HashedSessionPassword, Settings.IncludeSubfolders, false));
+                        TaskManager.AddTask(new BulkRenameFolderTask(model.URI, SessionPassword, Settings.IncludeSubfolders, false));
                     }
                 }
             }
@@ -480,7 +479,7 @@ namespace SharpEncrypt.Forms
 
         private void ClearSessionPassword_Click(object sender, EventArgs e)
         {
-            HashedSessionPassword = null;
+            SessionPassword = null;
         }
 
         private void ShowAllSecuredFiles_Click(object sender, EventArgs e)
@@ -614,8 +613,7 @@ namespace SharpEncrypt.Forms
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    HashedSessionPassword = dialog.Password.Hash();
-                    SessionPassword = dialog.Password;
+                    SessionPassword = dialog.Password.Hash();
                 }
             }
         }
@@ -649,7 +647,10 @@ namespace SharpEncrypt.Forms
         {
             using (var importPubKeyForm = new ImportPublicKeyForm())
             {
-                importPubKeyForm.Show();
+                if(importPubKeyForm.ShowDialog() == DialogResult.OK)
+                {
+                    TaskManager.AddTask(new ImportPublicRSAKeyTask(PathHelper.PubKeyFile, importPubKeyForm.Result));
+                }
             }
         }
 
@@ -691,10 +692,13 @@ namespace SharpEncrypt.Forms
                 string.Empty,
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                var (publicKey, privateKey) = RSAKeyPairHelper.GetNewKeyPair();
-                RSAKeyWriterHelper.Write(@public, publicKey);
-                RSAKeyWriterHelper.Write(@private, privateKey);
-                //encrypt the rsa priv key (IMPORTANT)
+                if (OnPasswordRequired())
+                {
+                    var (publicKey, privateKey) = RSAKeyPairHelper.GetNewKeyPair();
+                    RSAKeyWriterHelper.Write(@public, publicKey);
+                    RSAKeyWriterHelper.Write(@private, privateKey);
+                    ContainerHelper.ContainerizeFile(@private, AESHelper.GetNewAESKey(), SessionPassword);
+                }
             }
         }
 
@@ -980,7 +984,7 @@ namespace SharpEncrypt.Forms
         private void OnFolderSecured(FolderDataGridItemModel folderModel)
         {
             TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, true, folderModel));
-            FileSystemManager.AddPaths(new[] { folderModel.URI });
+            FileSystemManager.AddPaths(folderModel.URI);
             SecuredFolders.Add(folderModel);
             AddModelsToSecuredFoldersDataGrid_NoCheck(folderModel);
         }
@@ -988,7 +992,7 @@ namespace SharpEncrypt.Forms
         private void OnFileSecured(FileDataGridItemModel model)
         {
             TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, true, model));
-            FileSystemManager.AddPaths(new[] { model.Secured });
+            FileSystemManager.AddPaths(model.Secured);
             SecuredFiles.Add(model);
             AddModelsToSecuredFilesDataGrid_NoCheck(model);
         }
@@ -1183,7 +1187,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        TaskManager.AddTask(new RenameFileNameTask(openFileDialog.FileName, HashedSessionPassword, anonymize));
+                        TaskManager.AddTask(new RenameFileNameTask(openFileDialog.FileName, SessionPassword, anonymize));
                     }
                 }
             }
@@ -1202,7 +1206,7 @@ namespace SharpEncrypt.Forms
             }
             else if (Settings.StoreType == StoreType.AES)
             {
-                TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, HashedSessionPassword));
+                TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
             }
         }
 

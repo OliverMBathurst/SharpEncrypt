@@ -1,12 +1,9 @@
 ﻿using SharpEncrypt.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Resources;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace SharpEncrypt.Forms
@@ -17,6 +14,8 @@ namespace SharpEncrypt.Forms
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
 
         public ImportPublicKeyForm() => InitializeComponent();
+
+        public (string identity, string pubFilePath) Result { get; set; }
 
         private void ImportPublicKeyForm_Load(object sender, EventArgs e)
         {
@@ -65,23 +64,13 @@ namespace SharpEncrypt.Forms
         private bool ImportPublicKey(string identity)
         {
             var keyFilePath = PathService.PubKeyFile;
-            IDictionary<string, RSAParameters> pubKeyList = new Dictionary<string, RSAParameters>();
             if (File.Exists(keyFilePath))
             {
-                pubKeyList = RSAKeyReaderHelper.GetPublicKeys(keyFilePath);
-
-                if (pubKeyList.ContainsKey(identity))
+                if (RSAKeyReaderHelper.GetPublicKeys(keyFilePath).ContainsKey(identity))
                 {
                     MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));
                     return false;
                 }
-            }
-            
-            pubKeyList.Add(identity, RSAKeyReaderHelper.GetParameters(PublicKeyFilePathField.Text));
-
-            using (var fs = new FileStream(keyFilePath, FileMode.Create))
-            {
-                new BinaryFormatter().Serialize(fs, pubKeyList);
             }
 
             return true;

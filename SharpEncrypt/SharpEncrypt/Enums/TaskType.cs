@@ -29,6 +29,7 @@
         RenameFileTask,
         OTPSavePasswordsTask,
         BulkRenameFolderTask,
+        ImportPublicRSAKeyTask,
         Undefined
     }
 }

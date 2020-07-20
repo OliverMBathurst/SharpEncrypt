@@ -140,6 +140,7 @@
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
     <Compile Include="Exceptions\CouldNotDeserializeKeyFileException.cs" />
+    <Compile Include="Exceptions\DuplicateIdentityException.cs" />
     <Compile Include="Exceptions\FileNotSecuredException.cs" />
     <Compile Include="Exceptions\InvalidEncryptedFileException.cs" />
     <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Tasks\BulkRenameFolderTask.cs" />
     <Compile Include="Tasks\DecontainerizeFileTask.cs" />
+    <Compile Include="Tasks\ImportPublicRSAKeyTask.cs" />
     <Compile Include="Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />

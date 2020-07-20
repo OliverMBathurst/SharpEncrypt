@@ -22,16 +22,19 @@ namespace SharpEncrypt.Tasks
             InnerTask = new Task(() =>
             {
                 ContainerHelper.ContainerizeFile(filePath, AESHelper.GetNewAESKey(), password);
-                var path = FileGeneratorHelper.GetValidFileNameForDirectory(filePath, ext);
+                var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
+                    Path.GetDirectoryName(filePath),
+                    Path.GetFileNameWithoutExtension(filePath),
+                    ext);
 
-                File.Move(filePath, path);
+                File.Move(filePath, newPath);
 
 
                 Result.Value = new FileDataGridItemModel
                 {
                     File = Path.GetFileName(filePath),
                     Time = DateTime.Now,
-                    Secured = path,
+                    Secured = newPath,
                     Algorithm = CipherType.AES
                 };
             });

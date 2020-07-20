@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -20,9 +21,19 @@ namespace SharpEncrypt.ExtensionClasses
             using (var sha256 = new SHA256Managed())
             {
                 var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(str));
-                var hashString = string.Join(string.Empty, hash.Select(x => string.Format(CultureInfo.InvariantCulture, "{0:x2}", x)));
-                return hashString;
+                return string.Join(string.Empty, hash.Select(x => string.Format(CultureInfo.InvariantCulture, "{0:x2}", x)));
             }
+        }
+
+        public static string RemoveLast(this string str, int number)
+        {
+            if (str == null)
+                throw new ArgumentNullException(nameof(str));
+
+            if (number >= str.Length)
+                return string.Empty;
+
+            return str.Substring(0, str.Length - number);
         }
     }
 }

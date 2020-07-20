@@ -149,11 +149,8 @@ namespace FileGeneratorLibrary
             WriteNewFile(driveInfo.RootDirectory.FullName, size, random, postDelete);
         }
 
-        public static string GetValidFileNameForDirectory(string filePath, string fileExtension)
+        public static string GetValidFileNameForDirectory(string dir, string fileName, string fileExtension)
         {
-            var dir = Path.GetDirectoryName(filePath);
-            var fileName = Path.GetFileName(filePath);
-
             var proposed = Path.Combine(dir, $"{fileName}{fileExtension}");
             if (!File.Exists(proposed)) return proposed;
             {

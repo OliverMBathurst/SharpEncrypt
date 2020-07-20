@@ -3,6 +3,7 @@ using OTPLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
+using SharpEncrypt.ExtensionClasses;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -24,16 +25,25 @@ namespace SharpEncrypt.Tasks
 
                 if (encrypt)
                 {
-                    newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(filePath, ext);
-                    if (newFileName == null)
-                        throw new NoSuitableNameFoundException();
+                    newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
+                        Path.GetDirectoryName(filePath),
+                        Path.GetFileName(filePath),
+                        ext);
                 }
                 else
                 {
                     if (!filePath.EndsWith(ext, StringComparison.Ordinal))
                         throw new InvalidEncryptedFileException();
-                    newFileName = filePath.Replace(ext, string.Empty);
+                    var name = filePath.RemoveLast(ext.Length);
+
+                    newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
+                        Path.GetDirectoryName(name),
+                        Path.GetFileName(name),
+                        string.Empty);
                 }
+
+                if (newFileName == null)
+                    throw new NoSuitableNameFoundException();
 
                 File.Move(filePath, newFileName);
 
