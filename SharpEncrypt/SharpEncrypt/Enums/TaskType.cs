@@ -28,8 +28,10 @@
         CreateOTPPasswordStoreKeyTask,
         RenameFileTask,
         OTPSavePasswordsTask,
+        AESSavePasswordsTask,
         BulkRenameFolderTask,
         ImportPublicRSAKeyTask,
+        GenerateNewRSAKeyPairTask,
         Undefined
     }
 }

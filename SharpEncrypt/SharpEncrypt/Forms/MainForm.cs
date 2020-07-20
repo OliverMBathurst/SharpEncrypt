@@ -16,7 +16,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using AESLibrary;
 
 namespace SharpEncrypt.Forms
 {
@@ -57,6 +56,7 @@ namespace SharpEncrypt.Forms
         private delegate void TaskExceptionOccurredEventHandler(Exception exception);
         private delegate void OTPPasswordStoreKeyWrittenEventHandler(CreateOTPPasswordStoreKeyTaskResult result);
         private delegate void OTPPasswordStoreReadEventHandler(OpenOTPPasswordStoreTaskResult result);
+        private delegate void AESPasswordStoreReadEventHandler(OpenAESPasswordStoreTaskResult result);
         private delegate void LogFileReadEventHandler(string[] lines);
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
         private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
@@ -74,6 +74,7 @@ namespace SharpEncrypt.Forms
         private event SecuredFileRenamedEventHandler SecuredFileRenamed;
         private event OTPPasswordStoreKeyWrittenEventHandler OTPPasswordStoreKeyWritten;
         private event OTPPasswordStoreReadEventHandler OTPPasswordStoreRead;
+        private event AESPasswordStoreReadEventHandler AESPasswordStoreRead;
         private event LogFileReadEventHandler LogFileRead;
         private event GenericTaskCompletedSuccessfullyEventHandler GenericTaskCompletedSuccessfully;
         private event FileDecontainerizedEventHandler FileDecontainerized;
@@ -114,6 +115,7 @@ namespace SharpEncrypt.Forms
             SecuredFileRenamed += OnSecuredFileRenamed;
             OTPPasswordStoreKeyWritten += OnOTPPasswordStoreKeyWritten;
             OTPPasswordStoreRead += OnOTPPasswordStoreRead;
+            AESPasswordStoreRead += OnAESPasswordStoreRead;
             GenericTaskCompletedSuccessfully += OnGenericTaskCompletedSuccessfully;
             FileDecontainerized += OnFileDecontainerized;
 
@@ -685,8 +687,6 @@ namespace SharpEncrypt.Forms
 
         private void GenerateNewKeyPairToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var (@public, @private) = PathHelper.KeyPairPaths;
-
             if (MessageBox.Show(
                 ResourceManager.GetString("KeyPairDisclaimer"),
                 string.Empty,
@@ -694,10 +694,7 @@ namespace SharpEncrypt.Forms
             {
                 if (OnPasswordRequired())
                 {
-                    var (publicKey, privateKey) = RSAKeyPairHelper.GetNewKeyPair();
-                    RSAKeyWriterHelper.Write(@public, publicKey);
-                    RSAKeyWriterHelper.Write(@private, privateKey);
-                    ContainerHelper.ContainerizeFile(@private, AESHelper.GetNewAESKey(), SessionPassword);
+                    TaskManager.AddTask(new GenerateNewRSAKeyPairTask(PathHelper.KeyPairPaths, SessionPassword));
                 }
             }
         }
@@ -1077,6 +1074,23 @@ namespace SharpEncrypt.Forms
             }
         }
 
+        private void OnAESPasswordStoreRead(OpenAESPasswordStoreTaskResult result)
+        {
+            if (OnPasswordRequired())
+            {
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    using (var passwordManager = new PasswordManagerForm(result.Models))
+                    {
+                        if (passwordManager.ShowDialog() == DialogResult.OK)
+                        {
+                            TaskManager.AddTask(new AESSavePasswordsTask(PathHelper.AESPasswordStoreFile, SessionPassword, passwordManager.PasswordModels));
+                        }
+                    }
+                }));
+            }
+        }
+
         private void OnOTPPasswordStoreRead(OpenOTPPasswordStoreTaskResult result)
         {
             InvokeOnControl(new MethodInvoker(() =>
@@ -1088,7 +1102,7 @@ namespace SharpEncrypt.Forms
                         TaskManager.AddTask(new OTPSavePasswordsTask(result.StorePath, result.KeyPath, passwordManager.PasswordModels));
                     }
                 }
-            }));            
+            }));
         }
 
         private void OnFileDecontainerized(DecontainerizeFileTaskResult result)
@@ -1206,19 +1220,22 @@ namespace SharpEncrypt.Forms
             }
             else if (Settings.StoreType == StoreType.AES)
             {
-                TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
+                if (OnPasswordRequired())
+                {
+                    TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
+                }
             }
         }
 
         private void OTPPasswordStoreKeyNotFound(KeyFileStoreFileTupleModel tuple)
         {
-            if(!DriveInfo.GetDrives().Any(x => x.Name[0].Equals(tuple.KeyFile[0])))
+            if (!DriveInfo.GetDrives().Any(x => x.Name[0].Equals(tuple.KeyFile[0])))
             {
                 InvokeOnControl(new MethodInvoker(() =>
                 {
                     using (var waitingForDriveForm = new WaitingForDriveForm(tuple))
                     {
-                        if(waitingForDriveForm.ShowDialog() == DialogResult.OK)
+                        if (waitingForDriveForm.ShowDialog() == DialogResult.OK)
                         {
                             TaskManager.AddTask(new OpenOTPPasswordStoreTask(tuple.StoreFile, tuple.KeyFile));
                         }
@@ -1233,7 +1250,7 @@ namespace SharpEncrypt.Forms
 
         private void OTPPasswordStoreFirstUse()
         {
-            if(MessageBox.Show(ResourceManager.GetString("AKeyMustBeSavedForThisOTPStore"), 
+            if (MessageBox.Show(ResourceManager.GetString("AKeyMustBeSavedForThisOTPStore"), 
                 ResourceManager.GetString("FirstUseDialogTitle"),
                 MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
@@ -1624,6 +1641,9 @@ namespace SharpEncrypt.Forms
                         break;
                     case TaskType.OpenOTPPasswordStoreTask when task.Result.Value is OpenOTPPasswordStoreTaskResult result:
                         OTPPasswordStoreRead?.Invoke(result);
+                        break;
+                    case TaskType.OpenAESPasswordStoreTask when task.Result.Value is OpenAESPasswordStoreTaskResult result:
+                        AESPasswordStoreRead?.Invoke(result);
                         break;
                     case TaskType.BulkRenameFolderTask when task.Result.Exception == null:
                         GenericTaskCompletedSuccessfully?.Invoke();

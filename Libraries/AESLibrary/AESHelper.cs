@@ -54,8 +54,6 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
-                rif.Mode = aesKey.Mode;
-                rif.Padding = aesKey.Padding;
                 rif.BlockSize = aesKey.BlockSize;
 
                 using (var encryptor = rif.CreateEncryptor(key, iv))
@@ -103,8 +101,6 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
-                rif.Mode = aesKey.Mode;
-                rif.Padding = aesKey.Padding;
                 rif.BlockSize = aesKey.BlockSize;
 
                 using (var decryptor = rif.CreateDecryptor(key, iv))
@@ -154,8 +150,6 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
-                rif.Mode = aesKey.Mode;
-                rif.Padding = aesKey.Padding;
                 rif.BlockSize = aesKey.BlockSize;
 
                 using (var decryptor = rif.CreateDecryptor(key, iv))
@@ -205,8 +199,6 @@ namespace AESLibrary
                 rif.Key = key;
                 rif.IV = iv;
                 rif.KeySize = keyLength;
-                rif.Mode = aesKey.Mode;
-                rif.Padding = aesKey.Padding;
                 rif.BlockSize = aesKey.BlockSize;
 
                 using (var encryptor = rif.CreateEncryptor(key, iv))

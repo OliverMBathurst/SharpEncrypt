@@ -232,10 +232,13 @@
     <Compile Include="Managers\TaskManager.cs" />
     <Compile Include="Models\KeyFileStoreFileTupleModel.cs" />
     <Compile Include="Models\OnSecuredFileRenamedTaskResult.cs" />
+    <Compile Include="Models\OpenAESPasswordStoreTaskResult.cs" />
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
     <Compile Include="Models\PasswordModel.cs" />
+    <Compile Include="Tasks\AESSavePasswordsTask.cs" />
     <Compile Include="Tasks\BulkRenameFolderTask.cs" />
     <Compile Include="Tasks\DecontainerizeFileTask.cs" />
+    <Compile Include="Tasks\GenerateNewRSAKeyPairTask.cs" />
     <Compile Include="Tasks\ImportPublicRSAKeyTask.cs" />
     <Compile Include="Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />

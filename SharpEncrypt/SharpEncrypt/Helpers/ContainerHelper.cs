@@ -6,6 +6,7 @@ using System.Text;
 using SharpEncrypt.Exceptions;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace SharpEncrypt.Helpers
 {
@@ -13,7 +14,12 @@ namespace SharpEncrypt.Helpers
     {
         private const int KEY_SIZE = 256, BLOCK_SIZE = 128, SALT_LENGTH = 32;
 
-        public static bool ValidateContainer(string filePath, string password) => GetDecryptedAESKey(filePath, password, out _) != null;
+        public static bool ValidateContainer(string filePath, string password) 
+        {
+            if (!File.Exists(filePath))
+                return false;
+            return GetDecryptedAESKey(filePath, password, out _) != null;
+        } 
 
         public static void DecontainerizeFile(string filePath, string password)
         {
@@ -25,8 +31,14 @@ namespace SharpEncrypt.Helpers
                 {
                     fs.SetLength(fs.Length - (keyLength + SALT_LENGTH + GetLengthBytes(keyLength).Length + 1));
                 }
+                try
+                {
+                    AESHelper.DecryptFile(key, filePath);
+                }catch(Exception e)
+                {
 
-                AESHelper.DecryptFile(key, filePath);
+                }
+               
             }
             else
             {
