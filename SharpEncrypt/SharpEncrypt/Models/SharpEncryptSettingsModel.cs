@@ -1,10 +1,10 @@
 ﻿using SharpEncrypt.Enums;
 using System;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Models
 {
     [Serializable]
-    public sealed class SharpEncryptSettings
+    public sealed class SharpEncryptSettingsModel
     {
         public string LanguageCode { get; set; } = "en-GB";
 
@@ -22,12 +22,14 @@ namespace SharpEncrypt
 
         public bool WipeFreeSpaceAfterSecureDelete { get; set; } = false;
 
-        public bool ReencryptOnLock { get; set; } = true;
+        public bool ReencryptOnLock { get; set; } = false;
 
         public bool Logging { get; set; } = false;
 
         public StoreType StoreType { get; set; } = StoreType.OTP;
 
         public string OTPStoreKeyFilePath { get; set; } = string.Empty;
+
+        public int InactivityTimeout { get; set; } = -1;
     }
 }

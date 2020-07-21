@@ -151,6 +151,7 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SetInactivityTimeoutStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.SecuredFilesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecuredFilesGrid)).BeginInit();
@@ -674,6 +675,7 @@ namespace SharpEncrypt.Forms
             this.PasswordManagementToolStripMenuItem,
             this.ChangeSessionPasswordToolStripMenuItem,
             this.ClearSessionPassword,
+            this.SetInactivityTimeoutStripMenuItem,
             this.ResetAllSettingsToolStripMenuItem,
             this.toolStripSeparator3,
             this.Debug,
@@ -841,6 +843,7 @@ namespace SharpEncrypt.Forms
             // AESPasswordBasedToolStripMenuItem
             // 
             this.AESPasswordBasedToolStripMenuItem.CheckOnClick = true;
+            this.AESPasswordBasedToolStripMenuItem.Enabled = false;
             this.AESPasswordBasedToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.AESPasswordBasedToolStripMenuItem.Name = "AESPasswordBasedToolStripMenuItem";
             this.AESPasswordBasedToolStripMenuItem.Size = new System.Drawing.Size(279, 34);
@@ -1202,6 +1205,13 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
+            // SetInactivityTimeoutStripMenuItem
+            // 
+            this.SetInactivityTimeoutStripMenuItem.Name = "SetInactivityTimeoutStripMenuItem";
+            this.SetInactivityTimeoutStripMenuItem.Size = new System.Drawing.Size(559, 34);
+            this.SetInactivityTimeoutStripMenuItem.Text = "Set Inactivity Timeout";
+            this.SetInactivityTimeoutStripMenuItem.Click += new System.EventHandler(this.SetInactivityTimeoutStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1360,6 +1370,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem ReencryptTemporarilyDecryptedFileOnLockLogoffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AnonymizeFileNameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeanonymizeFileNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SetInactivityTimeoutStripMenuItem;
     }
 }
 

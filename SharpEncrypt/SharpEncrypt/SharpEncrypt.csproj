@@ -152,6 +152,12 @@
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\StringExtensions.cs" />
+    <Compile Include="Forms\GenericTextInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GenericTextInput.Designer.cs">
+      <DependentUpon>GenericTextInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PasswordManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,7 +203,7 @@
     <Compile Include="Enums\DriveWipeType.cs" />
     <Compile Include="Exceptions\InvalidKeyException.cs" />
     <Compile Include="ExtensionClasses\ControlExtensions.cs" />
-    <Compile Include="BackgroundTaskHandler.cs" />
+    <Compile Include="Managers\BackgroundTaskManager.cs" />
     <Compile Include="Forms\AdvancedHardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +246,7 @@
     <Compile Include="Tasks\DecontainerizeFileTask.cs" />
     <Compile Include="Tasks\GenerateNewRSAKeyPairTask.cs" />
     <Compile Include="Tasks\ImportPublicRSAKeyTask.cs" />
+    <Compile Include="Tasks\InactivityTimeoutTask.cs" />
     <Compile Include="Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />
@@ -335,7 +342,7 @@
     </Compile>
     <Compile Include="Helpers\RSAKeyPairHelper.cs" />
     <Compile Include="Helpers\RSAKeyReaderHelper.cs" />
-    <Compile Include="SharpEncryptSettings.cs" />
+    <Compile Include="Models\SharpEncryptSettingsModel.cs" />
     <Compile Include="Forms\ShowOnceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GenericGridForm.resx">
       <DependentUpon>GenericGridForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GenericTextInput.resx">
+      <DependentUpon>GenericTextInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GenericTextViewer.resx">
       <DependentUpon>GenericTextViewer.cs</DependentUpon>

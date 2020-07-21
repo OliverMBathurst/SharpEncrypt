@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace SharpEncrypt.Forms
 {
@@ -25,7 +26,7 @@ namespace SharpEncrypt.Forms
         private readonly FileSystemManager FileSystemManager = new FileSystemManager();
         private readonly TaskManager TaskManager = new TaskManager();
         private readonly PathHelper PathHelper = new PathHelper();
-        private SharpEncryptSettings _settings;
+        private SharpEncryptSettingsModel _settings;
 
         #region Collections
         //Lists of excluded file and folder model objects the user has requested not to see
@@ -44,7 +45,7 @@ namespace SharpEncrypt.Forms
         #region Delegates and Events
 
         private delegate void SettingsChangeEventHandler(string settingsPropertyName, object value);
-        private delegate void SettingsWriteEventHandler(SharpEncryptSettings settings);
+        private delegate void SettingsWriteEventHandler(SharpEncryptSettingsModel settings);
         private delegate void FileSecuredEventHandler(FileDataGridItemModel model);
         private delegate void FolderSecuredEventHandler(FolderDataGridItemModel model);
         private delegate void SecuredFileRenamedEventHandler(OnSecuredFileRenamedTaskResult result);
@@ -52,13 +53,14 @@ namespace SharpEncrypt.Forms
         private delegate void ReadSecuredFolderListEventHandler(IEnumerable<FolderDataGridItemModel> models);
         private delegate void ExcludedFilesListReadEventHandler(IEnumerable<FileDataGridItemModel> models);
         private delegate void ExcludedFoldersListReadEventHandler(IEnumerable<FolderDataGridItemModel> models);
-        private delegate void SettingsFileReadEventHandler(SharpEncryptSettings settings);
+        private delegate void SettingsFileReadEventHandler(SharpEncryptSettingsModel settings);
         private delegate void TaskExceptionOccurredEventHandler(Exception exception);
         private delegate void OTPPasswordStoreKeyWrittenEventHandler(CreateOTPPasswordStoreKeyTaskResult result);
         private delegate void OTPPasswordStoreReadEventHandler(OpenOTPPasswordStoreTaskResult result);
         private delegate void AESPasswordStoreReadEventHandler(OpenAESPasswordStoreTaskResult result);
         private delegate void LogFileReadEventHandler(string[] lines);
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
+        private delegate void InactivityTaskCompletedEventHandler(int oldTimeout);
         private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
@@ -78,6 +80,28 @@ namespace SharpEncrypt.Forms
         private event LogFileReadEventHandler LogFileRead;
         private event GenericTaskCompletedSuccessfullyEventHandler GenericTaskCompletedSuccessfully;
         private event FileDecontainerizedEventHandler FileDecontainerized;
+        private event InactivityTaskCompletedEventHandler InactivityTaskCompleted;
+
+        #endregion
+
+        #region Structs
+
+        internal struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
+        }
+
+        #endregion
+
+        #region DLL imports
+
+        [DllImport("User32.dll")]
+        public static extern bool LockWorkStation();
+        [DllImport("User32.dll")]
+        private static extern bool GetLastInputInfo(ref LASTINPUTINFO Dummy);
+        [DllImport("Kernel32.dll")]
+        private static extern uint GetLastError();
 
         #endregion
 
@@ -85,11 +109,11 @@ namespace SharpEncrypt.Forms
 
         private bool IsPasswordValid => SessionPassword != null && SessionPassword.Length > 0;
 
-        public SharpEncryptSettings Settings {
+        public SharpEncryptSettingsModel Settings {
             get => _settings;
             private set {
                 _settings = value;
-                SetUIOptions();
+                SetOptions();
             }
         }
 
@@ -118,6 +142,7 @@ namespace SharpEncrypt.Forms
             AESPasswordStoreRead += OnAESPasswordStoreRead;
             GenericTaskCompletedSuccessfully += OnGenericTaskCompletedSuccessfully;
             FileDecontainerized += OnFileDecontainerized;
+            InactivityTaskCompleted += OnInactivityTaskCompleted;
 
             SecuredFilesGrid.DragDrop += OnSecuredFilesGridDragDrop;
             SecuredFilesGrid.DragEnter += OnSecuredFilesGridDragEnter;
@@ -234,7 +259,18 @@ namespace SharpEncrypt.Forms
                 ChangeLanguage(Settings.LanguageCode);
         }
 
-        private void SetUIOptions()
+        private void OnSettingsFileRead(SharpEncryptSettingsModel settings)
+        {
+            Settings = settings;
+            if (Settings.LanguageCode != Constants.DefaultLanguage)
+                ChangeLanguage(Settings.LanguageCode);
+            if (Settings.InactivityTimeout != Constants.DefaultInactivityTimeout)
+                AddTimeoutTask(Settings.InactivityTimeout);
+            if (!Settings.PasswordStartupPromptHide)
+                SetSessionPassword();
+        }
+
+        private void SetOptions()
         {
             InvokeOnControl(new MethodInvoker(delegate ()
             {
@@ -303,6 +339,153 @@ namespace SharpEncrypt.Forms
                 return filePaths;
             }
             return null;
+        }
+
+        public static uint GetIdleTime()
+        {
+            var LastUserAction = new LASTINPUTINFO();
+            LastUserAction.cbSize = (uint)Marshal.SizeOf(LastUserAction);
+            GetLastInputInfo(ref LastUserAction);
+            return ((uint)TickCount - LastUserAction.dwTime);
+        }
+
+        public static long TickCount => Environment.TickCount;
+
+        public static long GetLastInputTime()
+        {
+            var LastUserAction = new LASTINPUTINFO();
+            LastUserAction.cbSize = (uint)Marshal.SizeOf(LastUserAction);
+            if (!GetLastInputInfo(ref LastUserAction))
+            {
+                throw new Exception(GetLastError().ToString(CultureInfo.CurrentCulture));
+            }
+
+            return LastUserAction.dwTime;
+        }
+
+        private void AddTimeoutTask(int timeout)
+        {
+            TaskManager.AddTask(new InactivityTimeoutTask(timeout));
+        }
+
+        private void TransformFileName(bool anonymize)
+        {
+            if (!IsPasswordValid)
+            {
+                ShowErrorDialog(ResourceManager.GetString("PasswordInvalid"));
+            }
+            else
+            {
+                using (var openFileDialog = GetAllFilesDialog())
+                {
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        TaskManager.AddTask(new RenameFileNameTask(openFileDialog.FileName, SessionPassword, anonymize));
+                    }
+                }
+            }
+        }
+
+        private void ShowErrorDialog(string message)
+        {
+            MessageBox.Show(message, ResourceManager.GetString("Error"), MessageBoxButtons.OK);
+        }
+
+        private void OpenPasswordStore()
+        {
+            if (Settings.StoreType == StoreType.OTP)
+            {
+                TaskManager.AddTask(new OpenOTPPasswordStoreTask(PathHelper.OTPPasswordStoreFile, Settings.OTPStoreKeyFilePath));
+            }
+            else if (Settings.StoreType == StoreType.AES)
+            {
+                if (OnPasswordRequired())
+                {
+                    TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
+                }
+            }
+        }
+
+        private void OTPPasswordStoreKeyNotFound(KeyFileStoreFileTupleModel tuple)
+        {
+            if (!DriveInfo.GetDrives().Any(x => x.Name[0].Equals(tuple.KeyFile[0])))
+            {
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    using (var waitingForDriveForm = new WaitingForDriveForm(tuple))
+                    {
+                        if (waitingForDriveForm.ShowDialog() == DialogResult.OK)
+                        {
+                            TaskManager.AddTask(new OpenOTPPasswordStoreTask(tuple.StoreFile, tuple.KeyFile));
+                        }
+                    }
+                }));
+            }
+            else
+            {
+                OnException(new FileNotFoundException(tuple.KeyFile));
+            }
+        }
+
+        private void OTPPasswordStoreFirstUse()
+        {
+            if (MessageBox.Show(ResourceManager.GetString("AKeyMustBeSavedForThisOTPStore"),
+                ResourceManager.GetString("FirstUseDialogTitle"),
+                MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    using (var saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptPasswordStoreFileKey");
+                        var result = saveFileDialog.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            TaskManager.AddTask(new CreateOTPPasswordStoreKeyTask(PathHelper.OTPPasswordStoreFile, saveFileDialog.FileName, true));
+                        }
+                    }
+                }));
+            }
+        }
+
+        private void AddSecuredFolder()
+        {
+            using (var secureFolderDialog = new FolderBrowserDialog())
+            {
+                if (secureFolderDialog.ShowDialog() == DialogResult.OK
+                    && !string.IsNullOrWhiteSpace(secureFolderDialog.SelectedPath))
+                {
+                    SecureFolders(secureFolderDialog.SelectedPath);
+                }
+            }
+        }
+
+        private void ShowApplication()
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            NotifyIcon.Visible = false;
+        }
+
+        private void InvokeOnControl(Delegate method) => Invoke(method);
+
+        private OpenFileDialog GetAllFilesDialog()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
+                return dialog;
+            }
+        }
+
+        private OpenFileDialog GetSEEFFilesDialog()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
+                return dialog;
+            }
         }
 
         #endregion
@@ -446,6 +629,22 @@ namespace SharpEncrypt.Forms
 
         #region File menu items
 
+        private void SetInactivityTimeoutStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var genericTextInput = new GenericTextInput<int>(ResourceManager.GetString("EnterTimeout"), -1))
+            {
+                if (genericTextInput.ShowDialog() == DialogResult.OK)
+                {
+                    TaskManager.CancelAllExisting(TaskType.InactivityTimeoutTask);
+                    SettingsChangeRequired?.Invoke("InactivityTimeout", genericTextInput.Result);
+                    if(genericTextInput.Result != Constants.DefaultInactivityTimeout)
+                    {
+                        AddTimeoutTask(genericTextInput.Result);
+                    }                        
+                }
+            }
+        }
+
         private void AESPasswordBasedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (AESPasswordBasedToolStripMenuItem.Checked)
@@ -475,19 +674,13 @@ namespace SharpEncrypt.Forms
         }
 
         private void OpenPasswordManagerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenPasswordStore();
-        }
+            => OpenPasswordStore();
 
         private void ClearSessionPassword_Click(object sender, EventArgs e)
-        {
-            SessionPassword = null;
-        }
+            => SessionPassword = null;
 
         private void ShowAllSecuredFiles_Click(object sender, EventArgs e)
-        {
-            AddModelsToSecuredFilesDataGrid_NoCheck(ExcludedFiles.Where(x => File.Exists(x.Secured)));
-        }
+            => AddModelsToSecuredFilesDataGrid_NoCheck(ExcludedFiles.Where(x => File.Exists(x.Secured)));
 
         private void HideExcludedSecuredFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -506,19 +699,13 @@ namespace SharpEncrypt.Forms
         private void SecuredFoldersToolStripMenuItem_Click(object sender, EventArgs e) => Tabs.SelectedTab = Tabs.TabPages[1];
 
         private void AnonymousRenameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TransformFileName(true);
-        }
+            => TransformFileName(true);
 
         private void RenameToOriginalToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            TransformFileName(false);
-        }
+            => TransformFileName(false);
 
         private void AddSecuredFolderToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            AddSecuredFolder();
-        }
+            => AddSecuredFolder();
 
         private void SecureDeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -545,10 +732,7 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnExitRequested();
-        }
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) => OnExitRequested(false);
 
         private void SecureFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -635,7 +819,7 @@ namespace SharpEncrypt.Forms
                 string.Empty,
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                var newSettingsObj = new SharpEncryptSettings();
+                var newSettingsObj = new SharpEncryptSettingsModel();
                 var changeLang = Settings.LanguageCode != newSettingsObj.LanguageCode;
                 SettingsWriteRequired?.Invoke(newSettingsObj);
 
@@ -762,13 +946,16 @@ namespace SharpEncrypt.Forms
 
         private void ValidateContainerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(var openFileDialog = GetSEEFFilesDialog())
+            if (OnPasswordRequired())
             {
-                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                using (var openFileDialog = GetAllFilesDialog())
                 {
-                    MessageBox.Show(ContainerHelper.ValidateContainer(openFileDialog.FileName, SessionPassword) 
-                        ? string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("ValidContainer"), openFileDialog.FileName)
-                        : string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("NotAValidContainer"), openFileDialog.FileName));
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show(ContainerHelper.ValidateContainer(openFileDialog.FileName, SessionPassword)
+                            ? string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("ValidContainer"), openFileDialog.FileName)
+                            : string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("NotAValidContainer"), openFileDialog.FileName));
+                    }
                 }
             }
         }
@@ -834,6 +1021,33 @@ namespace SharpEncrypt.Forms
         #endregion
 
         #region Handlers
+
+        private void OnInactivityTaskCompleted(int oldTimeout)
+        {
+            var idle = GetIdleTime();
+            if (idle >= oldTimeout)
+            {
+                OnExitRequested(true);
+            }
+            else
+            {
+                if (Settings.InactivityTimeout != Constants.DefaultInactivityTimeout)
+                {
+                    var wait = Settings.InactivityTimeout - idle;
+                    if (wait > 0)
+                    {
+                        if(wait < int.MaxValue && wait > int.MinValue)
+                        {
+                            TaskManager.AddTask(new InactivityTimeoutTask((int)wait));
+                        }
+                    }
+                    else
+                    {
+                        OnExitRequested(true);
+                    }
+                }                
+            }
+        }
 
         private void OnGenericTaskCompletedSuccessfully()
         {
@@ -942,15 +1156,6 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void OnSettingsFileRead(SharpEncryptSettings settings)
-        {
-            Settings = settings;
-            if (Settings.LanguageCode != Constants.DefaultLanguage)
-                ChangeLanguage(Settings.LanguageCode);
-            if (!Settings.PasswordStartupPromptHide)
-                SetSessionPassword();
-        }
-
         private void OnSecuredFolderListRead(IEnumerable<FolderDataGridItemModel> folders)
         {
             var existingFolders = folders.Where(x => Directory.Exists(x.URI)).ToArray();
@@ -996,7 +1201,7 @@ namespace SharpEncrypt.Forms
 
         private void SettingsChangeHandler(string settingsPropertyName, object value)
         {
-            var prop = typeof(SharpEncryptSettings).GetProperty(settingsPropertyName);
+            var prop = typeof(SharpEncryptSettingsModel).GetProperty(settingsPropertyName);
             if (prop == null)
             {
                 MessageBox.Show(ResourceManager.GetString("ACriticalErrorHasOccurred"));
@@ -1015,24 +1220,35 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void SettingsWriteHandler(SharpEncryptSettings settings)
+        private void SettingsWriteHandler(SharpEncryptSettingsModel settings)
             => TaskManager.AddTask(new WriteSettingsFileTask(PathHelper.AppSettingsPath, settings));
 
         private void FormClosingHandler(object sender, FormClosingEventArgs e)
         {
-            OnExitRequested();
+            OnExitRequested(false);
         }
 
-        private void OnExitRequested()
+        private void OnExitRequested(bool silent)
         {
-            if (!TaskManager.HasCompletedJobs)
+            if (!TaskManager.HasCompletedBlockingJobs)
             {
                 InvokeOnControl(new MethodInvoker(() =>
                 {
-                    MessageBox.Show(
-                        ResourceManager.GetString("ThereAreActiveTasks"),
-                        ResourceManager.GetString("ActiveJobsWarning"),
-                        MessageBoxButtons.OK);
+                    if (!silent)
+                    {
+                        MessageBox.Show(
+                            ResourceManager.GetString("ThereAreActiveTasks"),
+                            ResourceManager.GetString("ActiveJobsWarning"),
+                            MessageBoxButtons.OK);
+                    }
+
+                    using (var activeTasksForm = new ActiveTasksForm(TaskManager, true))
+                    {
+                        if(activeTasksForm.ShowDialog() == DialogResult.OK)
+                        {
+                            CloseApplication();
+                        }
+                    }
                 }));
             }
             else
@@ -1187,130 +1403,6 @@ namespace SharpEncrypt.Forms
 
         #endregion
 
-        #region Misc
-
-        private void TransformFileName(bool anonymize)
-        {
-            if (!IsPasswordValid)
-            {
-                ShowErrorDialog(ResourceManager.GetString("PasswordInvalid"));
-            }
-            else
-            {
-                using (var openFileDialog = GetAllFilesDialog())
-                {
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        TaskManager.AddTask(new RenameFileNameTask(openFileDialog.FileName, SessionPassword, anonymize));
-                    }
-                }
-            }
-        }
-
-        private void ShowErrorDialog(string message)
-        {
-            MessageBox.Show(message, ResourceManager.GetString("Error"), MessageBoxButtons.OK);
-        }
-
-        private void OpenPasswordStore()
-        {
-            if (Settings.StoreType == StoreType.OTP)
-            {
-                TaskManager.AddTask(new OpenOTPPasswordStoreTask(PathHelper.OTPPasswordStoreFile, Settings.OTPStoreKeyFilePath));
-            }
-            else if (Settings.StoreType == StoreType.AES)
-            {
-                if (OnPasswordRequired())
-                {
-                    TaskManager.AddTask(new OpenAESPasswordStoreTask(PathHelper.AESPasswordStoreFile, SessionPassword));
-                }
-            }
-        }
-
-        private void OTPPasswordStoreKeyNotFound(KeyFileStoreFileTupleModel tuple)
-        {
-            if (!DriveInfo.GetDrives().Any(x => x.Name[0].Equals(tuple.KeyFile[0])))
-            {
-                InvokeOnControl(new MethodInvoker(() =>
-                {
-                    using (var waitingForDriveForm = new WaitingForDriveForm(tuple))
-                    {
-                        if (waitingForDriveForm.ShowDialog() == DialogResult.OK)
-                        {
-                            TaskManager.AddTask(new OpenOTPPasswordStoreTask(tuple.StoreFile, tuple.KeyFile));
-                        }
-                    }
-                }));
-            }
-            else
-            {
-                OnException(new FileNotFoundException(tuple.KeyFile));
-            }
-        }
-
-        private void OTPPasswordStoreFirstUse()
-        {
-            if (MessageBox.Show(ResourceManager.GetString("AKeyMustBeSavedForThisOTPStore"), 
-                ResourceManager.GetString("FirstUseDialogTitle"),
-                MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                InvokeOnControl(new MethodInvoker(() =>
-                {
-                    using (var saveFileDialog = new SaveFileDialog())
-                    {
-                        saveFileDialog.Filter = ResourceManager.GetString("SharpEncryptPasswordStoreFileKey");
-                        var result = saveFileDialog.ShowDialog();
-                        if (result == DialogResult.OK)
-                        {
-                            TaskManager.AddTask(new CreateOTPPasswordStoreKeyTask(PathHelper.OTPPasswordStoreFile, saveFileDialog.FileName, true));
-                        }
-                    }
-                }));
-            }
-        }
-
-        private void AddSecuredFolder()
-        {
-            using (var secureFolderDialog = new FolderBrowserDialog())
-            {
-                if (secureFolderDialog.ShowDialog() == DialogResult.OK 
-                    && !string.IsNullOrWhiteSpace(secureFolderDialog.SelectedPath))
-                {
-                    SecureFolders(secureFolderDialog.SelectedPath);
-                }
-            }
-        }
-
-        private void ShowApplication()
-        {
-            Show();
-            WindowState = FormWindowState.Normal;
-            ShowInTaskbar = true;
-            NotifyIcon.Visible = false;
-        }
-
-        private void InvokeOnControl(Delegate method) => Invoke(method);
-
-        private OpenFileDialog GetAllFilesDialog()
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = ResourceManager.GetString("AllFilesFilter");
-                return dialog;
-            }
-        }
-
-        private OpenFileDialog GetSEEFFilesDialog()
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = ResourceManager.GetString("EncryptedFileFilter");
-                return dialog;
-            }
-        }
-
-        #endregion
-
         #region Language Menu Items
 
         private void EnglishToolStripMenuItem_Click(object sender, EventArgs e) => ChangeLanguage("en-GB");
@@ -1361,7 +1453,7 @@ namespace SharpEncrypt.Forms
 
         private void IndividualSettingsResetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var individualSettingsResetDialog = new IndividualSettingsResetDialog<SharpEncryptSettings>(Settings, new SharpEncryptSettings()))
+            using (var individualSettingsResetDialog = new IndividualSettingsResetDialog<SharpEncryptSettingsModel>(Settings, new SharpEncryptSettingsModel()))
             {
                 if(individualSettingsResetDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -1377,7 +1469,7 @@ namespace SharpEncrypt.Forms
         private void ExitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ShowApplication();
-            OnExitRequested();
+            OnExitRequested(false);
         }
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1589,7 +1681,7 @@ namespace SharpEncrypt.Forms
 
         private void OnTaskCompleted(SharpEncryptTask task)
         {
-            if (task.Result.Exception != null)
+            if (task.Result.Exception != null && !(task.Result.Exception is OperationCanceledException))
             {
                 if (task.Result.Exception is OTPPasswordStoreFirstUseException)
                 {
@@ -1615,7 +1707,7 @@ namespace SharpEncrypt.Forms
                     case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<FolderDataGridItemModel> models:
                         SecuredFolderListRead?.Invoke(models);
                         break;
-                    case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettings settings:
+                    case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettingsModel settings:
                         SettingsFileRead?.Invoke(settings);
                         break;
                     case TaskType.ReadFileExclusionListTask when task.Result.Value is IEnumerable<FileDataGridItemModel> models:
@@ -1650,6 +1742,9 @@ namespace SharpEncrypt.Forms
                         break;
                     case TaskType.DecontainerizeFileTask when task.Result.Value is DecontainerizeFileTaskResult result:
                         FileDecontainerized?.Invoke(result);
+                        break;
+                    case TaskType.InactivityTimeoutTask when task.Result.Value is int result:
+                        InactivityTaskCompleted?.Invoke(result);
                         break;
                 }
             }

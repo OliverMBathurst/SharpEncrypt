@@ -21,12 +21,8 @@ namespace SharpEncrypt.Tasks
             InnerTask = new Task(() =>
             {
                 if (!File.Exists(filePath))
-                {
                     ContainerizeNewAESPasswordStore(filePath);
-                    return;
-                }
 
-                var containerized = false;
                 if (ContainerHelper.ValidateContainer(filePath, password))
                 {
                     ContainerHelper.DecontainerizeFile(filePath, password);
@@ -39,12 +35,10 @@ namespace SharpEncrypt.Tasks
                         else
                         {
                             ContainerizeNewAESPasswordStore(filePath);
-                            containerized = true;
                         }
                     }
 
-                    if(!containerized)
-                        ContainerHelper.ContainerizeFile(filePath, AESHelper.GetNewAESKey(), password);
+                    ContainerHelper.ContainerizeFile(filePath, AESHelper.GetNewAESKey(), password);
                 }
                 else
                 {
@@ -53,12 +47,13 @@ namespace SharpEncrypt.Tasks
 
                 void ContainerizeNewAESPasswordStore(string path)
                 {
-                    using (var fs = new FileStream(path, FileMode.CreateNew)) 
+                    using (var fs = new FileStream(path, FileMode.Create)) 
                     {
                         new BinaryFormatter().Serialize(fs, new List<PasswordModel>());
                     }
                     ContainerHelper.ContainerizeFile(path, AESHelper.GetNewAESKey(), password);
                     Result.Value = new OpenAESPasswordStoreTaskResult(new List<PasswordModel>());
+                    return;
                 }
             });
         }

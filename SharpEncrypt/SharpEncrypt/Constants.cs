@@ -11,5 +11,7 @@ namespace SharpEncrypt
         public static byte[] GetGuidBytes() => Encoding.ASCII.GetBytes(GuidIdentifier);
 
         public static string ProjectURL => "https://github.com/OliverMBathurst/SharpEncrypt";
+
+        public static int DefaultInactivityTimeout => -1;
     }
 }

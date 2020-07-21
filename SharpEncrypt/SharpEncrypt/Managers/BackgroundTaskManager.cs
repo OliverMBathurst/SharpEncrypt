@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using SharpEncrypt.Models;
 
-namespace SharpEncrypt
+namespace SharpEncrypt.Managers
 {
-    public sealed class BackgroundTaskHandler : IDisposable
+    public sealed class BackgroundTaskManager : IDisposable
     {        
         private readonly BackgroundWorker BackgroundWorker = new BackgroundWorker();
         private readonly ConcurrentQueue<SharpEncryptTask> mTasks = new ConcurrentQueue<SharpEncryptTask>();
@@ -29,7 +29,7 @@ namespace SharpEncrypt
         public event ExceptionOccurredEventHandler Exception;
         #endregion
 
-        public BackgroundTaskHandler(bool disableAfterJob = true)
+        public BackgroundTaskManager(bool disableAfterJob = true)
         {
             DisableAfterJob = disableAfterJob;
 

@@ -32,6 +32,7 @@
         BulkRenameFolderTask,
         ImportPublicRSAKeyTask,
         GenerateNewRSAKeyPairTask,
+        InactivityTimeoutTask,
         Undefined
     }
 }

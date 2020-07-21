@@ -10,11 +10,14 @@ namespace SharpEncrypt.AbstractClasses
     {
         public SharpEncryptTask(ResourceType resourceType, params string[] blockedResources) : base(resourceType, blockedResources) { }
 
+        public bool Disabled { get; set; } = false;
+
         public virtual Guid Identifier { get; } = Guid.NewGuid();
 
-        public virtual bool IsSpecial { get; set; } = true;
+        public virtual bool ShouldBlockExit { get; set; } = true;
 
-        //whether only one task of this type should be running at any one point or not
+        public virtual bool IsSpecial { get; set; } = true;
+       
         public virtual bool IsExclusive { get; set; } = false;
 
         public virtual TaskType TaskType { get; } = TaskType.Undefined;

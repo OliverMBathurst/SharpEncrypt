@@ -655,6 +655,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter timeout (ms):.
+        /// </summary>
+        internal static string EnterTimeout {
+            get {
+                return ResourceManager.GetString("EnterTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -889,6 +898,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inactivity Timeout.
+        /// </summary>
+        internal static string InactivityTimeout {
+            get {
+                return ResourceManager.GetString("InactivityTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Include Subfolders.
         /// </summary>
         internal static string IncludeSubfolders {
@@ -912,6 +930,15 @@ namespace SharpEncrypt.Resources {
         internal static string IndividualSettingsResetToolStripMenuItem {
             get {
                 return ResourceManager.GetString("IndividualSettingsResetToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        internal static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
             }
         }
         
@@ -1600,6 +1627,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set Inactivity Timeout.
+        /// </summary>
+        internal static string SetInactivityTimeoutStripMenuItem {
+            get {
+                return ResourceManager.GetString("SetInactivityTimeoutStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share Keys.
         /// </summary>
         internal static string ShareKeysToolStripMenuItem {
@@ -1794,6 +1830,15 @@ namespace SharpEncrypt.Resources {
         internal static string TaskType {
             get {
                 return ResourceManager.GetString("TaskType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text Input.
+        /// </summary>
+        internal static string TextInput {
+            get {
+                return ResourceManager.GetString("TextInput", resourceCulture);
             }
         }
         

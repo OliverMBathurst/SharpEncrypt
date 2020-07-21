@@ -18,8 +18,7 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() =>
             {
-                var valid = ContainerHelper.ValidateContainer(filePath, password);
-                if (valid)
+                if (ContainerHelper.ValidateContainer(filePath, password))
                 {
                     ContainerHelper.DecontainerizeFile(filePath, password);
                     using (var fs = new FileStream(filePath, FileMode.Open))

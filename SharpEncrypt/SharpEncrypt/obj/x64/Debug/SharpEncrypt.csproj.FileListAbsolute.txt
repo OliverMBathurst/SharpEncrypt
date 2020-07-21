@@ -53,3 +53,4 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debu
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.WaitingForDriveForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.PasswordManagerForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.GenericTextInput.resources

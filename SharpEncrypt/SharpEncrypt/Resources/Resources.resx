@@ -316,6 +316,9 @@
   <data name="EncryptedFileFilter" xml:space="preserve">
     <value>SharpEncrypt Encrypted File (*.seef)|*.seef</value>
   </data>
+  <data name="EnterTimeout" xml:space="preserve">
+    <value>Enter timeout (ms):</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -394,6 +397,9 @@
   <data name="ImportPublicKeyDialogTitle" xml:space="preserve">
     <value>Import Public Key</value>
   </data>
+  <data name="InactivityTimeout" xml:space="preserve">
+    <value>Inactivity Timeout</value>
+  </data>
   <data name="IncludeSubfolders" xml:space="preserve">
     <value>Include Subfolders</value>
   </data>
@@ -402,6 +408,9 @@
   </data>
   <data name="IndividualSettingsResetToolStripMenuItem" xml:space="preserve">
     <value>Individual Settings Reset</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input</value>
   </data>
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key, please generate a new key-pair.</value>
@@ -631,6 +640,9 @@
   <data name="SelectSecuredFile" xml:space="preserve">
     <value>Select a secured file to open.</value>
   </data>
+  <data name="SetInactivityTimeoutStripMenuItem" xml:space="preserve">
+    <value>Set Inactivity Timeout</value>
+  </data>
   <data name="ShareKeysToolStripMenuItem" xml:space="preserve">
     <value>Share Keys</value>
   </data>
@@ -696,6 +708,9 @@
   </data>
   <data name="TaskType" xml:space="preserve">
     <value>Task Type</value>
+  </data>
+  <data name="TextInput" xml:space="preserve">
+    <value>Text Input</value>
   </data>
   <data name="TextViewer" xml:space="preserve">
     <value>Text Viewer</value>

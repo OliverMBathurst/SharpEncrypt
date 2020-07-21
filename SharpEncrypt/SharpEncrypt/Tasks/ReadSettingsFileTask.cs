@@ -1,5 +1,6 @@
 ﻿using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace SharpEncrypt.Tasks
                 {
                     using (var fs = new FileStream(path, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is SharpEncryptSettings settings)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is SharpEncryptSettingsModel settings)
                         {
                             Result.Value = settings;
                         }
@@ -26,7 +27,7 @@ namespace SharpEncrypt.Tasks
                 }
 
                 if (Result.Value == null)
-                    Result.Value = new SharpEncryptSettings();
+                    Result.Value = new SharpEncryptSettingsModel();
             });
         }
     }

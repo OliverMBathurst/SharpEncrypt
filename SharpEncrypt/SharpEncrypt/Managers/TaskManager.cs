@@ -4,13 +4,14 @@ using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using SharpEncrypt.Exceptions;
+using SharpEncrypt.Enums;
 
 namespace SharpEncrypt.Managers
 {
     public sealed class TaskManager : IDisposable
     {
-        private readonly BackgroundTaskHandler SpecialTaskHandler = new BackgroundTaskHandler(false);
-        private readonly ConcurrentDictionary<Guid, BackgroundTaskHandler> GenericTaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskHandler>();
+        private readonly BackgroundTaskManager SpecialTaskHandler = new BackgroundTaskManager(false);
+        private readonly ConcurrentDictionary<Guid, BackgroundTaskManager> GenericTaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskManager>();
 
         #region Delegates and events
         public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
@@ -39,6 +40,15 @@ namespace SharpEncrypt.Managers
         public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
 
         public bool HasCompletedJobs => SpecialTaskHandler.HasCompletedJobs && GenericTaskHandlers.All(x => x.Value.HasCompletedJobs);
+
+        public bool HasCompletedBlockingJobs 
+        {
+            get
+            {
+                return (SpecialTaskHandler.HasCompletedJobs || SpecialTaskHandler.ActiveTasks.All(x => !x.ShouldBlockExit))
+                    && (GenericTaskHandlers.All(x => x.Value.HasCompletedJobs) || GenericTaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit)));
+            }
+        }
 
         public int TaskCount => SpecialTaskHandler.TaskCount + GenericTaskHandlers.Count;
 
@@ -103,7 +113,7 @@ namespace SharpEncrypt.Managers
             }
             else
             {
-                using (var taskHandlerForTask = new BackgroundTaskHandler())
+                using (var taskHandlerForTask = new BackgroundTaskManager())
                 {
                     taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
                     taskHandlerForTask.TaskCompleted += OnTaskCompleted;
@@ -134,6 +144,34 @@ namespace SharpEncrypt.Managers
         }
 
         public void SetCancellationFlag() => Cancelled = true;
+
+        public void CancelAllExisting(TaskType type)
+        {
+            if (SpecialTaskHandler.CurrentTaskInstance.Task.TaskType == type)
+            {
+                SpecialTaskHandler.CurrentTaskInstance.Token.Cancel();
+            }
+
+            foreach (var taskInstance in GenericTaskHandlers.Select(x => x.Value.CurrentTaskInstance))
+            {
+                if (taskInstance.Task.TaskType == type)
+                {
+                    taskInstance.Token.Cancel();
+                }
+            }
+
+            foreach (var specialTask in SpecialTaskHandler.ActiveTasks.Where(x => x.TaskType == type))
+            {
+                specialTask.Disabled = true;
+            }
+
+            foreach (var matchingGuid in GenericTaskHandlers.Select(x => x)
+                .Where(x => x.Value.ActiveTasks.Any(z => z.TaskType == type))
+                .Select(k => k.Key))
+            {
+                GenericTaskHandlers.TryRemove(matchingGuid, out _);
+            }
+        }
 
         #endregion
     }
