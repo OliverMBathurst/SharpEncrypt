@@ -1395,6 +1395,15 @@ namespace SharpEncrypt.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Rename To Original Name.
         /// </summary>
+        internal static string RenameToOriginalToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("RenameToOriginalToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename To Original Name.
+        /// </summary>
         internal static string RenameToOriginalToolStripMenuItem1 {
             get {
                 return ResourceManager.GetString("RenameToOriginalToolStripMenuItem1", resourceCulture);

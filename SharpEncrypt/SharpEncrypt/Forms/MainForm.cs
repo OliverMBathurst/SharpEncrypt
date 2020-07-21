@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace SharpEncrypt.Forms
 {
@@ -62,6 +63,8 @@ namespace SharpEncrypt.Forms
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
         private delegate void InactivityTaskCompletedEventHandler(int oldTimeout);
         private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
+        private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderTaskResult result);
+        private delegate void TempFilesEncryptedEventHandler(ReencryptTempFilesTaskResult result);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
         private event SettingsChangeEventHandler SettingsChangeRequired;
@@ -81,6 +84,8 @@ namespace SharpEncrypt.Forms
         private event GenericTaskCompletedSuccessfullyEventHandler GenericTaskCompletedSuccessfully;
         private event FileDecontainerizedEventHandler FileDecontainerized;
         private event InactivityTaskCompletedEventHandler InactivityTaskCompleted;
+        private event FolderDecontainerizedEventHandler FolderDecontainerized;
+        private event TempFilesEncryptedEventHandler TempFilesEncrypted;
 
         #endregion
 
@@ -122,6 +127,7 @@ namespace SharpEncrypt.Forms
             InitializeComponent();
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
+            SystemEvents.SessionSwitch += OnSessionSwitch;
 
             SettingsWriteRequired += SettingsWriteHandler;
             SettingsChangeRequired += SettingsChangeHandler;
@@ -143,6 +149,8 @@ namespace SharpEncrypt.Forms
             GenericTaskCompletedSuccessfully += OnGenericTaskCompletedSuccessfully;
             FileDecontainerized += OnFileDecontainerized;
             InactivityTaskCompleted += OnInactivityTaskCompleted;
+            FolderDecontainerized += OnFolderDecontainerized;
+            TempFilesEncrypted += OnTempFilesEncrypted;
 
             SecuredFilesGrid.DragDrop += OnSecuredFilesGridDragDrop;
             SecuredFilesGrid.DragEnter += OnSecuredFilesGridDragEnter;
@@ -173,6 +181,37 @@ namespace SharpEncrypt.Forms
         private void MainForm_Load(object sender, EventArgs e) => LoadApplication();
 
         #region Misc methods
+
+        private void ReencryptTempFiles(bool silent = false, bool exitAfter = false)
+        {
+            var files = FileSystemManager.TempFiles;
+
+            if (!files.Any() && exitAfter)
+            {
+                OnExitRequested(true);
+            }
+            else
+            {
+                if (IsPasswordValid)
+                {
+                    TaskManager.AddTask(new ReencryptTempFilesTask(files, SessionPassword, exitAfter));
+                }
+                else
+                {
+                    if (!silent)
+                    {
+                        if (OnPasswordRequired())
+                        {
+                            TaskManager.AddTask(new ReencryptTempFilesTask(files, SessionPassword, exitAfter));
+                        }
+                    }
+                    else
+                    {
+                        //todo log errors in a temp error file (lasterror.txt or something)
+                    }
+                }
+            }
+        }
 
         private void SecureFolders(params string[] folders)
         {
@@ -281,6 +320,11 @@ namespace SharpEncrypt.Forms
                 WipeDiskSpaceAfterSecureDeleteToolStripMenuItem.Checked = Settings.WipeFreeSpaceAfterSecureDelete;
                 LoggingToolStripMenuItem.Checked = Settings.Logging;
                 ReencryptTemporarilyDecryptedFileOnLockLogoffToolStripMenuItem.Checked = Settings.ReencryptOnLock;
+
+                if (Settings.InactivityTimeout == Constants.DefaultInactivityTimeout)
+                {
+                    TaskManager.CancelAllExisting(TaskType.InactivityTimeoutTask);
+                }
 
                 if (Debug.Checked)
                 {
@@ -520,10 +564,7 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void AddSecuredFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSecured();
-        }
+        private void AddSecuredFileToolStripMenuItem_Click(object sender, EventArgs e) => AddSecured();
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -560,7 +601,16 @@ namespace SharpEncrypt.Forms
 
         private void RenameToOriginalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (OnPasswordRequired())
+            {
+                foreach (DataGridViewRow row in SecuredFilesGrid.SelectedRows)
+                {
+                    if (row.DataBoundItem is FileDataGridItemModel model)
+                    {
+                        TaskManager.AddTask(new RenameFileNameTask(model.Secured, SessionPassword, false));
+                    }
+                }
+            }
         }
 
         #endregion
@@ -596,14 +646,10 @@ namespace SharpEncrypt.Forms
         }
 
         private void ShowAllSecuredFolders_Click(object sender, EventArgs e)
-        {
-            AddModelsToSecuredFoldersDataGrid_NoCheck(ExcludedFolders.Where(x => Directory.Exists(x.URI)));
-        }
+            => AddModelsToSecuredFoldersDataGrid_NoCheck(ExcludedFolders.Where(x => Directory.Exists(x.URI)));
 
         private void HideExcludedSecuredFoldersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveModelsFromSecuredFoldersDataGrid(ExcludedFolders);
-        }
+            => RemoveModelsFromSecuredFoldersDataGrid(ExcludedFolders);
 
         private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -612,7 +658,16 @@ namespace SharpEncrypt.Forms
 
         private void DecryptPermanentlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (OnPasswordRequired())
+            {
+                foreach (DataGridViewRow row in SecuredFoldersGrid.SelectedRows)
+                {
+                    if (row.DataBoundItem is FolderDataGridItemModel model)
+                    {
+                        TaskManager.AddTask(new DecontainerizeFolderTask(model, SessionPassword, Settings.IncludeSubfolders, true));
+                    }
+                }
+            }            
         }
 
         private void DecryptTemporarilyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -620,10 +675,7 @@ namespace SharpEncrypt.Forms
 
         }
 
-        private void AddSecuredFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddSecuredFolder();
-        }
+        private void AddSecuredFolderToolStripMenuItem_Click(object sender, EventArgs e) => AddSecuredFolder();
 
         #endregion
 
@@ -683,9 +735,7 @@ namespace SharpEncrypt.Forms
             => AddModelsToSecuredFilesDataGrid_NoCheck(ExcludedFiles.Where(x => File.Exists(x.Secured)));
 
         private void HideExcludedSecuredFilesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RemoveModelsFromSecuredFilesDataGrid(ExcludedFiles);
-        }
+            => RemoveModelsFromSecuredFilesDataGrid(ExcludedFiles);
 
         private void OpenSecuredToolStripMenuItem_Click(object sender, EventArgs e) => OpenSecured();
 
@@ -1022,12 +1072,60 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void OnTempFilesEncrypted(ReencryptTempFilesTaskResult result)
+        {
+            if (result.UncontainerizedFiles.Any())
+            {
+                //todo write to log
+            }
+
+            if (result.ExitAfter)
+            {
+                OnExitRequested(true);
+            }
+        }
+
+        private void OnSessionSwitch(object sender, SessionSwitchEventArgs e)
+        {
+            switch (e.Reason)
+            {
+                case SessionSwitchReason.SessionLogoff:
+                case SessionSwitchReason.SessionLock:
+                    if (Settings.ReencryptOnLock)
+                    {
+                        ReencryptTempFiles(true);
+                    }
+                    break;
+                case SessionSwitchReason.SessionLogon:
+                    if (Settings.ReencryptOnLock)
+                    {
+                        //todo check for re-encryption log and present user with any errors
+                    }
+                    break;
+            }
+        }
+
+        private void OnFolderDecontainerized(DecontainerizeFolderTaskResult result)
+        {
+            if (result.RemoveAfter)
+            {
+                InvokeOnControl(new MethodInvoker(() =>
+                {
+                    DisplaySecuredFolders.Remove(result.Model);
+                    SecuredFolders.Remove(result.Model);
+                    ExcludedFolders.Remove(result.Model);
+                }));
+
+                TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, false, result.Model));
+            }
+        }
+
         private void OnInactivityTaskCompleted(int oldTimeout)
         {
             var idle = GetIdleTime();
             if (idle >= oldTimeout)
             {
-                OnExitRequested(true);
+                ReencryptTempFiles(true, true);
             }
             else
             {
@@ -1036,14 +1134,14 @@ namespace SharpEncrypt.Forms
                     var wait = Settings.InactivityTimeout - idle;
                     if (wait > 0)
                     {
-                        if(wait < int.MaxValue && wait > int.MinValue)
+                        if (wait < int.MaxValue && wait > int.MinValue)
                         {
                             TaskManager.AddTask(new InactivityTimeoutTask((int)wait));
                         }
                     }
                     else
                     {
-                        OnExitRequested(true);
+                        ReencryptTempFiles(true, true);
                     }
                 }                
             }
@@ -1230,30 +1328,37 @@ namespace SharpEncrypt.Forms
 
         private void OnExitRequested(bool silent)
         {
-            if (!TaskManager.HasCompletedBlockingJobs)
+            if (!FileSystemManager.HasTempDecryptedFiles)
             {
-                InvokeOnControl(new MethodInvoker(() =>
+                if (!TaskManager.HasCompletedBlockingJobs)
                 {
-                    if (!silent)
+                    InvokeOnControl(new MethodInvoker(() =>
                     {
-                        MessageBox.Show(
-                            ResourceManager.GetString("ThereAreActiveTasks"),
-                            ResourceManager.GetString("ActiveJobsWarning"),
-                            MessageBoxButtons.OK);
-                    }
-
-                    using (var activeTasksForm = new ActiveTasksForm(TaskManager, true))
-                    {
-                        if(activeTasksForm.ShowDialog() == DialogResult.OK)
+                        if (!silent)
                         {
-                            CloseApplication();
+                            MessageBox.Show(
+                                ResourceManager.GetString("ThereAreActiveTasks"),
+                                ResourceManager.GetString("ActiveJobsWarning"),
+                                MessageBoxButtons.OK);
                         }
-                    }
-                }));
+
+                        using (var activeTasksForm = new ActiveTasksForm(TaskManager, true))
+                        {
+                            if (activeTasksForm.ShowDialog() == DialogResult.OK)
+                            {
+                                CloseApplication();
+                            }
+                        }
+                    }));
+                }
+                else
+                {
+                    CloseApplication();
+                }
             }
             else
             {
-                CloseApplication();
+                ReencryptTempFiles(true, true);
             }
         }
 
@@ -1580,7 +1685,9 @@ namespace SharpEncrypt.Forms
 
         private void OpenExplorerHereToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var models = SecuredFoldersGrid.SelectedRows.Select(x => GetFolderModelFromRow(x));
+            var models = SecuredFoldersGrid.SelectedRows.Select(x => GetFolderModelFromRow(x))
+                .Where(z => z != null);
+
             foreach(var model in models)
             {
                 if (Directory.Exists(model.URI))
@@ -1745,6 +1852,12 @@ namespace SharpEncrypt.Forms
                         break;
                     case TaskType.InactivityTimeoutTask when task.Result.Value is int result:
                         InactivityTaskCompleted?.Invoke(result);
+                        break;
+                    case TaskType.DecontainerizeFolderTask when task.Result.Value is DecontainerizeFolderTaskResult result:
+                        FolderDecontainerized?.Invoke(result);
+                        break;
+                    case TaskType.ReencryptTempFilesTask when task.Result.Value is ReencryptTempFilesTaskResult result:
+                        TempFilesEncrypted?.Invoke(result);
                         break;
                 }
             }

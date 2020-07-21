@@ -231,6 +231,7 @@
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstance.cs" />
     <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
+    <Compile Include="Models\DecontainerizeFolderTaskResult.cs" />
     <Compile Include="Models\DriveWipeJob.cs" />
     <Compile Include="Models\DriveWipeJobSettings.cs" />
     <Compile Include="Models\FileDataGridItemModel.cs" />
@@ -241,12 +242,15 @@
     <Compile Include="Models\OpenAESPasswordStoreTaskResult.cs" />
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
     <Compile Include="Models\PasswordModel.cs" />
+    <Compile Include="Models\ReencryptTempFilesTaskResult.cs" />
     <Compile Include="Tasks\AESSavePasswordsTask.cs" />
     <Compile Include="Tasks\BulkRenameFolderTask.cs" />
     <Compile Include="Tasks\DecontainerizeFileTask.cs" />
+    <Compile Include="Tasks\DecontainerizeFolderTask.cs" />
     <Compile Include="Tasks\GenerateNewRSAKeyPairTask.cs" />
     <Compile Include="Tasks\ImportPublicRSAKeyTask.cs" />
     <Compile Include="Tasks\InactivityTimeoutTask.cs" />
+    <Compile Include="Tasks\ReencryptTempFilesTask.cs" />
     <Compile Include="Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\GenericDeleteFileTask.cs" />

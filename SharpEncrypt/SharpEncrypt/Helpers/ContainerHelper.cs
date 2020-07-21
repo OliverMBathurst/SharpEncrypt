@@ -33,10 +33,6 @@ namespace SharpEncrypt.Helpers
 
                 AESHelper.DecryptFile(key, filePath);
             }
-            else
-            {
-                throw new InvalidEncryptedFileException();
-            }      
         }
 
         public static void ContainerizeFile(string filePath, AESKey key, string password)

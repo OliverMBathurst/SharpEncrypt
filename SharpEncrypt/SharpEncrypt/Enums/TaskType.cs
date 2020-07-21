@@ -33,6 +33,8 @@
         ImportPublicRSAKeyTask,
         GenerateNewRSAKeyPairTask,
         InactivityTimeoutTask,
+        DecontainerizeFolderTask,
+        ReencryptTempFilesTask,
         Undefined
     }
 }

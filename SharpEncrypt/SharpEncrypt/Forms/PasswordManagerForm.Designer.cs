@@ -39,8 +39,6 @@
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OK = new System.Windows.Forms.Button();
             this.PasswordGenerator = new System.Windows.Forms.Button();
-            this.SearchBox = new System.Windows.Forms.TextBox();
-            this.SearchGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.UndoButton = new System.Windows.Forms.Button();
@@ -49,7 +47,6 @@
             this.SelectedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             this.GridContextMenuStrip.SuspendLayout();
-            this.SearchGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // GridView
@@ -144,25 +141,6 @@
             this.PasswordGenerator.UseVisualStyleBackColor = true;
             this.PasswordGenerator.Click += new System.EventHandler(this.PasswordGenerator_Click);
             // 
-            // SearchBox
-            // 
-            this.SearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchBox.Location = new System.Drawing.Point(6, 36);
-            this.SearchBox.Name = "SearchBox";
-            this.SearchBox.Size = new System.Drawing.Size(314, 26);
-            this.SearchBox.TabIndex = 4;
-            // 
-            // SearchGroupBox
-            // 
-            this.SearchGroupBox.Controls.Add(this.SearchBox);
-            this.SearchGroupBox.Location = new System.Drawing.Point(12, 12);
-            this.SearchGroupBox.Name = "SearchGroupBox";
-            this.SearchGroupBox.Size = new System.Drawing.Size(332, 68);
-            this.SearchGroupBox.TabIndex = 5;
-            this.SearchGroupBox.TabStop = false;
-            this.SearchGroupBox.Text = "Search";
-            // 
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -238,7 +216,6 @@
             this.Controls.Add(this.UndoButton);
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.AddButton);
-            this.Controls.Add(this.SearchGroupBox);
             this.Controls.Add(this.PasswordGenerator);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.GridView);
@@ -250,8 +227,6 @@
             this.Load += new System.EventHandler(this.PasswordManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.GridContextMenuStrip.ResumeLayout(false);
-            this.SearchGroupBox.ResumeLayout(false);
-            this.SearchGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,8 +237,6 @@
         private System.Windows.Forms.DataGridView GridView;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button PasswordGenerator;
-        private System.Windows.Forms.TextBox SearchBox;
-        private System.Windows.Forms.GroupBox SearchGroupBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button UndoButton;

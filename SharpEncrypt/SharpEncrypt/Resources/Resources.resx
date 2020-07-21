@@ -562,6 +562,9 @@
   <data name="RemoveFolderFromListToolStripMenuItem" xml:space="preserve">
     <value>Remove Folder From List But Keep Secured</value>
   </data>
+  <data name="RenameToOriginalToolStripMenuItem" xml:space="preserve">
+    <value>Rename To Original Name</value>
+  </data>
   <data name="RenameToOriginalToolStripMenuItem1" xml:space="preserve">
     <value>Rename To Original Name</value>
   </data>

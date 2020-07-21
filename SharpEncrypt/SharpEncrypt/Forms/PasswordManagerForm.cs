@@ -35,7 +35,6 @@ namespace SharpEncrypt.Forms
 
         private void PasswordManager_Load(object sender, EventArgs e)
         {
-            SearchGroupBox.Text = ResourceManager.GetString("Search");
             OK.Text = ResourceManager.GetString("OK");
             Text = ResourceManager.GetString("PasswordManager");
             PasswordGenerator.Text = ResourceManager.GetString("PasswordGenerator");

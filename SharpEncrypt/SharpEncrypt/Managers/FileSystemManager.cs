@@ -25,6 +25,14 @@ namespace SharpEncrypt.Managers
 
         #endregion
 
+        #region Properties
+
+        public bool HasTempDecryptedFiles => TempFiles.Any();
+
+        public HashSet<string> TempFiles { get; } = new HashSet<string>();
+
+        #endregion
+
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public void AddPaths(IEnumerable<string> paths) => AddPathsInternal(paths);
 
@@ -63,6 +71,8 @@ namespace SharpEncrypt.Managers
         #endregion
 
         #region Misc methods
+
+        public void AddTempFile(string path) => TempFiles.Add(path);
 
         private void AddPathsInternal(IEnumerable<string> paths)
         {
