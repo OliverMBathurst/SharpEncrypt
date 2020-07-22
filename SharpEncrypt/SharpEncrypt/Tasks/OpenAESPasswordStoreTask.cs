@@ -10,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class OpenAESPasswordStoreTask : SharpEncryptTask
+    internal sealed class OpenAesPasswordStoreTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.OpenAESPasswordStoreTask;
 
-        public override bool IsSpecial => false;
-
-        public OpenAESPasswordStoreTask(string filePath, string password) : base(ResourceType.File, filePath)
+        public OpenAesPasswordStoreTask(string filePath, string password) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {
                 if (!File.Exists(filePath))
-                    ContainerizeNewAESPasswordStore(filePath);
+                    ContainerizeNewAesPasswordStore(filePath);
 
                 if (ContainerHelper.ValidateContainer(filePath, password))
                 {
@@ -30,11 +28,11 @@ namespace SharpEncrypt.Tasks
                     {
                         if (fs.Length > 0 && new BinaryFormatter().Deserialize(fs) is List<PasswordModel> models)
                         {
-                            Result.Value = new OpenAESPasswordStoreTaskResult(models);
+                            Result.Value = new OpenAesPasswordStoreTaskResult(models);
                         }
                         else
                         {
-                            ContainerizeNewAESPasswordStore(filePath);
+                            ContainerizeNewAesPasswordStore(filePath);
                         }
                     }
 
@@ -42,17 +40,17 @@ namespace SharpEncrypt.Tasks
                 }
                 else
                 {
-                    ContainerizeNewAESPasswordStore(filePath);
+                    ContainerizeNewAesPasswordStore(filePath);
                 }
 
-                void ContainerizeNewAESPasswordStore(string path)
+                void ContainerizeNewAesPasswordStore(string path)
                 {
                     using (var fs = new FileStream(path, FileMode.Create)) 
                     {
                         new BinaryFormatter().Serialize(fs, new List<PasswordModel>());
                     }
                     ContainerHelper.ContainerizeFile(path, AESHelper.GetNewAESKey(), password);
-                    Result.Value = new OpenAESPasswordStoreTaskResult(new List<PasswordModel>());
+                    Result.Value = new OpenAesPasswordStoreTaskResult(new List<PasswordModel>());
                     return;
                 }
             });

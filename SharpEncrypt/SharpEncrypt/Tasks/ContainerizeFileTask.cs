@@ -15,8 +15,6 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ContainerizeFileTask;
 
-        public override bool IsSpecial => false;
-
         public ContainerizeFileTask(string filePath, string password, string ext) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>

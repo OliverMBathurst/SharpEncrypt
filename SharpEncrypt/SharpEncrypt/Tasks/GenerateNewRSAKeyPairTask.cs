@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class GenerateNewRSAKeyPairTask : SharpEncryptTask
+    internal sealed class GenerateNewRsaKeyPairTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.GenerateNewRSAKeyPairTask;
 
-        public GenerateNewRSAKeyPairTask((string @public, string @private) keyPaths, string sessionPassword) 
-            : base(ResourceType.File, keyPaths.@public, keyPaths.@private)
+        public GenerateNewRsaKeyPairTask((string @public, string @private) keyPaths, string sessionPassword) : base(ResourceType.File, keyPaths.@public, keyPaths.@private)
         {
             InnerTask = new Task(() =>
             {
-                var (publicKey, privateKey) = RSAKeyPairHelper.GetNewKeyPair();
-                RSAKeyWriterHelper.Write(keyPaths.@public, publicKey);
-                RSAKeyWriterHelper.Write(keyPaths.@private, privateKey);
-                ContainerHelper.ContainerizeFile(keyPaths.@private, AESHelper.GetNewAESKey(), sessionPassword);
+                var (@public, @private) = keyPaths;
+
+                var (publicKey, privateKey) = RsaKeyPairHelper.GetNewKeyPair();
+                RsaKeyWriterHelper.Write(@public, publicKey);
+                RsaKeyWriterHelper.Write(@private, privateKey);
+                ContainerHelper.ContainerizeFile(@private, AESHelper.GetNewAESKey(), sessionPassword);
             });
         }
     }

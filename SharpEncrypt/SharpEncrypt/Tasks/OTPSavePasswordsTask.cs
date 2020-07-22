@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class OTPSavePasswordsTask : SharpEncryptTask
+    internal sealed class OtpSavePasswordsTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.OTPSavePasswordsTask;
 
-        public OTPSavePasswordsTask(string storePath, string keyPath, List<PasswordModel> models) : base(ResourceType.File, storePath, keyPath)
+        public OtpSavePasswordsTask(string storePath, string keyPath, IReadOnlyCollection<PasswordModel> models) : base(ResourceType.File, storePath, keyPath)
         {
             InnerTask = new Task(() =>
             {
@@ -44,6 +44,8 @@ namespace SharpEncrypt.Tasks
                             {
                                 if (buffer.Length > increase)
                                     buffer = new byte[increase];
+
+                                crypto.GetNonZeroBytes(buffer);
 
                                 fs.Write(buffer, 0, buffer.Length);
                                 increase -= buffer.Length;

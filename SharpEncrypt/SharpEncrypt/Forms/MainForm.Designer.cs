@@ -898,7 +898,7 @@ namespace SharpEncrypt.Forms
             // 
             this.ResetAllSettingsToolStripMenuItem.Name = "ResetAllSettingsToolStripMenuItem";
             this.ResetAllSettingsToolStripMenuItem.Size = new System.Drawing.Size(559, 34);
-            this.ResetAllSettingsToolStripMenuItem.Text = "Reset All Settings";
+            this.ResetAllSettingsToolStripMenuItem.Text = "Reset All AppSettings";
             this.ResetAllSettingsToolStripMenuItem.Click += new System.EventHandler(this.ResetAllSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -1070,7 +1070,7 @@ namespace SharpEncrypt.Forms
             // 
             this.IndividualSettingsResetToolStripMenuItem.Name = "IndividualSettingsResetToolStripMenuItem";
             this.IndividualSettingsResetToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
-            this.IndividualSettingsResetToolStripMenuItem.Text = "Individual Settings Reset";
+            this.IndividualSettingsResetToolStripMenuItem.Text = "Individual AppSettings Reset";
             this.IndividualSettingsResetToolStripMenuItem.Click += new System.EventHandler(this.IndividualSettingsResetToolStripMenuItem_Click);
             // 
             // HelpMenuStrip

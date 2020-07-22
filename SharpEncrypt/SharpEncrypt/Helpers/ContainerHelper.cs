@@ -11,28 +11,27 @@ namespace SharpEncrypt.Helpers
 {
     internal static class ContainerHelper
     {
-        private const int KEY_SIZE = 256, BLOCK_SIZE = 128, SALT_LENGTH = 32;
+        private const int KeySize = 256, BlockSize = 128, SaltLength = 32;
 
         public static bool ValidateContainer(string filePath, string password) 
         {
             if (!File.Exists(filePath))
                 return false;
-            return GetDecryptedAESKey(filePath, password, out _) != null;
+            return GetDecryptedAesKey(filePath, password, out _) != null;
         } 
 
         public static void DecontainerizeFile(string filePath, string password)
         {
-            var key = GetDecryptedAESKey(filePath, password, out var keyLength);
+            var key = GetDecryptedAesKey(filePath, password, out var keyLength);
 
-            if (key != null)
+            if (key == null) return;
+
+            using (var fs = new FileStream(filePath, FileMode.Open))
             {
-                using (var fs = new FileStream(filePath, FileMode.Open))
-                {
-                    fs.SetLength(fs.Length - (keyLength + SALT_LENGTH + GetLengthBytes(keyLength).Length + 1));
-                }
-
-                AESHelper.DecryptFile(key, filePath);
+                fs.SetLength(fs.Length - (keyLength + SaltLength + GetLengthBytes(keyLength).Length + 1));
             }
+
+            AESHelper.DecryptFile(key, filePath);
         }
 
         public static void ContainerizeFile(string filePath, AESKey key, string password)
@@ -43,16 +42,16 @@ namespace SharpEncrypt.Helpers
             var salt = GenerateSalt();
             using (var passwordKey = new Rfc2898DeriveBytes(passwordBytes, salt, 50000, HashAlgorithmName.SHA512))
             {
-                using (var AES = new RijndaelManaged())
+                using (var aes = new RijndaelManaged())
                 {
-                    AES.KeySize = KEY_SIZE;
-                    AES.BlockSize = BLOCK_SIZE;
-                    AES.Key = passwordKey.GetBytes(AES.KeySize / 8);
-                    AES.IV = passwordKey.GetBytes(AES.BlockSize / 8);
+                    aes.KeySize = KeySize;
+                    aes.BlockSize = BlockSize;
+                    aes.Key = passwordKey.GetBytes(aes.KeySize / 8);
+                    aes.IV = passwordKey.GetBytes(aes.BlockSize / 8);
 
                     using (var ms = new MemoryStream())
                     {
-                        using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                        using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
                         {
                             var bytes = GetByteArray(key);
                             cs.Write(bytes, 0, bytes.Length);
@@ -73,7 +72,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static AESKey GetDecryptedAESKey(string filePath, string password, out int keyLength)
+        private static AESKey GetDecryptedAesKey(string filePath, string password, out int keyLength)
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             byte[] decryptedKeyBytes;
@@ -90,29 +89,29 @@ namespace SharpEncrypt.Helpers
 
                 keyLength = lengthBytes.Sum(x => x);
 
-                if (fs.Length < (keyLength + SALT_LENGTH + lengthBytesLength + 1))
+                if (fs.Length < (keyLength + SaltLength + lengthBytesLength + 1))
                     throw new InvalidEncryptedFileException();
 
-                var salt = new byte[SALT_LENGTH];
-                fs.Seek(fs.Length - (lengthBytesLength + 1 + SALT_LENGTH), SeekOrigin.Begin);
+                var salt = new byte[SaltLength];
+                fs.Seek(fs.Length - (lengthBytesLength + 1 + SaltLength), SeekOrigin.Begin);
                 fs.Read(salt, 0, salt.Length);
 
-                using (var AES = new RijndaelManaged())
+                using (var aes = new RijndaelManaged())
                 {
                     using (var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000, HashAlgorithmName.SHA512))
                     {
-                        AES.KeySize = KEY_SIZE;
-                        AES.BlockSize = BLOCK_SIZE;
-                        AES.Key = key.GetBytes(AES.KeySize / 8);
-                        AES.IV = key.GetBytes(AES.BlockSize / 8);
+                        aes.KeySize = KeySize;
+                        aes.BlockSize = BlockSize;
+                        aes.Key = key.GetBytes(aes.KeySize / 8);
+                        aes.IV = key.GetBytes(aes.BlockSize / 8);
 
                         var encKeyBytes = new byte[keyLength];
-                        fs.Seek(fs.Length - (keyLength + SALT_LENGTH + lengthBytesLength + 1), SeekOrigin.Begin);
+                        fs.Seek(fs.Length - (keyLength + SaltLength + lengthBytesLength + 1), SeekOrigin.Begin);
                         fs.Read(encKeyBytes, 0, encKeyBytes.Length);
 
                         using (var ms = new MemoryStream(encKeyBytes))
                         {
-                            using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Read))
+                            using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
                             {
                                 decryptedKeyBytes = new byte[ms.Length];
                                 cs.Read(decryptedKeyBytes, 0, decryptedKeyBytes.Length);
@@ -163,7 +162,7 @@ namespace SharpEncrypt.Helpers
 
         private static byte[] GenerateSalt()
         {
-            var data = new byte[SALT_LENGTH];
+            var data = new byte[SaltLength];
             using (var rgnCryptoServiceProvider = new RNGCryptoServiceProvider())
             {
                 rgnCryptoServiceProvider.GetBytes(data);

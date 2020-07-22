@@ -44,7 +44,7 @@ namespace SharpEncrypt.Forms
 
         private void Options_Click(object sender, EventArgs e)
         {
-            var drives = DriveSelectionControl.GetSelectedDrives();
+            var drives = DriveSelectionControl.GetSelectedDrives().ToList();
             if (!drives.Any())
             {
                 MessageBox.Show(ResourceManager.GetString("NoDrivesSelected"));
@@ -53,18 +53,16 @@ namespace SharpEncrypt.Forms
             {
                 using (var driveWipeOptionsDialog = new AdvancedHardDriveWipeOptionsDialog())
                 {
-                    if(driveWipeOptionsDialog.ShowDialog() == DialogResult.OK)
+                    if (driveWipeOptionsDialog.ShowDialog() != DialogResult.OK) return;
+                    var job = driveWipeOptionsDialog.Job;
+                    foreach (var drive in drives)
                     {
-                        var job = driveWipeOptionsDialog.Job;
-                        foreach (var drive in drives)
-                        {
-                            if (Jobs.ContainsKey(drive))
-                                Jobs[drive].Add(job);
-                            else
-                                Jobs.Add(drive, new List<DriveWipeJob> { job });
-                        }
-                        MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNJobs"), drives.Count()));
+                        if (Jobs.ContainsKey(drive))
+                            Jobs[drive].Add(job);
+                        else
+                            Jobs.Add(drive, new List<DriveWipeJob> { job });
                     }
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNJobs") ?? string.Empty, drives.Count));
                 }
             }
         }
@@ -79,8 +77,7 @@ namespace SharpEncrypt.Forms
             var columns = new List<string> { ResourceManager.GetString("Drive") };
 
             var props = typeof(DriveWipeJob).GetProperties();
-            foreach (var prop in props)
-                columns.Add(ResourceManager.GetString(prop.Name));
+            columns.AddRange(props.Select(prop => ResourceManager.GetString(prop.Name)));
 
             var rows = new List<List<object>>();
             foreach(var kvp in Jobs)
@@ -90,9 +87,7 @@ namespace SharpEncrypt.Forms
                     var row = new List<object> {
                         kvp.Key.Name
                     };
-
-                    foreach(var prop in props)
-                        row.Add(prop.GetValue(value));
+                    row.AddRange(props.Select(prop => prop.GetValue(value)));
 
                     rows.Add(row);
                 }

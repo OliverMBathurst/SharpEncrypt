@@ -3,21 +3,21 @@
 namespace SharpEncrypt.Exceptions
 {
     [Serializable]
-    public class OTPPasswordStoreFirstUseException : Exception
+    public class OtpPasswordStoreFirstUseException : Exception
     {
-        public OTPPasswordStoreFirstUseException(string message) : base(message)
+        public OtpPasswordStoreFirstUseException(string message) : base(message)
         {
         }
 
-        public OTPPasswordStoreFirstUseException(string message, Exception innerException) : base(message, innerException)
+        public OtpPasswordStoreFirstUseException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        public OTPPasswordStoreFirstUseException()
+        public OtpPasswordStoreFirstUseException()
         {
         }
 
-        protected OTPPasswordStoreFirstUseException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+        protected OtpPasswordStoreFirstUseException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
         {
             throw new NotImplementedException();
         }

@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace SharpEncrypt.Helpers
 {
-    internal static class RSAKeyReaderHelper
+    internal static class RsaKeyReaderHelper
     {
         public static RSAParameters GetParameters(string path)
         {

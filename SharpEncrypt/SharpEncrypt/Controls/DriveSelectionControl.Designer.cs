@@ -63,6 +63,7 @@
             this.DriveDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DriveDataGrid.Size = new System.Drawing.Size(897, 566);
             this.DriveDataGrid.TabIndex = 1;
+            this.DriveDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DriveDataGrid_CellContentClick);
             // 
             // SelectedColumn
             // 

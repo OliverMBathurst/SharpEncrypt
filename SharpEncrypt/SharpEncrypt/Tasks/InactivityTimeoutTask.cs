@@ -9,8 +9,6 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.InactivityTimeoutTask;
 
-        public override bool IsSpecial => false;
-
         public override bool ShouldBlockExit => false;
 
         public InactivityTimeoutTask(int msTimeout) : base(ResourceType.Undefined)

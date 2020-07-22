@@ -11,8 +11,6 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class SecureFolderTask : SharpEncryptTask
     {
-        public override bool IsSpecial => false;
-
         public override TaskType TaskType => TaskType.SecureFolderTask;
 
         public SecureFolderTask(string folderPath, string password, bool includeSubFolders) : base(ResourceType.Folder, folderPath)
@@ -28,16 +26,14 @@ namespace SharpEncrypt.Tasks
                         ContainerHelper.ContainerizeFile(filePath, AESHelper.GetNewAESKey(), password);
                     }
 
-                    if (includeSubFolders)
+                    if (!includeSubFolders) return;
+                    foreach (var subFolder in Directory.GetDirectories(dir))
                     {
-                        foreach (var subFolder in Directory.GetDirectories(dir))
-                        {
-                            SecureDirectory(subFolder);
-                        }
+                        SecureDirectory(subFolder);
                     }
                 }
 
-                Result.Value = new FolderDataGridItemModel { URI = folderPath, Time = DateTime.Now };
+                Result.Value = new FolderDataGridItemModel { Uri = folderPath, Time = DateTime.Now };
             });
         }
     }

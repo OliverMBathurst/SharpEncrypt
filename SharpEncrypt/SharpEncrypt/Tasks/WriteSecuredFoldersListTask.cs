@@ -42,13 +42,13 @@ namespace SharpEncrypt.Tasks
 
                 if (add)
                 {
-                    dirs.AddRange(models);
+                    dirs.AddRange(models.Where(x => x.Uri != null));
                 }
                 else
                 {
                     if (dirs.Any())
                     {
-                        dirs.RemoveAll(x => models.Any(z => z.URI.Equals(x.URI, StringComparison.Ordinal)));
+                        dirs.RemoveAll(x => models.Any(z => z.Uri.Equals(x.Uri, StringComparison.Ordinal)));
                     }
                 }
                 

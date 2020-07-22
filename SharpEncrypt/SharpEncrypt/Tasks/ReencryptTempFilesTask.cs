@@ -14,25 +14,22 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.ReencryptTempFilesTask;
 
-        public override bool IsSpecial => false;
-
-        public ReencryptTempFilesTask(IEnumerable<string> paths, string password, bool exitAfter = false) : base(ResourceType.File, paths)
+        public ReencryptTempFilesTask(ISet<string> paths, string password, bool exitAfter = false) : base(ResourceType.File, paths)
         {
             InnerTask = new Task(() =>
             {
                 var uncontainerized = new List<string>();
+
                 foreach(var path in paths)
                 {
-                    if (File.Exists(path))
+                    if (!File.Exists(path)) continue;
+                    try
                     {
-                        try
-                        {
-                            ContainerHelper.ContainerizeFile(path, AESHelper.GetNewAESKey(), password);
-                        }
-                        catch (Exception)
-                        {
-                            uncontainerized.Add(path);
-                        }
+                        ContainerHelper.ContainerizeFile(path, AESHelper.GetNewAESKey(), password);
+                    }
+                    catch (Exception)
+                    {
+                        uncontainerized.Add(path);
                     }
                 }
 

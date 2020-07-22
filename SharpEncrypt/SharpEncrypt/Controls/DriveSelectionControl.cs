@@ -37,5 +37,10 @@ namespace SharpEncrypt.Controls
             foreach (var drive in Drives)
                 DriveDataGrid.Rows.Add(false, drive.Name, drive.TotalSize/1024/1024/1024, drive.AvailableFreeSpace/1024/1024/1024, drive.DriveType, drive.DriveFormat);
         }
+
+        private void DriveDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -47,13 +47,13 @@ namespace SharpEncrypt.Forms
         {
             if (string.IsNullOrEmpty(Identity.Text))
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("Identity")));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty") ?? string.Empty, ResourceManager.GetString("Identity")));
                 return;
             }
 
             if (string.IsNullOrEmpty(PublicKeyFilePathField.Text))
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty"), ResourceManager.GetString("PublicKey")));
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("FieldCannotBeEmpty") ?? string.Empty, ResourceManager.GetString("PublicKey")));
                 return;
             }
 
@@ -64,16 +64,11 @@ namespace SharpEncrypt.Forms
         private bool ImportPublicKey(string identity)
         {
             var keyFilePath = PathService.PubKeyFile;
-            if (File.Exists(keyFilePath))
-            {
-                if (RSAKeyReaderHelper.GetPublicKeys(keyFilePath).ContainsKey(identity))
-                {
-                    MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));
-                    return false;
-                }
-            }
+            if (!File.Exists(keyFilePath)) return true;
+            if (!RsaKeyReaderHelper.GetPublicKeys(keyFilePath).ContainsKey(identity)) return true;
+            MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));
+            return false;
 
-            return true;
         }
     }
 }

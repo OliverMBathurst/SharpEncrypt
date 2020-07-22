@@ -51,10 +51,7 @@ namespace SharpEncrypt.Forms
 
         private void ShowPassword_Click(object sender, EventArgs e)
         {
-            if (PasswordInputBox.UseSystemPasswordChar)
-                PasswordInputBox.UseSystemPasswordChar = false;
-            else
-                PasswordInputBox.UseSystemPasswordChar = true;
+            PasswordInputBox.UseSystemPasswordChar = !PasswordInputBox.UseSystemPasswordChar;
         }
 
         private void OK_Click(object sender, EventArgs e)
@@ -97,7 +94,7 @@ namespace SharpEncrypt.Forms
                         else
                         {
                             MessageBox.Show(string.Format(CultureInfo.CurrentCulture,
-                                ResourceManager.GetString("PasswordRestrictedChars"),
+                                ResourceManager.GetString("PasswordRestrictedChars") ?? string.Empty,
                                 string.Join(", ", PasswordHelper.GetRestrictedChars())));
                         }
                     }

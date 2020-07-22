@@ -44,26 +44,27 @@ namespace SharpEncrypt.Forms
             GridContextMenuStrip.Items[0].Text = ResourceManager.GetString("GenerateNewPassword");
             GridContextMenuStrip.Items[1].Text = ResourceManager.GetString("Remove");
 
-            TotalLabel.Text = $"{ResourceManager.GetString("Total")}:";
-            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected"), GridView.SelectedRows.Count, GridView.Rows.Count);
+            TotalLabel.Text = string.Format(CultureInfo.CurrentCulture, Resources.Resources._0colon, ResourceManager.GetString("Total"));
+            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected") ?? string.Empty, GridView.SelectedRows.Count, GridView.Rows.Count);
 
             GridView.SelectionChanged += GridView_SelectionChanged;
         }
 
         private void GridView_SelectionChanged(object sender, EventArgs e)
         {
-            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected"), GridView.SelectedRows.Count, GridView.Rows.Count);
+            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected") ?? string.Empty, GridView.SelectedRows.Count, GridView.Rows.Count);
             SelectedRowDetailsBox.Text = GetSelectSelectedRowDetailsBoxText();
         }
 
         private void FullRefresh()
         {
             GridView.Refresh();
-            TotalLabel.Text = $"{ResourceManager.GetString("Total")}: {Models.Count}";
-            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected"), GridView.SelectedRows.Count, GridView.Rows.Count);
+            TotalLabel.Text = string.Format(CultureInfo.CurrentCulture, Resources.Resources._0colon1, ResourceManager.GetString("Total"), Models.Count);
+            SelectedLabel.Text = string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("0OutOfNSelected") ?? string.Empty, GridView.SelectedRows.Count, GridView.Rows.Count);
         }
 
         #region Button handlers
+
         private void OK_Click(object sender, EventArgs e)
         {
             foreach (var model in Models)
@@ -72,12 +73,6 @@ namespace SharpEncrypt.Forms
                 model.OldPasswords.Clear();
             }
             DialogResult = DialogResult.OK;
-            Close();
-        }
-
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -127,7 +122,7 @@ namespace SharpEncrypt.Forms
                     sb.Append(
                         $"{ResourceManager.GetString("Name")}: {model.PasswordName ?? string.Empty}, " +
                         $"{ResourceManager.GetString("UserName")}: {model.UserName ?? string.Empty}, " +
-                        $"{ResourceManager.GetString("Password")}: {'*'.Repeat(model.Password != null ? model.Password.Length : 0)}, " +
+                        $"{ResourceManager.GetString("Password")}: {'*'.Repeat(model.Password?.Length ?? 0)}, " +
                         $"{ResourceManager.GetString("Address")}: {model.Address ?? string.Empty}, " +
                         $"{ResourceManager.GetString("Notes")}: {model.Notes ?? string.Empty}, " +
                         $"{ResourceManager.GetString("CreationTime")}: {model.Created}, " +

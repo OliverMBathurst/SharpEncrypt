@@ -39,33 +39,23 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings GutmannSettings
-        {
-            get
+        private static DriveWipeJobSettings GutmannSettings =>
+            new DriveWipeJobSettings
             {
-                return new DriveWipeJobSettings
-                {
-                    Type = DriveWipeType.Gutmann,
-                    NameObfuscation = true,
-                    PropertyObfuscation = true,
-                    WipeRounds = false                   
-                };
-            }
-        }
+                Type = DriveWipeType.Gutmann,
+                NameObfuscation = true,
+                PropertyObfuscation = true,
+                WipeRounds = false
+            };
 
-        private static DriveWipeJobSettings SDeleteSettings
-        {
-            get
+        private static DriveWipeJobSettings SDeleteSettings =>
+            new DriveWipeJobSettings
             {
-                return new DriveWipeJobSettings
-                {
-                    Type = DriveWipeType.SDelete,
-                    NameObfuscation = false,
-                    PropertyObfuscation = false,
-                    WipeRounds = false
-                };
-            }
-        }
+                Type = DriveWipeType.SDelete,
+                NameObfuscation = false,
+                PropertyObfuscation = false,
+                WipeRounds = false
+            };
 
         private static DriveWipeJobSettings RandomWriteSettings => DefaultSettings;
 
@@ -99,18 +89,13 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings DefaultSettings
-        {
-            get
+        private static DriveWipeJobSettings DefaultSettings =>
+            new DriveWipeJobSettings
             {
-                return new DriveWipeJobSettings
-                {
-                    Type = DriveWipeType.RandomWrite,
-                    NameObfuscation = true,
-                    PropertyObfuscation = true,
-                    WipeRounds = true
-                };
-            }
-        }
+                Type = DriveWipeType.RandomWrite,
+                NameObfuscation = true,
+                PropertyObfuscation = true,
+                WipeRounds = true
+            };
     }
 }

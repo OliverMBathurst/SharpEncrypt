@@ -5,23 +5,20 @@ namespace SharpEncrypt.AbstractClasses
 {
     public abstract class ResourceBlocker
     {
-        private readonly IEnumerable<string> _blockedResources;
-        private readonly ResourceType _resourceType;
-        
-        public ResourceBlocker(ResourceType resourceType, params string[] blockedResources)
+        protected ResourceBlocker(ResourceType resourceType, params string[] blockedResources)
         {
-            _resourceType = resourceType;
-            _blockedResources = blockedResources;
+            ResourceType = resourceType;
+            BlockedResources = blockedResources;
         }
 
-        public ResourceBlocker(ResourceType resourceType, IEnumerable<string> blockedResources)
+        protected ResourceBlocker(ResourceType resourceType, IEnumerable<string> blockedResources)
         {
-            _resourceType = resourceType;
-            _blockedResources = blockedResources;
+            ResourceType = resourceType;
+            BlockedResources = blockedResources;
         }
 
-        public virtual ResourceType ResourceType => _resourceType;
+        public virtual ResourceType ResourceType { get; }
 
-        public virtual IEnumerable<string> BlockedResources => _blockedResources;
+        public virtual IEnumerable<string> BlockedResources { get; }
     }
 }

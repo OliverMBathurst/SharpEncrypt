@@ -11,8 +11,6 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.BulkRenameFolderTask;
 
-        public override bool IsSpecial => false;
-
         public BulkRenameFolderTask(string folderUri, string sessionPasswordHash, bool includeSubfolders, bool anonymize) : base(ResourceType.Folder, folderUri)
         {
             InnerTask = new Task(() =>
@@ -40,12 +38,11 @@ namespace SharpEncrypt.Tasks
                         }
                     }
 
-                    if (includeSubfolders)
+                    if (!includeSubfolders) return;
+
+                    foreach (var subFolder in Directory.GetDirectories(uri))
                     {
-                        foreach (var subFolder in Directory.GetDirectories(uri))
-                        {
-                            RenameFilesInFolder(subFolder);
-                        }
+                        RenameFilesInFolder(subFolder);
                     }
                 }
             });

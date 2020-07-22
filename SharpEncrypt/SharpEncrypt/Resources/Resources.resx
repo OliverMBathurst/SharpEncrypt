@@ -404,10 +404,10 @@
     <value>Include Subfolders</value>
   </data>
   <data name="IndividualSettingsResetDialog" xml:space="preserve">
-    <value>Individual Settings Reset Dialog</value>
+    <value>Individual AppSettings Reset Dialog</value>
   </data>
   <data name="IndividualSettingsResetToolStripMenuItem" xml:space="preserve">
-    <value>Individual Settings Reset</value>
+    <value>Individual AppSettings Reset</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Input</value>
@@ -493,7 +493,7 @@
   <data name="OTPDisclaimer" xml:space="preserve">
     <value>The One Time Pad Vernam cipher requires that a key be generated that is either equal to or greater in length than that of the file to encrypt. e.g. a 2MB file will require at least a key of size 2MB. This cipher is widely regarded as perfect and unbreakable. It is therefore a necessity that the key is not stored with the encrypted file in a SharpEncrypt container, as the key would have to be encrypted with an inferior cipher. The next dialog will ask you for a location to store the key file. It is best to store the key file on removable media, and to wipe the free space of any drive that has previously stored a One Time Pad key. Continue?</value>
   </data>
-  <data name="OTPDisclaimerHide" xml:space="preserve">
+  <data name="OtpDisclaimerHide" xml:space="preserve">
     <value>One Time Pad Disclaimer Hide</value>
   </data>
   <data name="OTPKeyBasedToolStripMenuItem" xml:space="preserve">
@@ -502,7 +502,7 @@
   <data name="OTPPasswordStoreFile" xml:space="preserve">
     <value>OTPPasswordStore.seotppf</value>
   </data>
-  <data name="OTPStoreKeyFilePath" xml:space="preserve">
+  <data name="OtpStoreKeyFilePath" xml:space="preserve">
     <value>OTP Store Key File Path</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -575,7 +575,7 @@
     <value>Reset All</value>
   </data>
   <data name="ResetAllSettingsToolStripMenuItem" xml:space="preserve">
-    <value>Reset All Settings</value>
+    <value>Reset All AppSettings</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Result</value>
@@ -665,7 +665,7 @@
     <value>SharpEncrypt Password Store File Key (*.seotppfk)|*.seotppfk</value>
   </data>
   <data name="SharpEncryptSettingsFileName" xml:space="preserve">
-    <value>SharpEncryptSettings.BIN</value>
+    <value>SharpEncryptAppSettings.BIN</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
@@ -789,5 +789,11 @@
   </data>
   <data name="WipeType" xml:space="preserve">
     <value>Wipe Type</value>
+  </data>
+  <data name="0colon1" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="0colon" xml:space="preserve">
+    <value>{0}:</value>
   </data>
 </root>

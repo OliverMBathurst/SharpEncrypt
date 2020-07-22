@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class AESSavePasswordsTask : SharpEncryptTask
+    internal sealed class AesSavePasswordsTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.AESSavePasswordsTask;
 
-        public AESSavePasswordsTask(string filePath, string password, List<PasswordModel> models) : base(ResourceType.File, filePath)
+        public AesSavePasswordsTask(string filePath, string password, List<PasswordModel> models) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {

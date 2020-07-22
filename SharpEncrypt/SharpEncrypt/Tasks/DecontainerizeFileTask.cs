@@ -12,8 +12,6 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.DecontainerizeFileTask;
 
-        public override bool IsSpecial => false;
-
         public DecontainerizeFileTask(FileDataGridItemModel model, string password, bool removeAfter = false, bool openAfter = false) : base(ResourceType.File, model.Secured)
         {
             InnerTask = new Task(() =>

@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class OTPSaveKeyOfFileTask : SharpEncryptTask
+    internal sealed class OtpSaveKeyOfFileTask : SharpEncryptTask
     {
-        public override bool IsSpecial => false;
-
         public override TaskType TaskType => TaskType.OTPSaveKeyOfFileTask;
 
-        public OTPSaveKeyOfFileTask(string keyPath, string filePath) : base(ResourceType.File, keyPath, filePath)
+        public OtpSaveKeyOfFileTask(string keyPath, string filePath) : base(ResourceType.File, keyPath, filePath)
         {
             InnerTask = new Task(() =>
             {

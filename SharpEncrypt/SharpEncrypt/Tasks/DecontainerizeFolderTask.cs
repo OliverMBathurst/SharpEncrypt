@@ -11,13 +11,11 @@ namespace SharpEncrypt.Tasks
     {
         public override TaskType TaskType => TaskType.DecontainerizeFolderTask;
 
-        public override bool IsSpecial => false;
-
-        public DecontainerizeFolderTask(FolderDataGridItemModel model, string password, bool includeSubFolders, bool removeAfter = false) : base(ResourceType.Folder, model.URI)
+        public DecontainerizeFolderTask(FolderDataGridItemModel model, string password, bool includeSubFolders, bool removeAfter = false) : base(ResourceType.Folder, model.Uri)
         {
             InnerTask = new Task(() =>
             {
-                DecontainerizeDirectory(model.URI);
+                DecontainerizeDirectory(model.Uri);
 
                 void DecontainerizeDirectory(string dir)
                 {
@@ -26,12 +24,11 @@ namespace SharpEncrypt.Tasks
                         ContainerHelper.DecontainerizeFile(filePath, password);
                     }
 
-                    if (includeSubFolders)
+                    if (!includeSubFolders) return;
+
+                    foreach (var subFolder in Directory.GetDirectories(dir))
                     {
-                        foreach (var subFolder in Directory.GetDirectories(dir))
-                        {
-                            DecontainerizeDirectory(subFolder);
-                        }
+                        DecontainerizeDirectory(subFolder);
                     }
                 }
 

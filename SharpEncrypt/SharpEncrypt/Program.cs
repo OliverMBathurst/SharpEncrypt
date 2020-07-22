@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt
 {
-    static class Program
+    internal static class Program
     {
         private static readonly Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "The embedded assemblies will always end with the extension .dll")]
@@ -14,7 +14,7 @@ namespace SharpEncrypt
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -36,6 +36,9 @@ namespace SharpEncrypt
 
             using (var stream = ExecutingAssembly.GetManifestResourceStream(resourceName))
             {
+                if(stream == null)
+                    throw new ArgumentNullException(nameof(stream));
+
                 var bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);
                 return Assembly.Load(bytes);

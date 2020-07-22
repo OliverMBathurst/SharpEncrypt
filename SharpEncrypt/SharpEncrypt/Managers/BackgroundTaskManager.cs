@@ -13,7 +13,7 @@ namespace SharpEncrypt.Managers
     public sealed class BackgroundTaskManager : IDisposable
     {        
         private readonly BackgroundWorker BackgroundWorker = new BackgroundWorker();
-        private readonly ConcurrentQueue<SharpEncryptTask> mTasks = new ConcurrentQueue<SharpEncryptTask>();
+        private readonly ConcurrentQueue<SharpEncryptTask> Tasks = new ConcurrentQueue<SharpEncryptTask>();
 
         #region Delegates and events
         public delegate void BackgroundWorkerDisabledEventHandler(Guid guid);
@@ -40,15 +40,15 @@ namespace SharpEncrypt.Managers
         #region Properties
         public Guid Identifier { get; } = Guid.NewGuid();
 
-        public bool DisableAfterJob { get; private set; }
+        public bool DisableAfterJob { get; }
 
-        public bool HasCompletedJobs => mTasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
+        public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
 
-        public int TaskCount => mTasks.Count + (IsProcessingTask ? 1 : 0);
+        public int TaskCount => Tasks.Count + (IsProcessingTask ? 1 : 0);
 
-        public bool IsProcessingTask { get; private set; } = false;
+        public bool IsProcessingTask { get; private set; }
 
-        public bool Disabled { get; private set; } = false;
+        public bool Disabled { get; private set; }
 
         public CurrentTaskInstance CurrentTaskInstance { get; private set; }
 
@@ -56,7 +56,7 @@ namespace SharpEncrypt.Managers
         {
             get
             {
-                var tasks = mTasks.ToList();
+                var tasks = Tasks.ToList();
                 if (CurrentTaskInstance.Task != null && !CurrentTaskInstance.Task.InnerTask.IsCompleted)
                     tasks.Add(CurrentTaskInstance.Task);
                 return tasks;
@@ -80,7 +80,7 @@ namespace SharpEncrypt.Managers
                 return;
             }
 
-            mTasks.Enqueue(task);
+            Tasks.Enqueue(task);
             if (!BackgroundWorker.IsBusy)
                 BackgroundWorker.RunWorkerAsync();
         }
@@ -94,8 +94,8 @@ namespace SharpEncrypt.Managers
         {
             BackgroundWorker.CancelAsync();
             
-            while (!mTasks.IsEmpty)
-                mTasks.TryDequeue(out _);
+            while (!Tasks.IsEmpty)
+                Tasks.TryDequeue(out _);
 
             if (CurrentTaskInstance.Task.InnerTask != null)
                 CurrentTaskInstance.Token.Cancel();            
@@ -108,31 +108,30 @@ namespace SharpEncrypt.Managers
 
         private void BackgroundWorkerWork(object sender, DoWorkEventArgs e)
         {
-            while (!BackgroundWorker.CancellationPending && !mTasks.IsEmpty && !Disabled)
+            while (!BackgroundWorker.CancellationPending && !Tasks.IsEmpty && !Disabled)
             {
-                if (mTasks.TryDequeue(out var task))
+                if (!Tasks.TryDequeue(out var task)) continue;
+
+                IsProcessingTask = true;
+                OnTaskDequeued(task);
+                var cancellationTokenSource = new CancellationTokenSource();
+                CurrentTaskInstance = new CurrentTaskInstance { Task = task, Token = cancellationTokenSource };
+
+                try
                 {
-                    IsProcessingTask = true;
-                    OnTaskDequeued(task);
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    CurrentTaskInstance = new CurrentTaskInstance { Task = task, Token = cancellationTokenSource };
-
-                    try
-                    {
-                        task.Start();
-                        task.Wait(cancellationTokenSource.Token);
-                    }
-                    catch (Exception exception)
-                    {
-                        task.Result.Exception = exception;
-                    }
-
-                    IsProcessingTask = false;
-                    OnTaskCompleted(task);
-
-                    if (mTasks.IsEmpty)
-                        OnCurrentTasksCompleted();
+                    task.Start();
+                    task.Wait(cancellationTokenSource.Token);
                 }
+                catch (Exception exception)
+                {
+                    task.Result.Exception = exception;
+                }
+
+                IsProcessingTask = false;
+                OnTaskCompleted(task);
+
+                if (Tasks.IsEmpty)
+                    OnCurrentTasksCompleted();
             }
         }
 
@@ -141,7 +140,7 @@ namespace SharpEncrypt.Managers
         #region Events
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!mTasks.IsEmpty && !Disabled)
+            if (!Tasks.IsEmpty && !Disabled)
                 BackgroundWorker.RunWorkerAsync();
         }
 

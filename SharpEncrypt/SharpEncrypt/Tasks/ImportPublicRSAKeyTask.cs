@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.Tasks
 {
-    internal sealed class ImportPublicRSAKeyTask : SharpEncryptTask
+    internal sealed class ImportPublicRsaKeyTask : SharpEncryptTask
     {
         public override TaskType TaskType => TaskType.ImportPublicRSAKeyTask;
 
-        public ImportPublicRSAKeyTask(string path, (string identity, string importFilePath) importResult)
+        public ImportPublicRsaKeyTask(string path, (string identity, string importFilePath) importResult)
             : base(ResourceType.File, path, importResult.importFilePath)
         {
             InnerTask = new Task(() =>
@@ -22,7 +22,7 @@ namespace SharpEncrypt.Tasks
                 IDictionary<string, RSAParameters> pubKeyList = new Dictionary<string, RSAParameters>();
                 if (File.Exists(path))
                 {
-                    pubKeyList = RSAKeyReaderHelper.GetPublicKeys(path);
+                    pubKeyList = RsaKeyReaderHelper.GetPublicKeys(path);
 
                     if (pubKeyList.ContainsKey(importResult.identity))
                     {
@@ -30,7 +30,7 @@ namespace SharpEncrypt.Tasks
                     }
                 }
 
-                pubKeyList.Add(importResult.identity, RSAKeyReaderHelper.GetParameters(importResult.importFilePath));
+                pubKeyList.Add(importResult.identity, RsaKeyReaderHelper.GetParameters(importResult.importFilePath));
 
                 using (var fs = new FileStream(path, FileMode.Create))
                 {

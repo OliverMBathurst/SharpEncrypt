@@ -61,7 +61,7 @@ namespace SharpEncrypt.Helpers
             var destFileName =
                 $"{dir}" +
                 @"\" +
-                $"{string.Join(string.Empty, bytes.Select(x => Convert.ToChar(x)))}{ext}";
+                $"{string.Join(string.Empty, bytes.Select(Convert.ToChar))}{ext}";
 
             File.Move(filePath, destFileName);
         }
@@ -72,13 +72,13 @@ namespace SharpEncrypt.Helpers
             {
                 if (remaining < hashBytes.Count)
                 {
-                    hashBytes.Concat(hashBytes.Take(remaining));
+                    hashBytes = hashBytes.Concat(hashBytes.Take(remaining)).ToList();
                     remaining = 0;
                 }
                 else
                 {
                     var take = hashBytes.Count;
-                    hashBytes.Concat(hashBytes.Take(take));
+                    hashBytes = hashBytes.Concat(hashBytes.Take(take)).ToList();
                     remaining -= take;
                 }
             }

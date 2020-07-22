@@ -3,7 +3,7 @@
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class CreateOTPPasswordStoreKeyTaskResult
+    internal sealed class CreateOtpPasswordStoreKeyTaskResult
     {
         public string StorePath { get; set; }
 

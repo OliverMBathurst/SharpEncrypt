@@ -16,6 +16,9 @@ namespace SharpEncrypt.Models
 
         public bool Equals(FileDataGridItemModel other)
         {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+
             return Secured.Equals(other.Secured, StringComparison.Ordinal);
         }
 
@@ -24,6 +27,9 @@ namespace SharpEncrypt.Models
             return obj is FileDataGridItemModel model && Equals(model);
         }
 
-        public override int GetHashCode() => base.GetHashCode();
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

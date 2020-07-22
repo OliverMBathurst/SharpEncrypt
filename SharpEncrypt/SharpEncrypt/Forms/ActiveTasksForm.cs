@@ -13,26 +13,23 @@ namespace SharpEncrypt.Forms
     {
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly BindingList<SharpEncryptTask> ActiveTasks = new BindingList<SharpEncryptTask>();
-        private readonly TaskManager TaskManager;
         private readonly bool ExitOnCompletion;
 
         public ActiveTasksForm(TaskManager taskManager, bool exitOnCompletion = false)
         {
             InitializeComponent();
-            TaskManager = taskManager ?? throw new ArgumentNullException(nameof(taskManager));
-            ActiveTasks.AddRange(TaskManager.Tasks);
-            TaskManager.TaskCompleted += TaskCompleted;
+            var taskManager1 = taskManager ?? throw new ArgumentNullException(nameof(taskManager));
+            ActiveTasks.AddRange(taskManager1.Tasks);
+            taskManager1.TaskCompleted += TaskCompleted;
             ExitOnCompletion = exitOnCompletion;
         }
 
         private void TaskCompleted(SharpEncryptTask task)
         {
             ActiveTasks.Remove(task);
-            if(!ActiveTasks.Any() && ExitOnCompletion)
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
+            if (ActiveTasks.Any() || !ExitOnCompletion) return;
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void ActiveTasksForm_Load(object sender, EventArgs e)

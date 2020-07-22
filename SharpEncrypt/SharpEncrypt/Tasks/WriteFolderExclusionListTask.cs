@@ -48,7 +48,7 @@ namespace SharpEncrypt.Tasks
                 {
                     if (folders.Any())
                     {
-                        folders.RemoveAll(x => models.Any(z => z.URI.Equals(x.URI, StringComparison.Ordinal)));
+                        folders.RemoveAll(x => models.Any(z => z.Uri.Equals(x.Uri, StringComparison.Ordinal)));
                     }
                 }
 

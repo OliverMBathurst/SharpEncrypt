@@ -61,6 +61,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}:.
+        /// </summary>
+        internal static string _0colon {
+            get {
+                return ResourceManager.GetString("0colon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: {1}.
+        /// </summary>
+        internal static string _0colon1 {
+            get {
+                return ResourceManager.GetString("0colon1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} out of {1} selected.
         /// </summary>
         internal static string _0OutOfNSelected {
@@ -916,7 +934,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Individual Settings Reset Dialog.
+        ///   Looks up a localized string similar to Individual AppSettings Reset Dialog.
         /// </summary>
         internal static string IndividualSettingsResetDialog {
             get {
@@ -925,7 +943,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Individual Settings Reset.
+        ///   Looks up a localized string similar to Individual AppSettings Reset.
         /// </summary>
         internal static string IndividualSettingsResetToolStripMenuItem {
             get {
@@ -1188,9 +1206,9 @@ namespace SharpEncrypt.Resources {
         /// <summary>
         ///   Looks up a localized string similar to One Time Pad Disclaimer Hide.
         /// </summary>
-        internal static string OTPDisclaimerHide {
+        internal static string OtpDisclaimerHide {
             get {
-                return ResourceManager.GetString("OTPDisclaimerHide", resourceCulture);
+                return ResourceManager.GetString("OtpDisclaimerHide", resourceCulture);
             }
         }
         
@@ -1215,9 +1233,9 @@ namespace SharpEncrypt.Resources {
         /// <summary>
         ///   Looks up a localized string similar to OTP Store Key File Path.
         /// </summary>
-        internal static string OTPStoreKeyFilePath {
+        internal static string OtpStoreKeyFilePath {
             get {
-                return ResourceManager.GetString("OTPStoreKeyFilePath", resourceCulture);
+                return ResourceManager.GetString("OtpStoreKeyFilePath", resourceCulture);
             }
         }
         
@@ -1429,7 +1447,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset All Settings.
+        ///   Looks up a localized string similar to Reset All AppSettings.
         /// </summary>
         internal static string ResetAllSettingsToolStripMenuItem {
             get {
@@ -1699,7 +1717,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SharpEncryptSettings.BIN.
+        ///   Looks up a localized string similar to SharpEncryptAppSettings.BIN.
         /// </summary>
         internal static string SharpEncryptSettingsFileName {
             get {

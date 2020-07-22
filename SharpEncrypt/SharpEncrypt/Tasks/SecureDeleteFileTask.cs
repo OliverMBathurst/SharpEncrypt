@@ -9,8 +9,6 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class SecureDeleteFileTask : SharpEncryptTask
     {
-        public override bool IsSpecial => false;
-
         public override TaskType TaskType => TaskType.SecureDeleteFileTask;
 
         public SecureDeleteFileTask(string filePath) : base(ResourceType.File, filePath)

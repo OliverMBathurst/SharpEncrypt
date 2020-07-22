@@ -5,7 +5,7 @@ namespace SharpEncrypt.Models
     [Serializable]
     internal sealed class FolderDataGridItemModel : IEquatable<FolderDataGridItemModel>
     {
-        public string URI { get; set; }
+        public string Uri { get; set; }
 
         public DateTime Time { get; set; }
 
@@ -16,10 +16,16 @@ namespace SharpEncrypt.Models
 
         public bool Equals(FolderDataGridItemModel other)
         {
-            return URI.Equals(other.URI, StringComparison.Ordinal)
+            if(other == null)
+                throw new ArgumentNullException(nameof(other));
+
+            return Uri.Equals(other.Uri, StringComparison.Ordinal)
                 && Time.Ticks.Equals(other.Time.Ticks);
         }
 
-        public override int GetHashCode() => base.GetHashCode();
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

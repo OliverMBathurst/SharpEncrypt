@@ -3,15 +3,15 @@
 namespace SharpEncrypt.Exceptions
 {
     [Serializable]
-    public class OTPKeyFileNotAvailableException : Exception
+    public class OtpKeyFileNotAvailableException : Exception
     {
-        public OTPKeyFileNotAvailableException() { }
+        public OtpKeyFileNotAvailableException() { }
 
-        public OTPKeyFileNotAvailableException(string message) : base(message) { }
+        public OtpKeyFileNotAvailableException(string message) : base(message) { }
 
-        public OTPKeyFileNotAvailableException(string message, Exception innerException) : base(message, innerException) { }
+        public OtpKeyFileNotAvailableException(string message, Exception innerException) : base(message, innerException) { }
 
-        protected OTPKeyFileNotAvailableException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+        protected OtpKeyFileNotAvailableException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
         {
             throw new NotImplementedException();
         }

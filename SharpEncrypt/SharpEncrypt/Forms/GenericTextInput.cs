@@ -44,7 +44,7 @@ namespace SharpEncrypt.Forms
                 {
                     MessageBox.Show(
                         string.Format(CultureInfo.CurrentCulture,
-                        ResourceManager.GetString("AnExceptionHasOccurred"),
+                        ResourceManager.GetString("AnExceptionHasOccurred") ?? string.Empty,
                         ex.Message),
                         ResourceManager.GetString("Error"),
                         MessageBoxButtons.OK);

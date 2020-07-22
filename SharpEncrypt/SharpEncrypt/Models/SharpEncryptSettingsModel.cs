@@ -8,7 +8,7 @@ namespace SharpEncrypt.Models
     {
         public string LanguageCode { get; set; } = "en-GB";
 
-        public bool OTPDisclaimerHide { get; set; } = false;
+        public bool OtpDisclaimerHide { get; set; } = false;
 
         public bool PasswordStartupPromptHide { get; set; } = false;
 
@@ -28,7 +28,7 @@ namespace SharpEncrypt.Models
 
         public StoreType StoreType { get; set; } = StoreType.OTP;
 
-        public string OTPStoreKeyFilePath { get; set; } = string.Empty;
+        public string OtpStoreKeyFilePath { get; set; } = string.Empty;
 
         public int InactivityTimeout { get; set; } = -1;
     }

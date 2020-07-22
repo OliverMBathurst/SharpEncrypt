@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    public sealed class OpenOTPPasswordStoreTaskResult
+    public sealed class OpenOtpPasswordStoreTaskResult
     {
-        public OpenOTPPasswordStoreTaskResult(List<PasswordModel> models, string storePath, string keyPath)
+        public OpenOtpPasswordStoreTaskResult(List<PasswordModel> models, string storePath, string keyPath)
         {
             Models = models;
             StorePath = storePath;

@@ -12,12 +12,9 @@ namespace SharpEncrypt.Tasks
 {
     internal sealed class OneTimePadTransformTask : SharpEncryptTask
     {
-        public override bool IsSpecial => false;
-
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
-    
-        public OneTimePadTransformTask(string filePath, string ext, string keyFilePath = "", bool encrypt = true)
-            : base(ResourceType.File, filePath, keyFilePath)
+
+        public OneTimePadTransformTask(string filePath, string ext, string keyFilePath = "", bool encrypt = true) : base(ResourceType.File, filePath, keyFilePath)
         {
             InnerTask = new Task(() =>
             {

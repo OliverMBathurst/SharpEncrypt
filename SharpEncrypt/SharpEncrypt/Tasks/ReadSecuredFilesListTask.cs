@@ -16,14 +16,12 @@ namespace SharpEncrypt.Tasks
         {
             InnerTask = new Task(() =>
             {
-                if (File.Exists(path))
+                if (!File.Exists(path)) return;
+                using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    using (var fs = new FileStream(path, FileMode.Open))
+                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> models)
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> models)
-                        {
-                            Result.Value = models;
-                        }
+                        Result.Value = models;
                     }
                 }
             });

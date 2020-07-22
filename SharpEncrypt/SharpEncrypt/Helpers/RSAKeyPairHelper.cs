@@ -2,7 +2,7 @@
 
 namespace SharpEncrypt.Helpers
 {
-    internal static class RSAKeyPairHelper
+    internal static class RsaKeyPairHelper
     {
         public static (RSAParameters publicKey, RSAParameters privateKey) GetNewKeyPair()
         {
