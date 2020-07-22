@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace SharpEncrypt.Helpers
 {
-    internal static class DriveWipeJobSettingsHelper
+    internal static class DriveWipeTaskSettingsHelper
     {
-        public static IEnumerable<DriveWipeJobSettings> GetOptions()
+        public static IEnumerable<DriveWipeTaskSettings> GetOptions()
         {
             foreach (var name in Enum.GetNames(typeof(DriveWipeType)))
             {
@@ -18,7 +18,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        public static DriveWipeJobSettings GetSettings(DriveWipeType type)
+        public static DriveWipeTaskSettings GetSettings(DriveWipeType type)
         {
             switch (type)
             {
@@ -39,8 +39,8 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings GutmannSettings =>
-            new DriveWipeJobSettings
+        private static DriveWipeTaskSettings GutmannSettings =>
+            new DriveWipeTaskSettings
             {
                 Type = DriveWipeType.Gutmann,
                 NameObfuscation = true,
@@ -48,8 +48,8 @@ namespace SharpEncrypt.Helpers
                 WipeRounds = false
             };
 
-        private static DriveWipeJobSettings SDeleteSettings =>
-            new DriveWipeJobSettings
+        private static DriveWipeTaskSettings SDeleteSettings =>
+            new DriveWipeTaskSettings
             {
                 Type = DriveWipeType.SDelete,
                 NameObfuscation = false,
@@ -57,9 +57,9 @@ namespace SharpEncrypt.Helpers
                 WipeRounds = false
             };
 
-        private static DriveWipeJobSettings RandomWriteSettings => DefaultSettings;
+        private static DriveWipeTaskSettings RandomWriteSettings => DefaultSettings;
 
-        private static DriveWipeJobSettings WriteZerosSettings
+        private static DriveWipeTaskSettings WriteZerosSettings
         {
             get
             {
@@ -69,7 +69,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings Write255Settings
+        private static DriveWipeTaskSettings Write255Settings
         {
             get
             {
@@ -79,7 +79,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings DefaultWipeSettings
+        private static DriveWipeTaskSettings DefaultWipeSettings
         {
             get
             {
@@ -89,8 +89,8 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static DriveWipeJobSettings DefaultSettings =>
-            new DriveWipeJobSettings
+        private static DriveWipeTaskSettings DefaultSettings =>
+            new DriveWipeTaskSettings
             {
                 Type = DriveWipeType.RandomWrite,
                 NameObfuscation = true,

@@ -29,9 +29,9 @@ namespace SharpEncrypt.Managers
         public event ExceptionOccurredEventHandler Exception;
         #endregion
 
-        public BackgroundTaskManager(bool disableAfterJob = true)
+        public BackgroundTaskManager(bool disableAfterTaskCompleted = true)
         {
-            DisableAfterJob = disableAfterJob;
+            DisableAfterTaskCompleted = disableAfterTaskCompleted;
 
             BackgroundWorker.DoWork += BackgroundWorkerWork;
             BackgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
@@ -40,9 +40,9 @@ namespace SharpEncrypt.Managers
         #region Properties
         public Guid Identifier { get; } = Guid.NewGuid();
 
-        public bool DisableAfterJob { get; }
+        public bool DisableAfterTaskCompleted { get; }
 
-        public bool HasCompletedJobs => Tasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
+        public bool HasCompletedTasks => Tasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
 
         public int TaskCount => Tasks.Count + (IsProcessingTask ? 1 : 0);
 
@@ -141,7 +141,7 @@ namespace SharpEncrypt.Managers
         private void OnTaskCompleted(SharpEncryptTask task)
         {
             TaskCompleted?.Invoke(task);
-            if (!DisableAfterJob) return;
+            if (!DisableAfterTaskCompleted) return;
             Disabled = true;
             BackgroundWorkerDisabled?.Invoke(Identifier);
         }

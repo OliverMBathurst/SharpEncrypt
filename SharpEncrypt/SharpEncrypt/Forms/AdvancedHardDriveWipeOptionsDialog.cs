@@ -11,9 +11,9 @@ namespace SharpEncrypt.Forms
     public partial class AdvancedHardDriveWipeOptionsDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-        private readonly IList<DriveWipeJobSettings> Options = DriveWipeJobSettingsHelper.GetOptions().ToList();
+        private readonly IList<DriveWipeTaskSettings> Options = DriveWipeTaskSettingsHelper.GetOptions().ToList();
 
-        public DriveWipeJob Job { get; private set; }
+        public DriveWipeTaskModel Task { get; private set; }
 
         public AdvancedHardDriveWipeOptionsDialog()
         {
@@ -22,8 +22,8 @@ namespace SharpEncrypt.Forms
 
         private void AdvancedHardDriveWipeOptionsDialog_Load(object sender, EventArgs e)
         {
-            Text = ResourceManager.GetString("AddJob");
-            AddJob.Text = ResourceManager.GetString("AddJob");
+            Text = ResourceManager.GetString("AddTask");
+            AddTask.Text = ResourceManager.GetString("AddTask");
             Cancel.Text = ResourceManager.GetString("Cancel");
             WipeTypeGroupBox.Text = ResourceManager.GetString("WipeType");
             WipeOptions.Text = ResourceManager.GetString("WipeOptions");
@@ -47,7 +47,7 @@ namespace SharpEncrypt.Forms
             ItemSelected(Options[index]);
         }
 
-        private void ItemSelected(DriveWipeJobSettings settings)
+        private void ItemSelected(DriveWipeTaskSettings settings)
         {
             NameObfuscationPicker.Value = 0;
             NameObfuscationPicker.Enabled = settings.NameObfuscation;
@@ -67,7 +67,7 @@ namespace SharpEncrypt.Forms
 
         private void OK_Click(object sender, EventArgs e)
         {
-            Job = new DriveWipeJob
+            Task = new DriveWipeTaskModel
             {
                 WipeType = Options[WipeTypeComboBox.SelectedIndex].Type,
                 WipeRounds = (int)WipeRoundsPicker.Value,

@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActiveTasksForm));
-            this.ActiveJobsGridView = new System.Windows.Forms.DataGridView();
+            this.ActiveTasksGridView = new System.Windows.Forms.DataGridView();
             this.Guid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.ActiveJobsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveTasksGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // ActiveJobsGridView
+            // ActiveTasksGridView
             // 
-            this.ActiveJobsGridView.AllowUserToAddRows = false;
-            this.ActiveJobsGridView.AllowUserToDeleteRows = false;
-            this.ActiveJobsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.ActiveJobsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ActiveJobsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ActiveTasksGridView.AllowUserToAddRows = false;
+            this.ActiveTasksGridView.AllowUserToDeleteRows = false;
+            this.ActiveTasksGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ActiveTasksGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ActiveTasksGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Guid,
             this.TaskType});
-            this.ActiveJobsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ActiveJobsGridView.Location = new System.Drawing.Point(0, 0);
-            this.ActiveJobsGridView.Name = "ActiveJobsGridView";
-            this.ActiveJobsGridView.ReadOnly = true;
-            this.ActiveJobsGridView.RowHeadersVisible = false;
-            this.ActiveJobsGridView.RowHeadersWidth = 62;
-            this.ActiveJobsGridView.RowTemplate.Height = 28;
-            this.ActiveJobsGridView.Size = new System.Drawing.Size(830, 459);
-            this.ActiveJobsGridView.TabIndex = 1;
+            this.ActiveTasksGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ActiveTasksGridView.Location = new System.Drawing.Point(0, 0);
+            this.ActiveTasksGridView.Name = "ActiveTasksGridView";
+            this.ActiveTasksGridView.ReadOnly = true;
+            this.ActiveTasksGridView.RowHeadersVisible = false;
+            this.ActiveTasksGridView.RowHeadersWidth = 62;
+            this.ActiveTasksGridView.RowTemplate.Height = 28;
+            this.ActiveTasksGridView.Size = new System.Drawing.Size(830, 459);
+            this.ActiveTasksGridView.TabIndex = 1;
             // 
             // Guid
             // 
@@ -75,21 +75,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 459);
-            this.Controls.Add(this.ActiveJobsGridView);
+            this.Controls.Add(this.ActiveTasksGridView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ActiveTasksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ActiveTasksForm";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ActiveTasksForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ActiveJobsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveTasksGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ActiveJobsGridView;
+        private System.Windows.Forms.DataGridView ActiveTasksGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Guid;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskType;
     }

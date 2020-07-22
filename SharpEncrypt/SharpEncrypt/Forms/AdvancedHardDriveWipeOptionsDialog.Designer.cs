@@ -38,7 +38,7 @@
             this.PropertyObfuscationPicker = new System.Windows.Forms.NumericUpDown();
             this.NameObfuscationPicker = new System.Windows.Forms.NumericUpDown();
             this.WipeRoundsPicker = new System.Windows.Forms.NumericUpDown();
-            this.AddJob = new System.Windows.Forms.Button();
+            this.AddTask = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.WipeTypeGroupBox.SuspendLayout();
             this.WipeOptions.SuspendLayout();
@@ -139,16 +139,16 @@
             0,
             0});
             // 
-            // AddJob
+            // AddTask
             // 
-            this.AddJob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddJob.Location = new System.Drawing.Point(546, 378);
-            this.AddJob.Name = "AddJob";
-            this.AddJob.Size = new System.Drawing.Size(118, 60);
-            this.AddJob.TabIndex = 3;
-            this.AddJob.Text = "Add Job";
-            this.AddJob.UseVisualStyleBackColor = true;
-            this.AddJob.Click += new System.EventHandler(this.OK_Click);
+            this.AddTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddTask.Location = new System.Drawing.Point(546, 378);
+            this.AddTask.Name = "AddTask";
+            this.AddTask.Size = new System.Drawing.Size(118, 60);
+            this.AddTask.TabIndex = 3;
+            this.AddTask.Text = "Add Task";
+            this.AddTask.UseVisualStyleBackColor = true;
+            this.AddTask.Click += new System.EventHandler(this.OK_Click);
             // 
             // Cancel
             // 
@@ -167,7 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Cancel);
-            this.Controls.Add(this.AddJob);
+            this.Controls.Add(this.AddTask);
             this.Controls.Add(this.WipeOptions);
             this.Controls.Add(this.WipeTypeGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -196,7 +196,7 @@
         private System.Windows.Forms.Label NameObfuscationRounds;
         private System.Windows.Forms.Label PropertyObfuscationRounds;
         private System.Windows.Forms.Label WipeNumber;
-        private System.Windows.Forms.Button AddJob;
+        private System.Windows.Forms.Button AddTask;
         private System.Windows.Forms.Button Cancel;
     }
 }

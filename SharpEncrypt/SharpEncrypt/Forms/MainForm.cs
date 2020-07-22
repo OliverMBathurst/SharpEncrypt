@@ -909,7 +909,7 @@ namespace SharpEncrypt.Forms
             });
         }
 
-        private void ViewActiveJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewActiveTasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var activeTasksForm = new ActiveTasksForm(TaskManager))
             {
@@ -917,13 +917,13 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void ViewCompletedJobsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewCompletedTasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var columns = new[] { ResourceManager.GetString("TaskType"), ResourceManager.GetString("Completed") };
             var rows = TaskManager.CompletedTasks.Select(x => new List<object> { x.Task.TaskType, x.Time.ToString(CultureInfo.CurrentCulture) }).ToList();
-            using (var completedJobsDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("CompletedJobs")))
+            using (var completedTasksDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("CompletedTasks")))
             {
-                completedJobsDialog.ShowDialog();
+                completedTasksDialog.ShowDialog();
             }
         }
 
@@ -1218,7 +1218,7 @@ namespace SharpEncrypt.Forms
         {
             if (!FileSystemManager.HasTempDecryptedFiles)
             {
-                if (!TaskManager.HasCompletedBlockingJobs)
+                if (!TaskManager.HasCompletedBlockingTasks)
                 {
                     InvokeOnControl(new MethodInvoker(() =>
                     {
@@ -1226,7 +1226,7 @@ namespace SharpEncrypt.Forms
                         {
                             MessageBox.Show(
                                 ResourceManager.GetString("ThereAreActiveTasks"),
-                                ResourceManager.GetString("ActiveJobsWarning"),
+                                ResourceManager.GetString("ActiveTasksWarning"),
                                 MessageBoxButtons.OK);
                         }
 

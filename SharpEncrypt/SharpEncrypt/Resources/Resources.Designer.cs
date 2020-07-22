@@ -115,20 +115,20 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active Jobs Warning.
-        /// </summary>
-        internal static string ActiveJobsWarning {
-            get {
-                return ResourceManager.GetString("ActiveJobsWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Active Tasks.
         /// </summary>
         internal static string ActiveTasks {
             get {
                 return ResourceManager.GetString("ActiveTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active Tasks Warning.
+        /// </summary>
+        internal static string ActiveTasksWarning {
+            get {
+                return ResourceManager.GetString("ActiveTasksWarning", resourceCulture);
             }
         }
         
@@ -142,20 +142,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added {0} jobs..
+        ///   Looks up a localized string similar to Added {0} tasks..
         /// </summary>
-        internal static string AddedNJobs {
+        internal static string AddedNTasks {
             get {
-                return ResourceManager.GetString("AddedNJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add Job.
-        /// </summary>
-        internal static string AddJob {
-            get {
-                return ResourceManager.GetString("AddJob", resourceCulture);
+                return ResourceManager.GetString("AddedNTasks", resourceCulture);
             }
         }
         
@@ -192,6 +183,15 @@ namespace SharpEncrypt.Resources {
         internal static string AddSecuredFolderToolStripMenuItem1 {
             get {
                 return ResourceManager.GetString("AddSecuredFolderToolStripMenuItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Task.
+        /// </summary>
+        internal static string AddTask {
+            get {
+                return ResourceManager.GetString("AddTask", resourceCulture);
             }
         }
         
@@ -385,15 +385,6 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Jobs.
-        /// </summary>
-        internal static string ClearJobs {
-            get {
-                return ResourceManager.GetString("ClearJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear Secured Files Grid.
         /// </summary>
         internal static string ClearSecuredFilesListToolStripMenuItem {
@@ -421,6 +412,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Tasks.
+        /// </summary>
+        internal static string ClearTasks {
+            get {
+                return ResourceManager.GetString("ClearTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to select encrypted files to share keys with others..
         /// </summary>
         internal static string ClickToShare {
@@ -439,11 +439,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Completed Jobs.
+        ///   Looks up a localized string similar to Completed Tasks.
         /// </summary>
-        internal static string CompletedJobs {
+        internal static string CompletedTasks {
             get {
-                return ResourceManager.GetString("CompletedJobs", resourceCulture);
+                return ResourceManager.GetString("CompletedTasks", resourceCulture);
             }
         }
         
@@ -943,7 +943,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Individual AppSettings Reset Dialog.
+        ///   Looks up a localized string similar to Individual Settings Reset Dialog.
         /// </summary>
         internal static string IndividualSettingsResetDialog {
             get {
@@ -952,7 +952,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Individual AppSettings Reset.
+        ///   Looks up a localized string similar to Individual Settings Reset.
         /// </summary>
         internal static string IndividualSettingsResetToolStripMenuItem {
             get {
@@ -975,15 +975,6 @@ namespace SharpEncrypt.Resources {
         internal static string InvalidKey {
             get {
                 return ResourceManager.GetString("InvalidKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Jobs.
-        /// </summary>
-        internal static string Jobs {
-            get {
-                return ResourceManager.GetString("Jobs", resourceCulture);
             }
         }
         
@@ -1456,7 +1447,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset All AppSettings.
+        ///   Looks up a localized string similar to Reset All Settings.
         /// </summary>
         internal static string ResetAllSettingsToolStripMenuItem {
             get {
@@ -1726,7 +1717,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SharpEncryptAppSettings.BIN.
+        ///   Looks up a localized string similar to SharpEncryptSettings.BIN.
         /// </summary>
         internal static string SharpEncryptSettingsFileName {
             get {
@@ -1857,6 +1848,15 @@ namespace SharpEncrypt.Resources {
         internal static string TaskProgressForm {
             get {
                 return ResourceManager.GetString("TaskProgressForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        internal static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
             }
         }
         
@@ -2005,29 +2005,11 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Completed Jobs.
+        ///   Looks up a localized string similar to View Completed Tasks.
         /// </summary>
-        internal static string ViewCompletedJobsToolStripMenuItem {
+        internal static string ViewCompletedTasksToolStripMenuItem {
             get {
-                return ResourceManager.GetString("ViewCompletedJobsToolStripMenuItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Jobs.
-        /// </summary>
-        internal static string ViewJobs {
-            get {
-                return ResourceManager.GetString("ViewJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Jobs.
-        /// </summary>
-        internal static string ViewJobsToolStripMenuItem {
-            get {
-                return ResourceManager.GetString("ViewJobsToolStripMenuItem", resourceCulture);
+                return ResourceManager.GetString("ViewCompletedTasksToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -2037,6 +2019,24 @@ namespace SharpEncrypt.Resources {
         internal static string ViewLogToolStripMenuItem {
             get {
                 return ResourceManager.GetString("ViewLogToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Tasks.
+        /// </summary>
+        internal static string ViewTasks {
+            get {
+                return ResourceManager.GetString("ViewTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Tasks.
+        /// </summary>
+        internal static string ViewTasksToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ViewTasksToolStripMenuItem", resourceCulture);
             }
         }
         

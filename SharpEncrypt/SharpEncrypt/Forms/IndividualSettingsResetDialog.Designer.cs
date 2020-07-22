@@ -143,7 +143,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IndividualSettingsResetDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Individual AppSettings Reset Dialog";
+            this.Text = "Individual Settings Reset Dialog";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.IndividualSettingsResetDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PropertyValuesGrid)).EndInit();

@@ -15,7 +15,7 @@ namespace SharpEncrypt.Forms
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly DriveSelectionControl DriveSelectionControl = new DriveSelectionControl { Dock = DockStyle.Fill };
 
-        public IDictionary<DriveInfo, IList<DriveWipeJob>> Jobs { get; } = new Dictionary<DriveInfo, IList<DriveWipeJob>>();
+        public IDictionary<DriveInfo, IList<DriveWipeTaskModel>> Tasks { get; } = new Dictionary<DriveInfo, IList<DriveWipeTaskModel>>();
 
         public AdvancedHardDriveWipeDialog() => InitializeComponent();
 
@@ -24,9 +24,9 @@ namespace SharpEncrypt.Forms
             Text = ResourceManager.GetString("HDDWipeDialog");
             OK.Text = ResourceManager.GetString("OK");
             Cancel.Text = ResourceManager.GetString("Cancel");
-            AddJob.Text = ResourceManager.GetString("AddJob");
-            ClearJobs.Text = ResourceManager.GetString("ClearJobs");
-            ViewJobs.Text = ResourceManager.GetString("ViewJobs");
+            AddTask.Text = ResourceManager.GetString("AddTask");
+            ClearTasks.Text = ResourceManager.GetString("ClearTasks");
+            ViewTasks.Text = ResourceManager.GetString("ViewTasks");
             ControlsPanel.Controls.Add(DriveSelectionControl); 
         }
 
@@ -54,33 +54,30 @@ namespace SharpEncrypt.Forms
                 using (var driveWipeOptionsDialog = new AdvancedHardDriveWipeOptionsDialog())
                 {
                     if (driveWipeOptionsDialog.ShowDialog() != DialogResult.OK) return;
-                    var job = driveWipeOptionsDialog.Job;
+                    var task = driveWipeOptionsDialog.Task;
                     foreach (var drive in drives)
                     {
-                        if (Jobs.ContainsKey(drive))
-                            Jobs[drive].Add(job);
+                        if (Tasks.ContainsKey(drive))
+                            Tasks[drive].Add(task);
                         else
-                            Jobs.Add(drive, new List<DriveWipeJob> { job });
+                            Tasks.Add(drive, new List<DriveWipeTaskModel> { task });
                     }
-                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNJobs") ?? string.Empty, drives.Count));
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNTasks") ?? string.Empty, drives.Count));
                 }
             }
         }
 
-        private void ClearJobs_Click(object sender, EventArgs e)
-        {
-            Jobs.Clear();
-        }
+        private void ClearTasks_Click(object sender, EventArgs e) => Tasks.Clear();
 
-        private void ViewJobs_Click(object sender, EventArgs e)
+        private void ViewTasks_Click(object sender, EventArgs e)
         {
             var columns = new List<string> { ResourceManager.GetString("Drive") };
 
-            var props = typeof(DriveWipeJob).GetProperties();
+            var props = typeof(DriveWipeTaskModel).GetProperties();
             columns.AddRange(props.Select(prop => ResourceManager.GetString(prop.Name)));
 
             var rows = new List<List<object>>();
-            foreach (var kvp in Jobs)
+            foreach (var kvp in Tasks)
             {
                 foreach (var value in kvp.Value)
                 {
@@ -93,9 +90,9 @@ namespace SharpEncrypt.Forms
                 }
             }
 
-            using (var viewJobsDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("Jobs")))
+            using (var viewTasksDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("Tasks")))
             {
-                viewJobsDialog.ShowDialog();
+                viewTasksDialog.ShowDialog();
             }
         }
     }

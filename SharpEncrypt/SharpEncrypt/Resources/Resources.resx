@@ -126,8 +126,8 @@
   <data name="ACriticalErrorHasOccurred" xml:space="preserve">
     <value>A critical error has occurred.</value>
   </data>
-  <data name="ActiveJobsWarning" xml:space="preserve">
-    <value>Active Jobs Warning</value>
+  <data name="ActiveTasksWarning" xml:space="preserve">
+    <value>Active Tasks Warning</value>
   </data>
   <data name="ActiveTasks" xml:space="preserve">
     <value>Active Tasks</value>
@@ -135,11 +135,11 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AddedNJobs" xml:space="preserve">
-    <value>Added {0} jobs.</value>
+  <data name="AddedNTasks" xml:space="preserve">
+    <value>Added {0} tasks.</value>
   </data>
-  <data name="AddJob" xml:space="preserve">
-    <value>Add Job</value>
+  <data name="AddTask" xml:space="preserve">
+    <value>Add Task</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
@@ -217,8 +217,8 @@
   <data name="ChangeSessionPasswordToolStripMenuItem" xml:space="preserve">
     <value>Change Session Password</value>
   </data>
-  <data name="ClearJobs" xml:space="preserve">
-    <value>Clear Jobs</value>
+  <data name="ClearTasks" xml:space="preserve">
+    <value>Clear Tasks</value>
   </data>
   <data name="ClearSecuredFilesListToolStripMenuItem" xml:space="preserve">
     <value>Clear Secured Files Grid</value>
@@ -235,8 +235,8 @@
   <data name="Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
-  <data name="CompletedJobs" xml:space="preserve">
-    <value>Completed Jobs</value>
+  <data name="CompletedTasks" xml:space="preserve">
+    <value>Completed Tasks</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
@@ -404,10 +404,10 @@
     <value>Include Subfolders</value>
   </data>
   <data name="IndividualSettingsResetDialog" xml:space="preserve">
-    <value>Individual AppSettings Reset Dialog</value>
+    <value>Individual Settings Reset Dialog</value>
   </data>
   <data name="IndividualSettingsResetToolStripMenuItem" xml:space="preserve">
-    <value>Individual AppSettings Reset</value>
+    <value>Individual Settings Reset</value>
   </data>
   <data name="Input" xml:space="preserve">
     <value>Input</value>
@@ -415,8 +415,8 @@
   <data name="InvalidKey" xml:space="preserve">
     <value>Invalid key, please generate a new key-pair.</value>
   </data>
-  <data name="Jobs" xml:space="preserve">
-    <value>Jobs</value>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="KeyPairDisclaimer" xml:space="preserve">
     <value>Generating a new key pair will overwrite any existing keys, your current session password will be used to encrypt your private key, continue?</value>
@@ -575,7 +575,7 @@
     <value>Reset All</value>
   </data>
   <data name="ResetAllSettingsToolStripMenuItem" xml:space="preserve">
-    <value>Reset All AppSettings</value>
+    <value>Reset All Settings</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Result</value>
@@ -665,7 +665,7 @@
     <value>SharpEncrypt Password Store File Key (*.seotppfk)|*.seotppfk</value>
   </data>
   <data name="SharpEncryptSettingsFileName" xml:space="preserve">
-    <value>SharpEncryptAppSettings.BIN</value>
+    <value>SharpEncryptSettings.BIN</value>
   </data>
   <data name="Show" xml:space="preserve">
     <value>Show</value>
@@ -754,14 +754,14 @@
   <data name="ValidContainer" xml:space="preserve">
     <value>{0} is a valid container.</value>
   </data>
-  <data name="ViewCompletedJobsToolStripMenuItem" xml:space="preserve">
-    <value>View Completed Jobs</value>
+  <data name="ViewCompletedTasksToolStripMenuItem" xml:space="preserve">
+    <value>View Completed Tasks</value>
   </data>
-  <data name="ViewJobs" xml:space="preserve">
-    <value>View Jobs</value>
+  <data name="ViewTasks" xml:space="preserve">
+    <value>View Tasks</value>
   </data>
-  <data name="ViewJobsToolStripMenuItem" xml:space="preserve">
-    <value>View Jobs</value>
+  <data name="ViewTasksToolStripMenuItem" xml:space="preserve">
+    <value>View Tasks</value>
   </data>
   <data name="ViewLogToolStripMenuItem" xml:space="preserve">
     <value>View Log</value>

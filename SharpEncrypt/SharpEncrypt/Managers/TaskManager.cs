@@ -31,9 +31,9 @@ namespace SharpEncrypt.Managers
 
         public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
 
-        public bool HasCompletedJobs => TaskHandlers.All(x => x.Value.HasCompletedJobs);
+        public bool HasCompletedTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks);
 
-        public bool HasCompletedBlockingJobs => TaskHandlers.All(x => x.Value.HasCompletedJobs) 
+        public bool HasCompletedBlockingTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks) 
                                                 || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
 
         public int TaskCount => TaskHandlers.Count;

@@ -32,9 +32,9 @@
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
-            this.AddJob = new System.Windows.Forms.Button();
-            this.ClearJobs = new System.Windows.Forms.Button();
-            this.ViewJobs = new System.Windows.Forms.Button();
+            this.AddTask = new System.Windows.Forms.Button();
+            this.ClearTasks = new System.Windows.Forms.Button();
+            this.ViewTasks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ControlsPanel
@@ -71,47 +71,47 @@
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
-            // AddJob
+            // AddTask
             // 
-            this.AddJob.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddJob.Location = new System.Drawing.Point(726, 470);
-            this.AddJob.Name = "AddJob";
-            this.AddJob.Size = new System.Drawing.Size(119, 62);
-            this.AddJob.TabIndex = 3;
-            this.AddJob.Text = "Add Job";
-            this.AddJob.UseVisualStyleBackColor = true;
-            this.AddJob.Click += new System.EventHandler(this.Options_Click);
+            this.AddTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddTask.Location = new System.Drawing.Point(726, 470);
+            this.AddTask.Name = "AddTask";
+            this.AddTask.Size = new System.Drawing.Size(119, 62);
+            this.AddTask.TabIndex = 3;
+            this.AddTask.Text = "Add Task";
+            this.AddTask.UseVisualStyleBackColor = true;
+            this.AddTask.Click += new System.EventHandler(this.Options_Click);
             // 
-            // ClearJobs
+            // ClearTasks
             // 
-            this.ClearJobs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearJobs.Location = new System.Drawing.Point(601, 470);
-            this.ClearJobs.Name = "ClearJobs";
-            this.ClearJobs.Size = new System.Drawing.Size(119, 62);
-            this.ClearJobs.TabIndex = 4;
-            this.ClearJobs.Text = "Clear Jobs";
-            this.ClearJobs.UseVisualStyleBackColor = true;
-            this.ClearJobs.Click += new System.EventHandler(this.ClearJobs_Click);
+            this.ClearTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClearTasks.Location = new System.Drawing.Point(601, 470);
+            this.ClearTasks.Name = "ClearTasks";
+            this.ClearTasks.Size = new System.Drawing.Size(119, 62);
+            this.ClearTasks.TabIndex = 4;
+            this.ClearTasks.Text = "Clear Tasks";
+            this.ClearTasks.UseVisualStyleBackColor = true;
+            this.ClearTasks.Click += new System.EventHandler(this.ClearTasks_Click);
             // 
-            // ViewJobs
+            // ViewTasks
             // 
-            this.ViewJobs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ViewJobs.Location = new System.Drawing.Point(476, 470);
-            this.ViewJobs.Name = "ViewJobs";
-            this.ViewJobs.Size = new System.Drawing.Size(119, 62);
-            this.ViewJobs.TabIndex = 5;
-            this.ViewJobs.Text = "View Jobs";
-            this.ViewJobs.UseVisualStyleBackColor = true;
-            this.ViewJobs.Click += new System.EventHandler(this.ViewJobs_Click);
+            this.ViewTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ViewTasks.Location = new System.Drawing.Point(476, 470);
+            this.ViewTasks.Name = "ViewTasks";
+            this.ViewTasks.Size = new System.Drawing.Size(119, 62);
+            this.ViewTasks.TabIndex = 5;
+            this.ViewTasks.Text = "View Tasks";
+            this.ViewTasks.UseVisualStyleBackColor = true;
+            this.ViewTasks.Click += new System.EventHandler(this.ViewTasks_Click);
             // 
             // AdvancedHardDriveWipeDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 544);
-            this.Controls.Add(this.ViewJobs);
-            this.Controls.Add(this.ClearJobs);
-            this.Controls.Add(this.AddJob);
+            this.Controls.Add(this.ViewTasks);
+            this.Controls.Add(this.ClearTasks);
+            this.Controls.Add(this.AddTask);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.ControlsPanel);
@@ -130,8 +130,8 @@
         private System.Windows.Forms.Panel ControlsPanel;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button AddJob;
-        private System.Windows.Forms.Button ClearJobs;
-        private System.Windows.Forms.Button ViewJobs;
+        private System.Windows.Forms.Button AddTask;
+        private System.Windows.Forms.Button ClearTasks;
+        private System.Windows.Forms.Button ViewTasks;
     }
 }
