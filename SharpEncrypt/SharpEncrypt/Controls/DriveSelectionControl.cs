@@ -15,9 +15,9 @@ namespace SharpEncrypt.Controls
 
         public IEnumerable<DriveInfo> GetSelectedDrives()
         {
-            for(var i = 0; i < DriveDataGrid.Rows.Count; i++)
+            for (var i = 0; i < DriveDataGrid.Rows.Count; i++)
             {
-                if(DriveDataGrid.Rows[i].Cells[0].Value is bool value && value)
+                if (DriveDataGrid.Rows[i].Cells[0].Value is bool value && value)
                 {
                     yield return Drives[i];
                 }

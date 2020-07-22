@@ -124,6 +124,7 @@
             this.Name = "ImportPublicKeyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ImportPublicKeyForm";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ImportPublicKeyForm_Load);
             this.Identity.ResumeLayout(false);
             this.Identity.PerformLayout();

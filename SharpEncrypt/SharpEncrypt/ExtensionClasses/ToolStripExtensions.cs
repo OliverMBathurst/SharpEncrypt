@@ -20,8 +20,8 @@ namespace SharpEncrypt.ExtensionClasses
             foreach (ToolStripItem item in items)
             {
                 if (item is ToolStripDropDownItem toolDownItem)
-                    foreach (ToolStripItem subitem in toolDownItem.DropDownItems.Flatten())
-                        yield return subitem;
+                    foreach (var subItem in toolDownItem.DropDownItems.Flatten())
+                        yield return subItem;
                 yield return item;
             }
         }

@@ -6,6 +6,7 @@ using System.Text;
 using SharpEncrypt.Exceptions;
 using System.Linq;
 using System.Collections.Generic;
+using AesLibrary;
 
 namespace SharpEncrypt.Helpers
 {
@@ -31,12 +32,12 @@ namespace SharpEncrypt.Helpers
                 fs.SetLength(fs.Length - (keyLength + SaltLength + GetLengthBytes(keyLength).Length + 1));
             }
 
-            AESHelper.DecryptFile(key, filePath);
+            AesHelper.DecryptFile(key, filePath);
         }
 
-        public static void ContainerizeFile(string filePath, AESKey key, string password)
+        public static void ContainerizeFile(string filePath, AesKey key, string password)
         {
-            AESHelper.EncryptFile(key, filePath);
+            AesHelper.EncryptFile(key, filePath);
 
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             var salt = GenerateSalt();
@@ -72,7 +73,7 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        private static AESKey GetDecryptedAesKey(string filePath, string password, out int keyLength)
+        private static AesKey GetDecryptedAesKey(string filePath, string password, out int keyLength)
         {
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             byte[] decryptedKeyBytes;
@@ -123,7 +124,7 @@ namespace SharpEncrypt.Helpers
 
             using (var ms = new MemoryStream(decryptedKeyBytes))
             {
-                if (new BinaryFormatter().Deserialize(ms) is AESKey aesKey)
+                if (new BinaryFormatter().Deserialize(ms) is AesKey aesKey)
                 {
                     return aesKey;
                 }
@@ -137,7 +138,7 @@ namespace SharpEncrypt.Helpers
             var list = new List<int>();
             while (number > 0)
             {
-                if(number <= 255)
+                if (number <= 255)
                 {
                     list.Add(number);
                     number = 0;

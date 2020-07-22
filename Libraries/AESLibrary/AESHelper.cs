@@ -4,22 +4,24 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using AESLibrary;
+using AesLibrary.Exceptions;
 
-namespace AESLibrary
+namespace AesLibrary
 {
-    public static class AESHelper
+    public static class AesHelper
     {
-        private const int BUFFER_LENGTH = 1024;
+        private const int BufferLength = 1024;
 
         /// <summary>
         ///
         /// </summary>
-        public static bool TryGetKey(string path, out AESKey key)
+        public static bool TryGetKey(string path, out AesKey key)
         {
             using (var fs = new FileStream(path, FileMode.Open))
             {
                 var obj = new BinaryFormatter().Deserialize(fs);
-                if (obj is AESKey aesKey)
+                if (obj is AesKey aesKey)
                 {
                     key = aesKey;
                     return true;
@@ -33,13 +35,13 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void EncryptFile(AESKey aesKey, string inputPath, string outputPath, int bufferLength = BUFFER_LENGTH)
+        public static void EncryptFile(AesKey aesKey, string inputPath, string outputPath, int bufferLength = BufferLength)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
 
             var key = aesKey.GetKey();
-            var iv = aesKey.GetIV();
+            var iv = aesKey.GetIv();
             var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
@@ -82,13 +84,13 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void DecryptFile(AESKey aesKey, string inputPath, string outputPath, int bufferLength = BUFFER_LENGTH)
+        public static void DecryptFile(AesKey aesKey, string inputPath, string outputPath, int bufferLength = BufferLength)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
 
             var key = aesKey.GetKey();
-            var iv = aesKey.GetIV();
+            var iv = aesKey.GetIv();
             var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
@@ -131,13 +133,13 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void DecryptFile(AESKey aesKey, string filePath, int bufferLength = BUFFER_LENGTH)
+        public static void DecryptFile(AesKey aesKey, string filePath, int bufferLength = BufferLength)
         {
             if (aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
 
             var key = aesKey.GetKey();
-            var iv = aesKey.GetIV();
+            var iv = aesKey.GetIv();
             var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
@@ -184,13 +186,13 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void EncryptFile(AESKey aesKey, string filePath, int bufferLength = BUFFER_LENGTH)
+        public static void EncryptFile(AesKey aesKey, string filePath, int bufferLength = BufferLength)
         {
             if(aesKey == null)
                 throw new ArgumentNullException(nameof(aesKey));
 
             var key = aesKey.GetKey();
-            var iv = aesKey.GetIV();
+            var iv = aesKey.GetIv();
             var keyLength = aesKey.KeySize;
 
             if (!key.Any() || keyLength <= 0)
@@ -232,9 +234,9 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static AESKey WriteNewKey(string path)
+        public static AesKey WriteNewKey(string path)
         {
-            var key = GetNewAESKey();
+            var key = GetNewAesKey();
             using (var stream = new FileStream(path, FileMode.CreateNew))
             {
                 new BinaryFormatter().Serialize(stream, key);
@@ -245,9 +247,9 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static AESKey WriteNewKey(string path, RijndaelManaged managed)
+        public static AesKey WriteNewKey(string path, RijndaelManaged managed)
         {
-            var key = new AESKey(managed);
+            var key = new AesKey(managed);
             using (var stream = new FileStream(path, FileMode.CreateNew))
             {
                 new BinaryFormatter().Serialize(stream, key);
@@ -258,7 +260,7 @@ namespace AESLibrary
         /// <summary>
         ///
         /// </summary>
-        public static AESKey GetNewAESKey(
+        public static AesKey GetNewAesKey(
             int keySize = 256, 
             int blockSize = 128,
             CipherMode cipherMode = CipherMode.CBC,
@@ -273,7 +275,7 @@ namespace AESLibrary
 
                 key.GenerateKey();
                 key.GenerateIV();
-                return new AESKey(key);
+                return new AesKey(key);
             }
         }
     }

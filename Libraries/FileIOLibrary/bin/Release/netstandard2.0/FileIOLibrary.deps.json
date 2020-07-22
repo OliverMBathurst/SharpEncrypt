@@ -7,13 +7,13 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "FileIOLibrary/1.0.0": {
+      "FileIoLibrary/1.0.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "3.0.0",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
-          "FileIOLibrary.dll": {}
+          "FileIoLibrary.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.FxCopAnalyzers/3.0.0": {
@@ -37,7 +37,7 @@
     }
   },
   "libraries": {
-    "FileIOLibrary/1.0.0": {
+    "FileIoLibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

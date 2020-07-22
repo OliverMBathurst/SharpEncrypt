@@ -243,32 +243,32 @@
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\ReencryptTempFilesTaskResult.cs" />
-    <Compile Include="Tasks\AESSavePasswordsTask.cs" />
-    <Compile Include="Tasks\BulkRenameFolderTask.cs" />
-    <Compile Include="Tasks\DecontainerizeFileTask.cs" />
-    <Compile Include="Tasks\DecontainerizeFolderTask.cs" />
-    <Compile Include="Tasks\GenerateNewRSAKeyPairTask.cs" />
-    <Compile Include="Tasks\ImportPublicRSAKeyTask.cs" />
-    <Compile Include="Tasks\InactivityTimeoutTask.cs" />
-    <Compile Include="Tasks\ReencryptTempFilesTask.cs" />
-    <Compile Include="Tasks\RenameFileNameTask.cs" />
-    <Compile Include="Tasks\CreateOTPPasswordStoreKeyTask.cs" />
-    <Compile Include="Tasks\GenericDeleteFileTask.cs" />
-    <Compile Include="Tasks\OpenAESPasswordStoreTask.cs" />
-    <Compile Include="Tasks\OpenOTPPasswordStoreTask.cs" />
-    <Compile Include="Tasks\ReadFolderExclusionListTask.cs" />
-    <Compile Include="Tasks\ReadLogFileTask.cs" />
-    <Compile Include="Tasks\OTPSavePasswordsTask.cs" />
-    <Compile Include="Tasks\ContainerizeFileTask.cs" />
-    <Compile Include="Tasks\ShredDirectoryTask.cs" />
-    <Compile Include="Tasks\OnSecuredFileRenamedTask.cs" />
-    <Compile Include="Tasks\WriteFolderExclusionListTask.cs" />
-    <Compile Include="Tasks\WriteFileExclusionListTask.cs" />
-    <Compile Include="Tasks\LoggingTask.cs" />
-    <Compile Include="Tasks\OneTimePadTransformTask.cs" />
+    <Compile Include="Tasks\Aes Tasks\AesSavePasswordsTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\BulkRenameFolderTask.cs" />
+    <Compile Include="Tasks\File Tasks\DecontainerizeFileTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderTask.cs" />
+    <Compile Include="Tasks\Rsa Tasks\GenerateNewRsaKeyPairTask.cs" />
+    <Compile Include="Tasks\Rsa Tasks\ImportPublicRsaKeyTask.cs" />
+    <Compile Include="Tasks\Misc Tasks\InactivityTimeoutTask.cs" />
+    <Compile Include="Tasks\File Tasks\ReencryptTempFilesTask.cs" />
+    <Compile Include="Tasks\File Tasks\RenameFileNameTask.cs" />
+    <Compile Include="Tasks\Otp Tasks\CreateOtpPasswordStoreKeyTask.cs" />
+    <Compile Include="Tasks\File Tasks\GenericDeleteFileTask.cs" />
+    <Compile Include="Tasks\Aes Tasks\OpenAesPasswordStoreTask.cs" />
+    <Compile Include="Tasks\Otp Tasks\OpenOtpPasswordStoreTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\ReadFolderExclusionListTask.cs" />
+    <Compile Include="Tasks\Logging Tasks\ReadLogFileTask.cs" />
+    <Compile Include="Tasks\Otp Tasks\OtpSavePasswordsTask.cs" />
+    <Compile Include="Tasks\File Tasks\ContainerizeFileTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\ShredDirectoryTask.cs" />
+    <Compile Include="Tasks\File Tasks\OnSecuredFileRenamedTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\WriteFolderExclusionListTask.cs" />
+    <Compile Include="Tasks\File Tasks\WriteFileExclusionListTask.cs" />
+    <Compile Include="Tasks\Logging Tasks\LoggingTask.cs" />
+    <Compile Include="Tasks\Otp Tasks\OtpTransformTask.cs" />
     <Compile Include="Models\SharpEncryptTaskResult.cs" />
     <Compile Include="Helpers\PathHelper.cs" />
-    <Compile Include="Helpers\RSAKeyWriterHelper.cs" />
+    <Compile Include="Helpers\RsaKeyWriterHelper.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,8 +344,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.tr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\RSAKeyPairHelper.cs" />
-    <Compile Include="Helpers\RSAKeyReaderHelper.cs" />
+    <Compile Include="Helpers\RsaKeyPairHelper.cs" />
+    <Compile Include="Helpers\RsaKeyReaderHelper.cs" />
     <Compile Include="Models\SharpEncryptSettingsModel.cs" />
     <Compile Include="Forms\ShowOnceDialog.cs">
       <SubType>Form</SubType>
@@ -353,16 +353,17 @@
     <Compile Include="Forms\ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tasks\OTPSaveKeyOfFileTask.cs" />
-    <Compile Include="Tasks\ReadFileExclusionListTask.cs" />
-    <Compile Include="Tasks\ReadSecuredFilesListTask.cs" />
-    <Compile Include="Tasks\ReadSecuredFoldersListTask.cs" />
-    <Compile Include="Tasks\ReadSettingsFileTask.cs" />
-    <Compile Include="Tasks\SecureDeleteFileTask.cs" />
-    <Compile Include="Tasks\SecureFolderTask.cs" />
-    <Compile Include="Tasks\WriteSecuredFileListTask.cs" />
-    <Compile Include="Tasks\WriteSecuredFoldersListTask.cs" />
-    <Compile Include="Tasks\WriteSettingsFileTask.cs" />
+    <Compile Include="Tasks\Otp Tasks\OtpSaveKeyOfFileTask.cs" />
+    <Compile Include="Tasks\File Tasks\ReadFileExclusionListTask.cs" />
+    <Compile Include="Tasks\File Tasks\ReadSecuredFilesListTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\ReadSecuredFoldersListTask.cs" />
+    <Compile Include="Tasks\File Tasks\ReadSettingsFileTask.cs" />
+    <Compile Include="Tasks\File Tasks\SecureDeleteFileTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\SecureFolderTask.cs" />
+    <Compile Include="Tasks\File Tasks\WriteSecuredFileListTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\WriteSecuredFoldersListTask.cs" />
+    <Compile Include="Tasks\File Tasks\WriteSettingsFileTask.cs" />
+    <Compile Include="Tasks\Test Tasks\FailingTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -502,6 +503,7 @@
     <EmbeddedResource Include="lib\OTPLibrary.dll" />
     <EmbeddedResource Include="lib\SecureEraseLibrary.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

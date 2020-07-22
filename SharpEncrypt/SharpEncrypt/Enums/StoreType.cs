@@ -2,7 +2,7 @@
 {
     public enum StoreType
     {
-        AES,
-        OTP
+        Aes,
+        Otp
     }
 }

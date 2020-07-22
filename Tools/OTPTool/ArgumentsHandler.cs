@@ -1,23 +1,22 @@
-﻿using OTPLibrary;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Resources;
 
-namespace OTPTool
+namespace OtpTool
 {
     internal sealed class ArgumentsHandler
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager _resourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
 
         public void Execute()
         {
-            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == _resourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == _resourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
+                Console.WriteLine(_resourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -50,20 +49,20 @@ namespace OTPTool
                             i++;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, _resourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture) ?? string.Empty, _arguments[i], _resourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                 }
 
                 if (genKey)
                 {
                     if (string.IsNullOrEmpty(referenceFile))
-                        OTPHelper.GenerateKey(path, keySize);
+                        OtpHelper.GenerateKey(path, keySize);
                     else
-                        OTPHelper.GenerateKey(path, referenceFile);
+                        OtpHelper.GenerateKey(path, referenceFile);
                 }
                 else
                 {
-                    OTPHelper.Transform(path, keyPath);
+                    OtpHelper.Transform(path, keyPath);
                 }
             }
         }

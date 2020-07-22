@@ -9,12 +9,7 @@ namespace SharpEncrypt.ExtensionClasses
 {
     public static class StringExtensions
     {
-        public static bool Exists(this string path)
-        {
-            if (Directory.Exists(path) || File.Exists(path))
-                return true;
-            return false;
-        }
+        public static bool Exists(this string path) => Directory.Exists(path) || File.Exists(path);
 
         public static string Hash(this string str)
         {
@@ -29,11 +24,7 @@ namespace SharpEncrypt.ExtensionClasses
         {
             if (str == null)
                 throw new ArgumentNullException(nameof(str));
-
-            if (number >= str.Length)
-                return string.Empty;
-
-            return str.Substring(0, str.Length - number);
+            return number >= str.Length ? string.Empty : str.Substring(0, str.Length - number);
         }
     }
 }

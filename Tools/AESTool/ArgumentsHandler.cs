@@ -1,13 +1,12 @@
-﻿using AESLibrary;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Resources;
 
-namespace AESTool
+namespace AesTool
 {
     internal sealed class ArgumentsHandler
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager _resourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
@@ -15,9 +14,9 @@ namespace AESTool
         public void Execute()
         {
             
-            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == _resourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == _resourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
+                Console.WriteLine(_resourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -50,38 +49,38 @@ namespace AESTool
                             genKey = true;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, _resourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture) ?? string.Empty, _arguments[i], _resourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                 }
 
                 if (genKey)
                 {
-                    AESHelper.WriteNewKey(inputPath);
+                    AesHelper.WriteNewKey(inputPath);
                 }
                 else
                 {
-                    if (!AESHelper.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("NotAKey", CultureInfo.CurrentCulture), keyPath));
+                    if (!AesHelper.TryGetKey(keyPath, out var key)) throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, _resourceManager.GetString("NotAKey", CultureInfo.CurrentCulture) ?? string.Empty, keyPath));
                     {
                         if (encrypt)
                         {
                             if (string.IsNullOrEmpty(outputPath))
                             {
-                                AESHelper.EncryptFile(key, inputPath);
+                                AesHelper.EncryptFile(key, inputPath);
                             }
                             else
                             {
-                                AESHelper.EncryptFile(key, inputPath, outputPath);
+                                AesHelper.EncryptFile(key, inputPath, outputPath);
                             }
                         }
                         else
                         {
                             if (string.IsNullOrEmpty(outputPath))
                             {
-                                AESHelper.DecryptFile(key, inputPath);
+                                AesHelper.DecryptFile(key, inputPath);
                             }
                             else
                             {
-                                AESHelper.DecryptFile(key, inputPath, outputPath);
+                                AesHelper.DecryptFile(key, inputPath, outputPath);
                             }
                         }
                     }

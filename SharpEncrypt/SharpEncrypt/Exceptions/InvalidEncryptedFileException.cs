@@ -19,7 +19,7 @@ namespace SharpEncrypt.Exceptions
 
         protected InvalidEncryptedFileException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

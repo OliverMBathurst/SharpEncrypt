@@ -12,6 +12,8 @@ namespace SharpEncrypt.Exceptions
         public InvalidKeyException(string message, Exception innerException) : base(message, innerException) { }
 
         private InvalidKeyException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
-            => throw new NotImplementedException();
+        {
+
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace SharpEncrypt.Exceptions
 
         protected DuplicateIdentityException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

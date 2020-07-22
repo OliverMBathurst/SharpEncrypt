@@ -119,6 +119,7 @@
             this.Name = "AdvancedHardDriveWipeDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HardDriveWipeDialog";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdvancedHardDriveWipeDialog_Load);
             this.ResumeLayout(false);
 

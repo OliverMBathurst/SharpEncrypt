@@ -174,6 +174,7 @@
             this.Name = "AdvancedHardDriveWipeOptionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdvancedHardDriveWipeOptionsDialog";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.AdvancedHardDriveWipeOptionsDialog_Load);
             this.WipeTypeGroupBox.ResumeLayout(false);
             this.WipeOptions.ResumeLayout(false);

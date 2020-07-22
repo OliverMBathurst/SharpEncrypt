@@ -796,4 +796,10 @@
   <data name="0colon" xml:space="preserve">
     <value>{0}:</value>
   </data>
+  <data name="TaskCountToolStripMenuItem" xml:space="preserve">
+    <value>Task Count</value>
+  </data>
+  <data name="0Interpolation" xml:space="preserve">
+    <value>{0}</value>
+  </data>
 </root>

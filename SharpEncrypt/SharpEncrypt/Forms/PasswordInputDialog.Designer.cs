@@ -211,6 +211,7 @@
             this.Name = "PasswordInputDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PasswordInput";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PasswordInput_Load);
             this.PasswordGroupBox.ResumeLayout(false);
             this.PasswordGroupBox.PerformLayout();

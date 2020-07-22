@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AESTool {
+namespace AesTool {
     using System;
     
     

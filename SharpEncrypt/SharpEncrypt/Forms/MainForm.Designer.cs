@@ -41,15 +41,19 @@ namespace SharpEncrypt.Forms
             this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.RemoveFileFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopSecuringAndRemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ShareKeysToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToOriginalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClearSecuredFilesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddSecuredFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.ClearSecuredFilesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowAllSecuredFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.HideExcludedSecuredFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.AnonymizeFileNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeanonymizeFileNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SecuredFoldersTab = new System.Windows.Forms.TabPage();
@@ -57,15 +61,18 @@ namespace SharpEncrypt.Forms
             this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FolderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.DecryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptTemporarilyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemoveFolderFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearSecuredFoldersGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveFolderFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowAllSecuredFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.HideExcludedSecuredFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.BulkAnonymousRenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BulkDeanonymizeFileNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
@@ -136,6 +143,8 @@ namespace SharpEncrypt.Forms
             this.HelpMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunFailTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppLabel = new System.Windows.Forms.Label();
             this.Logo = new System.Windows.Forms.PictureBox();
             this.AddSecuredGUIButton = new System.Windows.Forms.Button();
@@ -152,13 +161,7 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.TaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.SecuredFilesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecuredFilesGrid)).BeginInit();
@@ -294,6 +297,18 @@ namespace SharpEncrypt.Forms
             this.OpenToolStripMenuItem.Text = "Open";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
+            // ShowInFolderToolStripMenuItem
+            // 
+            this.ShowInFolderToolStripMenuItem.Name = "ShowInFolderToolStripMenuItem";
+            this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
+            this.ShowInFolderToolStripMenuItem.Text = "Show In Folder";
+            this.ShowInFolderToolStripMenuItem.Click += new System.EventHandler(this.ShowInFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(397, 6);
+            // 
             // RemoveFileFromListButKeepSecuredToolStripMenuItem
             // 
             this.RemoveFileFromListButKeepSecuredToolStripMenuItem.Name = "RemoveFileFromListButKeepSecuredToolStripMenuItem";
@@ -308,19 +323,17 @@ namespace SharpEncrypt.Forms
             this.StopSecuringAndRemoveFromListToolStripMenuItem.Text = "Stop Securing And Remove From List";
             this.StopSecuringAndRemoveFromListToolStripMenuItem.Click += new System.EventHandler(this.StopSecuringAndRemoveFromListToolStripMenuItem_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(397, 6);
+            // 
             // ShareKeysToolStripMenuItem1
             // 
             this.ShareKeysToolStripMenuItem1.Name = "ShareKeysToolStripMenuItem1";
             this.ShareKeysToolStripMenuItem1.Size = new System.Drawing.Size(400, 32);
             this.ShareKeysToolStripMenuItem1.Text = "Share Keys";
             this.ShareKeysToolStripMenuItem1.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem1_Click);
-            // 
-            // ShowInFolderToolStripMenuItem
-            // 
-            this.ShowInFolderToolStripMenuItem.Name = "ShowInFolderToolStripMenuItem";
-            this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
-            this.ShowInFolderToolStripMenuItem.Text = "Show In Folder";
-            this.ShowInFolderToolStripMenuItem.Click += new System.EventHandler(this.ShowInFolderToolStripMenuItem_Click);
             // 
             // RenameToOriginalToolStripMenuItem
             // 
@@ -329,19 +342,24 @@ namespace SharpEncrypt.Forms
             this.RenameToOriginalToolStripMenuItem.Text = "Rename To Original Name";
             this.RenameToOriginalToolStripMenuItem.Click += new System.EventHandler(this.RenameToOriginalToolStripMenuItem_Click);
             // 
-            // ClearSecuredFilesListToolStripMenuItem
-            // 
-            this.ClearSecuredFilesListToolStripMenuItem.Name = "ClearSecuredFilesListToolStripMenuItem";
-            this.ClearSecuredFilesListToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
-            this.ClearSecuredFilesListToolStripMenuItem.Text = "Clear Secured Files Grid";
-            this.ClearSecuredFilesListToolStripMenuItem.Click += new System.EventHandler(this.ClearSecuredFilesListToolStripMenuItem_Click);
-            // 
             // AddSecuredFileToolStripMenuItem
             // 
             this.AddSecuredFileToolStripMenuItem.Name = "AddSecuredFileToolStripMenuItem";
             this.AddSecuredFileToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
             this.AddSecuredFileToolStripMenuItem.Text = "Add Secured File";
             this.AddSecuredFileToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(397, 6);
+            // 
+            // ClearSecuredFilesListToolStripMenuItem
+            // 
+            this.ClearSecuredFilesListToolStripMenuItem.Name = "ClearSecuredFilesListToolStripMenuItem";
+            this.ClearSecuredFilesListToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
+            this.ClearSecuredFilesListToolStripMenuItem.Text = "Clear Secured Files Grid";
+            this.ClearSecuredFilesListToolStripMenuItem.Click += new System.EventHandler(this.ClearSecuredFilesListToolStripMenuItem_Click);
             // 
             // ShowAllSecuredFiles
             // 
@@ -356,6 +374,11 @@ namespace SharpEncrypt.Forms
             this.HideExcludedSecuredFilesToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
             this.HideExcludedSecuredFilesToolStripMenuItem.Text = "Hide Excluded Secured Files";
             this.HideExcludedSecuredFilesToolStripMenuItem.Click += new System.EventHandler(this.HideExcludedSecuredFilesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(397, 6);
             // 
             // AnonymizeFileNameToolStripMenuItem
             // 
@@ -448,12 +471,31 @@ namespace SharpEncrypt.Forms
             this.FolderMenuStrip.Name = "folderMenuStrip";
             this.FolderMenuStrip.Size = new System.Drawing.Size(425, 374);
             // 
+            // OpenExplorerHereToolStripMenuItem
+            // 
+            this.OpenExplorerHereToolStripMenuItem.Name = "OpenExplorerHereToolStripMenuItem";
+            this.OpenExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
+            this.OpenExplorerHereToolStripMenuItem.Text = "Open Explorer Here";
+            this.OpenExplorerHereToolStripMenuItem.Click += new System.EventHandler(this.OpenExplorerHereToolStripMenuItem_Click);
+            // 
+            // AddSecuredFolderToolStripMenuItem
+            // 
+            this.AddSecuredFolderToolStripMenuItem.Name = "AddSecuredFolderToolStripMenuItem";
+            this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
+            this.AddSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
+            this.AddSecuredFolderToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFolderToolStripMenuItem_Click);
+            // 
             // ShareKeysToolStripMenuItem
             // 
             this.ShareKeysToolStripMenuItem.Name = "ShareKeysToolStripMenuItem";
             this.ShareKeysToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
             this.ShareKeysToolStripMenuItem.Text = "Share Keys";
             this.ShareKeysToolStripMenuItem.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(421, 6);
             // 
             // DecryptPermanentlyToolStripMenuItem
             // 
@@ -469,19 +511,10 @@ namespace SharpEncrypt.Forms
             this.DecryptTemporarilyToolStripMenuItem.Text = "Decrypt Temporarily";
             this.DecryptTemporarilyToolStripMenuItem.Click += new System.EventHandler(this.DecryptTemporarilyToolStripMenuItem_Click);
             // 
-            // RemoveFolderFromListToolStripMenuItem
+            // toolStripSeparator8
             // 
-            this.RemoveFolderFromListToolStripMenuItem.Name = "RemoveFolderFromListToolStripMenuItem";
-            this.RemoveFolderFromListToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
-            this.RemoveFolderFromListToolStripMenuItem.Text = "Remove Folder From List But Keep Secured";
-            this.RemoveFolderFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFolderFromListToolStripMenuItem_Click);
-            // 
-            // OpenExplorerHereToolStripMenuItem
-            // 
-            this.OpenExplorerHereToolStripMenuItem.Name = "OpenExplorerHereToolStripMenuItem";
-            this.OpenExplorerHereToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
-            this.OpenExplorerHereToolStripMenuItem.Text = "Open Explorer Here";
-            this.OpenExplorerHereToolStripMenuItem.Click += new System.EventHandler(this.OpenExplorerHereToolStripMenuItem_Click);
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(421, 6);
             // 
             // ClearSecuredFoldersGridToolStripMenuItem
             // 
@@ -490,12 +523,12 @@ namespace SharpEncrypt.Forms
             this.ClearSecuredFoldersGridToolStripMenuItem.Text = "Clear Secured Folders Grid";
             this.ClearSecuredFoldersGridToolStripMenuItem.Click += new System.EventHandler(this.ClearSecuredFoldersGridToolStripMenuItem_Click);
             // 
-            // AddSecuredFolderToolStripMenuItem
+            // RemoveFolderFromListToolStripMenuItem
             // 
-            this.AddSecuredFolderToolStripMenuItem.Name = "AddSecuredFolderToolStripMenuItem";
-            this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
-            this.AddSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
-            this.AddSecuredFolderToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFolderToolStripMenuItem_Click);
+            this.RemoveFolderFromListToolStripMenuItem.Name = "RemoveFolderFromListToolStripMenuItem";
+            this.RemoveFolderFromListToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
+            this.RemoveFolderFromListToolStripMenuItem.Text = "Remove Folder From List But Keep Secured";
+            this.RemoveFolderFromListToolStripMenuItem.Click += new System.EventHandler(this.RemoveFolderFromListToolStripMenuItem_Click);
             // 
             // ShowAllSecuredFolders
             // 
@@ -510,6 +543,11 @@ namespace SharpEncrypt.Forms
             this.HideExcludedSecuredFoldersToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
             this.HideExcludedSecuredFoldersToolStripMenuItem.Text = "Hide Excluded Secured Folders";
             this.HideExcludedSecuredFoldersToolStripMenuItem.Click += new System.EventHandler(this.HideExcludedSecuredFoldersToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(421, 6);
             // 
             // BulkAnonymousRenameToolStripMenuItem
             // 
@@ -535,7 +573,8 @@ namespace SharpEncrypt.Forms
             this.DebugMenuStrip,
             this.DiskToolsToolStripMenuItem,
             this.AdvancedMenuStrip,
-            this.HelpMenuStrip});
+            this.HelpMenuStrip,
+            this.TestToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(1092, 33);
@@ -1062,14 +1101,14 @@ namespace SharpEncrypt.Forms
             // ForceExitToolStripMenuItem
             // 
             this.ForceExitToolStripMenuItem.Name = "ForceExitToolStripMenuItem";
-            this.ForceExitToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
+            this.ForceExitToolStripMenuItem.Size = new System.Drawing.Size(341, 34);
             this.ForceExitToolStripMenuItem.Text = "Force Exit";
             this.ForceExitToolStripMenuItem.Click += new System.EventHandler(this.ForceExitToolStripMenuItem_Click);
             // 
             // IndividualSettingsResetToolStripMenuItem
             // 
             this.IndividualSettingsResetToolStripMenuItem.Name = "IndividualSettingsResetToolStripMenuItem";
-            this.IndividualSettingsResetToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
+            this.IndividualSettingsResetToolStripMenuItem.Size = new System.Drawing.Size(341, 34);
             this.IndividualSettingsResetToolStripMenuItem.Text = "Individual AppSettings Reset";
             this.IndividualSettingsResetToolStripMenuItem.Click += new System.EventHandler(this.IndividualSettingsResetToolStripMenuItem_Click);
             // 
@@ -1086,7 +1125,7 @@ namespace SharpEncrypt.Forms
             // 
             this.ShowHelpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ShowHelpToolStripMenuItem.Image")));
             this.ShowHelpToolStripMenuItem.Name = "ShowHelpToolStripMenuItem";
-            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.ShowHelpToolStripMenuItem.Text = "Show Help";
             this.ShowHelpToolStripMenuItem.Click += new System.EventHandler(this.ShowHelpToolStripMenuItem_Click);
             // 
@@ -1094,9 +1133,27 @@ namespace SharpEncrypt.Forms
             // 
             this.AboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripMenuItem.Image")));
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // TestToolStripMenuItem
+            // 
+            this.TestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RunFailTaskToolStripMenuItem,
+            this.TaskCountToolStripMenuItem});
+            this.TestToolStripMenuItem.Enabled = false;
+            this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
+            this.TestToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
+            this.TestToolStripMenuItem.Text = "Test";
+            this.TestToolStripMenuItem.Visible = false;
+            // 
+            // RunFailTaskToolStripMenuItem
+            // 
+            this.RunFailTaskToolStripMenuItem.Name = "RunFailTaskToolStripMenuItem";
+            this.RunFailTaskToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.RunFailTaskToolStripMenuItem.Text = "Run Failing Task";
+            this.RunFailTaskToolStripMenuItem.Click += new System.EventHandler(this.RunFailTaskToolStripMenuItem_Click);
             // 
             // AppLabel
             // 
@@ -1227,40 +1284,12 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
-            // toolStripSeparator4
+            // TaskCountToolStripMenuItem
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(397, 6);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(397, 6);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(397, 6);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(397, 6);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(421, 6);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(421, 6);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(421, 6);
+            this.TaskCountToolStripMenuItem.Name = "TaskCountToolStripMenuItem";
+            this.TaskCountToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.TaskCountToolStripMenuItem.Text = "Task Count";
+            this.TaskCountToolStripMenuItem.Click += new System.EventHandler(this.TaskCountToolStripMenuItem_Click_1);
             // 
             // MainForm
             // 
@@ -1428,6 +1457,9 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem TestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RunFailTaskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TaskCountToolStripMenuItem;
     }
 }
 

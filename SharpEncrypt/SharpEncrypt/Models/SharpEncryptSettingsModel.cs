@@ -26,7 +26,7 @@ namespace SharpEncrypt.Models
 
         public bool Logging { get; set; } = false;
 
-        public StoreType StoreType { get; set; } = StoreType.OTP;
+        public StoreType StoreType { get; set; } = StoreType.Otp;
 
         public string OtpStoreKeyFilePath { get; set; } = string.Empty;
 

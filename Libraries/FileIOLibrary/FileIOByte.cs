@@ -3,38 +3,38 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 
-namespace FileIOLibrary
+namespace FileIoLibrary
 {
     /// <summary>
     ///
     /// </summary>
-    public class FileIOByte : IEquatable<FileIOByte>
+    public class FileIoByte : IEquatable<FileIoByte>
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
-        private const char ON = '1', OFF = '0';
-        private Bit[] mBits;
+        private readonly ResourceManager _resourceManager = new ResourceManager(typeof(Resources));
+        private const char On = '1', Off = '0';
+        private Bit[] _bits;
 
         /// <summary>
         ///
         /// </summary>
-        public FileIOByte(string stringRepresentation) => SetBits(stringRepresentation);
+        public FileIoByte(string stringRepresentation) => SetBits(stringRepresentation);
 
         /// <summary>
         ///
         /// </summary>
-        public FileIOByte(Bit[] bits)
+        public FileIoByte(Bit[] bits)
         {
             if (bits == null)
                 throw new ArgumentNullException(nameof(bits));
             if (bits.Length != 8)
-                throw new ArgumentException(ResourceManager.GetString("WrongStringLength", CultureInfo.CurrentCulture));
-            mBits = bits;
+                throw new ArgumentException(_resourceManager.GetString("WrongStringLength", CultureInfo.CurrentCulture));
+            _bits = bits;
         }
 
         /// <summary>
         ///
         /// </summary>
-        public Bit[] GetBits() => mBits;
+        public Bit[] GetBits() => _bits;
 
         /// <summary>
         ///
@@ -43,7 +43,7 @@ namespace FileIOLibrary
         {
             var sum = 0;
             for (var i = 0; i < 8; i++)
-                sum += mBits[i].Value == true ? (int)Math.Pow(2, mode == EndianMode.Big ? (8 - (i + 1)) : i) : 0;
+                sum += _bits[i].Value ? (int)Math.Pow(2, mode == EndianMode.Big ? (8 - (i + 1)) : i) : 0;
             return sum;
         }
 
@@ -54,25 +54,16 @@ namespace FileIOLibrary
         {
             for (var i = 0; i < 8; i++)
             {
-                if (mBits[i].Value)
-                {
-                    mBits[i].Value = false;
-                }
-                else
-                {
-                    mBits[i].Value = true;
-                }
+                _bits[i].Value = !_bits[i].Value;
             }
         }
 
         /// <summary>
         ///
         /// </summary>
-        public bool Equals(FileIOByte other)
+        public bool Equals(FileIoByte other)
         {
-            if (other != null)
-                return other.GetBits().SequenceEqual(GetBits());
-            return false;
+            return other != null && other.GetBits().SequenceEqual(GetBits());
         }
 
         /// <summary>
@@ -84,33 +75,28 @@ namespace FileIOLibrary
         /// <returns>
         /// The Bit object at the specified index.
         /// </returns>
-        public Bit this[int index] => mBits[index];
+        public Bit this[int index] => _bits[index];
 
         /// <summary>
         ///
         /// </summary>
-        public static FileIOByte DefaultByte
-            => new FileIOByte(new [] { new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit()});
+        public static FileIoByte DefaultByte
+            => new FileIoByte(new [] { new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit()});
 
         /// <summary>
         ///
         /// </summary>
-        public static FileIOByte New => DefaultByte;
+        public static FileIoByte New => DefaultByte;
 
         /// <summary>
         ///
         /// </summary>
-        public override bool Equals(object obj) => obj is FileIOByte b && Equals(b);
+        public override bool Equals(object obj) => obj is FileIoByte b && Equals(b);
 
         /// <summary>
         ///
         /// </summary>
-        public override int GetHashCode() => base.GetHashCode();
-
-        /// <summary>
-        ///
-        /// </summary>
-        public override string ToString() => string.Join(string.Empty, mBits);
+        public override string ToString() => string.Join(string.Empty, _bits);
 
         /// <summary>
         ///
@@ -127,10 +113,10 @@ namespace FileIOLibrary
             {
                 switch (byteString[i])
                 {
-                    case ON:
+                    case On:
                         bits[i] = new Bit(true);
                         break;
-                    case OFF:
+                    case Off:
                         bits[i] = new Bit(false);
                         break;
                     default:
@@ -138,7 +124,9 @@ namespace FileIOLibrary
                 }
             }
 
-            mBits = bits;
+            _bits = bits;
         }
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

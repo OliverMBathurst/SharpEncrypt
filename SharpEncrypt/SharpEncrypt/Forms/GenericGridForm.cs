@@ -24,10 +24,10 @@ namespace SharpEncrypt.Forms
         private void GenericGridForm_Load(object sender, EventArgs e)
         {
 
-            foreach(var column in Columns)
+            foreach (var column in Columns)
                 GridView.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = column });
 
-            foreach(var row in Rows)
+            foreach (var row in Rows)
             {
                 var newRow = new DataGridViewRow();
                 for (var i = 0; i < row.Count; i++)

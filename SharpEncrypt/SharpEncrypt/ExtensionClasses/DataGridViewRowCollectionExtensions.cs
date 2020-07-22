@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SharpEncrypt.ExtensionClasses
@@ -13,7 +14,7 @@ namespace SharpEncrypt.ExtensionClasses
             if (rows == null)
                 throw new ArgumentNullException(nameof(rows));
 
-            foreach (DataGridViewRow row in rows)
+            foreach (var row in rows)
                 collection.Remove(row);
         }
 
@@ -24,7 +25,7 @@ namespace SharpEncrypt.ExtensionClasses
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            foreach(DataGridViewRow row in collection)
+            foreach (DataGridViewRow row in collection)
             {
                 yield return predicate(row);
             }
@@ -39,7 +40,7 @@ namespace SharpEncrypt.ExtensionClasses
 
             foreach (DataGridViewRow row in collection)
             {
-                if(predicate(row))
+                if (predicate(row))
                     yield return row;
             }
         }
@@ -51,16 +52,7 @@ namespace SharpEncrypt.ExtensionClasses
             if (predicate == null)
                 throw new ArgumentNullException(nameof(predicate));
 
-            var list = new List<DataGridViewRow>();
-            foreach(DataGridViewRow row in collection)
-            {
-                if (predicate(row))
-                {
-                    list.Add(row);
-                }
-            }
-
-            collection.RemoveAll(list);
+            collection.RemoveAll(collection.Cast<DataGridViewRow>().Where(predicate));
         }
 
         public static void RemoveAll(this DataGridViewRowCollection collection, DataGridViewSelectedRowCollection rowCollection)

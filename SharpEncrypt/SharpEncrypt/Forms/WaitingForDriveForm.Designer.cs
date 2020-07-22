@@ -77,6 +77,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WaitingForDriveForm";
             this.Text = "WaitingForDriveForm";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.WaitingForDriveForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

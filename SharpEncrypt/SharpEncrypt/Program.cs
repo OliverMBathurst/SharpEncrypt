@@ -36,7 +36,7 @@ namespace SharpEncrypt
 
             using (var stream = ExecutingAssembly.GetManifestResourceStream(resourceName))
             {
-                if(stream == null)
+                if (stream == null)
                     throw new ArgumentNullException(nameof(stream));
 
                 var bytes = new byte[stream.Length];

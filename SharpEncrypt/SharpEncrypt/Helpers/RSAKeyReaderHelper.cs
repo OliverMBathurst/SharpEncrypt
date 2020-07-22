@@ -18,7 +18,7 @@ namespace SharpEncrypt.Helpers
 
             using (var fs = new FileStream(path, FileMode.Open))
             {
-                if(new BinaryFormatter().Deserialize(fs) is RSAParameters @params)
+                if (new BinaryFormatter().Deserialize(fs) is RSAParameters @params)
                 {
                     return @params;
                 }

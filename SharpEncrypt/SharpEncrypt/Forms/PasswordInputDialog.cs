@@ -110,7 +110,7 @@ namespace SharpEncrypt.Forms
 
         private void Copy_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(PasswordInputBox.Text))
+            if (!string.IsNullOrEmpty(PasswordInputBox.Text))
                 Clipboard.SetText(PasswordInputBox.Text);
         }
 
@@ -120,7 +120,7 @@ namespace SharpEncrypt.Forms
         }
 
         private void CopyGenerated_Click(object sender, EventArgs e) { 
-            if(!string.IsNullOrEmpty(PasswordGeneratorField.Text))
+            if (!string.IsNullOrEmpty(PasswordGeneratorField.Text))
                 Clipboard.SetText(PasswordGeneratorField.Text);
         } 
     }

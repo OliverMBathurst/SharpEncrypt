@@ -6,7 +6,7 @@ namespace GutmannLibrary
 {
     public static class GutmannHelper
     {
-        private readonly static int[] _patterns = new[] { 
+        private static readonly int[] Patterns = { 
             85, 170, 146, 73, 
             36, 0, 17, 34, 
             51, 68, 85, 102, 
@@ -16,7 +16,7 @@ namespace GutmannLibrary
             109, 182, 219
         };
 
-        private const int BUFFER_LENGTH = 1024;
+        private const int BufferLength = 1024;
 
         /// <summary>
         ///
@@ -36,7 +36,7 @@ namespace GutmannLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void RandomWipe(string path, int passes = 4, int bufferLength = BUFFER_LENGTH)
+        public static void RandomWipe(string path, int passes = 4, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -69,7 +69,7 @@ namespace GutmannLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void GutmannPatternWipe(string path, int bufferLength = BUFFER_LENGTH)
+        public static void GutmannPatternWipe(string path, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -78,7 +78,7 @@ namespace GutmannLibrary
 
             using (var bw = new BinaryWriter(File.OpenWrite(path)))
             {
-                foreach(var number in _patterns)
+                foreach(var number in Patterns)
                 {
                     bw.Seek(0, SeekOrigin.Begin);
                     var remainingLength = bw.BaseStream.Length;

@@ -80,6 +80,7 @@
             this.Name = "ActiveTasksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ActiveTasksForm";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ActiveTasksForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ActiveJobsGridView)).EndInit();
             this.ResumeLayout(false);

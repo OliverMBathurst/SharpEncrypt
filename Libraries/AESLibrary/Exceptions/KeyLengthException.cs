@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AESLibrary
+namespace AesLibrary.Exceptions
 {
     public class KeyLengthException : Exception
     {

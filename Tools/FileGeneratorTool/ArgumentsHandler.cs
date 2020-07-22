@@ -1,5 +1,4 @@
-﻿using FileGeneratorLibrary;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Resources;
@@ -8,7 +7,7 @@ namespace FileGeneratorTool
 {
     internal sealed class ArgumentsHandler
     {
-        private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources));
+        private readonly ResourceManager _resourceManager = new ResourceManager(typeof(Resources));
         private readonly string[] _arguments;
 
         public ArgumentsHandler(string[] args) => _arguments = args;
@@ -19,9 +18,9 @@ namespace FileGeneratorTool
             var length = 0L;
             bool random = false, pause = true, postDelete = true;
 
-            if ((_arguments.Length == 1 && (_arguments[0] == ResourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == ResourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
+            if ((_arguments.Length == 1 && (_arguments[0] == _resourceManager.GetString("HelpSwitch", CultureInfo.CurrentCulture) || _arguments[0] == _resourceManager.GetString("HelpShortSwitch", CultureInfo.CurrentCulture))) || _arguments.Length == 0)
             {
-                Console.WriteLine(ResourceManager.GetString("Usage", CultureInfo.CurrentCulture));
+                Console.WriteLine(_resourceManager.GetString("Usage", CultureInfo.CurrentCulture));
             }
             else
             {
@@ -45,18 +44,16 @@ namespace FileGeneratorTool
                             postDelete = postResult;
                             break;
                         default:
-                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], ResourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
+                            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, _resourceManager.GetString("InvalidArg", CultureInfo.CurrentCulture), _arguments[i], _resourceManager.GetString("Usage", CultureInfo.CurrentCulture)));
                     }
                     i++;
                 }
 
                 FileGeneratorHelper.WriteNewFile(path, length, random, postDelete);
 
-                if (pause)
-                {
-                    Console.WriteLine(ResourceManager.GetString("FileHasBeenGenerated", CultureInfo.CurrentCulture));
-                    Console.ReadLine();
-                }
+                if (!pause) return;
+                Console.WriteLine(_resourceManager.GetString("FileHasBeenGenerated", CultureInfo.CurrentCulture));
+                Console.ReadLine();
             }
         }
     }

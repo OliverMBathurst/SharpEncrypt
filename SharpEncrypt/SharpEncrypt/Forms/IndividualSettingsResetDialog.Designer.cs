@@ -32,11 +32,11 @@
             this.Cancel = new System.Windows.Forms.Button();
             this.OK = new System.Windows.Forms.Button();
             this.PropertyValuesGrid = new System.Windows.Forms.DataGridView();
-            this.ResetAll = new System.Windows.Forms.Button();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DefaultValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ResetColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ResetAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PropertyValuesGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,17 +88,6 @@
             this.PropertyValuesGrid.Size = new System.Drawing.Size(925, 444);
             this.PropertyValuesGrid.TabIndex = 2;
             // 
-            // ResetAll
-            // 
-            this.ResetAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ResetAll.Location = new System.Drawing.Point(12, 462);
-            this.ResetAll.Name = "ResetAll";
-            this.ResetAll.Size = new System.Drawing.Size(112, 60);
-            this.ResetAll.TabIndex = 3;
-            this.ResetAll.Text = "Reset All";
-            this.ResetAll.UseVisualStyleBackColor = true;
-            this.ResetAll.Click += new System.EventHandler(this.ResetAll_Click);
-            // 
             // Property
             // 
             this.Property.HeaderText = "Property";
@@ -130,6 +119,17 @@
             this.ResetColumn.ReadOnly = true;
             this.ResetColumn.Text = "Result";
             // 
+            // ResetAll
+            // 
+            this.ResetAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ResetAll.Location = new System.Drawing.Point(12, 462);
+            this.ResetAll.Name = "ResetAll";
+            this.ResetAll.Size = new System.Drawing.Size(112, 60);
+            this.ResetAll.TabIndex = 3;
+            this.ResetAll.Text = "Reset All";
+            this.ResetAll.UseVisualStyleBackColor = true;
+            this.ResetAll.Click += new System.EventHandler(this.ResetAll_Click);
+            // 
             // IndividualSettingsResetDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -144,6 +144,7 @@
             this.Name = "IndividualSettingsResetDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Individual AppSettings Reset Dialog";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.IndividualSettingsResetDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PropertyValuesGrid)).EndInit();
             this.ResumeLayout(false);

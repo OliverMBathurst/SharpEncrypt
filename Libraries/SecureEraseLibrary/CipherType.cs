@@ -5,7 +5,7 @@
     /// </summary>
     public enum CipherType
     {
-         OTP, 
-         AES
+         Otp, 
+         Aes
     }
 }

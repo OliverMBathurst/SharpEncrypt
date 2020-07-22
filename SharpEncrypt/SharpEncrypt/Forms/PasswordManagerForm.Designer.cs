@@ -224,6 +224,7 @@
             this.Name = "PasswordManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PasswordManager";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PasswordManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.GridContextMenuStrip.ResumeLayout(false);

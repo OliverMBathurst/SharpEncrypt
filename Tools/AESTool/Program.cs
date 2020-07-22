@@ -1,7 +1,7 @@
-﻿namespace AESTool
+﻿namespace AesTool
 {
     internal class Program
     {
-        static void Main(string[] args) => new ArgumentsHandler(args).Execute();
+        private static void Main(string[] args) => new ArgumentsHandler(args).Execute();
     }
 }

@@ -91,6 +91,7 @@
             this.MinimumSize = new System.Drawing.Size(787, 201);
             this.Name = "GenericTextInput";
             this.Text = "Text Input";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.GenericTextInput_Load);
             this.InputGroupBox.ResumeLayout(false);
             this.InputGroupBox.PerformLayout();

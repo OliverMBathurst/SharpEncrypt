@@ -4,34 +4,34 @@ using System.Security.Cryptography;
 namespace AESLibrary
 {
     [Serializable]
-    public sealed class AESKey
+    public sealed class AesKey
     {
-        private readonly byte[] keyBytes;
-        private readonly byte[] IVBytes;
+        private readonly byte[] _keyBytes;
+        private readonly byte[] _ivBytes;
 
-        public AESKey(RijndaelManaged managed)
+        public AesKey(RijndaelManaged managed)
         {
             if (managed == null)
                 throw new ArgumentNullException(nameof(managed));
 
-            keyBytes = managed.Key;
-            IVBytes = managed.IV;
+            _keyBytes = managed.Key;
+            _ivBytes = managed.IV;
             KeySize = managed.KeySize;
             BlockSize = managed.BlockSize;
             Padding = managed.Padding;
             Mode = managed.Mode;
         }
 
-        public byte[] GetKey() => keyBytes;
+        public byte[] GetKey() => _keyBytes;
 
-        public byte[] GetIV() => IVBytes;
+        public byte[] GetIv() => _ivBytes;
 
-        public int KeySize { get; } = 256;
+        public int KeySize { get; }
 
-        public int BlockSize { get; } = 128;
+        public int BlockSize { get; }
 
-        public PaddingMode Padding { get; } = PaddingMode.PKCS7;
+        public PaddingMode Padding { get; }
 
-        public CipherMode Mode { get; } = CipherMode.CBC;
+        public CipherMode Mode { get; }
     }
 }

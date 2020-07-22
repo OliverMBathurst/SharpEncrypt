@@ -11,8 +11,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6818A13C-C5ED-4926-AAFA-E1CF5724F57B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FileGen</RootNamespace>
-    <AssemblyName>FileGen</AssemblyName>
+    <RootNamespace>FileGeneratorTool</RootNamespace>
+    <AssemblyName>FileGeneratorTool</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -40,20 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExtensionMethods">
-      <HintPath>..\..\ExtensionMethodsProjects\ExtensionMethods\bin\Release\netstandard2.0\ExtensionMethods.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="ArgumentsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,19 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FileGeneratorLibrary\FileGeneratorLibrary.csproj">
-      <Project>{A6DFAE55-3665-46DE-BE7B-179C6F79CADF}</Project>
-      <Name>FileGeneratorLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\SharpEncrypt\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />

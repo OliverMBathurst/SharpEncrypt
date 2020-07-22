@@ -57,7 +57,7 @@ namespace SharpEncrypt.Forms
                 return;
             }
 
-            if(ImportPublicKey(Identity.Text))
+            if (ImportPublicKey(Identity.Text))
                 DialogResult = DialogResult.OK;
         }
 

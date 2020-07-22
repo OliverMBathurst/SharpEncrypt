@@ -12,10 +12,7 @@ namespace SharpEncrypt.ExtensionClasses
             if (rows == null)
                 throw new ArgumentNullException(nameof(rows));
 
-            var list = new List<T>();
-            foreach (var row in rows)
-                list.Add(func(row));
-            return list;
+            return rows.Select(func);
         }
     }
 }

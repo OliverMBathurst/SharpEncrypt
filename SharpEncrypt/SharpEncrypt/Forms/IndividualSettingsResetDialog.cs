@@ -26,7 +26,7 @@ namespace SharpEncrypt.Forms
 
         private void CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == PropertyValuesGrid.Columns.Count - 1)
+            if (e.ColumnIndex == PropertyValuesGrid.Columns.Count - 1)
             {
                 Reset(e.RowIndex);
                 RefreshGrid();
@@ -96,7 +96,7 @@ namespace SharpEncrypt.Forms
 
         private void Reset(int index)
         {
-            if(index > -1)
+            if (index > -1)
             {
                 CurrentPropertyValues[index] = DefaultPropertyValues[index];
             }            

@@ -16,7 +16,7 @@ namespace SharpEncrypt.Models
 
         public bool Equals(FolderDataGridItemModel other)
         {
-            if(other == null)
+            if (other == null)
                 throw new ArgumentNullException(nameof(other));
 
             return Uri.Equals(other.Uri, StringComparison.Ordinal)

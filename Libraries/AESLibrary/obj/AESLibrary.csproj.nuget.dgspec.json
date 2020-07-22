@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AESLibrary.csproj": {}
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AesLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AESLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AesLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AESLibrary.csproj",
-        "projectName": "AESLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AESLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AesLibrary.csproj",
+        "projectName": "AesLibrary",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\AesLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\AESLibrary\\obj\\",
         "projectStyle": "PackageReference",

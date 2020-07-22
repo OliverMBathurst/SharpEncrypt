@@ -13,7 +13,7 @@ namespace SharpEncrypt.Exceptions
 
         protected TaskManagerDisabledException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

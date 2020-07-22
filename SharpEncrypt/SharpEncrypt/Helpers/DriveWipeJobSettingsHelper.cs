@@ -9,7 +9,7 @@ namespace SharpEncrypt.Helpers
     {
         public static IEnumerable<DriveWipeJobSettings> GetOptions()
         {
-            foreach(var name in Enum.GetNames(typeof(DriveWipeType)))
+            foreach (var name in Enum.GetNames(typeof(DriveWipeType)))
             {
                 if (Enum.TryParse<DriveWipeType>(name, out var result))
                 {
@@ -28,9 +28,9 @@ namespace SharpEncrypt.Helpers
                     return RandomWriteSettings;
                 case DriveWipeType.SDelete:
                     return SDeleteSettings;
-                case DriveWipeType.Write0s:
+                case DriveWipeType.WriteZeros:
                     return WriteZerosSettings;
-                case DriveWipeType.Write255s:
+                case DriveWipeType.WriteTwoFiveFives:
                     return Write255Settings;
                 case DriveWipeType.Default:
                     return DefaultWipeSettings;
@@ -64,7 +64,7 @@ namespace SharpEncrypt.Helpers
             get
             {
                 var @default = DefaultSettings;
-                @default.Type = DriveWipeType.Write0s;
+                @default.Type = DriveWipeType.WriteZeros;
                 return @default;
             }
         }
@@ -74,7 +74,7 @@ namespace SharpEncrypt.Helpers
             get
             {
                 var @default = DefaultSettings;
-                @default.Type = DriveWipeType.Write255s;
+                @default.Type = DriveWipeType.WriteTwoFiveFives;
                 return @default;
             }
         }

@@ -85,10 +85,7 @@ namespace SharpEncrypt.Managers
                 BackgroundWorker.RunWorkerAsync();
         }
 
-        public void CancelWorker()
-        {
-            BackgroundWorker.CancelAsync();
-        }
+        public void CancelWorker() => BackgroundWorker.CancelAsync();
 
         public void CancelAllTasks()
         {
@@ -101,10 +98,7 @@ namespace SharpEncrypt.Managers
                 CurrentTaskInstance.Token.Cancel();            
         }               
 
-        public void Dispose()
-        {
-            BackgroundWorker.Dispose();
-        }
+        public void Dispose() => BackgroundWorker.Dispose();
 
         private void BackgroundWorkerWork(object sender, DoWorkEventArgs e)
         {
@@ -147,22 +141,14 @@ namespace SharpEncrypt.Managers
         private void OnTaskCompleted(SharpEncryptTask task)
         {
             TaskCompleted?.Invoke(task);
-            if (DisableAfterJob)
-            {
-                Disabled = true;
-                BackgroundWorkerDisabled?.Invoke(Identifier);
-            }
+            if (!DisableAfterJob) return;
+            Disabled = true;
+            BackgroundWorkerDisabled?.Invoke(Identifier);
         }
 
-        private void OnTaskDequeued(SharpEncryptTask task)
-        {
-            TaskDequeued?.Invoke(task);
-        }
+        private void OnTaskDequeued(SharpEncryptTask task) => TaskDequeued?.Invoke(task);
 
-        private void OnCurrentTasksCompleted()
-        {
-            TasksCompleted?.Invoke();
-        }
+        private void OnCurrentTasksCompleted() => TasksCompleted?.Invoke();
 
         #endregion
     }

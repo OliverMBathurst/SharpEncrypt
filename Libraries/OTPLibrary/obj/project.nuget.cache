@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eIvl+R0fcGhxZW0zfJ5WqiViccwTRFl2HdY8nYWZIku1vgfdbEUXSC70l91Vr7uwgxtyBsj1azX5NmBYKYfTcA==",
+  "dgSpecHash": "qYrpGLdiaCNfsNxM7CURrE66WhCdRvd32E/QbaBDKP+4LMCF9VWvuzKwFRAkBXZyQMlKO0mnrzIk8EGTPMTFKQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\OTPLibrary\\OTPLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\OTPLibrary\\OtpLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",

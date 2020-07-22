@@ -50,7 +50,7 @@ namespace SharpEncrypt.ExtensionClasses
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
 
-            foreach(var element in list)
+            foreach (var element in list)
             {
                 if (predicate(element))
                     list.Remove(element);

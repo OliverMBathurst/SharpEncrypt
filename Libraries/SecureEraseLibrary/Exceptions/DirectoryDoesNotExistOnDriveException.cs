@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SecureEraseLibrary
+namespace SecureEraseLibrary.Exceptions
 {
     public class DirectoryDoesNotExistOnDriveException : Exception
     {

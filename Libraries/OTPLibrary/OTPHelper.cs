@@ -1,22 +1,22 @@
-﻿using FileIOLibrary;
-using OTPLibrary.Exceptions;
+﻿using FileIoLibrary;
+using OtpLibrary.Exceptions;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace OTPLibrary
+namespace OtpLibrary
 {
     /// <summary>
     ///
     /// </summary>
-    public static class OTPHelper
+    public static class OtpHelper
     {
-        private const int BUFFER_LENGTH = 1024;
+        private const int BufferLength = 1024;
 
         /// <summary>
         ///
         /// </summary>
-        public static void GenerateKey(string path, string referenceFile, int bufferLength = BUFFER_LENGTH)
+        public static void GenerateKey(string path, string referenceFile, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -31,7 +31,7 @@ namespace OTPLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void GenerateKey(string path, long length, int bufferLength = BUFFER_LENGTH)
+        public static void GenerateKey(string path, long length, int bufferLength = BufferLength)
         {
             using (var provider = new RNGCryptoServiceProvider())
             {
@@ -54,7 +54,7 @@ namespace OTPLibrary
         /// <summary>
         ///
         /// </summary>
-        public static byte[] XOR(byte[] fileBytes, byte[] keyBytes)
+        public static byte[] Xor(byte[] fileBytes, byte[] keyBytes)
         {
             if (fileBytes == null)
                 throw new ArgumentNullException(nameof(fileBytes));
@@ -74,7 +74,7 @@ namespace OTPLibrary
         //<summary>
         // Encrypts the file without the possibility of recovery
         //<summary>
-        public static void EncryptWithoutKey(string path, int bufferLength = BUFFER_LENGTH)
+        public static void EncryptWithoutKey(string path, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -90,7 +90,7 @@ namespace OTPLibrary
                         bytes = new byte[readWriter.GetBuffer().Length];
 
                     provider.GetNonZeroBytes(bytes);
-                    readWriter.SetBuffer(XOR(readWriter.GetBuffer(), bytes));
+                    readWriter.SetBuffer(Xor(readWriter.GetBuffer(), bytes));
                     readWriter.Write();
                 }
             }
@@ -99,7 +99,7 @@ namespace OTPLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void Transform(string path, string keyPath, int bufferLength = BUFFER_LENGTH)
+        public static void Transform(string path, string keyPath, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -126,7 +126,7 @@ namespace OTPLibrary
 
                     keyStream.Read(keyBytes, 0, keyBytes.Length);
 
-                    readWriter.SetBuffer(XOR(readWriter.GetBuffer(), keyBytes));
+                    readWriter.SetBuffer(Xor(readWriter.GetBuffer(), keyBytes));
                     readWriter.Write();
                 }
             }

@@ -80,7 +80,7 @@ namespace SharpEncrypt.Forms
             columns.AddRange(props.Select(prop => ResourceManager.GetString(prop.Name)));
 
             var rows = new List<List<object>>();
-            foreach(var kvp in Jobs)
+            foreach (var kvp in Jobs)
             {
                 foreach (var value in kvp.Value)
                 {

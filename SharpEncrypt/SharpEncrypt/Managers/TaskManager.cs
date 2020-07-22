@@ -33,13 +33,8 @@ namespace SharpEncrypt.Managers
 
         public bool HasCompletedJobs => TaskHandlers.All(x => x.Value.HasCompletedJobs);
 
-        public bool HasCompletedBlockingJobs 
-        {
-            get
-            {
-                return TaskHandlers.All(x => x.Value.HasCompletedJobs) || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
-            }
-        }
+        public bool HasCompletedBlockingJobs => TaskHandlers.All(x => x.Value.HasCompletedJobs) 
+                                                || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
 
         public int TaskCount => TaskHandlers.Count;
 
@@ -47,28 +42,15 @@ namespace SharpEncrypt.Managers
 
         #endregion
 
+        public TaskManager() => TaskCompleted += AfterTaskCompleted;
+
         #region Event methods
 
-        private void OnException(Exception exception)
-        {
-            ExceptionOccurred?.Invoke(exception);
-        }
+        private void OnTaskDequeued(SharpEncryptTask task) => TaskDequeued?.Invoke(task);
 
-        private void OnTaskDequeued(SharpEncryptTask task)
-        {
-            TaskDequeued?.Invoke(task);
-        }
+        private void OnTaskCompleted(SharpEncryptTask task) => TaskCompleted?.Invoke(task);
 
-        private void OnTaskCompleted(SharpEncryptTask task)
-        {
-            TaskCompleted?.Invoke(task);
-            AfterTaskCompleted(task);
-        }
-
-        private void OnBackgroundWorkerDisabled(Guid guid)
-        {
-            TaskHandlers.TryRemove(guid, out _);
-        }
+        private void OnBackgroundWorkerDisabled(Guid guid) => TaskHandlers.TryRemove(guid, out _);
 
         #endregion
 
@@ -78,19 +60,19 @@ namespace SharpEncrypt.Managers
         {
             if (Cancelled)
             {
-                OnException(new TaskManagerDisabledException());
+                ExceptionOccurred?.Invoke(new TaskManagerDisabledException());
                 return;
             }
 
             if (sharpEncryptTask == null)
             {
-                OnException(new ArgumentNullException(nameof(sharpEncryptTask)));
+                ExceptionOccurred?.Invoke(new ArgumentNullException(nameof(sharpEncryptTask)));
                 return;
             }
 
             if (sharpEncryptTask.IsExclusive)
             {
-                if(TaskHandlers.SelectMany(x => x.Value.ActiveTasks)
+                if (TaskHandlers.SelectMany(x => x.Value.ActiveTasks)
                     .Any(x => x.TaskType == sharpEncryptTask.TaskType))
                 {
                     DuplicateExclusiveTask?.Invoke(sharpEncryptTask);
@@ -102,7 +84,7 @@ namespace SharpEncrypt.Managers
                 taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
                 taskHandlerForTask.TaskCompleted += OnTaskCompleted;
                 taskHandlerForTask.TaskDequeued += OnTaskDequeued;
-                taskHandlerForTask.Exception += OnException;
+                taskHandlerForTask.Exception += exception => ExceptionOccurred?.Invoke(exception);
 
                 TaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
                 
@@ -119,7 +101,7 @@ namespace SharpEncrypt.Managers
         private void AfterTaskCompleted(SharpEncryptTask task)
         {
             CompletedTasks.Add((task, DateTime.Now));
-            if(Cancelled && TaskHandlers.IsEmpty)
+            if (Cancelled && TaskHandlers.IsEmpty)
             {
                 TaskManagerCompleted?.Invoke();
             }

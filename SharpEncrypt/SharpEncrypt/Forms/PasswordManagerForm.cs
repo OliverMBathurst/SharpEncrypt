@@ -106,7 +106,7 @@ namespace SharpEncrypt.Forms
 
         private void Undo_Click(object sender, EventArgs e)
         {
-            if(UndoStack.Count != 0)
+            if (UndoStack.Count != 0)
                 Undo(UndoStack.Pop());
         }
 
@@ -115,9 +115,9 @@ namespace SharpEncrypt.Forms
         private string GetSelectSelectedRowDetailsBoxText()
         {
             var sb = new StringBuilder();
-            foreach(DataGridViewRow row in GridView.SelectedRows)
+            foreach (DataGridViewRow row in GridView.SelectedRows)
             {
-                if(row.DataBoundItem is PasswordModel model)
+                if (row.DataBoundItem is PasswordModel model)
                 {
                     sb.Append(
                         $"{ResourceManager.GetString("Name")}: {model.PasswordName ?? string.Empty}, " +
@@ -138,21 +138,21 @@ namespace SharpEncrypt.Forms
             switch (operation.OperationType)
             {
                 case OperationType.Add:
-                    foreach(var model in operation.Models)
+                    foreach (var model in operation.Models)
                     {
                         Models.Remove(model);
                     }
                     break;
                 case OperationType.Remove:
-                    foreach(var model in operation.Models)
+                    foreach (var model in operation.Models)
                     {
                         Models.Add(model);
                     }
                     break;
                 case OperationType.PasswordChange:
-                    foreach(var model in operation.Models)
+                    foreach (var model in operation.Models)
                     {
-                        if(model.OldPasswords.Count > 0)
+                        if (model.OldPasswords.Count > 0)
                             model.Password = model.OldPasswords.Pop();
                     }
                     break;
@@ -180,9 +180,9 @@ namespace SharpEncrypt.Forms
         #region Context menu items
         private void GenerateNewPasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in GridView.SelectedRows)
+            foreach (DataGridViewRow row in GridView.SelectedRows)
             {
-                if(row.DataBoundItem is PasswordModel model)
+                if (row.DataBoundItem is PasswordModel model)
                 {
                     model.OldPasswords.Push(model.Password);
                     model.Password = PasswordHelper.GeneratePassword();
@@ -197,7 +197,7 @@ namespace SharpEncrypt.Forms
         {
             foreach (DataGridViewRow row in GridView.SelectedRows)
             {
-                if(row.DataBoundItem is PasswordModel model)
+                if (row.DataBoundItem is PasswordModel model)
                 {
                     Models.Remove(model);
                     UndoStack.Push(new Operation { OperationType = OperationType.Remove, Models = new[] { model } });

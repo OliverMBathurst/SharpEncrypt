@@ -10,7 +10,7 @@ namespace FileGeneratorLibrary
     /// </summary>
     public static class FileGeneratorHelper
     {
-        private const int BUFFER_LENGTH = 1024;
+        private const int BufferLength = 1024;
 
         /// <summary>
         /// Creates a new file 
@@ -32,7 +32,7 @@ namespace FileGeneratorLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void WriteNewFile(string path, long length, bool random = true, bool postDelete = true, int bufferLength = BUFFER_LENGTH)
+        public static void WriteNewFile(string path, long length, bool random = true, bool postDelete = true, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -71,7 +71,7 @@ namespace FileGeneratorLibrary
         public static string CreateUniqueFileForDirectory(string directoryPath, string extension)
         {
             var uniqueFilePath = CreateUniqueFilePathForDirectory(directoryPath, extension);
-            using (var fs = File.Create(uniqueFilePath))
+            using (_ = File.Create(uniqueFilePath))
             {
                 return uniqueFilePath;
             }
@@ -88,10 +88,10 @@ namespace FileGeneratorLibrary
                 throw new DirectoryNotFoundException(directoryPath);
 
             var dir = Path.GetDirectoryName(directoryPath);
-            var path = Path.Combine(dir, $"{GetRandomNameWithoutExtension()}{extension}");
+            var path = Path.Combine(dir ?? string.Empty, $"{GetRandomNameWithoutExtension()}{extension}");
 
             while (File.Exists(path))
-                path = Path.Combine(dir, $"{GetRandomNameWithoutExtension()}{extension}");
+                path = Path.Combine(dir ?? string.Empty, $"{GetRandomNameWithoutExtension()}{extension}");
 
             return path;
         }
@@ -117,7 +117,7 @@ namespace FileGeneratorLibrary
         /// <summary>
         /// <c>GetAnonymousName()</c> should not be used to generate names for the renaming of sensitive files.
         /// The file name string that is returned by this method leaks metadata (the epoch time at which the file name was generated), use <c>GetRandomName()</c> instead.
-        /// <summary>
+        /// </summary>
         /// <returns>
         /// The epoch time at the time of method execution, represented as a string.
         /// </returns>

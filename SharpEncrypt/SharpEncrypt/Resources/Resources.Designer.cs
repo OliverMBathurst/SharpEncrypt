@@ -79,6 +79,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}.
+        /// </summary>
+        internal static string _0Interpolation {
+            get {
+                return ResourceManager.GetString("0Interpolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} out of {1} selected.
         /// </summary>
         internal static string _0OutOfNSelected {
@@ -1830,6 +1839,15 @@ namespace SharpEncrypt.Resources {
         internal static string TaskCompletedSuccessfully {
             get {
                 return ResourceManager.GetString("TaskCompletedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Count.
+        /// </summary>
+        internal static string TaskCountToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("TaskCountToolStripMenuItem", resourceCulture);
             }
         }
         

@@ -1,11 +1,12 @@
-﻿using AESLibrary;
-using FileGeneratorLibrary;
-using OTPLibrary;
+﻿using FileGeneratorLibrary;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using AesLibrary;
+using OtpLibrary;
+using SecureEraseLibrary.Exceptions;
 
 namespace SecureEraseLibrary
 {
@@ -14,13 +15,13 @@ namespace SecureEraseLibrary
     /// </summary>
     public static class SecureEraseHelper
     {
-        private readonly static char[] _alphabet = new []{ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-        private const int BUFFER_LENGTH = 1024;
+        private static readonly char[] Alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+        private const int BufferLength = 1024;
 
         /// <summary>
         ///
         /// </summary>
-        public static void WriteZeros(string path, int passes = 1, int bufferLength = BUFFER_LENGTH)
+        public static void WriteZeros(string path, int passes = 1, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -49,30 +50,27 @@ namespace SecureEraseLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void Write255s(string path, int passes = 1, int bufferLength = BUFFER_LENGTH)
+        public static void Write255S(string path, int passes = 1, int bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
             if (!File.Exists(path))
                 throw new FileNotFoundException(path);
-
-            using (var provider = new RNGCryptoServiceProvider())
+            
+            using (var fs = new FileStream(path, FileMode.Open))
             {
-                using (var fs = new FileStream(path, FileMode.Open))
+                var byteArr = CreateByteArray(bufferLength, 255);
+                for (var i = 0; i < passes; i++)
                 {
-                    var byteArr = CreateByteArray(bufferLength, 255);
-                    for (var i = 0; i < passes; i++)
+                    fs.Seek(0, SeekOrigin.Begin);                        
+                    var remainingLength = fs.Length;
+                    while (remainingLength > 0)
                     {
-                        fs.Seek(0, SeekOrigin.Begin);                        
-                        var remainingLength = fs.Length;
-                        while (remainingLength > 0)
-                        {
-                            if (remainingLength < byteArr.Length)
-                                byteArr = CreateByteArray(remainingLength, 255);
+                        if (remainingLength < byteArr.Length)
+                            byteArr = CreateByteArray(remainingLength, 255);
 
-                            fs.Write(byteArr, 0, byteArr.Length);
-                            remainingLength -= byteArr.Length;
-                        }
+                        fs.Write(byteArr, 0, byteArr.Length);
+                        remainingLength -= byteArr.Length;
                     }
                 }
             }
@@ -81,7 +79,7 @@ namespace SecureEraseLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void WriteRandomData(string path, int passes = 1, long bufferLength = BUFFER_LENGTH)
+        public static void WriteRandomData(string path, int passes = 1, long bufferLength = BufferLength)
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -114,9 +112,9 @@ namespace SecureEraseLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void SDeleteDriveWipe(char driveLetter, string tempDirectory = "", bool postDelete = true, int passes = 1, int bufferLength = BUFFER_LENGTH)
+        public static void SDeleteDriveWipe(char driveLetter, string tempDirectory = "", bool postDelete = true, int passes = 1, int bufferLength = BufferLength)
         {
-            var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(driveLetter, CultureInfo.CurrentCulture));
+            var drives = DriveInfo.GetDrives().Where(x => char.ToLower(x.Name[0], CultureInfo.CurrentCulture) == char.ToLower(driveLetter, CultureInfo.CurrentCulture)).ToList();
             if (!drives.Any())
                 throw new DriveNotFoundException(driveLetter.ToString());
 
@@ -131,7 +129,7 @@ namespace SecureEraseLibrary
             var tmpFile = FileGeneratorHelper.CreateUniqueFilePathForDirectory(tempDirectory, FileGeneratorHelper.GetRandomExtension());
             FileGeneratorHelper.CreateDummyFile(tmpFile, drive.AvailableFreeSpace);
             WriteZeros(tmpFile, passes, bufferLength);
-            Write255s(tmpFile, passes, bufferLength);
+            Write255S(tmpFile, passes, bufferLength);
             WriteRandomData(tmpFile, passes, bufferLength);
             if (postDelete)
                 File.Delete(tmpFile);
@@ -140,10 +138,10 @@ namespace SecureEraseLibrary
         /// <summary>
         ///
         /// </summary>
-        public static void SDeleteFileWipe(string filePath, bool postDelete = true, int bufferLength = BUFFER_LENGTH)
+        public static void SDeleteFileWipe(string filePath, bool postDelete = true, int bufferLength = BufferLength)
         {
             WriteZeros(filePath, bufferLength: bufferLength);
-            Write255s(filePath, bufferLength: bufferLength);
+            Write255S(filePath, bufferLength: bufferLength);
             WriteRandomData(filePath, bufferLength: bufferLength);
             filePath = SDeleteFileRename(filePath);
             if (postDelete)
@@ -163,19 +161,14 @@ namespace SecureEraseLibrary
             var extensionLength = split[1].Length;
             var dir = Path.GetDirectoryName(path);
 
-            foreach(var character in _alphabet)
+            foreach (var character in Alphabet)
             {
                 var newName = $"{Enumerable.Repeat(character, fileNameLength)}.{Enumerable.Repeat(character, extensionLength)}";
-                var newPath = Path.Combine(dir, newName);
-                if (File.Exists(newPath))
-                {
-                    continue;
-                }
-                else
-                {
-                    File.Move(path, newName);
-                    path = newPath;
-                }
+                var newPath = Path.Combine(dir ?? string.Empty, newName);
+                if (File.Exists(newPath)) continue;
+
+                File.Move(path, newName);
+                path = newPath;
             }
 
             return path;
@@ -234,7 +227,7 @@ namespace SecureEraseLibrary
             {
                 var rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
                 string currentPath;
-                while (File.Exists(currentPath = Path.Combine(dir, rand)))
+                while (File.Exists(currentPath = Path.Combine(dir ?? string.Empty, rand)))
                     rand = FileGeneratorHelper.GetRandomNameWithoutExtension();
 
                 File.Move(path, currentPath);
@@ -261,7 +254,7 @@ namespace SecureEraseLibrary
             {
                 var directories = Directory.GetDirectories(path);
                 foreach (var directory in directories)
-                    ShredDirectory(directory, cipherType, recurse, nameObfuscation, propertyObfuscation);
+                    ShredDirectory(directory, cipherType, true, nameObfuscation, propertyObfuscation);
             }
 
             if (propertyObfuscation)
@@ -283,10 +276,15 @@ namespace SecureEraseLibrary
             if (!File.Exists(path))
                 throw new FileNotFoundException(path);
 
-            if (cipherType == CipherType.OTP)
-                OTPHelper.EncryptWithoutKey(path);
-            else if (cipherType == CipherType.AES)
-                AESHelper.EncryptFile(AESHelper.GetNewAESKey(), path);
+            switch (cipherType)
+            {
+                case CipherType.Otp:
+                    OtpHelper.EncryptWithoutKey(path);
+                    break;
+                case CipherType.Aes:
+                    AesHelper.EncryptFile(AesHelper.GetNewAesKey(), path);
+                    break;
+            }
 
             if (propertyObfuscation)
                 ObfuscateFileProperties(path);

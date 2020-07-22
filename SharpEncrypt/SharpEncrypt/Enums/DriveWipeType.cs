@@ -4,8 +4,8 @@
     {
         SDelete,
         Gutmann,
-        Write255s,
-        Write0s,
+        WriteTwoFiveFives,
+        WriteZeros,
         RandomWrite,
         Default
     }
