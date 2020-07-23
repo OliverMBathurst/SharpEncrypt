@@ -1,4 +1,5 @@
-﻿using SharpEncrypt.Enums;
+﻿using System;
+using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,6 +15,8 @@ namespace SharpEncrypt.AbstractClasses
 
         protected SharpEncryptTask(ResourceType resourceType, IEnumerable<string> blockedResources,
             params TaskType[] blockingTaskTypes) : base(resourceType, blockedResources, blockingTaskTypes) { }
+
+        public virtual Guid Identifier { get; } = Guid.NewGuid();
 
         public virtual bool ShouldBlockExit { get; set; } = true;
 

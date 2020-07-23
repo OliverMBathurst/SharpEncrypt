@@ -1212,10 +1212,8 @@ namespace SharpEncrypt.Forms
 
                         using (var activeTasksForm = new ActiveTasksForm(TaskManager, true))
                         {
-                            if (activeTasksForm.ShowDialog() == DialogResult.OK)
-                            {
-                                CloseApplication();
-                            }
+                            activeTasksForm.AllTasksCompleted += CloseApplication;
+                            activeTasksForm.ShowDialog();
                         }
                     }));
                 }
@@ -1718,6 +1716,8 @@ namespace SharpEncrypt.Forms
         private void TaskCountToolStripMenuItem_Click_1(object sender, EventArgs e) => MessageBox.Show(TaskManager.ActiveTaskHandlersCount.ToString());
 
         private void WaitingTaskCountToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(TaskManager.WaitingListTaskCount.ToString());
+
+        private void RunNeverEndingTaskToolStripMenuItem_Click(object sender, EventArgs e) => TaskManager.AddTask(new LongRunningTask());
 
         #endregion
     }

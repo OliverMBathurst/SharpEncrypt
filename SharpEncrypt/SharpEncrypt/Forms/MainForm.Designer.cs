@@ -146,6 +146,7 @@ namespace SharpEncrypt.Forms
             this.TestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunFailTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.waitingTaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppLabel = new System.Windows.Forms.Label();
             this.AddSecuredGUIButton = new System.Windows.Forms.Button();
             this.OpenSecuredGUIButton = new System.Windows.Forms.Button();
@@ -161,7 +162,7 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.waitingTaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunNeverEndingTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.SecuredFilesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecuredFilesGrid)).BeginInit();
@@ -1124,7 +1125,7 @@ namespace SharpEncrypt.Forms
             // 
             this.ShowHelpToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ShowHelpToolStripMenuItem.Image")));
             this.ShowHelpToolStripMenuItem.Name = "ShowHelpToolStripMenuItem";
-            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.ShowHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.ShowHelpToolStripMenuItem.Text = "Show Help";
             this.ShowHelpToolStripMenuItem.Click += new System.EventHandler(this.ShowHelpToolStripMenuItem_Click);
             // 
@@ -1132,7 +1133,7 @@ namespace SharpEncrypt.Forms
             // 
             this.AboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("AboutToolStripMenuItem.Image")));
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(200, 34);
             this.AboutToolStripMenuItem.Text = "About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -1141,7 +1142,8 @@ namespace SharpEncrypt.Forms
             this.TestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RunFailTaskToolStripMenuItem,
             this.TaskCountToolStripMenuItem,
-            this.waitingTaskCountToolStripMenuItem});
+            this.waitingTaskCountToolStripMenuItem,
+            this.RunNeverEndingTaskToolStripMenuItem});
             this.TestToolStripMenuItem.Enabled = false;
             this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
             this.TestToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
@@ -1151,16 +1153,23 @@ namespace SharpEncrypt.Forms
             // RunFailTaskToolStripMenuItem
             // 
             this.RunFailTaskToolStripMenuItem.Name = "RunFailTaskToolStripMenuItem";
-            this.RunFailTaskToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.RunFailTaskToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
             this.RunFailTaskToolStripMenuItem.Text = "Run Failing Task";
             this.RunFailTaskToolStripMenuItem.Click += new System.EventHandler(this.RunFailTaskToolStripMenuItem_Click);
             // 
             // TaskCountToolStripMenuItem
             // 
             this.TaskCountToolStripMenuItem.Name = "TaskCountToolStripMenuItem";
-            this.TaskCountToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.TaskCountToolStripMenuItem.Text = "Task Count";
+            this.TaskCountToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.TaskCountToolStripMenuItem.Text = "Active Task Count";
             this.TaskCountToolStripMenuItem.Click += new System.EventHandler(this.TaskCountToolStripMenuItem_Click_1);
+            // 
+            // waitingTaskCountToolStripMenuItem
+            // 
+            this.waitingTaskCountToolStripMenuItem.Name = "waitingTaskCountToolStripMenuItem";
+            this.waitingTaskCountToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.waitingTaskCountToolStripMenuItem.Text = "Waiting Task Count";
+            this.waitingTaskCountToolStripMenuItem.Click += new System.EventHandler(this.WaitingTaskCountToolStripMenuItem_Click);
             // 
             // AppLabel
             // 
@@ -1282,12 +1291,12 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
-            // waitingTaskCountToolStripMenuItem
+            // RunNeverEndingTaskToolStripMenuItem
             // 
-            this.waitingTaskCountToolStripMenuItem.Name = "waitingTaskCountToolStripMenuItem";
-            this.waitingTaskCountToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.waitingTaskCountToolStripMenuItem.Text = "Waiting Task Count";
-            this.waitingTaskCountToolStripMenuItem.Click += new System.EventHandler(this.WaitingTaskCountToolStripMenuItem_Click);
+            this.RunNeverEndingTaskToolStripMenuItem.Name = "RunNeverEndingTaskToolStripMenuItem";
+            this.RunNeverEndingTaskToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.RunNeverEndingTaskToolStripMenuItem.Text = "Run Never-Ending Task";
+            this.RunNeverEndingTaskToolStripMenuItem.Click += new System.EventHandler(this.RunNeverEndingTaskToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1456,6 +1465,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem RunFailTaskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TaskCountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem waitingTaskCountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RunNeverEndingTaskToolStripMenuItem;
     }
 }
 

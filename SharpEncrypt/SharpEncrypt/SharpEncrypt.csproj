@@ -364,6 +364,7 @@
     <Compile Include="Tasks\Folder Tasks\WriteSecuredFoldersListTask.cs" />
     <Compile Include="Tasks\File Tasks\WriteSettingsFileTask.cs" />
     <Compile Include="Tasks\Test Tasks\FailingTask.cs" />
+    <Compile Include="Tasks\Test Tasks\LongRunningTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
     </EmbeddedResource>
