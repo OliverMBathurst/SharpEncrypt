@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using SharpEncrypt.AbstractClasses;
@@ -11,7 +12,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
     {
         public override TaskType TaskType => TaskType.ReadSettingsFileTask;
 
-        public ReadSettingsFileTask(string path) : base(ResourceType.File, path)
+        public ReadSettingsFileTask(string path, params TaskType[] blockingTaskTypes) : base(ResourceType.File, new []{ path }, blockingTaskTypes)
         {
             InnerTask = new Task(() =>
             {

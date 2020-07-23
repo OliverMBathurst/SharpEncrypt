@@ -95,7 +95,7 @@ namespace SharpEncrypt.Managers
                 Tasks.TryDequeue(out _);
 
             if (CurrentTaskInstance.Task.InnerTask != null)
-                CurrentTaskInstance.Token.Cancel();            
+                CurrentTaskInstance.Source.Cancel();            
         }               
 
         public void Dispose() => BackgroundWorker.Dispose();
@@ -108,13 +108,12 @@ namespace SharpEncrypt.Managers
 
                 IsProcessingTask = true;
                 OnTaskDequeued(task);
-                var cancellationTokenSource = new CancellationTokenSource();
-                CurrentTaskInstance = new CurrentTaskInstance { Task = task, Token = cancellationTokenSource };
+                CurrentTaskInstance = new CurrentTaskInstance { Task = task, Source = new CancellationTokenSource() };
 
                 try
                 {
                     task.Start();
-                    task.Wait(cancellationTokenSource.Token);
+                    task.Wait(CurrentTaskInstance.Source.Token);
                 }
                 catch (Exception exception)
                 {

@@ -34,7 +34,7 @@ namespace SharpEncrypt.Forms
         private readonly FileSystemManager FileSystemManager = new FileSystemManager();
         private readonly TaskManager TaskManager = new TaskManager();
         private readonly PathHelper PathHelper = new PathHelper();
-        private SharpEncryptSettingsModel Settings;
+        private SharpEncryptSettingsModel Settings = new SharpEncryptSettingsModel();
 
         #region Collections
         //Lists of excluded file and folder model objects the user has requested not to see
@@ -292,16 +292,12 @@ namespace SharpEncrypt.Forms
         private void LoadApplication()
         {
             SetToolTips();
-            SetApplicationSettings();
             LoadExcludedFilesList();
             LoadExcludedFoldersList();
             LoadSecuredFilesList();
             LoadSecuredFoldersList();
-        }
 
-        private void SetApplicationSettings()
-        {
-            TaskManager.AddTask(new ReadSettingsFileTask(PathHelper.AppSettingsPath));
+            LoadApplicationSettings();
         }
 
         private void ReloadApplication(bool changeLanguage)
@@ -357,30 +353,22 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void LoadExcludedFilesList()
-        {
-            TaskManager.AddTask(new ReadFileExclusionListTask(PathHelper.ExcludedFilesFile));
-        }
+        private void LoadApplicationSettings()
+            => TaskManager.AddTask(new ReadSettingsFileTask(PathHelper.AppSettingsPath, 
+                TaskType.ReadFileExclusionListTask, 
+                TaskType.ReadFolderExclusionListTask,
+                TaskType.ReadSecuredFoldersListTask,
+                TaskType.ReadSecuredFilesListTask));
 
-        private void LoadExcludedFoldersList()
-        {
-            TaskManager.AddTask(new ReadFolderExclusionListTask(PathHelper.ExcludedFoldersFile));
-        }
+        private void LoadExcludedFilesList() => TaskManager.AddTask(new ReadFileExclusionListTask(PathHelper.ExcludedFilesFile));
 
-        private void LoadSecuredFoldersList()
-        {
-            TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFile));
-        }
+        private void LoadExcludedFoldersList() => TaskManager.AddTask(new ReadFolderExclusionListTask(PathHelper.ExcludedFoldersFile));
 
-        private void LoadSecuredFilesList()
-        {
-            TaskManager.AddTask(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
-        }
+        private void LoadSecuredFoldersList() => TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFile));
 
-        private static void CloseApplication()
-        {
-            Application.Exit();
-        }
+        private void LoadSecuredFilesList() => TaskManager.AddTask(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
+
+        private static void CloseApplication() => Application.Exit();
 
         private static string[] ExtractPaths(DragEventArgs args)
         {
@@ -402,10 +390,7 @@ namespace SharpEncrypt.Forms
 
         public static long TickCount => Environment.TickCount;
 
-        private void AddTimeoutTask(int timeout)
-        {
-            TaskManager.AddTask(new InactivityTimeoutTask(timeout));
-        }
+        private void AddTimeoutTask(int timeout) => TaskManager.AddTask(new InactivityTimeoutTask(timeout));
 
         private void TransformFileName(bool anonymize)
         {
@@ -425,10 +410,7 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void ShowErrorDialog(string message)
-        {
-            MessageBox.Show(message, ResourceManager.GetString("Error"), MessageBoxButtons.OK);
-        }
+        private void ShowErrorDialog(string message) => MessageBox.Show(message, ResourceManager.GetString("Error"), MessageBoxButtons.OK);
 
         private void OpenPasswordStore()
         {
@@ -581,7 +563,7 @@ namespace SharpEncrypt.Forms
                 TaskManager.AddTask(new BulkRenameFolderTask(m.Uri, SessionPassword, AppSettings.IncludeSubfolders, false))));
 
         private void ShowAllSecuredFolders_Click(object sender, EventArgs e)
-            => AddModelsToSecuredFoldersDataGrid_NoCheck(ExcludedFolders.Where(x => Directory.Exists(x.Uri)));
+            => AddModelsToSecuredFoldersDataGrid(ExcludedFolders.Where(x => Directory.Exists(x.Uri)));
 
         private void HideExcludedSecuredFoldersToolStripMenuItem_Click(object sender, EventArgs e)
             => RemoveModelsFromSecuredFoldersDataGrid(ExcludedFolders);
@@ -639,7 +621,7 @@ namespace SharpEncrypt.Forms
             => SessionPassword = null;
 
         private void ShowAllSecuredFiles_Click(object sender, EventArgs e)
-            => AddModelsToSecuredFilesDataGrid_NoCheck(ExcludedFiles.Where(x => File.Exists(x.Secured)));
+            => AddModelsToSecuredFilesDataGrid(ExcludedFiles.Where(x => File.Exists(x.Secured)));
 
         private void HideExcludedSecuredFilesToolStripMenuItem_Click(object sender, EventArgs e)
             => RemoveModelsFromSecuredFilesDataGrid(ExcludedFiles);
@@ -1148,7 +1130,7 @@ namespace SharpEncrypt.Forms
             FileSystemManager.AddPaths(existingFolders.Select(x => x.Uri));
 
             SecuredFolders.AddRange(existingFolders);
-            AddModelsToSecuredFoldersDataGrid_NoCheck(SecuredFolders.Where(x => !ExcludedFolders.Any(z => z.Uri.Equals(x.Uri, StringComparison.Ordinal))));
+            AddModelsToSecuredFoldersDataGrid(SecuredFolders.Where(x => !ExcludedFolders.Any(z => z.Uri.Equals(x.Uri, StringComparison.Ordinal))));
 
             var removedFolders = folderDataGridItemModels.Where(x => !Directory.Exists(x.Uri)).ToArray();
 
@@ -1163,7 +1145,7 @@ namespace SharpEncrypt.Forms
             FileSystemManager.AddPaths(existing.Select(x => x.Secured));
 
             SecuredFiles.AddRange(existing);
-            AddModelsToSecuredFilesDataGrid_NoCheck(SecuredFiles.Where(x => !ExcludedFiles.Any(z => z.Equals(x))));
+            AddModelsToSecuredFilesDataGrid(SecuredFiles.Where(x => !ExcludedFiles.Any(z => z.Equals(x))));
 
             var removedFiles = fileDataGridItemModels.Where(x => !File.Exists(x.Secured)).ToArray();
             if (removedFiles.Any())
@@ -1175,7 +1157,7 @@ namespace SharpEncrypt.Forms
             TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, true, folderModel));
             FileSystemManager.AddPaths(folderModel.Uri);
             SecuredFolders.Add(folderModel);
-            AddModelsToSecuredFoldersDataGrid_NoCheck(folderModel);
+            AddModelsToSecuredFoldersDataGrid(folderModel);
         }
 
         private void OnFileSecured(FileDataGridItemModel model)
@@ -1183,7 +1165,7 @@ namespace SharpEncrypt.Forms
             TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, true, model));
             FileSystemManager.AddPaths(model.Secured);
             SecuredFiles.Add(model);
-            AddModelsToSecuredFilesDataGrid_NoCheck(model);
+            AddModelsToSecuredFilesDataGrid(model);
         }
 
         private void SettingsChangeHandler(string settingsPropertyName, object value)
@@ -1462,14 +1444,14 @@ namespace SharpEncrypt.Forms
 
         #region DataGrid methods
 
-        private void AddModelsToSecuredFoldersDataGrid_NoCheck(IEnumerable<FolderDataGridItemModel> models)
+        private void AddModelsToSecuredFoldersDataGrid(IEnumerable<FolderDataGridItemModel> models)
         {
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFolders.AddRange(models);
             }));
         }
 
-        private void AddModelsToSecuredFoldersDataGrid_NoCheck(params FolderDataGridItemModel[] models)
+        private void AddModelsToSecuredFoldersDataGrid(params FolderDataGridItemModel[] models)
         {
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFolders.AddRange(models);
@@ -1490,14 +1472,14 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void AddModelsToSecuredFilesDataGrid_NoCheck(params FileDataGridItemModel[] models)
+        private void AddModelsToSecuredFilesDataGrid(params FileDataGridItemModel[] models)
         {
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFiles.AddRange(models);
             }));
         }
 
-        private void AddModelsToSecuredFilesDataGrid_NoCheck(IEnumerable<FileDataGridItemModel> models)
+        private void AddModelsToSecuredFilesDataGrid(IEnumerable<FileDataGridItemModel> models)
         {
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFiles.AddRange(models);
@@ -1733,12 +1715,10 @@ namespace SharpEncrypt.Forms
 
         private void RunFailTaskToolStripMenuItem_Click(object sender, EventArgs e) => TaskManager.AddTask(new FailingTask());
 
-        private void TaskCountToolStripMenuItem_Click_1(object sender, EventArgs e) => MessageBox.Show(TaskManager.TaskCount.ToString());
+        private void TaskCountToolStripMenuItem_Click_1(object sender, EventArgs e) => MessageBox.Show(TaskManager.ActiveTaskHandlersCount.ToString());
 
         private void WaitingTaskCountToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(TaskManager.WaitingListTaskCount.ToString());
 
         #endregion
-
-
     }
 }

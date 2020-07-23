@@ -11,7 +11,7 @@ namespace SharpEncrypt.Managers
     public sealed class TaskManager : IDisposable
     {
         private readonly ConcurrentDictionary<Guid, BackgroundTaskManager> TaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskManager>();
-        private readonly List<SharpEncryptTask> WaitingList = new List<SharpEncryptTask>();
+        private readonly ConcurrentDictionary<SharpEncryptTask, int> WaitingList = new ConcurrentDictionary<SharpEncryptTask, int>();
 
         #region Delegates and events
         public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
@@ -35,7 +35,7 @@ namespace SharpEncrypt.Managers
         public bool HasCompletedBlockingTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks) 
                                                  || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
 
-        public int TaskCount => TaskHandlers.Count;
+        public int ActiveTaskHandlersCount => TaskHandlers.Count(x => !x.Value.HasCompletedTasks);
 
         public int WaitingListTaskCount => WaitingList.Count;
 
@@ -80,9 +80,9 @@ namespace SharpEncrypt.Managers
                 }
             }
 
-            if (BlockingTasks(sharpEncryptTask).Any())
+            if (IsBlocked(sharpEncryptTask))
             {
-                WaitingList.Add(sharpEncryptTask);
+                WaitingList.TryAdd(sharpEncryptTask, 0);
             }
             else
             {
@@ -102,10 +102,15 @@ namespace SharpEncrypt.Managers
 
             if (!Cancelled)
             {
-                foreach (var waitingTask in WaitingList.Where(waitingTask => !BlockingTasks(waitingTask).Any()))
+                var initialUnblockedTasks = WaitingList.Where(x => !IsBlocked(x.Key)).ToList();
+                foreach (var initialUnblockedTask in initialUnblockedTasks)
                 {
-                    WaitingList.Remove(waitingTask);
-                    AddBackgroundTaskManager(waitingTask);
+                    if (IsBlocked(initialUnblockedTask.Key))
+                        continue;
+                    if (WaitingList.TryRemove(initialUnblockedTask.Key, out _))
+                    {
+                        AddBackgroundTaskManager(initialUnblockedTask.Key);
+                    }
                 }
             }
             else
@@ -122,7 +127,7 @@ namespace SharpEncrypt.Managers
             {
                 if (taskInstance.Task.TaskType == type)
                 {
-                    taskInstance.Token.Cancel();
+                    taskInstance.Source.Cancel();
                 }
             }
 
@@ -149,12 +154,14 @@ namespace SharpEncrypt.Managers
             }
         }
 
-        private IEnumerable<SharpEncryptTask> BlockingTasks(ResourceBlocker blocker)
+        private bool IsBlocked(ResourceBlocker resourceBlocker) => BlockingTasks(resourceBlocker).Any();
+
+        private IEnumerable<SharpEncryptTask> BlockingTasks(ResourceBlocker resourceBlocker)
             => TaskHandlers
                 .Select(x => x.Value)
                 .SelectMany(z => z.ActiveTasks)
-                .Where(k => k.ResourceType == blocker.ResourceType &&
-                            k.BlockedResources.Any(blocker.BlockedResources.Contains));
+                .Where(k => k.ResourceType == resourceBlocker.ResourceType && k.BlockedResources.Any(resourceBlocker.BlockedResources.Contains) || 
+                            resourceBlocker.BlockingTaskTypes != null && resourceBlocker.BlockingTaskTypes.Contains(k.TaskType));
 
         #endregion
     }

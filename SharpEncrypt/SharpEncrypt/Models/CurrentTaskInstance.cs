@@ -7,6 +7,6 @@ namespace SharpEncrypt.Models
     {
         public SharpEncryptTask Task { get; set; }
 
-        public CancellationTokenSource Token { get; set; }
+        public CancellationTokenSource Source { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using SharpEncrypt.AbstractClasses;
@@ -10,8 +11,7 @@ namespace SharpEncrypt.Tasks.Logging_Tasks
     {
         public override TaskType TaskType => TaskType.LoggingTask;
 
-        public LoggingTask(string logFilePath, Exception exception)
-            : base(ResourceType.File, logFilePath)
+        public LoggingTask(string logFilePath, Exception exception) : base(ResourceType.File, logFilePath)
         {
             InnerTask = new Task(() =>
             {
@@ -19,7 +19,14 @@ namespace SharpEncrypt.Tasks.Logging_Tasks
                 {
                     using (var sw = new StreamWriter(fs))
                     {
-                        sw.WriteLine(exception.StackTrace ?? exception.Message);     
+                        var message = $"[{DateTime.Now.ToString(CultureInfo.CurrentCulture)}] {exception.Message}";
+                        if (exception.InnerException != null)
+                            message += $"\n{exception.InnerException.Message}";
+
+                        if (exception.StackTrace != null)
+                            message += $"\n{exception.StackTrace}";
+
+                        sw.WriteLine(message);
                     }
                 }
             });

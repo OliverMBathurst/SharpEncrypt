@@ -24,7 +24,7 @@ namespace SharpEncrypt.Models
 
         public bool ReencryptOnLock { get; set; } = false;
 
-        public bool Logging { get; set; } = false;
+        public bool Logging { get; set; } = true;
 
         public StoreType StoreType { get; set; } = StoreType.Otp;
 
