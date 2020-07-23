@@ -253,7 +253,7 @@
     <Compile Include="Tasks\File Tasks\ReencryptTempFilesTask.cs" />
     <Compile Include="Tasks\File Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\Otp Tasks\CreateOtpPasswordStoreKeyTask.cs" />
-    <Compile Include="Tasks\File Tasks\GenericDeleteFileTask.cs" />
+    <Compile Include="Tasks\File Tasks\GenericDeleteFilesTask.cs" />
     <Compile Include="Tasks\Aes Tasks\OpenAesPasswordStoreTask.cs" />
     <Compile Include="Tasks\Otp Tasks\OpenOtpPasswordStoreTask.cs" />
     <Compile Include="Tasks\Folder Tasks\ReadFolderExclusionListTask.cs" />

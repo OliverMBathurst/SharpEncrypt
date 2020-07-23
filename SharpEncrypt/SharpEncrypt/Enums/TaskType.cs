@@ -17,7 +17,7 @@
         WriteFolderExclusionListTask,
         ReadFileExclusionListTask,
         ReadFolderExclusionListTask,
-        GenericDeleteTask,
+        GenericDeleteFilesTask,
         ReadLogFileTask,
         ShredDirectoryTask,
         ContainerizeFileTask,

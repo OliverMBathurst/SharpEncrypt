@@ -12,8 +12,6 @@ namespace SharpEncrypt.AbstractClasses
 
         protected SharpEncryptTask(ResourceType resourceType, IEnumerable<string> blockedResources) : base(resourceType, blockedResources) { }
 
-        public virtual bool Disabled { get; set; }
-
         public virtual bool ShouldBlockExit { get; set; } = true;
 
         public virtual bool IsExclusive { get; set; }

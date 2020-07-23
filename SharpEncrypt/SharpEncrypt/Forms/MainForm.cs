@@ -932,10 +932,8 @@ namespace SharpEncrypt.Forms
         private void CancelAllFutureTasksToolStripMenuItem_Click(object sender, EventArgs e) => TaskManager.SetCancellationFlag();
 
         private void DeleteGridExclusionList_Click(object sender, EventArgs e)
-        {
-            TaskManager.AddTask(new GenericDeleteFileTask(PathHelper.ExcludedFilesFile));
-            TaskManager.AddTask(new GenericDeleteFileTask(PathHelper.ExcludedFoldersFile));
-        }
+            => TaskManager.AddTask(new GenericDeleteFilesTask(PathHelper.ExcludedFilesFile, PathHelper.ExcludedFoldersFile));
+       
         #endregion
 
         #region Flag Menu Items
@@ -1735,8 +1733,12 @@ namespace SharpEncrypt.Forms
 
         private void RunFailTaskToolStripMenuItem_Click(object sender, EventArgs e) => TaskManager.AddTask(new FailingTask());
 
-        private void TaskCountToolStripMenuItem_Click_1(object sender, EventArgs e) => MessageBox.Show(string.Format(Resources.Resources._0Interpolation, TaskManager.TaskCount));
+        private void TaskCountToolStripMenuItem_Click_1(object sender, EventArgs e) => MessageBox.Show(TaskManager.TaskCount.ToString());
+
+        private void WaitingTaskCountToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show(TaskManager.WaitingListTaskCount.ToString());
 
         #endregion
+
+
     }
 }

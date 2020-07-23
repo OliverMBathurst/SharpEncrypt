@@ -42,7 +42,7 @@ namespace SharpEncrypt.Managers
 
         public bool DisableAfterTaskCompleted { get; }
 
-        public bool HasCompletedTasks => Tasks.IsEmpty && (CurrentTaskInstance.Task.InnerTask == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
+        public bool HasCompletedTasks => Tasks.IsEmpty && (CurrentTaskInstance == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
 
         public int TaskCount => Tasks.Count + (IsProcessingTask ? 1 : 0);
 
@@ -57,7 +57,7 @@ namespace SharpEncrypt.Managers
             get
             {
                 var tasks = Tasks.ToList();
-                if (CurrentTaskInstance.Task != null && !CurrentTaskInstance.Task.InnerTask.IsCompleted)
+                if (CurrentTaskInstance?.Task != null && !CurrentTaskInstance.Task.InnerTask.IsCompleted)
                     tasks.Add(CurrentTaskInstance.Task);
                 return tasks;
             }

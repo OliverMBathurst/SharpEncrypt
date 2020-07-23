@@ -25,7 +25,8 @@ namespace SharpEncrypt.Helpers
         {
             var key = GetDecryptedAesKey(filePath, password, out var keyLength);
 
-            if (key == null) return;
+            if (key == null)
+                throw new InvalidEncryptedFileException();
 
             using (var fs = new FileStream(filePath, FileMode.Open))
             {
@@ -83,6 +84,9 @@ namespace SharpEncrypt.Helpers
                 fs.Seek(fs.Length - 1, SeekOrigin.Begin);
                 var lengthBytesLength = fs.ReadByte();
 
+                if (1 + lengthBytesLength >= fs.Length)
+                    throw new InvalidEncryptedFileException();
+
                 fs.Seek(fs.Length - (1 + lengthBytesLength), SeekOrigin.Begin);
                 var lengthBytes = new byte[lengthBytesLength];
 
@@ -90,7 +94,7 @@ namespace SharpEncrypt.Helpers
 
                 keyLength = lengthBytes.Sum(x => x);
 
-                if (fs.Length < (keyLength + SaltLength + lengthBytesLength + 1))
+                if (fs.Length < keyLength + SaltLength + lengthBytesLength + 1)
                     throw new InvalidEncryptedFileException();
 
                 var salt = new byte[SaltLength];

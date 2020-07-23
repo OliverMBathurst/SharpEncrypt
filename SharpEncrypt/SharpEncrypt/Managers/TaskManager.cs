@@ -11,13 +11,14 @@ namespace SharpEncrypt.Managers
     public sealed class TaskManager : IDisposable
     {
         private readonly ConcurrentDictionary<Guid, BackgroundTaskManager> TaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskManager>();
+        private readonly List<SharpEncryptTask> WaitingList = new List<SharpEncryptTask>();
 
         #region Delegates and events
         public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
         public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
         public delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
-        public delegate void TaskManagerCompletedEventHandler();
+        public delegate void TaskManagerCompletedEventHandler(bool hasRemainingTasks);
 
         public event TaskCompletedEventHandler TaskCompleted;
         public event TaskDequeuedEventHandler TaskDequeued;
@@ -31,12 +32,12 @@ namespace SharpEncrypt.Managers
 
         public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
 
-        public bool HasCompletedTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks);
-
         public bool HasCompletedBlockingTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks) 
-                                                || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
+                                                 || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
 
         public int TaskCount => TaskHandlers.Count;
+
+        public int WaitingListTaskCount => WaitingList.Count;
 
         public IEnumerable<SharpEncryptTask> Tasks => TaskHandlers.SelectMany(x => x.Value.ActiveTasks);
 
@@ -78,17 +79,14 @@ namespace SharpEncrypt.Managers
                     DuplicateExclusiveTask?.Invoke(sharpEncryptTask);
                 }
             }
-            
-            using (var taskHandlerForTask = new BackgroundTaskManager())
-            {
-                taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
-                taskHandlerForTask.TaskCompleted += OnTaskCompleted;
-                taskHandlerForTask.TaskDequeued += OnTaskDequeued;
-                taskHandlerForTask.Exception += exception => ExceptionOccurred?.Invoke(exception);
 
-                TaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
-                
-                taskHandlerForTask.AddTask(sharpEncryptTask);
+            if (BlockingTasks(sharpEncryptTask).Any())
+            {
+                WaitingList.Add(sharpEncryptTask);
+            }
+            else
+            {
+                AddBackgroundTaskManager(sharpEncryptTask);
             }
         }
 
@@ -101,9 +99,18 @@ namespace SharpEncrypt.Managers
         private void AfterTaskCompleted(SharpEncryptTask task)
         {
             CompletedTasks.Add((task, DateTime.Now));
-            if (Cancelled && TaskHandlers.IsEmpty)
+
+            if (!Cancelled)
             {
-                TaskManagerCompleted?.Invoke();
+                foreach (var waitingTask in WaitingList.Where(waitingTask => !BlockingTasks(waitingTask).Any()))
+                {
+                    WaitingList.Remove(waitingTask);
+                    AddBackgroundTaskManager(waitingTask);
+                }
+            }
+            else
+            {
+                TaskManagerCompleted?.Invoke(!TaskHandlers.IsEmpty);
             }
         }
 
@@ -126,6 +133,28 @@ namespace SharpEncrypt.Managers
                 TaskHandlers.TryRemove(matchingGuid, out _);
             }
         }
+
+        private void AddBackgroundTaskManager(SharpEncryptTask task)
+        {
+            using (var taskHandlerForTask = new BackgroundTaskManager())
+            {
+                taskHandlerForTask.BackgroundWorkerDisabled += OnBackgroundWorkerDisabled;
+                taskHandlerForTask.TaskCompleted += OnTaskCompleted;
+                taskHandlerForTask.TaskDequeued += OnTaskDequeued;
+                taskHandlerForTask.Exception += exception => ExceptionOccurred?.Invoke(exception);
+
+                TaskHandlers.TryAdd(taskHandlerForTask.Identifier, taskHandlerForTask);
+
+                taskHandlerForTask.AddTask(task);
+            }
+        }
+
+        private IEnumerable<SharpEncryptTask> BlockingTasks(ResourceBlocker blocker)
+            => TaskHandlers
+                .Select(x => x.Value)
+                .SelectMany(z => z.ActiveTasks)
+                .Where(k => k.ResourceType == blocker.ResourceType &&
+                            k.BlockedResources.Any(blocker.BlockedResources.Contains));
 
         #endregion
     }
