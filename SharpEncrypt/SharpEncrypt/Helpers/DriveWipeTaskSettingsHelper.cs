@@ -7,7 +7,7 @@ namespace SharpEncrypt.Helpers
 {
     internal static class DriveWipeTaskSettingsHelper
     {
-        public static IEnumerable<DriveWipeTaskSettings> GetOptions()
+        public static IEnumerable<DriveWipeTaskSettingsModel> GetOptions()
         {
             foreach (var name in Enum.GetNames(typeof(DriveWipeType)))
             {
@@ -18,29 +18,29 @@ namespace SharpEncrypt.Helpers
             }
         }
 
-        public static DriveWipeTaskSettings GetSettings(DriveWipeType type)
+        public static DriveWipeTaskSettingsModel GetSettings(DriveWipeType type)
         {
             switch (type)
             {
                 case DriveWipeType.Gutmann:
-                    return GutmannSettings;
+                    return GutmannSettingsModel;
                 case DriveWipeType.RandomWrite:
-                    return RandomWriteSettings;
+                    return RandomWriteSettingsModel;
                 case DriveWipeType.SDelete:
-                    return SDeleteSettings;
+                    return SDeleteSettingsModel;
                 case DriveWipeType.WriteZeros:
-                    return WriteZerosSettings;
+                    return WriteZerosSettingsModel;
                 case DriveWipeType.WriteTwoFiveFives:
-                    return Write255Settings;
+                    return Write255SettingsModel;
                 case DriveWipeType.Default:
-                    return DefaultWipeSettings;
+                    return DefaultWipeSettingsModel;
                 default:
-                    return DefaultSettings;
+                    return DefaultSettingsModel;
             }
         }
 
-        private static DriveWipeTaskSettings GutmannSettings =>
-            new DriveWipeTaskSettings
+        private static DriveWipeTaskSettingsModel GutmannSettingsModel =>
+            new DriveWipeTaskSettingsModel
             {
                 Type = DriveWipeType.Gutmann,
                 NameObfuscation = true,
@@ -48,8 +48,8 @@ namespace SharpEncrypt.Helpers
                 WipeRounds = false
             };
 
-        private static DriveWipeTaskSettings SDeleteSettings =>
-            new DriveWipeTaskSettings
+        private static DriveWipeTaskSettingsModel SDeleteSettingsModel =>
+            new DriveWipeTaskSettingsModel
             {
                 Type = DriveWipeType.SDelete,
                 NameObfuscation = false,
@@ -57,40 +57,40 @@ namespace SharpEncrypt.Helpers
                 WipeRounds = false
             };
 
-        private static DriveWipeTaskSettings RandomWriteSettings => DefaultSettings;
+        private static DriveWipeTaskSettingsModel RandomWriteSettingsModel => DefaultSettingsModel;
 
-        private static DriveWipeTaskSettings WriteZerosSettings
+        private static DriveWipeTaskSettingsModel WriteZerosSettingsModel
         {
             get
             {
-                var @default = DefaultSettings;
+                var @default = DefaultSettingsModel;
                 @default.Type = DriveWipeType.WriteZeros;
                 return @default;
             }
         }
 
-        private static DriveWipeTaskSettings Write255Settings
+        private static DriveWipeTaskSettingsModel Write255SettingsModel
         {
             get
             {
-                var @default = DefaultSettings;
+                var @default = DefaultSettingsModel;
                 @default.Type = DriveWipeType.WriteTwoFiveFives;
                 return @default;
             }
         }
 
-        private static DriveWipeTaskSettings DefaultWipeSettings
+        private static DriveWipeTaskSettingsModel DefaultWipeSettingsModel
         {
             get
             {
-                var @default = DefaultSettings;
+                var @default = DefaultSettingsModel;
                 @default.Type = DriveWipeType.Default;
                 return @default;
             }
         }
 
-        private static DriveWipeTaskSettings DefaultSettings =>
-            new DriveWipeTaskSettings
+        private static DriveWipeTaskSettingsModel DefaultSettingsModel =>
+            new DriveWipeTaskSettingsModel
             {
                 Type = DriveWipeType.RandomWrite,
                 NameObfuscation = true,

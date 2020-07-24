@@ -30,6 +30,6 @@ namespace SharpEncrypt.AbstractClasses
 
         public virtual void Wait(CancellationToken token) => InnerTask.Wait(token);
 
-        public virtual SharpEncryptTaskResult Result { get; set; } = new SharpEncryptTaskResult();
+        public virtual SharpEncryptTaskResultModel Result { get; set; } = new SharpEncryptTaskResultModel();
     }
 }

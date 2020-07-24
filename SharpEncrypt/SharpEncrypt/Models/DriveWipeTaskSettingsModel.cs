@@ -4,7 +4,7 @@ using System;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class DriveWipeTaskSettings
+    internal sealed class DriveWipeTaskSettingsModel
     {
         public DriveWipeType Type { get; set; }
 

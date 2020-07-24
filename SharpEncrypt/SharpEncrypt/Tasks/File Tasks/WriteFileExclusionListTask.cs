@@ -13,7 +13,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
     {
         public override TaskType TaskType => TaskType.WriteFileExclusionListTask;
 
-        public WriteFileExclusionListTask(string filePath, bool add, IEnumerable<FileDataGridItemModel> excludedFiles) : base(ResourceType.File, filePath)
+        public WriteFileExclusionListTask(string filePath, bool add, IEnumerable<FileModel> excludedFiles) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {
@@ -26,12 +26,12 @@ namespace SharpEncrypt.Tasks.File_Tasks
                         return;
                 }
 
-                var files = new List<FileDataGridItemModel>();
+                var files = new List<FileModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> deserialized)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileModel> deserialized)
                         {
                             files = deserialized;
                         }

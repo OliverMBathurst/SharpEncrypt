@@ -19,7 +19,7 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
                 if (!File.Exists(filePath)) return;
                 using (var fs = new FileStream(filePath, FileMode.Open))
                 {
-                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> models)
+                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderModel> models)
                     {
                         Result.Value = models;
                     }

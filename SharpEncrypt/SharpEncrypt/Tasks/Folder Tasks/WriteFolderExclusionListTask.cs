@@ -14,7 +14,7 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
     {
         public override TaskType TaskType => TaskType.WriteFolderExclusionListTask;
 
-        public WriteFolderExclusionListTask(string filePath, bool add, IEnumerable<FolderDataGridItemModel> models)
+        public WriteFolderExclusionListTask(string filePath, bool add, IEnumerable<FolderModel> models)
             : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
@@ -28,12 +28,12 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
                         return;
                 }
 
-                var folders = new List<FolderDataGridItemModel>();
+                var folders = new List<FolderModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> deserialized)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderModel> deserialized)
                         {
                             folders = deserialized;
                         }

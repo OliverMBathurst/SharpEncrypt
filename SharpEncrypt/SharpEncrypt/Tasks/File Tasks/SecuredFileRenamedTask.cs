@@ -10,21 +10,21 @@ using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class OnSecuredFileRenamedTask : SharpEncryptTask
+    internal sealed class SecuredFileRenamedTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.OnSecuredFileRenamedTask;
+        public override TaskType TaskType => TaskType.SecuredFileRenamedTask;
 
-        public OnSecuredFileRenamedTask(string fileListFilePath, string newPath, string oldPath) : base(ResourceType.File, fileListFilePath)
+        public SecuredFileRenamedTask(string fileListFilePath, string newPath, string oldPath) : base(ResourceType.File, fileListFilePath)
         {
             InnerTask = new Task(() =>
             {
                 if (!File.Exists(fileListFilePath))
                     return;
 
-                var listOfModels = new List<FileDataGridItemModel>();                
+                var listOfModels = new List<FileModel>();                
                 using (var fs = new FileStream(fileListFilePath, FileMode.Open))
                 {
-                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileModel> list)
                     {
                         listOfModels = list;
                     }
@@ -44,7 +44,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
                     new BinaryFormatter().Serialize(fs, listOfModels.Distinct().ToList());
                 }
 
-                Result.Value = new OnSecuredFileRenamedTaskResult { NewPath = newPath, OldPath = oldPath };
+                Result.Value = new SecuredFileRenamedTaskResultModel { NewPath = newPath, OldPath = oldPath };
             });
         }
     }

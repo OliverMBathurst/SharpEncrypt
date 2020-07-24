@@ -42,7 +42,7 @@ namespace SharpEncrypt.Managers
 
         public bool DisableAfterTaskCompleted { get; }
 
-        public bool HasCompletedTasks => Tasks.IsEmpty && (CurrentTaskInstance == null || CurrentTaskInstance.Task.InnerTask.IsCompleted);
+        public bool HasCompletedTasks => Tasks.IsEmpty && (CurrentTaskInstanceModel == null || CurrentTaskInstanceModel.Task.InnerTask.IsCompleted);
 
         public int TaskCount => Tasks.Count + (IsProcessingTask ? 1 : 0);
 
@@ -50,15 +50,15 @@ namespace SharpEncrypt.Managers
 
         public bool Disabled { get; private set; }
 
-        public CurrentTaskInstance CurrentTaskInstance { get; private set; }
+        public CurrentTaskInstanceModel CurrentTaskInstanceModel { get; private set; }
 
         public IEnumerable<SharpEncryptTask> ActiveTasks
         {
             get
             {
                 var tasks = Tasks.ToList();
-                if (CurrentTaskInstance?.Task != null && !CurrentTaskInstance.Task.InnerTask.IsCompleted)
-                    tasks.Add(CurrentTaskInstance.Task);
+                if (CurrentTaskInstanceModel?.Task != null && !CurrentTaskInstanceModel.Task.InnerTask.IsCompleted)
+                    tasks.Add(CurrentTaskInstanceModel.Task);
                 return tasks;
             }
         }
@@ -94,8 +94,8 @@ namespace SharpEncrypt.Managers
             while (!Tasks.IsEmpty)
                 Tasks.TryDequeue(out _);
 
-            if (CurrentTaskInstance.Task.InnerTask != null)
-                CurrentTaskInstance.Source.Cancel();            
+            if (CurrentTaskInstanceModel.Task.InnerTask != null)
+                CurrentTaskInstanceModel.Source.Cancel();            
         }               
 
         public void Dispose() => BackgroundWorker.Dispose();
@@ -108,12 +108,12 @@ namespace SharpEncrypt.Managers
 
                 IsProcessingTask = true;
                 OnTaskDequeued(task);
-                CurrentTaskInstance = new CurrentTaskInstance { Task = task, Source = new CancellationTokenSource() };
+                CurrentTaskInstanceModel = new CurrentTaskInstanceModel { Task = task, Source = new CancellationTokenSource() };
 
                 try
                 {
                     task.Start();
-                    task.Wait(CurrentTaskInstance.Source.Token);
+                    task.Wait(CurrentTaskInstanceModel.Source.Token);
                 }
                 catch (Exception exception)
                 {

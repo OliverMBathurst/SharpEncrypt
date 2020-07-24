@@ -4,7 +4,7 @@ using System;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class FileDataGridItemModel : IEquatable<FileDataGridItemModel>
+    internal sealed class FileModel : IEquatable<FileModel>
     {
         public string File { get; set; }
 
@@ -14,7 +14,9 @@ namespace SharpEncrypt.Models
 
         public CipherType Algorithm { get; set; }
 
-        public bool Equals(FileDataGridItemModel other)
+        public bool InSubfolder { get; set; }
+
+        public bool Equals(FileModel other)
         {
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
@@ -24,12 +26,9 @@ namespace SharpEncrypt.Models
 
         public override bool Equals(object obj)
         {
-            return obj is FileDataGridItemModel model && Equals(model);
+            return obj is FileModel model && Equals(model);
         }
 
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

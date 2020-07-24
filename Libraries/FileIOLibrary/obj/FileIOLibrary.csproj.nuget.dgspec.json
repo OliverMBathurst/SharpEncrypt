@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIoLibrary.csproj": {}
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIOLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIoLibrary.csproj": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIOLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIoLibrary.csproj",
-        "projectName": "FileIoLibrary",
-        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIoLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIOLibrary.csproj",
+        "projectName": "FileIOLibrary",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIOLibrary.csproj",
         "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\obj\\",
         "projectStyle": "PackageReference",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H3paYMWzsVr/B3az2nhG95xjVW737UkWZKEbiYQ6eCYS/3CaduKz/5esllZRKOqAxG3MQize0loYQM9Uvql06Q==",
+  "dgSpecHash": "esgNNT8NgyD5WlblXabc8gUmFWYXUdCbHogIS+wpF+DBUoTHShNGcOvaQ918rq0ISgF0QJvaEwrXWMUvrYPWYg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIoLibrary.csproj",
+  "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\Libraries\\FileIOLibrary\\FileIOLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\3.0.0\\microsoft.codeanalysis.fxcopanalyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Oliver\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\3.0.0\\microsoft.codeanalysis.versioncheckanalyzer.3.0.0.nupkg.sha512",

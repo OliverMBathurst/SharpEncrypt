@@ -14,17 +14,21 @@ namespace SharpEncrypt.Managers
         private readonly ConcurrentDictionary<SharpEncryptTask, int> WaitingList = new ConcurrentDictionary<SharpEncryptTask, int>();
 
         #region Delegates and events
+
         public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
         public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
         public delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
         public delegate void TaskManagerCompletedEventHandler(bool hasRemainingTasks);
+        public delegate void BlockingTasksCompletedEventHandler();
 
         public event TaskCompletedEventHandler TaskCompleted;
         public event TaskDequeuedEventHandler TaskDequeued;
         public event TaskManagerCompletedEventHandler TaskManagerCompleted;
         public event ExceptionOccurredEventHandler ExceptionOccurred;
         public event DuplicateExclusiveTaskEventHandler DuplicateExclusiveTask;
+        public event BlockingTasksCompletedEventHandler BlockingTasksCompleted;
+
         #endregion
 
         #region Properties
@@ -100,6 +104,11 @@ namespace SharpEncrypt.Managers
         {
             CompletedTasks.Add((task, DateTime.Now));
 
+            if (!TaskHandlers.SelectMany(x => x.Value.ActiveTasks)
+                .ToList()
+                .Concat(WaitingList.Select(x => x.Key)).Any(z => z.ShouldBlockExit))
+                BlockingTasksCompleted?.Invoke();
+
             if (!Cancelled)
             {
                 var initialUnblockedTasks = WaitingList.Where(x => !IsBlocked(x.Key)).ToList();
@@ -123,7 +132,7 @@ namespace SharpEncrypt.Managers
 
         public void CancelAllExisting(TaskType type)
         {
-            foreach (var taskInstance in TaskHandlers.Select(x => x.Value.CurrentTaskInstance))
+            foreach (var taskInstance in TaskHandlers.Select(x => x.Value.CurrentTaskInstanceModel))
             {
                 if (taskInstance.Task.TaskType == type)
                 {

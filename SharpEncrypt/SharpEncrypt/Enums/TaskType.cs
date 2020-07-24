@@ -21,8 +21,8 @@
         ReadLogFileTask,
         ShredDirectoryTask,
         ContainerizeFileTask,
-        DecontainerizeFileTask,
-        OnSecuredFileRenamedTask,
+        DecontainerizeFileTask, 
+        SecuredFileRenamedTask,
         OpenOtpPasswordStoreTask,
         OpenAesPasswordStoreTask,
         CreateOtpPasswordStoreKeyTask,
@@ -34,7 +34,10 @@
         GenerateNewRsaKeyPairTask,
         InactivityTimeoutTask,
         DecontainerizeFolderTask,
-        ReencryptTempFilesTask,
+        EncryptTempFoldersTask,
+        WriteUncontainerizedFilesListTask,
+        ReadUncontainerizedFilesListTask,
+        DecontainerizeOtherFileTask,
         Undefined
     }
 }

@@ -14,7 +14,7 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
     {
         public override TaskType TaskType => TaskType.WriteSecuredFoldersListTask;
 
-        public WriteSecuredFoldersListTask(string filePath, bool add, params FolderDataGridItemModel[] models) : base(ResourceType.File, filePath)
+        public WriteSecuredFoldersListTask(string filePath, bool add, params FolderModel[] models) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {
@@ -27,12 +27,12 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
                         return;
                 }
 
-                var dirs = new List<FolderDataGridItemModel>();
+                var dirs = new List<FolderModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> folders)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderModel> folders)
                         {
                             dirs = folders;
                         }

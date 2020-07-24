@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace SharpEncrypt.Models
 {
-    public sealed class CurrentTaskInstance
+    public sealed class CurrentTaskInstanceModel
     {
         public SharpEncryptTask Task { get; set; }
 

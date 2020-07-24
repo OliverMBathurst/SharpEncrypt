@@ -58,8 +58,6 @@ namespace SharpEncrypt.Forms
             this.DeanonymizeFileNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SecuredFoldersTab = new System.Windows.Forms.TabPage();
             this.SecuredFoldersGrid = new System.Windows.Forms.DataGridView();
-            this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FolderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,6 +145,8 @@ namespace SharpEncrypt.Forms
             this.RunFailTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.waitingTaskCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunNeverEndingTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunLongRunningBlockingTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AppLabel = new System.Windows.Forms.Label();
             this.AddSecuredGUIButton = new System.Windows.Forms.Button();
             this.OpenSecuredGUIButton = new System.Windows.Forms.Button();
@@ -162,7 +162,8 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.RunNeverEndingTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tabs.SuspendLayout();
             this.SecuredFilesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecuredFilesGrid)).BeginInit();
@@ -432,23 +433,6 @@ namespace SharpEncrypt.Forms
             this.SecuredFoldersGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SecuredFoldersGrid.Size = new System.Drawing.Size(1054, 366);
             this.SecuredFoldersGrid.TabIndex = 0;
-            // 
-            // Folder
-            // 
-            this.Folder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Folder.DataPropertyName = "URI";
-            this.Folder.HeaderText = "Folder";
-            this.Folder.MinimumWidth = 8;
-            this.Folder.Name = "Folder";
-            this.Folder.ReadOnly = true;
-            // 
-            // Time
-            // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "Time";
-            this.Time.MinimumWidth = 8;
-            this.Time.Name = "Time";
-            this.Time.ReadOnly = true;
             // 
             // FolderMenuStrip
             // 
@@ -1143,7 +1127,8 @@ namespace SharpEncrypt.Forms
             this.RunFailTaskToolStripMenuItem,
             this.TaskCountToolStripMenuItem,
             this.waitingTaskCountToolStripMenuItem,
-            this.RunNeverEndingTaskToolStripMenuItem});
+            this.RunNeverEndingTaskToolStripMenuItem,
+            this.RunLongRunningBlockingTaskToolStripMenuItem});
             this.TestToolStripMenuItem.Enabled = false;
             this.TestToolStripMenuItem.Name = "TestToolStripMenuItem";
             this.TestToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
@@ -1153,23 +1138,37 @@ namespace SharpEncrypt.Forms
             // RunFailTaskToolStripMenuItem
             // 
             this.RunFailTaskToolStripMenuItem.Name = "RunFailTaskToolStripMenuItem";
-            this.RunFailTaskToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.RunFailTaskToolStripMenuItem.Size = new System.Drawing.Size(373, 34);
             this.RunFailTaskToolStripMenuItem.Text = "Run Failing Task";
             this.RunFailTaskToolStripMenuItem.Click += new System.EventHandler(this.RunFailTaskToolStripMenuItem_Click);
             // 
             // TaskCountToolStripMenuItem
             // 
             this.TaskCountToolStripMenuItem.Name = "TaskCountToolStripMenuItem";
-            this.TaskCountToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.TaskCountToolStripMenuItem.Size = new System.Drawing.Size(373, 34);
             this.TaskCountToolStripMenuItem.Text = "Active Task Count";
             this.TaskCountToolStripMenuItem.Click += new System.EventHandler(this.TaskCountToolStripMenuItem_Click_1);
             // 
             // waitingTaskCountToolStripMenuItem
             // 
             this.waitingTaskCountToolStripMenuItem.Name = "waitingTaskCountToolStripMenuItem";
-            this.waitingTaskCountToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.waitingTaskCountToolStripMenuItem.Size = new System.Drawing.Size(373, 34);
             this.waitingTaskCountToolStripMenuItem.Text = "Waiting Task Count";
             this.waitingTaskCountToolStripMenuItem.Click += new System.EventHandler(this.WaitingTaskCountToolStripMenuItem_Click);
+            // 
+            // RunNeverEndingTaskToolStripMenuItem
+            // 
+            this.RunNeverEndingTaskToolStripMenuItem.Name = "RunNeverEndingTaskToolStripMenuItem";
+            this.RunNeverEndingTaskToolStripMenuItem.Size = new System.Drawing.Size(373, 34);
+            this.RunNeverEndingTaskToolStripMenuItem.Text = "Run Long Running Task";
+            this.RunNeverEndingTaskToolStripMenuItem.Click += new System.EventHandler(this.RunLongRunningTaskToolStripMenuItem_Click);
+            // 
+            // RunLongRunningBlockingTaskToolStripMenuItem
+            // 
+            this.RunLongRunningBlockingTaskToolStripMenuItem.Name = "RunLongRunningBlockingTaskToolStripMenuItem";
+            this.RunLongRunningBlockingTaskToolStripMenuItem.Size = new System.Drawing.Size(373, 34);
+            this.RunLongRunningBlockingTaskToolStripMenuItem.Text = "Run Long-Running Blocking Task";
+            this.RunLongRunningBlockingTaskToolStripMenuItem.Click += new System.EventHandler(this.RunLongRunningBlockingTaskToolStripMenuItem_Click);
             // 
             // AppLabel
             // 
@@ -1291,12 +1290,22 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
-            // RunNeverEndingTaskToolStripMenuItem
+            // Folder
             // 
-            this.RunNeverEndingTaskToolStripMenuItem.Name = "RunNeverEndingTaskToolStripMenuItem";
-            this.RunNeverEndingTaskToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
-            this.RunNeverEndingTaskToolStripMenuItem.Text = "Run Never-Ending Task";
-            this.RunNeverEndingTaskToolStripMenuItem.Click += new System.EventHandler(this.RunNeverEndingTaskToolStripMenuItem_Click);
+            this.Folder.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Folder.DataPropertyName = "Uri";
+            this.Folder.HeaderText = "Folder";
+            this.Folder.MinimumWidth = 8;
+            this.Folder.Name = "Folder";
+            this.Folder.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "Time";
+            this.Time.MinimumWidth = 8;
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -1437,8 +1446,6 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn SecuredColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.ToolStripMenuItem AddSecuredFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DoNotPromptForPasswordOnStartup;
         private System.Windows.Forms.ToolStripMenuItem PasswordManagementToolStripMenuItem;
@@ -1466,6 +1473,9 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem TaskCountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem waitingTaskCountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunNeverEndingTaskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RunLongRunningBlockingTaskToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Folder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
     }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace FileIoLibrary
+﻿namespace FileIOLibrary
 {
     /// <summary>
     ///

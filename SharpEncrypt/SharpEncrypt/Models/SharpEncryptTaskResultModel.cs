@@ -2,7 +2,7 @@
 
 namespace SharpEncrypt.Models
 {
-    public class SharpEncryptTaskResult
+    public class SharpEncryptTaskResultModel
     {
         public virtual Type Type { get; set; }
 

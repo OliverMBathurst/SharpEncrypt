@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Managers
 {
@@ -27,9 +28,9 @@ namespace SharpEncrypt.Managers
 
         #region Properties
 
-        public bool HasTempDecryptedFiles => TempFiles.Any();
+        public bool HasTempDecryptedFolders => FolderModels.Any();
 
-        public HashSet<string> TempFiles { get; } = new HashSet<string>();
+        public List<FolderModel> FolderModels { get; } = new List<FolderModel>();
 
         #endregion
 
@@ -63,7 +64,9 @@ namespace SharpEncrypt.Managers
 
         #region Misc methods
 
-        public void AddTempFile(string path) => TempFiles.Add(path);
+        public void OnTemporaryFoldersEncrypted(List<FolderModel> models) => FolderModels.RemoveAll(models);
+
+        public void AddTempFolder(FolderModel model) => FolderModels.Add(model);
 
         private void AddPathsInternal(IEnumerable<string> paths)
         {

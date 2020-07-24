@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace FileIoLibrary
+namespace FileIOLibrary
 {
     /// <summary>
     ///

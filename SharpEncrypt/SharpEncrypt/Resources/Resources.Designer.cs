@@ -1897,6 +1897,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following files were not re-encrypted: {0}.
+        /// </summary>
+        internal static string TheFollowingWereNotReEncrypted {
+            get {
+                return ResourceManager.GetString("TheFollowingWereNotReEncrypted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are active tasks, to exit please use &apos;Force Exit&apos;. Active tasks can be viewed by selecting &apos;Active Tasks&apos; in the Debug menu..
         /// </summary>
         internal static string ThereAreActiveTasks {
@@ -1929,6 +1938,15 @@ namespace SharpEncrypt.Resources {
         internal static string TotalSize {
             get {
                 return ResourceManager.GetString("TotalSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UncontainerizedFiles.BIN.
+        /// </summary>
+        internal static string UncontainerizedFilesLogFileName {
+            get {
+                return ResourceManager.GetString("UncontainerizedFilesLogFileName", resourceCulture);
             }
         }
         

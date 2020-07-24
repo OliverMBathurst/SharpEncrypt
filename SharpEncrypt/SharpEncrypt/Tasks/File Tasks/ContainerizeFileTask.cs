@@ -28,7 +28,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
                 File.Move(filePath, newPath);
 
 
-                Result.Value = new FileDataGridItemModel
+                Result.Value = new FileModel
                 {
                     File = Path.GetFileName(filePath),
                     Time = DateTime.Now,

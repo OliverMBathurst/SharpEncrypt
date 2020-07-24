@@ -3,12 +3,12 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 
-namespace FileIoLibrary
+namespace FileIOLibrary
 {
     /// <summary>
     ///
     /// </summary>
-    public class FileIoByte : IEquatable<FileIoByte>
+    public class FileIOByte : IEquatable<FileIOByte>
     {
         private readonly ResourceManager _resourceManager = new ResourceManager(typeof(Resources));
         private const char On = '1', Off = '0';
@@ -17,12 +17,12 @@ namespace FileIoLibrary
         /// <summary>
         ///
         /// </summary>
-        public FileIoByte(string stringRepresentation) => SetBits(stringRepresentation);
+        public FileIOByte(string stringRepresentation) => SetBits(stringRepresentation);
 
         /// <summary>
         ///
         /// </summary>
-        public FileIoByte(Bit[] bits)
+        public FileIOByte(Bit[] bits)
         {
             if (bits == null)
                 throw new ArgumentNullException(nameof(bits));
@@ -61,7 +61,7 @@ namespace FileIoLibrary
         /// <summary>
         ///
         /// </summary>
-        public bool Equals(FileIoByte other)
+        public bool Equals(FileIOByte other)
         {
             return other != null && other.GetBits().SequenceEqual(GetBits());
         }
@@ -80,18 +80,18 @@ namespace FileIoLibrary
         /// <summary>
         ///
         /// </summary>
-        public static FileIoByte DefaultByte
-            => new FileIoByte(new [] { new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit()});
+        public static FileIOByte DefaultByte
+            => new FileIOByte(new [] { new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit(), new Bit()});
 
         /// <summary>
         ///
         /// </summary>
-        public static FileIoByte New => DefaultByte;
+        public static FileIOByte New => DefaultByte;
 
         /// <summary>
         ///
         /// </summary>
-        public override bool Equals(object obj) => obj is FileIoByte b && Equals(b);
+        public override bool Equals(object obj) => obj is FileIOByte b && Equals(b);
 
         /// <summary>
         ///

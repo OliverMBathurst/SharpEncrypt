@@ -16,12 +16,12 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
         {
             InnerTask = new Task(() => 
             {
-                var foldersList = new List<FolderDataGridItemModel>();
+                var foldersList = new List<FolderModel>();
                 if (File.Exists(filePath))
                 {
                     using (var fs = new FileStream(filePath, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderDataGridItemModel> paths)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FolderModel> paths)
                         {
                             foldersList = paths;
                         }

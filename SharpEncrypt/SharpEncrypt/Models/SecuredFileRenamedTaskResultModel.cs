@@ -3,7 +3,7 @@
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class OnSecuredFileRenamedTaskResult
+    internal sealed class SecuredFileRenamedTaskResultModel
     {
         public string OldPath { get; set; }
 

@@ -11,7 +11,7 @@ namespace SharpEncrypt.Forms
     public partial class AdvancedHardDriveWipeOptionsDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-        private readonly IList<DriveWipeTaskSettings> Options = DriveWipeTaskSettingsHelper.GetOptions().ToList();
+        private readonly IList<DriveWipeTaskSettingsModel> Options = DriveWipeTaskSettingsHelper.GetOptions().ToList();
 
         public DriveWipeTaskModel Task { get; private set; }
 
@@ -47,16 +47,16 @@ namespace SharpEncrypt.Forms
             ItemSelected(Options[index]);
         }
 
-        private void ItemSelected(DriveWipeTaskSettings settings)
+        private void ItemSelected(DriveWipeTaskSettingsModel settingsModel)
         {
             NameObfuscationPicker.Value = 0;
-            NameObfuscationPicker.Enabled = settings.NameObfuscation;
+            NameObfuscationPicker.Enabled = settingsModel.NameObfuscation;
 
             PropertyObfuscationPicker.Value = 0;
-            PropertyObfuscationPicker.Enabled = settings.PropertyObfuscation;
+            PropertyObfuscationPicker.Enabled = settingsModel.PropertyObfuscation;
 
             WipeRoundsPicker.Value = 1;
-            WipeRoundsPicker.Enabled = settings.WipeRounds;
+            WipeRoundsPicker.Enabled = settingsModel.WipeRounds;
         }
 
         private void Cancel_Click(object sender, EventArgs e)

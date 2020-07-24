@@ -7,8 +7,11 @@ namespace SharpEncrypt.Tasks.Test_Tasks
 {
     internal sealed class LongRunningTask : SharpEncryptTask
     {
-        public LongRunningTask() : base(ResourceType.Undefined)
+        public override bool ShouldBlockExit { get; set; }
+
+        public LongRunningTask(bool blocking) : base(ResourceType.Undefined)
         {
+            ShouldBlockExit = blocking;
             InnerTask = new Task(() =>
             {
                 Thread.Sleep(20000);

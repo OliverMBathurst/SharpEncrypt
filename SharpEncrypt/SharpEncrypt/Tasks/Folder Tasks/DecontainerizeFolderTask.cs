@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using FileGeneratorLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
@@ -11,7 +13,7 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
     {
         public override TaskType TaskType => TaskType.DecontainerizeFolderTask;
 
-        public DecontainerizeFolderTask(FolderDataGridItemModel model, string password, bool includeSubFolders, bool removeAfter = false) : base(ResourceType.Folder, model.Uri)
+        public DecontainerizeFolderTask(FolderModel model, string password, bool includeSubFolders, bool removeAfter, bool temporary) : base(ResourceType.Folder, model.Uri)
         {
             InnerTask = new Task(() =>
             {
@@ -22,6 +24,19 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
                     foreach (var filePath in Directory.GetFiles(dir))
                     {
                         ContainerHelper.DecontainerizeFile(filePath, password);
+
+                        var fileModel = model.FileModels.FirstOrDefault(x => x.Secured.Equals(filePath));
+
+                        var ext = string.Empty;
+                        if (fileModel != null)
+                            ext = Path.GetExtension(fileModel.File);
+
+                        var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
+                            Path.GetDirectoryName(filePath),
+                            Path.GetFileNameWithoutExtension(filePath),
+                            ext);
+
+                        File.Move(filePath, newPath);
                     }
 
                     if (!includeSubFolders) return;
@@ -32,7 +47,12 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
                     }
                 }
 
-                Result.Value = new DecontainerizeFolderTaskResult { Model = model, RemoveAfter = removeAfter };
+                Result.Value = new DecontainerizeFolderTaskResult
+                {
+                    Model = model, 
+                    RemoveAfter = removeAfter,
+                    Temporary = temporary
+                };
             });
         }
     }

@@ -25,12 +25,8 @@ namespace SharpEncrypt.Helpers
             {
                 bytes[i] = (byte)(bytes[i] ^ hashBytes[i]);
             }
-
-            var destFileName =
-                $"{dir}" +
-                @"\" +
-                $"{BitConverter.ToString(bytes).Replace("-", string.Empty)}{ext}";
-
+            
+            var destFileName = Path.Combine(dir, $"{BitConverter.ToString(bytes).Replace("-", string.Empty)}{ext}");
             File.Move(filePath, destFileName);
         }
 
@@ -58,11 +54,7 @@ namespace SharpEncrypt.Helpers
                 bytes[j] = (byte)(bytes[j] ^ hashBytes[j]);
             }
 
-            var destFileName =
-                $"{dir}" +
-                @"\" +
-                $"{string.Join(string.Empty, bytes.Select(Convert.ToChar))}{ext}";
-
+            var destFileName = Path.Combine(dir, $"{string.Join(string.Empty, bytes.Select(Convert.ToChar))}{ext}");
             File.Move(filePath, destFileName);
         }
 

@@ -21,11 +21,11 @@ namespace SharpEncrypt.Tasks.File_Tasks
                 if (!File.Exists(path))
                     return;
 
-                var listOfModels = new List<FileDataGridItemModel>();
+                var listOfModels = new List<FileModel>();
                 
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileModel> list)
                     {
                         listOfModels = list;
                     }
@@ -41,7 +41,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
             });
         }
 
-        public WriteSecuredFileListTask(string path, bool add, params FileDataGridItemModel[] models)
+        public WriteSecuredFileListTask(string path, bool add, params FileModel[] models)
             : base(ResourceType.File, path)
         {
             InnerTask = new Task(() => 
@@ -55,12 +55,12 @@ namespace SharpEncrypt.Tasks.File_Tasks
                         return;
                 }
 
-                var listOfModels = new List<FileDataGridItemModel>();
+                var listOfModels = new List<FileModel>();
                 if (!created)
                 {
                     using (var fs = new FileStream(path, FileMode.Open))
                     {
-                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileDataGridItemModel> list)
+                        if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileModel> list)
                         {
                             listOfModels = list;
                         }

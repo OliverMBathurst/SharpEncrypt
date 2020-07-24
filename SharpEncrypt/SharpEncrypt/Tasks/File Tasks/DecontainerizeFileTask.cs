@@ -12,7 +12,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
     {
         public override TaskType TaskType => TaskType.DecontainerizeFileTask;
 
-        public DecontainerizeFileTask(FileDataGridItemModel model, string password, bool removeAfter = false, bool openAfter = false) : base(ResourceType.File, model.Secured)
+        public DecontainerizeFileTask(FileModel model, string password, bool removeAfter = false, bool openAfter = false) : base(ResourceType.File, model.Secured)
         {
             InnerTask = new Task(() =>
             {

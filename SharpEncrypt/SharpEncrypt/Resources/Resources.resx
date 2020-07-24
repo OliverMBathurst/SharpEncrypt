@@ -802,4 +802,10 @@
   <data name="0Interpolation" xml:space="preserve">
     <value>{0}</value>
   </data>
+  <data name="TheFollowingWereNotReEncrypted" xml:space="preserve">
+    <value>The following files were not re-encrypted: {0}</value>
+  </data>
+  <data name="UncontainerizedFilesLogFileName" xml:space="preserve">
+    <value>UncontainerizedFiles.BIN</value>
+  </data>
 </root>

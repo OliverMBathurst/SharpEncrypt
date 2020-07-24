@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractClasses\FinalizableTaskResult.cs" />
     <Compile Include="AbstractClasses\ResourceBlocker.cs" />
     <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
     <Compile Include="Constants.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="ExtensionClasses\CharExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
+    <Compile Include="ExtensionClasses\ListExtensionMethods.cs" />
     <Compile Include="ExtensionClasses\StringExtensions.cs" />
     <Compile Include="Forms\GenericTextInput.cs">
       <SubType>Form</SubType>
@@ -229,28 +231,32 @@
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
-    <Compile Include="Models\CurrentTaskInstance.cs" />
+    <Compile Include="Models\CurrentTaskInstanceModel.cs" />
     <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
     <Compile Include="Models\DecontainerizeFolderTaskResult.cs" />
     <Compile Include="Models\DriveWipeTaskModel.cs" />
-    <Compile Include="Models\DriveWipeTaskSettings.cs" />
-    <Compile Include="Models\FileDataGridItemModel.cs" />
-    <Compile Include="Models\FolderDataGridItemModel.cs" />
+    <Compile Include="Models\DriveWipeTaskSettingsModel.cs" />
+    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Managers\TaskManager.cs" />
+    <Compile Include="Models\FinalizableTaskResultModel.cs" />
+    <Compile Include="Models\FolderModel.cs" />
     <Compile Include="Models\KeyFileStoreFileTupleModel.cs" />
-    <Compile Include="Models\OnSecuredFileRenamedTaskResult.cs" />
+    <Compile Include="Models\SecuredFileRenamedTaskResultModel.cs" />
     <Compile Include="Models\OpenAESPasswordStoreTaskResult.cs" />
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
     <Compile Include="Models\PasswordModel.cs" />
-    <Compile Include="Models\ReencryptTempFilesTaskResult.cs" />
+    <Compile Include="Models\EncryptTempFoldersTaskResultModel.cs" />
     <Compile Include="Tasks\Aes Tasks\AesSavePasswordsTask.cs" />
+    <Compile Include="Tasks\File Tasks\DecontainerizeOtherFileTask.cs" />
+    <Compile Include="Tasks\File Tasks\ReadUncontainerizedFilesListTask.cs" />
+    <Compile Include="Tasks\File Tasks\WriteUncontainerizedFilesListTask.cs" />
     <Compile Include="Tasks\Folder Tasks\BulkRenameFolderTask.cs" />
     <Compile Include="Tasks\File Tasks\DecontainerizeFileTask.cs" />
     <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\GenerateNewRsaKeyPairTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\ImportPublicRsaKeyTask.cs" />
     <Compile Include="Tasks\Misc Tasks\InactivityTimeoutTask.cs" />
-    <Compile Include="Tasks\File Tasks\ReencryptTempFilesTask.cs" />
+    <Compile Include="Tasks\File Tasks\EncryptTempFoldersTask.cs" />
     <Compile Include="Tasks\File Tasks\RenameFileNameTask.cs" />
     <Compile Include="Tasks\Otp Tasks\CreateOtpPasswordStoreKeyTask.cs" />
     <Compile Include="Tasks\File Tasks\GenericDeleteFilesTask.cs" />
@@ -261,12 +267,12 @@
     <Compile Include="Tasks\Otp Tasks\OtpSavePasswordsTask.cs" />
     <Compile Include="Tasks\File Tasks\ContainerizeFileTask.cs" />
     <Compile Include="Tasks\Folder Tasks\ShredDirectoryTask.cs" />
-    <Compile Include="Tasks\File Tasks\OnSecuredFileRenamedTask.cs" />
+    <Compile Include="Tasks\File Tasks\SecuredFileRenamedTask.cs" />
     <Compile Include="Tasks\Folder Tasks\WriteFolderExclusionListTask.cs" />
     <Compile Include="Tasks\File Tasks\WriteFileExclusionListTask.cs" />
     <Compile Include="Tasks\Logging Tasks\LoggingTask.cs" />
     <Compile Include="Tasks\Otp Tasks\OtpTransformTask.cs" />
-    <Compile Include="Models\SharpEncryptTaskResult.cs" />
+    <Compile Include="Models\SharpEncryptTaskResultModel.cs" />
     <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Helpers\RsaKeyWriterHelper.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -498,11 +504,11 @@
     <Content Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="lib\AESLibrary.dll" />
+    <EmbeddedResource Include="lib\AesLibrary.dll" />
     <EmbeddedResource Include="lib\FileGeneratorLibrary.dll" />
     <EmbeddedResource Include="lib\FileIOLibrary.dll" />
     <EmbeddedResource Include="lib\GutmannLibrary.dll" />
-    <EmbeddedResource Include="lib\OTPLibrary.dll" />
+    <EmbeddedResource Include="lib\OtpLibrary.dll" />
     <EmbeddedResource Include="lib\SecureEraseLibrary.dll" />
   </ItemGroup>
   <ItemGroup />

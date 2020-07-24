@@ -5,7 +5,7 @@ namespace SharpEncrypt.Models
     [Serializable]
     internal sealed class DecontainerizeFileTaskResult
     {
-        public FileDataGridItemModel Model { get; set; }
+        public FileModel Model { get; set; }
 
         public string NewPath { get; set; }
 

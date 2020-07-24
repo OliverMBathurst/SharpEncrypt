@@ -8,20 +8,23 @@ using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class ReadSecuredFilesListTask : SharpEncryptTask
+    internal sealed class ReadUncontainerizedFilesListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.ReadSecuredFilesListTask;
-    
-        public ReadSecuredFilesListTask(string path) : base(ResourceType.File, path)
+        public override TaskType TaskType => TaskType.ReadUncontainerizedFilesListTask;
+
+        public override bool IsExclusive => true;
+
+        public ReadUncontainerizedFilesListTask(string path) : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
             {
                 if (!File.Exists(path)) return;
+
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
-                    if (fs.Length != 0 && new BinaryFormatter().Deserialize(fs) is List<FileModel> models)
+                    if (new BinaryFormatter().Deserialize(fs) is List<FolderModel> paths)
                     {
-                        Result.Value = models;
+                        Result.Value = paths;
                     }
                 }
             });
