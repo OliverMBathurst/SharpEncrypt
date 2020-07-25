@@ -70,7 +70,7 @@ namespace SharpEncrypt.Forms
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
         private delegate void InactivityTaskCompletedEventHandler(int oldTimeout);
         private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
-        private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderTaskResult result);
+        private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderFilesTaskResult result);
         private delegate void TempFoldersEncryptedEventHandler(EncryptTempFoldersTaskResultModel resultModel);
         private delegate void UncontainerizedFilesListReadEventHandler(List<string> paths);
         private delegate void TemporaryFoldersEncryptedEventHandler(List<FolderModel> paths);
@@ -596,12 +596,24 @@ namespace SharpEncrypt.Forms
         }
 
         private void DecryptPermanentlyToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(m => TaskManager.AddTask(new DecontainerizeFolderTask(m, SessionPassword, AppSettings.IncludeSubfolders, true, false))));
+            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(m => 
+                TaskManager.AddTask(new DecontainerizeFolderFilesTask(
+                    m, 
+                    SessionPassword,
+                    ResourceManager.GetString("EncryptedFileExtension"),
+                    AppSettings.IncludeSubfolders, 
+                    true, 
+                    false))));
 
         private void DecryptTemporarilyToolStripMenuItem_Click(object sender, EventArgs e)
             => OnPasswordValidated(() => ForEachSelectedSecuredFolder(f =>
-                TaskManager.AddTask(new DecontainerizeFolderTask(f, SessionPassword, AppSettings.IncludeSubfolders,
-                    true, true))));
+                TaskManager.AddTask(new DecontainerizeFolderFilesTask(
+                    f, 
+                    SessionPassword, 
+                    ResourceManager.GetString("EncryptedFileExtension"),
+                    AppSettings.IncludeSubfolders,
+                    true,
+                    true))));
 
         private void AddSecuredFolderToolStripMenuItem_Click(object sender, EventArgs e) => AddSecuredFolder();
 
@@ -1037,7 +1049,7 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void OnFolderDecontainerized(DecontainerizeFolderTaskResult result)
+        private void OnFolderDecontainerized(DecontainerizeFolderFilesTaskResult result)
         {
             if (result.Temporary)
             {
@@ -1583,7 +1595,7 @@ namespace SharpEncrypt.Forms
 
             foreach (var path in paths)
             {
-                var dir = Path.GetDirectoryName(path);
+                var dir = DirectoryHelper.GetDirectory(path);
                 if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
                 {
                     Process.Start(dir);
@@ -1763,7 +1775,7 @@ namespace SharpEncrypt.Forms
                     case TaskType.InactivityTimeoutTask when task.Result.Value is int result:
                         InactivityTaskCompleted?.Invoke(result);
                         break;
-                    case TaskType.DecontainerizeFolderTask when task.Result.Value is DecontainerizeFolderTaskResult result:
+                    case TaskType.DecontainerizeFolderFilesTask when task.Result.Value is DecontainerizeFolderFilesTaskResult result:
                         FolderDecontainerized?.Invoke(result);
                         break;
                     case TaskType.EncryptTempFoldersTask when task.Result.Value is EncryptTempFoldersTaskResultModel result:

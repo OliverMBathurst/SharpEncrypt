@@ -21,12 +21,11 @@ namespace SharpEncrypt.Tasks.File_Tasks
             {
                 ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                    Path.GetDirectoryName(filePath),
+                    DirectoryHelper.GetDirectory(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
                     ext);
 
                 File.Move(filePath, newPath);
-
 
                 Result.Value = new FileModel
                 {

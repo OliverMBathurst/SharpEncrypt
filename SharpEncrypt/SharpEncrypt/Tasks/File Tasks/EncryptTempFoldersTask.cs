@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AesLibrary;
-using FileGeneratorLibrary;
-using SecureEraseLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
@@ -27,7 +23,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
                 var containerized = new List<FolderModel>();
 
                 foreach (var model in models)
-                    ContainerizeFolder(model.Uri);
+                    SecureFolder(model.Uri);
 
                 Result.Value = new EncryptTempFoldersTaskResultModel
                 {
@@ -37,43 +33,26 @@ namespace SharpEncrypt.Tasks.File_Tasks
                     Silent = silent
                 };
 
-                void ContainerizeFolder(string folderPath)
+                void SecureFolder(string folderUri)
                 {
-                    var folder = new FolderModel { Uri = folderPath };
+                    var folderModel = new FolderModel
+                    {
+                        Uri = folderUri
+                    };
+
                     try
                     {
-                        foreach (var filePath in Directory.GetFiles(folderPath))
-                        {
-                            ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
-                            var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                                Path.GetDirectoryName(filePath),
-                                Path.GetFileNameWithoutExtension(filePath),
-                                ext);
-
-                            File.Move(filePath, newPath);
-
-                            folder.FileModels.Add(new FileModel
-                            {
-                                File = Path.GetFileName(filePath),
-                                Time = DateTime.Now,
-                                Secured = newPath,
-                                Algorithm = CipherType.Aes
-                            });
-                        }
+                        folderModel.FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderUri, password, ext).ToList();
 
                         if (includeSubFolders)
-                        {
-                            foreach (var subFolder in Directory.GetDirectories(folderPath))
-                            {
-                                ContainerizeFolder(subFolder);
-                            }
-                        }
+                            folderModel.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderUri, password, ext)
+                                .ToList();
 
-                        containerized.Add(folder);
+                        containerized.Add(folderModel);
                     }
                     catch (Exception)
                     {
-                        uncontainerized.Add(folder);
+                        uncontainerized.Add(folderModel);
                     }
                 }
             });

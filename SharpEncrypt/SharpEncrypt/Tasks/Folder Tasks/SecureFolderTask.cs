@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using AesLibrary;
-using FileGeneratorLibrary;
-using SecureEraseLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
@@ -19,38 +15,14 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
         {
             InnerTask = new Task(() =>
             {
-                var model = new FolderModel { Uri = folderPath };
-
-                SecureDirectory(folderPath);
-
-                void SecureDirectory(string dir)
+                var model = new FolderModel
                 {
-                    foreach (var filePath in Directory.GetFiles(dir))
-                    {
-                        ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
-                        var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                            Path.GetDirectoryName(filePath),
-                            Path.GetFileNameWithoutExtension(filePath), 
-                            ext);
+                    Uri = folderPath,
+                    FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderPath, password, ext).ToList()
+                };
 
-                        File.Move(filePath, newPath);
-
-                        model.FileModels.Add(new FileModel
-                        {
-                            File = Path.GetFileName(filePath),
-                            Time = DateTime.Now,
-                            Secured = newPath,
-                            Algorithm = CipherType.Aes,
-                            InSubfolder = dir != folderPath
-                        });
-                    }
-
-                    if (!includeSubFolders) return;
-                    foreach (var subFolder in Directory.GetDirectories(dir))
-                    {
-                        SecureDirectory(subFolder);
-                    }
-                }
+                if (includeSubFolders)
+                    model.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderPath, password, ext).ToList();
 
                 Result.Value = model;
             });

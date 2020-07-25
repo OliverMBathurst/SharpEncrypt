@@ -33,7 +33,7 @@
         ImportPublicRsaKeyTask,
         GenerateNewRsaKeyPairTask,
         InactivityTimeoutTask,
-        DecontainerizeFolderTask,
+        DecontainerizeFolderFilesTask,
         EncryptTempFoldersTask,
         WriteUncontainerizedFilesListTask,
         ReadUncontainerizedFilesListTask,

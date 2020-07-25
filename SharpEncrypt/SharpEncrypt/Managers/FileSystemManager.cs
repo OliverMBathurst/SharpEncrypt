@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Permissions;
+using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Managers
@@ -94,7 +95,7 @@ namespace SharpEncrypt.Managers
             ItemDeleted?.Invoke(path);
         }
 
-        private bool IsInSubfolder(string path) => !Watchers.Any(x => x.Path.Equals(Path.GetDirectoryName(path), StringComparison.Ordinal));
+        private bool IsInSubfolder(string path) => !Watchers.Any(x => x.Path.Equals(DirectoryHelper.GetDirectory(path), StringComparison.Ordinal));
 
         private FileSystemWatcher GetWatcher(string path)
         {
@@ -102,6 +103,7 @@ namespace SharpEncrypt.Managers
 
             var dirPath = string.Empty;
             var isDir = false;
+
             if (Directory.Exists(path))
             {
                 dirPath = path;
@@ -109,19 +111,7 @@ namespace SharpEncrypt.Managers
             }
             else if (File.Exists(path))
             {
-                var fileDir = Path.GetDirectoryName(path);
-                if (fileDir == null)
-                {
-                    var pathRoot = Path.GetPathRoot(path);
-                    if (!string.IsNullOrEmpty(pathRoot))
-                    {
-                        dirPath = pathRoot;
-                    }
-                }
-                else if (fileDir.Length > 0)
-                {
-                    dirPath = fileDir;
-                }
+                dirPath = DirectoryHelper.GetDirectory(path) ?? throw new ArgumentNullException(nameof(path));
             }
 
             if (string.IsNullOrEmpty(dirPath)) return null;

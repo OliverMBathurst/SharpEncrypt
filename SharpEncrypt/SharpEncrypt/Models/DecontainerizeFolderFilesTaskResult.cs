@@ -3,7 +3,7 @@
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class DecontainerizeFolderTaskResult
+    internal sealed class DecontainerizeFolderFilesTaskResult
     {
         public FolderModel Model { get; set; }
 

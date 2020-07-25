@@ -7,6 +7,7 @@ using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.ExtensionClasses;
+using SharpEncrypt.Helpers;
 
 namespace SharpEncrypt.Tasks.Otp_Tasks
 {
@@ -23,7 +24,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
                 if (encrypt)
                 {
                     newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
-                        Path.GetDirectoryName(filePath),
+                        DirectoryHelper.GetDirectory(filePath),
                         Path.GetFileName(filePath),
                         ext);
                 }
@@ -34,7 +35,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
                     var name = filePath.RemoveLast(ext.Length);
 
                     newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
-                        Path.GetDirectoryName(name),
+                        DirectoryHelper.GetDirectory(name),
                         Path.GetFileName(name),
                         string.Empty);
                 }

@@ -172,6 +172,7 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DirectoryHelper.cs" />
     <Compile Include="Helpers\FileRenameHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
@@ -233,7 +234,7 @@
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstanceModel.cs" />
     <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
-    <Compile Include="Models\DecontainerizeFolderTaskResult.cs" />
+    <Compile Include="Models\DecontainerizeFolderFilesTaskResult.cs" />
     <Compile Include="Models\DriveWipeTaskModel.cs" />
     <Compile Include="Models\DriveWipeTaskSettingsModel.cs" />
     <Compile Include="Models\FileModel.cs" />
@@ -252,7 +253,7 @@
     <Compile Include="Tasks\File Tasks\WriteUncontainerizedFilesListTask.cs" />
     <Compile Include="Tasks\Folder Tasks\BulkRenameFolderTask.cs" />
     <Compile Include="Tasks\File Tasks\DecontainerizeFileTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderTask.cs" />
+    <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderFilesTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\GenerateNewRsaKeyPairTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\ImportPublicRsaKeyTask.cs" />
     <Compile Include="Tasks\Misc Tasks\InactivityTimeoutTask.cs" />

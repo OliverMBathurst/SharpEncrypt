@@ -19,7 +19,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
                 ContainerHelper.DecontainerizeFile(model.Secured, password);
                 
                 var path = FileGeneratorHelper.GetValidFileNameForDirectory(
-                    Path.GetDirectoryName(model.Secured),
+                    DirectoryHelper.GetDirectory(model.Secured),
                     Path.GetFileNameWithoutExtension(model.File),
                     Path.GetExtension(model.File));
 

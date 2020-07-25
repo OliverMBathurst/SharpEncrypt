@@ -10,6 +10,8 @@ namespace SharpEncrypt.Models
 
         public DateTime Time { get; set; } = DateTime.Now;
 
+        public List<FolderModel> SubFolders { get; set; } = new List<FolderModel>();
+
         public List<FileModel> FileModels { get; set; } = new List<FileModel>();
 
         public override bool Equals(object obj) => obj is FolderModel model && Equals(model);
@@ -19,8 +21,7 @@ namespace SharpEncrypt.Models
             if (other == null)
                 throw new ArgumentNullException(nameof(other));
 
-            return Uri.Equals(other.Uri, StringComparison.Ordinal)
-                   && Time.Ticks.Equals(other.Time.Ticks);
+            return Uri.Equals(other.Uri, StringComparison.Ordinal) && Time.Ticks.Equals(other.Time.Ticks);
         }
 
         public override int GetHashCode() => base.GetHashCode();

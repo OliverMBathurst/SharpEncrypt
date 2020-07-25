@@ -14,8 +14,6 @@ namespace SharpEncrypt.Models
 
         public CipherType Algorithm { get; set; }
 
-        public bool InSubfolder { get; set; }
-
         public bool Equals(FileModel other)
         {
             if (other == null)

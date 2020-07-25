@@ -11,7 +11,7 @@ namespace SharpEncrypt.Helpers
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
-            var dir = Path.GetDirectoryName(path);
+            var dir = DirectoryHelper.GetDirectory(path);
             if (!Directory.Exists(dir))
                 throw new DirectoryNotFoundException(dir);
 
