@@ -24,7 +24,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
                 if (encrypt)
                 {
                     newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
-                        DirectoryHelper.GetDirectory(filePath),
+                        DirectoryHelper.GetDirectoryPath(filePath),
                         Path.GetFileName(filePath),
                         ext);
                 }
@@ -35,7 +35,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
                     var name = filePath.RemoveLast(ext.Length);
 
                     newFileName = FileGeneratorHelper.GetValidFileNameForDirectory(
-                        DirectoryHelper.GetDirectory(name),
+                        DirectoryHelper.GetDirectoryPath(name),
                         Path.GetFileName(name),
                         string.Empty);
                 }

@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using AesLibrary;
 using FileGeneratorLibrary;
-using SecureEraseLibrary;
 using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
@@ -21,7 +20,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
             {
                 ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                    DirectoryHelper.GetDirectory(filePath),
+                    DirectoryHelper.GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
                     ext);
 
@@ -31,8 +30,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
                 {
                     File = Path.GetFileName(filePath),
                     Time = DateTime.Now,
-                    Secured = newPath,
-                    Algorithm = CipherType.Aes
+                    Secured = newPath
                 };
             });
         }

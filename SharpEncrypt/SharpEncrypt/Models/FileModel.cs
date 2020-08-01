@@ -1,10 +1,9 @@
-﻿using SecureEraseLibrary;
-using System;
+﻿using System;
 
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class FileModel : IEquatable<FileModel>
+    public sealed class FileModel : IEquatable<FileModel>
     {
         public string File { get; set; }
 
@@ -12,20 +11,11 @@ namespace SharpEncrypt.Models
 
         public string Secured { get; set; }
 
-        public CipherType Algorithm { get; set; }
+        public string Algorithm => Constants.DefaultEncryptionStandard;
 
-        public bool Equals(FileModel other)
-        {
-            if (other == null)
-                throw new ArgumentNullException(nameof(other));
+        public bool Equals(FileModel other) => other != null && Secured.Equals(other.Secured, StringComparison.Ordinal);
 
-            return Secured.Equals(other.Secured, StringComparison.Ordinal);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is FileModel model && Equals(model);
-        }
+        public override bool Equals(object obj) => obj is FileModel model && Equals(model);
 
         public override int GetHashCode() => base.GetHashCode();
     }

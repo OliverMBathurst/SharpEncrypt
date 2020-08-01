@@ -10,7 +10,7 @@ namespace SharpEncrypt.Helpers
     {
         public static void AnonymizeFile(string filePath, string hash)
         {
-            var dir = DirectoryHelper.GetDirectory(filePath);
+            var dir = DirectoryHelper.GetDirectoryPath(filePath);
             var ext = Path.GetExtension(filePath);
 
             var bytes = Encoding.UTF8.GetBytes(Path.GetFileNameWithoutExtension(filePath));
@@ -32,7 +32,7 @@ namespace SharpEncrypt.Helpers
 
         public static void DeanonymizeFile(string filePath, string hash)
         {
-            var dir = DirectoryHelper.GetDirectory(filePath);
+            var dir = DirectoryHelper.GetDirectoryPath(filePath);
             var ext = Path.GetExtension(filePath);
             var hashBytes = Encoding.UTF8.GetBytes(hash).ToList();
 

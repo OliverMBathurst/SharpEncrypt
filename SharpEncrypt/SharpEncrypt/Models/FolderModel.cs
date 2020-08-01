@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    internal sealed class FolderModel
+    public sealed class FolderModel : IEquatable<FolderModel>
     {
         public string Uri { get; set; }
 
@@ -16,13 +16,7 @@ namespace SharpEncrypt.Models
 
         public override bool Equals(object obj) => obj is FolderModel model && Equals(model);
 
-        public bool Equals(FolderModel other)
-        {
-            if (other == null)
-                throw new ArgumentNullException(nameof(other));
-
-            return Uri.Equals(other.Uri, StringComparison.Ordinal) && Time.Ticks.Equals(other.Time.Ticks);
-        }
+        public bool Equals(FolderModel other) => other != null && Uri.Equals(other.Uri, StringComparison.Ordinal) && Time.Ticks.Equals(other.Time.Ticks);
 
         public override int GetHashCode() => base.GetHashCode();
     }

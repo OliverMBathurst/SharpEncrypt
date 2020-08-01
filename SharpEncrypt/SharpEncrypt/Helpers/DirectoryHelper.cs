@@ -4,14 +4,13 @@ using System.IO;
 using System.Linq;
 using AesLibrary;
 using FileGeneratorLibrary;
-using SecureEraseLibrary;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Helpers
 {
     internal static class DirectoryHelper
     {
-        public static string GetDirectory(string dir)
+        public static string GetDirectoryPath(string dir)
         {
             if(dir == null)
                 throw new ArgumentNullException(nameof(dir));
@@ -40,7 +39,7 @@ namespace SharpEncrypt.Helpers
             {
                 ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                    GetDirectory(filePath),
+                    GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
                     ext);
 
@@ -50,8 +49,7 @@ namespace SharpEncrypt.Helpers
                 {
                     File = Path.GetFileName(filePath),
                     Time = DateTime.Now,
-                    Secured = newPath,
-                    Algorithm = CipherType.Aes
+                    Secured = newPath
                 });
             }
 
@@ -62,7 +60,7 @@ namespace SharpEncrypt.Helpers
         {
             foreach (var filePath in Directory.GetFiles(folderPath))
             {
-                if (Path.GetExtension(filePath).Equals(encryptedFileExtension))
+                if (!Path.GetExtension(filePath).Equals(encryptedFileExtension))
                     continue;
 
                 ContainerHelper.DecontainerizeFile(filePath, password);
@@ -76,7 +74,7 @@ namespace SharpEncrypt.Helpers
                     ext = Path.GetExtension(fileModel.File);
 
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
-                    GetDirectory(filePath),
+                    GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
                     ext);
 

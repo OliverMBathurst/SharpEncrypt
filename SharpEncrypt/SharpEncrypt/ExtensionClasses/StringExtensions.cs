@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.ExtensionClasses
 {
@@ -25,6 +26,21 @@ namespace SharpEncrypt.ExtensionClasses
             if (str == null)
                 throw new ArgumentNullException(nameof(str));
             return number >= str.Length ? string.Empty : str.Substring(0, str.Length - number);
+        }
+
+        public static FileModel ToFileModel(this string path)
+        {
+            if(path == null)
+                throw new ArgumentNullException(nameof(path));
+
+            if (!File.Exists(path))
+                return null;
+
+            return new FileModel
+            {
+                File = path,
+                Time = DateTime.Now
+            };
         }
     }
 }

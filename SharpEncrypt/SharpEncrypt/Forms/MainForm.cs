@@ -1595,7 +1595,7 @@ namespace SharpEncrypt.Forms
 
             foreach (var path in paths)
             {
-                var dir = DirectoryHelper.GetDirectory(path);
+                var dir = DirectoryHelper.GetDirectoryPath(path);
                 if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
                 {
                     Process.Start(dir);

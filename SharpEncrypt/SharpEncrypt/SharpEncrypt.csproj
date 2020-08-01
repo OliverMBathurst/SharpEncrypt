@@ -152,6 +152,7 @@
     <Compile Include="ExtensionClasses\CharExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
+    <Compile Include="ExtensionClasses\FolderModelExtensions.cs" />
     <Compile Include="ExtensionClasses\ListExtensionMethods.cs" />
     <Compile Include="ExtensionClasses\StringExtensions.cs" />
     <Compile Include="Forms\GenericTextInput.cs">

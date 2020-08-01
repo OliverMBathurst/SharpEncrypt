@@ -95,7 +95,7 @@ namespace SharpEncrypt.Managers
             ItemDeleted?.Invoke(path);
         }
 
-        private bool IsInSubfolder(string path) => !Watchers.Any(x => x.Path.Equals(DirectoryHelper.GetDirectory(path), StringComparison.Ordinal));
+        private bool IsInSubfolder(string path) => !Watchers.Any(x => x.Path.Equals(DirectoryHelper.GetDirectoryPath(path), StringComparison.Ordinal));
 
         private FileSystemWatcher GetWatcher(string path)
         {
@@ -111,7 +111,7 @@ namespace SharpEncrypt.Managers
             }
             else if (File.Exists(path))
             {
-                dirPath = DirectoryHelper.GetDirectory(path) ?? throw new ArgumentNullException(nameof(path));
+                dirPath = DirectoryHelper.GetDirectoryPath(path) ?? throw new ArgumentNullException(nameof(path));
             }
 
             if (string.IsNullOrEmpty(dirPath)) return null;
