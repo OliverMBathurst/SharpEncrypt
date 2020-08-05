@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 
@@ -10,10 +12,10 @@ namespace SharpEncrypt.Forms
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly string[] Lines;
 
-        public GenericTextViewer(string[] lines)
+        public GenericTextViewer(IEnumerable<string> lines)
         {
             InitializeComponent();
-            Lines = lines;
+            Lines = lines.ToArray();
         }
 
         private void GenericTextViewer_Load(object sender, EventArgs e)

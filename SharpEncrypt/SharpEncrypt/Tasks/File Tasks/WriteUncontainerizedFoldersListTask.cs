@@ -8,20 +8,20 @@ using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class WriteUncontainerizedFilesListTask : SharpEncryptTask
+    internal sealed class WriteUncontainerizedFoldersListTask : SharpEncryptTask
     {
-        public override TaskType TaskType => TaskType.WriteUncontainerizedFilesListTask;
+        public override TaskType TaskType => TaskType.WriteUncontainerizedFoldersListTask;
 
         public override bool IsExclusive => true;
 
-        public WriteUncontainerizedFilesListTask(string path, IReadOnlyCollection<FolderModel> filePaths, bool exitAfter, bool silent) 
+        public WriteUncontainerizedFoldersListTask(string path, IReadOnlyCollection<FolderModel> directoryPaths, bool exitAfter, bool silent) 
             : base(ResourceType.File, path)
         {
             InnerTask = new Task(() =>
             {
                 using (var fs = new FileStream(path, FileMode.Create))
                 {
-                    new BinaryFormatter().Serialize(fs, filePaths);
+                    new BinaryFormatter().Serialize(fs, directoryPaths);
                 }
 
                 Result.Value = new FinalizableTaskResultModel

@@ -9,12 +9,20 @@ namespace SharpEncrypt.AbstractClasses
 {
     public abstract class SharpEncryptTask : ResourceBlocker
     {
+        protected SharpEncryptTask(ResourceType resourceType, TaskType taskType, params string[] blockedResources) :
+            base(resourceType, blockedResources)
+            => TaskType = taskType;
+
         protected SharpEncryptTask(ResourceType resourceType, params string[] blockedResources) : base(resourceType, blockedResources) { }
 
         protected SharpEncryptTask(ResourceType resourceType, IEnumerable<string> blockedResources) : base(resourceType, blockedResources) { }
 
         protected SharpEncryptTask(ResourceType resourceType, IEnumerable<string> blockedResources,
             params TaskType[] blockingTaskTypes) : base(resourceType, blockedResources, blockingTaskTypes) { }
+
+        protected SharpEncryptTask(ResourceType resourceType, string blockedResource, TaskType taskType,
+            params TaskType[] blockingTaskTypes) : base(resourceType, blockedResource, blockingTaskTypes)
+            => TaskType = taskType;
 
         public virtual Guid Identifier { get; } = Guid.NewGuid();
 

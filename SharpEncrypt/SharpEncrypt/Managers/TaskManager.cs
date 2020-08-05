@@ -163,7 +163,8 @@ namespace SharpEncrypt.Managers
             }
         }
 
-        private bool IsBlocked(ResourceBlocker resourceBlocker) => BlockingTasks(resourceBlocker).Any();
+        private bool IsBlocked(ResourceBlocker resourceBlocker) => resourceBlocker.ResourceType != ResourceType.Undefined 
+                                                                   && BlockingTasks(resourceBlocker).Any();
 
         private IEnumerable<SharpEncryptTask> BlockingTasks(ResourceBlocker resourceBlocker)
             => TaskHandlers

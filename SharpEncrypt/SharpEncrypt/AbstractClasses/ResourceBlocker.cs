@@ -24,6 +24,13 @@ namespace SharpEncrypt.AbstractClasses
             BlockingTaskTypes = taskTypes;
         }
 
+        protected ResourceBlocker(ResourceType resourceType, string blockedResource, params TaskType[] taskTypes)
+        {
+            ResourceType = resourceType;
+            BlockedResources = new [] { blockedResource };
+            BlockingTaskTypes = taskTypes;
+        }
+
         public virtual ResourceType ResourceType { get; }
 
         public virtual IEnumerable<string> BlockedResources { get; }

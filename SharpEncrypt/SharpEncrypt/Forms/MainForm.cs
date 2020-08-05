@@ -61,18 +61,18 @@ namespace SharpEncrypt.Forms
         private delegate void ReadSecuredFolderListEventHandler(IEnumerable<FolderModel> models);
         private delegate void ExcludedFilesListReadEventHandler(IEnumerable<FileModel> models);
         private delegate void ExcludedFoldersListReadEventHandler(IEnumerable<FolderModel> models);
+        private delegate void UncontainerizedFilesListReadEventHandler(IEnumerable<FolderModel> paths);
+        private delegate void LogFileReadEventHandler(IEnumerable<string> lines);
         private delegate void SettingsFileReadEventHandler(SharpEncryptSettingsModel settings);
         private delegate void TaskExceptionOccurredEventHandler(Exception exception);
         private delegate void OtpPasswordStoreKeyWrittenEventHandler(CreateOtpPasswordStoreKeyTaskResult result);
         private delegate void OtpPasswordStoreReadEventHandler(OpenOtpPasswordStoreTaskResult result);
         private delegate void AesPasswordStoreReadEventHandler(OpenAesPasswordStoreTaskResult result);
-        private delegate void LogFileReadEventHandler(string[] lines);
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
         private delegate void InactivityTaskCompletedEventHandler(int oldTimeout);
         private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
         private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderFilesTaskResult result);
         private delegate void TempFoldersEncryptedEventHandler(EncryptTempFoldersTaskResultModel resultModel);
-        private delegate void UncontainerizedFilesListReadEventHandler(List<string> paths);
         private delegate void TemporaryFoldersEncryptedEventHandler(List<FolderModel> paths);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
@@ -247,7 +247,7 @@ namespace SharpEncrypt.Forms
                     }
                     else
                     {
-                        TaskManager.AddTask(new WriteUncontainerizedFilesListTask(PathHelper.UncontainerizedFilesLoggingFilePath, folders, exitAfter, true));
+                        TaskManager.AddTask(new WriteUncontainerizedFoldersListTask(PathHelper.UncontainerizedFoldersLoggingFilePath, folders, exitAfter, true));
                     }
                 }
             }
@@ -303,14 +303,9 @@ namespace SharpEncrypt.Forms
             {
                 if (dialog.ShowDialog() != DialogResult.OK) return;
                 var model = SecuredFiles.FirstOrDefault(x => x.Secured.Equals(dialog.FileName, StringComparison.Ordinal));
-                if (model != null)
-                {
-                    TaskManager.AddTask(new DecontainerizeFileTask(model, SessionPassword, openAfter: true));
-                }
-                else
-                {
-                    OnException(new FileNotSecuredException());
-                }
+                TaskManager.AddTask(model != null
+                    ? new DecontainerizeFileTask(model, SessionPassword, openAfter: true)
+                    : new DecontainerizeFileTask(dialog.FileName, SessionPassword, openAfter: true));
             }
         }
 
@@ -379,22 +374,25 @@ namespace SharpEncrypt.Forms
         }
 
         private void LoadApplicationSettings()
-            => TaskManager.AddTask(new ReadSettingsFileTask(PathHelper.AppSettingsPath, 
+            => TaskManager.AddTask(new GenericDeserializationTask<SharpEncryptSettingsModel>(PathHelper.AppSettingsPath, 
                 TaskType.ReadFileExclusionListTask,
                 TaskType.ReadFolderExclusionListTask,
                 TaskType.ReadSecuredFoldersListTask,
                 TaskType.ReadSecuredFilesListTask,
-                TaskType.ReadUncontainerizedFilesListTask));
+                TaskType.ReadUncontainerizedFoldersListTask));
 
-        private void LoadExcludedFilesList() => TaskManager.AddTask(new ReadFileExclusionListTask(PathHelper.ExcludedFilesFile));
+        private void LoadExcludedFilesList() => TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FileModel>>(PathHelper.ExcludedFilesFile, TaskType.ReadFileExclusionListTask));
 
-        private void LoadExcludedFoldersList() => TaskManager.AddTask(new ReadFolderExclusionListTask(PathHelper.ExcludedFoldersFile));
+        private void LoadExcludedFoldersList() => TaskManager.AddTask(new GenericDeserializationTask<List<FolderModel>>(PathHelper.ExcludedFoldersFile, TaskType.ReadFolderExclusionListTask));
 
-        private void LoadSecuredFoldersList() => TaskManager.AddTask(new ReadSecuredFoldersListTask(PathHelper.SecuredFoldersListFile));
+        private void LoadSecuredFoldersList() => TaskManager.AddTask(new GenericDeserializationTask<List<FolderModel>>(PathHelper.SecuredFoldersListFile, TaskType.ReadSecuredFoldersListTask, new List<FolderModel>()));
 
-        private void LoadSecuredFilesList() => TaskManager.AddTask(new ReadSecuredFilesListTask(PathHelper.SecuredFilesListFile));
+        private void LoadSecuredFilesList() => TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FileModel>>(PathHelper.SecuredFilesListFile, TaskType.ReadSecuredFilesListTask));
 
-        private void LoadUncontainerizedFilesList() => TaskManager.AddTask(new ReadUncontainerizedFilesListTask(PathHelper.UncontainerizedFilesLoggingFilePath));
+        private void LoadUncontainerizedFilesList() =>
+            TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FolderModel>>(PathHelper.UncontainerizedFoldersLoggingFilePath,
+                    TaskType.ReadUncontainerizedFoldersListTask)
+                { IsExclusive = true });
 
         private static void CloseApplication() => Application.Exit();
 
@@ -567,6 +565,11 @@ namespace SharpEncrypt.Forms
             => OnPasswordValidated(() => ForEachSelectedSecuredFile(m => TaskManager.AddTask(new RenameFileNameTask(m.Secured, SessionPassword, false))));
 
         private void ShareKeysToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FileDecryptPermanently_Click(object sender, EventArgs e)
         {
 
         }
@@ -989,7 +992,7 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
-        private void OnUncontainerizedFilesListRead(List<string> paths)
+        private void OnUncontainerizedFilesListRead(IEnumerable<FolderModel> paths)
             => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? string.Empty,
                 string.Join("\n", paths)));
 
@@ -1012,7 +1015,7 @@ namespace SharpEncrypt.Forms
                 }
                 else
                 {
-                    TaskManager.AddTask(new WriteUncontainerizedFilesListTask(PathHelper.UncontainerizedFilesLoggingFilePath, model.UncontainerizedFolders, model.ExitAfter, model.Silent));
+                    TaskManager.AddTask(new WriteUncontainerizedFoldersListTask(PathHelper.UncontainerizedFoldersLoggingFilePath, model.UncontainerizedFolders, model.ExitAfter, model.Silent));
                 }
             }
             else
@@ -1042,7 +1045,10 @@ namespace SharpEncrypt.Forms
                 {
                     if (AppSettings.ReencryptOnLock)
                     {
-                        TaskManager.AddTask(new ReadUncontainerizedFilesListTask(PathHelper.UncontainerizedFilesLoggingFilePath));
+                        var task = new GenericDeserializationTask<IEnumerable<FolderModel>>(
+                            PathHelper.UncontainerizedFoldersLoggingFilePath,
+                            TaskType.ReadUncontainerizedFoldersListTask) {IsExclusive = true};
+                        TaskManager.AddTask(task);
                     }
                     break;
                 }
@@ -1117,7 +1123,7 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private static void OnLogFileRead(string[] lines)
+        private static void OnLogFileRead(IEnumerable<string> lines)
         {
             using (var textViewer = new GenericTextViewer(lines))
             {
@@ -1736,20 +1742,23 @@ namespace SharpEncrypt.Forms
                     case TaskType.ReadSecuredFoldersListTask when task.Result.Value is IEnumerable<FolderModel> models:
                         SecuredFolderListRead?.Invoke(models);
                         break;
-                    case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettingsModel settings:
-                        SettingsFileRead?.Invoke(settings);
-                        break;
                     case TaskType.ReadFileExclusionListTask when task.Result.Value is IEnumerable<FileModel> models:
                         ExcludedFilesListRead?.Invoke(models);
                         break;
                     case TaskType.ReadFolderExclusionListTask when task.Result.Value is IEnumerable<FolderModel> models:
                         ExcludedFoldersListRead?.Invoke(models);
                         break;
+                    case TaskType.ReadLogFileTask when task.Result.Value is IEnumerable<string> lines:
+                        LogFileRead?.Invoke(lines);
+                        break;
+                    case TaskType.ReadUncontainerizedFoldersListTask when task.Result.Value is IEnumerable<FolderModel> uncontainerizedFiles:
+                        UncontainerizedFilesListRead?.Invoke(uncontainerizedFiles);
+                        break;
                     case TaskType.SecureFolderTask when task.Result.Value is FolderModel model:
                         FolderSecured?.Invoke(model);
                         break;
-                    case TaskType.ReadLogFileTask when task.Result.Value is string[] lines:
-                        LogFileRead?.Invoke(lines);
+                    case TaskType.ReadSettingsFileTask when task.Result.Value is SharpEncryptSettingsModel settings:
+                        SettingsFileRead?.Invoke(settings);
                         break;
                     case TaskType.ContainerizeFileTask when task.Result.Value is FileModel model:
                         FileSecured?.Invoke(model);
@@ -1780,11 +1789,8 @@ namespace SharpEncrypt.Forms
                         break;
                     case TaskType.EncryptTempFoldersTask when task.Result.Value is EncryptTempFoldersTaskResultModel result:
                         TempFoldersEncrypted?.Invoke(result);
-                        break;
-                    case TaskType.ReadUncontainerizedFilesListTask when task.Result.Value is List<string> uncontainerizedFiles:
-                        UncontainerizedFilesListRead?.Invoke(uncontainerizedFiles);
-                        break;
-                    case TaskType.WriteUncontainerizedFilesListTask when task.Result.Value is FinalizableTaskResultModel model:
+                        break;                    
+                    case TaskType.WriteUncontainerizedFoldersListTask when task.Result.Value is FinalizableTaskResultModel model:
                         if (model.ExitAfter)
                             OnExitRequested(model.Silent);
                         break;

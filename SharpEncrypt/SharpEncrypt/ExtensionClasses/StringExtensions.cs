@@ -33,7 +33,7 @@ namespace SharpEncrypt.ExtensionClasses
             if(path == null)
                 throw new ArgumentNullException(nameof(path));
 
-            if (!File.Exists(path))
+            if (string.IsNullOrEmpty(Path.GetFileName(path)))
                 return null;
 
             return new FileModel

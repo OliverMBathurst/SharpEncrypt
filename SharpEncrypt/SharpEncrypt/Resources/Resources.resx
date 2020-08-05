@@ -808,4 +808,10 @@
   <data name="UncontainerizedFilesLogFileName" xml:space="preserve">
     <value>UncontainerizedFiles.BIN</value>
   </data>
+  <data name="FileDecryptPermanently" xml:space="preserve">
+    <value>Decrypt Permanently</value>
+  </data>
+  <data name="FileDecryptTemporarily" xml:space="preserve">
+    <value>Decrypt Temporarily</value>
+  </data>
 </root>

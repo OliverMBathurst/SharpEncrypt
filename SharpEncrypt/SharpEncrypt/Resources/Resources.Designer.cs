@@ -754,6 +754,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decrypt Permanently.
+        /// </summary>
+        internal static string FileDecryptPermanently {
+            get {
+                return ResourceManager.GetString("FileDecryptPermanently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt Temporarily.
+        /// </summary>
+        internal static string FileDecryptTemporarily {
+            get {
+                return ResourceManager.GetString("FileDecryptTemporarily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         internal static string FileMenuStripItem {

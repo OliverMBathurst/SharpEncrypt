@@ -15,9 +15,7 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
             InnerTask = new Task(() =>
             {
                 if (Directory.Exists(directoryPath))
-                {
                     SecureEraseHelper.ShredDirectory(directoryPath, CipherType.Otp, includeSubfolders);
-                }
             });
         }
     }

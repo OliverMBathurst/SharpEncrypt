@@ -18,6 +18,8 @@ namespace SharpEncrypt.Tasks.File_Tasks
         {
             InnerTask = new Task(() =>
             {
+                if (Path.GetExtension(filePath).Equals(ext)) return;
+
                 ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
                     DirectoryHelper.GetDirectoryPath(filePath),

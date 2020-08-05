@@ -32,7 +32,7 @@ namespace SharpEncrypt.Helpers
 
         public string AppSettingsPath => Path.Combine(AppDirectory, GetString("SharpEncryptSettingsFileName"));
 
-        public string UncontainerizedFilesLoggingFilePath => Path.Combine(LoggingDir, GetString("UncontainerizedFilesLogFileName"));
+        public string UncontainerizedFoldersLoggingFilePath => Path.Combine(LoggingDir, GetString("UncontainerizedFilesLogFileName"));
 
         public string LoggingFilePath => Path.Combine(LoggingDir, GetString("LogFileName"));
 

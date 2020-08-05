@@ -35,7 +35,7 @@ namespace SharpEncrypt.Helpers
         {
             var fileModels = new List<FileModel>();
 
-            foreach (var filePath in Directory.GetFiles(folderPath))
+            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => !Path.GetExtension(x).Equals(ext)))
             {
                 ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
@@ -58,11 +58,8 @@ namespace SharpEncrypt.Helpers
 
         public static void DecontainerizeDirectoryFiles(FolderModel masterModel, string folderPath, string password, string encryptedFileExtension, bool includeSubFolders)
         {
-            foreach (var filePath in Directory.GetFiles(folderPath))
+            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => !Path.GetExtension(x).Equals(encryptedFileExtension)))
             {
-                if (!Path.GetExtension(filePath).Equals(encryptedFileExtension))
-                    continue;
-
                 ContainerHelper.DecontainerizeFile(filePath, password);
 
                 var fileModel = folderPath.Equals(masterModel.Uri)

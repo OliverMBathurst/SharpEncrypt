@@ -35,8 +35,8 @@
         InactivityTimeoutTask,
         DecontainerizeFolderFilesTask,
         EncryptTempFoldersTask,
-        WriteUncontainerizedFilesListTask,
-        ReadUncontainerizedFilesListTask,
+        WriteUncontainerizedFoldersListTask,
+        ReadUncontainerizedFoldersListTask,
         DecontainerizeOtherFileTask,
         Undefined
     }

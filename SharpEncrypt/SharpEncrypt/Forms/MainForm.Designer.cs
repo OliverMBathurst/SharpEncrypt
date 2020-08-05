@@ -35,9 +35,16 @@ namespace SharpEncrypt.Forms
             this.Tabs = new System.Windows.Forms.TabControl();
             this.SecuredFilesTab = new System.Windows.Forms.TabPage();
             this.SecuredFilesGrid = new System.Windows.Forms.DataGridView();
+            this.FileColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SecuredColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FileMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.FileDecryptPermanently = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileDecryptTemporarily = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.RemoveFileFromListButKeepSecuredToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopSecuringAndRemoveFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -160,10 +167,6 @@ namespace SharpEncrypt.Forms
             this.NotifyIconContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.FileColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SecuredColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AlgorithmColumnHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tabs.SuspendLayout();
             this.SecuredFilesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecuredFilesGrid)).BeginInit();
@@ -232,12 +235,51 @@ namespace SharpEncrypt.Forms
             this.SecuredFilesGrid.Size = new System.Drawing.Size(1054, 366);
             this.SecuredFilesGrid.TabIndex = 1;
             // 
+            // FileColumnHeader
+            // 
+            this.FileColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FileColumnHeader.DataPropertyName = "File";
+            this.FileColumnHeader.HeaderText = "File";
+            this.FileColumnHeader.MinimumWidth = 8;
+            this.FileColumnHeader.Name = "FileColumnHeader";
+            this.FileColumnHeader.ReadOnly = true;
+            // 
+            // TimeColumnHeader
+            // 
+            this.TimeColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TimeColumnHeader.DataPropertyName = "Time";
+            this.TimeColumnHeader.HeaderText = "Time";
+            this.TimeColumnHeader.MinimumWidth = 8;
+            this.TimeColumnHeader.Name = "TimeColumnHeader";
+            this.TimeColumnHeader.ReadOnly = true;
+            // 
+            // SecuredColumnHeader
+            // 
+            this.SecuredColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SecuredColumnHeader.DataPropertyName = "Secured";
+            this.SecuredColumnHeader.HeaderText = "Secured";
+            this.SecuredColumnHeader.MinimumWidth = 8;
+            this.SecuredColumnHeader.Name = "SecuredColumnHeader";
+            this.SecuredColumnHeader.ReadOnly = true;
+            // 
+            // AlgorithmColumnHeader
+            // 
+            this.AlgorithmColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AlgorithmColumnHeader.DataPropertyName = "Algorithm";
+            this.AlgorithmColumnHeader.HeaderText = "Algorithm";
+            this.AlgorithmColumnHeader.MinimumWidth = 8;
+            this.AlgorithmColumnHeader.Name = "AlgorithmColumnHeader";
+            this.AlgorithmColumnHeader.ReadOnly = true;
+            // 
             // FileMenuStrip
             // 
             this.FileMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
             this.ShowInFolderToolStripMenuItem,
+            this.toolStripSeparator11,
+            this.FileDecryptPermanently,
+            this.FileDecryptTemporarily,
             this.toolStripSeparator6,
             this.RemoveFileFromListButKeepSecuredToolStripMenuItem,
             this.StopSecuringAndRemoveFromListToolStripMenuItem,
@@ -253,7 +295,7 @@ namespace SharpEncrypt.Forms
             this.AnonymizeFileNameToolStripMenuItem,
             this.DeanonymizeFileNameToolStripMenuItem});
             this.FileMenuStrip.Name = "contextMenuStrip1";
-            this.FileMenuStrip.Size = new System.Drawing.Size(401, 412);
+            this.FileMenuStrip.Size = new System.Drawing.Size(401, 482);
             // 
             // OpenToolStripMenuItem
             // 
@@ -268,6 +310,24 @@ namespace SharpEncrypt.Forms
             this.ShowInFolderToolStripMenuItem.Size = new System.Drawing.Size(400, 32);
             this.ShowInFolderToolStripMenuItem.Text = "Show In Folder";
             this.ShowInFolderToolStripMenuItem.Click += new System.EventHandler(this.ShowInFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(397, 6);
+            // 
+            // FileDecryptPermanently
+            // 
+            this.FileDecryptPermanently.Name = "FileDecryptPermanently";
+            this.FileDecryptPermanently.Size = new System.Drawing.Size(400, 32);
+            this.FileDecryptPermanently.Text = "Decrypt Permanently";
+            this.FileDecryptPermanently.Click += new System.EventHandler(this.FileDecryptPermanently_Click);
+            // 
+            // FileDecryptTemporarily
+            // 
+            this.FileDecryptTemporarily.Name = "FileDecryptTemporarily";
+            this.FileDecryptTemporarily.Size = new System.Drawing.Size(400, 32);
+            this.FileDecryptTemporarily.Text = "Decrypt Temporarily";
             // 
             // toolStripSeparator6
             // 
@@ -1271,42 +1331,6 @@ namespace SharpEncrypt.Forms
             this.ExitToolStripMenuItem1.Text = "Exit";
             this.ExitToolStripMenuItem1.Click += new System.EventHandler(this.ExitToolStripMenuItem1_Click);
             // 
-            // FileColumnHeader
-            // 
-            this.FileColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FileColumnHeader.DataPropertyName = "File";
-            this.FileColumnHeader.HeaderText = "File";
-            this.FileColumnHeader.MinimumWidth = 8;
-            this.FileColumnHeader.Name = "FileColumnHeader";
-            this.FileColumnHeader.ReadOnly = true;
-            // 
-            // TimeColumnHeader
-            // 
-            this.TimeColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TimeColumnHeader.DataPropertyName = "Time";
-            this.TimeColumnHeader.HeaderText = "Time";
-            this.TimeColumnHeader.MinimumWidth = 8;
-            this.TimeColumnHeader.Name = "TimeColumnHeader";
-            this.TimeColumnHeader.ReadOnly = true;
-            // 
-            // SecuredColumnHeader
-            // 
-            this.SecuredColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SecuredColumnHeader.DataPropertyName = "Secured";
-            this.SecuredColumnHeader.HeaderText = "Secured";
-            this.SecuredColumnHeader.MinimumWidth = 8;
-            this.SecuredColumnHeader.Name = "SecuredColumnHeader";
-            this.SecuredColumnHeader.ReadOnly = true;
-            // 
-            // AlgorithmColumnHeader
-            // 
-            this.AlgorithmColumnHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AlgorithmColumnHeader.DataPropertyName = "Algorithm";
-            this.AlgorithmColumnHeader.HeaderText = "Algorithm";
-            this.AlgorithmColumnHeader.MinimumWidth = 8;
-            this.AlgorithmColumnHeader.Name = "AlgorithmColumnHeader";
-            this.AlgorithmColumnHeader.ReadOnly = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1476,6 +1500,9 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn SecuredColumnHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn AlgorithmColumnHeader;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripMenuItem FileDecryptTemporarily;
+        private System.Windows.Forms.ToolStripMenuItem FileDecryptPermanently;
     }
 }
 
