@@ -13,7 +13,7 @@ namespace SharpEncrypt.Helpers
             get
             {
                 var appDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                if(string.IsNullOrEmpty(appDir))
+                if (string.IsNullOrEmpty(appDir))
                     throw new DirectoryNotFoundException();
 
                 var dir = Path.Combine(appDir, GetString("AppName"));
@@ -40,7 +40,7 @@ namespace SharpEncrypt.Helpers
 
         public string AesPasswordStoreFile => Path.Combine(PasswordStoresDirectory, GetString("AESPasswordStoreFile"));
 
-        public string PubKeyFile => Path.Combine(ImportedKeysDirectory, GetString("PubKeysFile"));
+        public string OtherUsersPubKeyFile => Path.Combine(ImportedKeysDirectory, GetString("PubKeysFile"));
 
         public string LoggingDir
         {
@@ -83,7 +83,7 @@ namespace SharpEncrypt.Helpers
             }            
         }
 
-        public (string pubKey, string privKey) KeyPairPaths
+        public (string PublicKey, string PrivateKey) KeyPairPaths
         {
             get
             {
@@ -96,7 +96,7 @@ namespace SharpEncrypt.Helpers
         private string GetString(string key)
         {
             var str = ResourceManager.GetString(key);
-            if(str == null)
+            if (str == null)
                 throw new MissingManifestResourceException();
             return str;
         }

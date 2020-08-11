@@ -232,6 +232,8 @@
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BulkExportKeysTaskResult.cs" />
+    <Compile Include="Models\ContainerizationSettings.cs" />
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstanceModel.cs" />
     <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
@@ -255,6 +257,8 @@
     <Compile Include="Tasks\File Tasks\DecontainerizeFileTask.cs" />
     <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderFilesTask.cs" />
     <Compile Include="Tasks\Misc Tasks\GenericDeserializationTask.cs" />
+    <Compile Include="Tasks\Rsa Tasks\BulkExportKeysTask.cs" />
+    <Compile Include="Tasks\Rsa Tasks\CreateShareableKeyTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\GenerateNewRsaKeyPairTask.cs" />
     <Compile Include="Tasks\Rsa Tasks\ImportPublicRsaKeyTask.cs" />
     <Compile Include="Tasks\Misc Tasks\InactivityTimeoutTask.cs" />

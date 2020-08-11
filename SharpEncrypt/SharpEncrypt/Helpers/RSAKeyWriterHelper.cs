@@ -20,5 +20,24 @@ namespace SharpEncrypt.Helpers
                 new BinaryFormatter().Serialize(fs, parameters);
             }
         }
+
+        public static void SerializeTextToFile(RSAParameters key, string text, string filePath)
+        {
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportParameters(key);
+
+                using (var ms = new MemoryStream())
+                {
+                    new BinaryFormatter().Serialize(ms, text);
+
+                    var passwordBytes = ms.ToArray();
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        new BinaryFormatter().Serialize(fs, passwordBytes);
+                    }
+                }
+            }
+        }
     }
 }

@@ -66,7 +66,6 @@ namespace SharpEncrypt.Forms
             this.FolderMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenExplorerHereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddSecuredFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ShareKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.DecryptPermanentlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DecryptTemporarilyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -358,7 +357,7 @@ namespace SharpEncrypt.Forms
             this.ShareKeysToolStripMenuItem1.Name = "ShareKeysToolStripMenuItem1";
             this.ShareKeysToolStripMenuItem1.Size = new System.Drawing.Size(400, 32);
             this.ShareKeysToolStripMenuItem1.Text = "Share Keys";
-            this.ShareKeysToolStripMenuItem1.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem1_Click);
+            this.ShareKeysToolStripMenuItem1.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem_Click);
             // 
             // RenameToOriginalToolStripMenuItem
             // 
@@ -481,7 +480,6 @@ namespace SharpEncrypt.Forms
             this.FolderMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenExplorerHereToolStripMenuItem,
             this.AddSecuredFolderToolStripMenuItem,
-            this.ShareKeysToolStripMenuItem,
             this.toolStripSeparator10,
             this.DecryptPermanentlyToolStripMenuItem,
             this.DecryptTemporarilyToolStripMenuItem,
@@ -494,7 +492,7 @@ namespace SharpEncrypt.Forms
             this.BulkAnonymousRenameToolStripMenuItem,
             this.BulkDeanonymizeFileNamesToolStripMenuItem});
             this.FolderMenuStrip.Name = "folderMenuStrip";
-            this.FolderMenuStrip.Size = new System.Drawing.Size(425, 374);
+            this.FolderMenuStrip.Size = new System.Drawing.Size(425, 342);
             // 
             // OpenExplorerHereToolStripMenuItem
             // 
@@ -509,13 +507,6 @@ namespace SharpEncrypt.Forms
             this.AddSecuredFolderToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
             this.AddSecuredFolderToolStripMenuItem.Text = "Add Secured Folder";
             this.AddSecuredFolderToolStripMenuItem.Click += new System.EventHandler(this.AddSecuredFolderToolStripMenuItem_Click);
-            // 
-            // ShareKeysToolStripMenuItem
-            // 
-            this.ShareKeysToolStripMenuItem.Name = "ShareKeysToolStripMenuItem";
-            this.ShareKeysToolStripMenuItem.Size = new System.Drawing.Size(424, 32);
-            this.ShareKeysToolStripMenuItem.Text = "Share Keys";
-            this.ShareKeysToolStripMenuItem.Click += new System.EventHandler(this.ShareKeysToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
@@ -1404,7 +1395,6 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.Button OpenSecuredGUIButton;
         private System.Windows.Forms.Button ShareButton;
         private System.Windows.Forms.ContextMenuStrip FolderMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem ShareKeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptPermanentlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DecryptTemporarilyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemoveFolderFromListToolStripMenuItem;

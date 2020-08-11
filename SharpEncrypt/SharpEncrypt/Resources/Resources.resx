@@ -650,7 +650,7 @@
     <value>Share Keys</value>
   </data>
   <data name="SharpEncryptOTPEncryptedFile" xml:space="preserve">
-    <value>SharpEncrypt OTP Encrypted File (*.seotpf)|*seotpf</value>
+    <value>SharpEncrypt OTP Encrypted File (*.seotpf)|*.seotpf</value>
   </data>
   <data name="SharpEncryptOTPEncryptedFileExtension" xml:space="preserve">
     <value>.seotpf</value>
@@ -813,5 +813,23 @@
   </data>
   <data name="FileDecryptTemporarily" xml:space="preserve">
     <value>Decrypt Temporarily</value>
+  </data>
+  <data name="ProvidedPasswordIsInvalid" xml:space="preserve">
+    <value>The provided password is not valid for the selected file.</value>
+  </data>
+  <data name="UserPrivateKeyDoesNotExist" xml:space="preserve">
+    <value>No private key currently exists, please generate another.</value>
+  </data>
+  <data name="ProvidePrivateKeyDecryptionKey" xml:space="preserve">
+    <value>You will now be asked for your private key decryption password.</value>
+  </data>
+  <data name="PrivateKeyDecryptionKeyIncorrect" xml:space="preserve">
+    <value>The private key decryption password is incorrect.</value>
+  </data>
+  <data name="ShareableKeyExtension" xml:space="preserve">
+    <value>.sesk</value>
+  </data>
+  <data name="ShareableKeyFilter" xml:space="preserve">
+    <value>SharpEncrypt Shareable Key (*.sesk)|*.sesk</value>
   </data>
 </root>

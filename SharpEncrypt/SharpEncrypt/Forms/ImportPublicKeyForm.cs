@@ -63,7 +63,7 @@ namespace SharpEncrypt.Forms
 
         private bool ImportPublicKey(string identity)
         {
-            var keyFilePath = PathService.PubKeyFile;
+            var keyFilePath = PathService.OtherUsersPubKeyFile;
             if (!File.Exists(keyFilePath)) return true;
             if (!RsaKeyReaderHelper.GetPublicKeys(keyFilePath).ContainsKey(identity)) return true;
             MessageBox.Show(ResourceManager.GetString("DuplicateIdentity"));

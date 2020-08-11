@@ -10,9 +10,6 @@ namespace SharpEncrypt.Helpers
     {
         public static void AnonymizeFile(string filePath, string hash)
         {
-            var dir = DirectoryHelper.GetDirectoryPath(filePath);
-            var ext = Path.GetExtension(filePath);
-
             var bytes = Encoding.UTF8.GetBytes(Path.GetFileNameWithoutExtension(filePath));
             var hashBytes = Encoding.UTF8.GetBytes(hash).ToList();
 
@@ -26,16 +23,13 @@ namespace SharpEncrypt.Helpers
                 bytes[i] = (byte)(bytes[i] ^ hashBytes[i]);
             }
             
-            var destFileName = Path.Combine(dir, $"{BitConverter.ToString(bytes).Replace("-", string.Empty)}{ext}");
+            var destFileName = Path.Combine(DirectoryHelper.GetDirectoryPath(filePath), $"{BitConverter.ToString(bytes).Replace("-", string.Empty)}{Path.GetExtension(filePath)}");
             File.Move(filePath, destFileName);
         }
 
         public static void DeanonymizeFile(string filePath, string hash)
         {
-            var dir = DirectoryHelper.GetDirectoryPath(filePath);
-            var ext = Path.GetExtension(filePath);
             var hashBytes = Encoding.UTF8.GetBytes(hash).ToList();
-
             var fileName = Path.GetFileNameWithoutExtension(filePath);
 
             var bytes = new List<byte>();
@@ -54,7 +48,7 @@ namespace SharpEncrypt.Helpers
                 bytes[j] = (byte)(bytes[j] ^ hashBytes[j]);
             }
 
-            var destFileName = Path.Combine(dir, $"{string.Join(string.Empty, bytes.Select(Convert.ToChar))}{ext}");
+            var destFileName = Path.Combine(DirectoryHelper.GetDirectoryPath(filePath), $"{string.Join(string.Empty, bytes.Select(Convert.ToChar))}{Path.GetExtension(filePath)}");
             File.Move(filePath, destFileName);
         }
 

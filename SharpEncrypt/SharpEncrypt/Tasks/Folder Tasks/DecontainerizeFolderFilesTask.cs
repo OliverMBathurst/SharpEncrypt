@@ -10,11 +10,11 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
     {
         public override TaskType TaskType => TaskType.DecontainerizeFolderFilesTask;
 
-        public DecontainerizeFolderFilesTask(FolderModel model, string password, string encryptedFileExtension, bool includeSubFolders, bool removeAfter, bool temporary) : base(ResourceType.Folder, model.Uri)
+        public DecontainerizeFolderFilesTask(FolderModel model, ContainerizationSettings settings, bool includeSubFolders, bool removeAfter, bool temporary) : base(ResourceType.Folder, model.Uri)
         {
             InnerTask = new Task(() =>
             {
-                DirectoryHelper.DecontainerizeDirectoryFiles(model, model.Uri, password, encryptedFileExtension, includeSubFolders);
+                DirectoryHelper.DecontainerizeDirectoryFiles(model, model.Uri, settings, includeSubFolders);
 
                 Result.Value = new DecontainerizeFolderFilesTaskResult
                 {

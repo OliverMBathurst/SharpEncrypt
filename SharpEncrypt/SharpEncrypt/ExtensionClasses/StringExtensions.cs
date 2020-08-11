@@ -30,7 +30,7 @@ namespace SharpEncrypt.ExtensionClasses
 
         public static FileModel ToFileModel(this string path)
         {
-            if(path == null)
+            if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
             if (string.IsNullOrEmpty(Path.GetFileName(path)))

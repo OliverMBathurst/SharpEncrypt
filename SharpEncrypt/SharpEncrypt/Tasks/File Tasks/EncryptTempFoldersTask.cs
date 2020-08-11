@@ -15,7 +15,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
 
         public override bool IsExclusive => true;
 
-        public EncryptTempFoldersTask(IReadOnlyCollection<FolderModel> models, string password, string ext, bool includeSubFolders, bool exitAfter, bool silent) : base(ResourceType.Folder, models.Select(x => x.Uri))
+        public EncryptTempFoldersTask(IReadOnlyCollection<FolderModel> models, ContainerizationSettings settings, bool includeSubFolders, bool exitAfter, bool silent) : base(ResourceType.Folder, models.Select(x => x.Uri))
         {
             InnerTask = new Task(() =>
             {
@@ -42,10 +42,10 @@ namespace SharpEncrypt.Tasks.File_Tasks
 
                     try
                     {
-                        folderModel.FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderUri, password, ext).ToList();
+                        folderModel.FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderUri, settings).ToList();
 
                         if (includeSubFolders)
-                            folderModel.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderUri, password, ext)
+                            folderModel.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderUri, settings)
                                 .ToList();
 
                         containerized.Add(folderModel);

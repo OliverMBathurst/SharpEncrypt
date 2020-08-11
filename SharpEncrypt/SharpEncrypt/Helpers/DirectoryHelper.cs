@@ -12,7 +12,7 @@ namespace SharpEncrypt.Helpers
     {
         public static string GetDirectoryPath(string dir)
         {
-            if(dir == null)
+            if (dir == null)
                 throw new ArgumentNullException(nameof(dir));
 
             var dirInfo = Path.GetDirectoryName(dir);
@@ -22,26 +22,26 @@ namespace SharpEncrypt.Helpers
             return dirInfo.Length > 0 ? dirInfo : null;
         }
 
-        public static IEnumerable<FolderModel> EnumerateAndSecureSubFolders(string folderPath, string password, string ext) =>
+        public static IEnumerable<FolderModel> EnumerateAndSecureSubFolders(string folderPath, ContainerizationSettings settings) =>
             Directory.GetDirectories(folderPath).Select(x
                 => new FolderModel
                 {
                     Uri = x,
-                    FileModels = EnumerateAndSecureFiles(x, password, ext).ToList(),
-                    SubFolders = EnumerateAndSecureSubFolders(x, password, ext).ToList()
+                    FileModels = EnumerateAndSecureFiles(x, settings).ToList(),
+                    SubFolders = EnumerateAndSecureSubFolders(x, settings).ToList()
                 });
 
-        public static IEnumerable<FileModel> EnumerateAndSecureFiles(string folderPath, string password, string ext)
+        public static IEnumerable<FileModel> EnumerateAndSecureFiles(string folderPath, ContainerizationSettings settings)
         {
             var fileModels = new List<FileModel>();
 
-            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => !Path.GetExtension(x).Equals(ext)))
+            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => !Path.GetExtension(x).Equals(settings.Extension)))
             {
-                ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
+                ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), settings.Password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
                     GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
-                    ext);
+                    settings.Extension);
 
                 File.Move(filePath, newPath);
 
@@ -56,24 +56,20 @@ namespace SharpEncrypt.Helpers
             return fileModels;
         }
 
-        public static void DecontainerizeDirectoryFiles(FolderModel masterModel, string folderPath, string password, string encryptedFileExtension, bool includeSubFolders)
+        public static void DecontainerizeDirectoryFiles(FolderModel masterModel, string folderPath, ContainerizationSettings settings, bool includeSubFolders)
         {
-            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => !Path.GetExtension(x).Equals(encryptedFileExtension)))
+            foreach (var filePath in Directory.GetFiles(folderPath).Where(x => Path.GetExtension(x).Equals(settings.Extension)))
             {
-                ContainerHelper.DecontainerizeFile(filePath, password);
+                ContainerHelper.DecontainerizeFile(filePath, settings.Password);
 
                 var fileModel = folderPath.Equals(masterModel.Uri)
                     ? masterModel.FileModels.FirstOrDefault(x => x.Secured.Equals(filePath))
                     : GetFileModel(masterModel, file => file.Secured.Equals(filePath));
 
-                var ext = string.Empty;
-                if (fileModel != null)
-                    ext = Path.GetExtension(fileModel.File);
-
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
                     GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
-                    ext);
+                    fileModel != null ? Path.GetExtension(fileModel.File) : string.Empty);
 
                 File.Move(filePath, newPath);
             }
@@ -81,7 +77,7 @@ namespace SharpEncrypt.Helpers
             if (!includeSubFolders) return;
 
             foreach (var subFolderPath in Directory.GetDirectories(folderPath))
-                DecontainerizeDirectoryFiles(masterModel, subFolderPath, password, encryptedFileExtension, true);
+                DecontainerizeDirectoryFiles(masterModel, subFolderPath, settings, true);
         }
 
         public static FolderModel GetSubFolderModel(FolderModel masterModel, Func<FolderModel, bool> predicate)

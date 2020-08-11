@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using Microsoft.Win32;
 using SharpEncrypt.Tasks.Aes_Tasks;
 using SharpEncrypt.Tasks.File_Tasks;
@@ -215,6 +216,12 @@ namespace SharpEncrypt.Forms
             }
         }
 
+        private void ForAllSelectedFiles(Action<IEnumerable<FileModel>> action) =>
+            action(SecuredFilesGrid.SelectedRows
+                .Select(x => x)
+                .Where(x => x is DataGridViewRow row && row.DataBoundItem is FileModel)
+                .Select(z => (FileModel)((DataGridViewRow)z).DataBoundItem));
+
         private void EncryptTempFolders(bool silent = true, bool exitAfter = true)
         {
             var folders = FileSystemManager.FolderModels
@@ -227,8 +234,7 @@ namespace SharpEncrypt.Forms
                 {
                     TaskManager.AddTask(new EncryptTempFoldersTask(
                         folders, 
-                        SessionPassword, 
-                        ResourceManager.GetString("EncryptedFileExtension"),
+                        new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                         AppSettings.IncludeSubfolders,
                         exitAfter, 
                         silent));
@@ -238,9 +244,8 @@ namespace SharpEncrypt.Forms
                     if (!silent)
                     {
                         OnPasswordValidated(() => TaskManager.AddTask(new EncryptTempFoldersTask(
-                            folders, 
-                            SessionPassword,
-                            ResourceManager.GetString("EncryptedFileExtension"),
+                            folders,
+                            new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                             AppSettings.IncludeSubfolders,
                             exitAfter, 
                             false)));
@@ -268,7 +273,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (Directory.Exists(folder))
                     {
-                        TaskManager.AddTask(new SecureFolderTask(folder, SessionPassword, AppSettings.IncludeSubfolders, ResourceManager.GetString("EncryptedFileExtension")));
+                        TaskManager.AddTask(new SecureFolderTask(folder, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), AppSettings.IncludeSubfolders));
                     }
                 }
             });
@@ -281,7 +286,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (File.Exists(filePath))
                     {
-                        TaskManager.AddTask(new ContainerizeFileTask(filePath, SessionPassword, ResourceManager.GetString("EncryptedFileExtension")));
+                        TaskManager.AddTask(new ContainerizeFileTask(filePath, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
                     }
                 }
             });
@@ -564,14 +569,58 @@ namespace SharpEncrypt.Forms
         private void RenameToOriginalToolStripMenuItem_Click(object sender, EventArgs e)
             => OnPasswordValidated(() => ForEachSelectedSecuredFile(m => TaskManager.AddTask(new RenameFileNameTask(m.Secured, SessionPassword, false))));
 
-        private void ShareKeysToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
+            => OnPasswordValidated(() => ForAllSelectedFiles(models =>
+            {
+                if (!models.Any()) return;
 
-        }
+                OnPrivateKeyPasswordGiven(privateKey =>
+                {
+                    using (var folderDialog = new FolderBrowserDialog())
+                    {
+                        if (folderDialog.ShowDialog() != DialogResult.OK) return;
+
+                        TaskManager.AddTask(new BulkExportKeysTask(
+                            folderDialog.SelectedPath,
+                            SessionPassword, 
+                            models, 
+                            privateKey, 
+                            ResourceManager.GetString("ShareableKeyExtension")));
+                    }
+                });
+            }));
 
         private void FileDecryptPermanently_Click(object sender, EventArgs e)
-        {
+            => OnPasswordValidated(() => ForEachSelectedSecuredFile(model => TaskManager.AddTask(new DecontainerizeFileTask(model.Secured, SessionPassword, true))));
 
+        private void OnPrivateKeyPasswordGiven(Action<RSAParameters> action)
+        {
+            if (!File.Exists(PathHelper.KeyPairPaths.PrivateKey))
+            {
+                MessageBox.Show(ResourceManager.GetString("UserPrivateKeyDoesNotExist"), string.Empty, MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show(ResourceManager.GetString("ProvidePrivateKeyDecryptionKey"), string.Empty, MessageBoxButtons.OK);
+
+                using (var passwordInput = new PasswordInputDialog(true, sessionPassword: SessionPassword))
+                {
+                    if (passwordInput.ShowDialog() != DialogResult.OK) return;
+
+                    var privateKey = RsaKeyReaderHelper.GetParameters(PathHelper.KeyPairPaths.PrivateKey, passwordInput.Password);
+
+                    if (privateKey.Exponent == null || privateKey.Modulus == null
+                                                    || !privateKey.Exponent.Any()
+                                                    || !privateKey.Modulus.Any())
+                    {
+                        MessageBox.Show(ResourceManager.GetString("PrivateKeyDecryptionKeyIncorrect"), string.Empty, MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        action(privateKey);
+                    }
+                }
+            }
         }
 
         #endregion
@@ -593,27 +642,20 @@ namespace SharpEncrypt.Forms
         private void HideExcludedSecuredFoldersToolStripMenuItem_Click(object sender, EventArgs e)
             => RemoveModelsFromSecuredFoldersDataGrid(ExcludedFolders);
 
-        private void ShareKeysToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void DecryptPermanentlyToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(m => 
+            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(model => 
                 TaskManager.AddTask(new DecontainerizeFolderFilesTask(
-                    m, 
-                    SessionPassword,
-                    ResourceManager.GetString("EncryptedFileExtension"),
+                    model, 
+                    new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                     AppSettings.IncludeSubfolders, 
                     true, 
                     false))));
 
         private void DecryptTemporarilyToolStripMenuItem_Click(object sender, EventArgs e)
-            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(f =>
+            => OnPasswordValidated(() => ForEachSelectedSecuredFolder(model =>
                 TaskManager.AddTask(new DecontainerizeFolderFilesTask(
-                    f, 
-                    SessionPassword, 
-                    ResourceManager.GetString("EncryptedFileExtension"),
+                    model, 
+                    new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                     AppSettings.IncludeSubfolders,
                     true,
                     true))));
@@ -719,7 +761,7 @@ namespace SharpEncrypt.Forms
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!ExitPending)
+            if (!ExitPending)
                 OnExitRequested(false);
         }
 
@@ -826,7 +868,7 @@ namespace SharpEncrypt.Forms
             {
                 if (importPubKeyForm.ShowDialog() == DialogResult.OK)
                 {
-                    TaskManager.AddTask(new ImportPublicRsaKeyTask(PathHelper.PubKeyFile, importPubKeyForm.Result));
+                    TaskManager.AddTask(new ImportPublicRsaKeyTask(PathHelper.OtherUsersPubKeyFile, importPubKeyForm.Result));
                 }
             }
         }
@@ -897,7 +939,61 @@ namespace SharpEncrypt.Forms
 
         private void ShareButton_Click(object sender, EventArgs e)
         {
+            using (var openFileDialog = GetSeefFilesDialog())
+            {
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
+                using (var filePasswordInput = new PasswordInputDialog(true, sessionPassword: SessionPassword))
+                {
+                    if (filePasswordInput.ShowDialog() != DialogResult.OK) return;
+
+                    if (!ContainerHelper.ValidateContainer(openFileDialog.FileName, filePasswordInput.Password))
+                    {
+                        MessageBox.Show(ResourceManager.GetString("ProvidedPasswordIsInvalid"));
+                    }
+                    else
+                    {
+                        if (!File.Exists(PathHelper.KeyPairPaths.PrivateKey))
+                        {
+                            MessageBox.Show(ResourceManager.GetString("UserPrivateKeyDoesNotExist"), string.Empty,
+                                MessageBoxButtons.OK);
+                        }
+                        else
+                        {
+                            MessageBox.Show(ResourceManager.GetString("ProvidePrivateKeyDecryptionKey"), string.Empty,
+                                MessageBoxButtons.OK);
+
+                            using (var passwordInput = new PasswordInputDialog(true, sessionPassword: SessionPassword))
+                            {
+                                if (passwordInput.ShowDialog() != DialogResult.OK) return;
+
+                                var privateKey = RsaKeyReaderHelper.GetParameters(PathHelper.KeyPairPaths.PrivateKey, passwordInput.Password);
+
+                                if (privateKey.Exponent != null && privateKey.Modulus != null
+                                                                && privateKey.Exponent.Any() &&
+                                                                privateKey.Modulus.Any())
+                                {
+                                    using (var saveDialog = new SaveFileDialog())
+                                    {
+                                        saveDialog.Filter = ResourceManager.GetString("ShareableKeyFilter");
+                                        if (saveDialog.ShowDialog() != DialogResult.OK) return;
+
+                                        TaskManager.AddTask(new CreateShareableKeyTask(
+                                            privateKey, 
+                                            saveDialog.FileName,
+                                            filePasswordInput.Password));
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show(ResourceManager.GetString("PrivateKeyDecryptionKeyIncorrect"),
+                                        string.Empty, MessageBoxButtons.OK);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void PasswordManagement_Click(object sender, EventArgs e) => OpenPasswordStore();
@@ -1263,13 +1359,13 @@ namespace SharpEncrypt.Forms
 
         private void FormClosingHandler(object sender, FormClosingEventArgs e)
         {
-            if(!ExitPending)
+            if (!ExitPending)
                 OnExitRequested(e.CloseReason != CloseReason.UserClosing);
         }
 
         private void OnExitRequested(bool silent)
         {
-            if(!ExitPending)
+            if (!ExitPending)
                 ExitPending = true;
 
             if (!FileSystemManager.HasTempDecryptedFolders)
@@ -1526,56 +1622,42 @@ namespace SharpEncrypt.Forms
 
         #region DataGrid methods
 
-        private void AddModelsToSecuredFoldersDataGrid(IEnumerable<FolderModel> models)
-        {
+        private void AddModelsToSecuredFoldersDataGrid(IEnumerable<FolderModel> models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFolders.AddRange(models);
             }));
-        }
 
-        private void AddModelsToSecuredFoldersDataGrid(params FolderModel[] models)
-        {
+        private void AddModelsToSecuredFoldersDataGrid(params FolderModel[] models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFolders.AddRange(models);
             }));
-        }
 
-        private void RemoveModelsFromSecuredFoldersDataGrid(IEnumerable<FolderModel> models)
-        {
+        private void RemoveModelsFromSecuredFoldersDataGrid(IEnumerable<FolderModel> models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFolders.RemoveAll(models);
             }));
-        }
 
-        private void RemoveModelsFromSecuredFilesDataGrid(IEnumerable<FileModel> models)
-        {
+        private void RemoveModelsFromSecuredFilesDataGrid(IEnumerable<FileModel> models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFiles.RemoveAll(models);
             }));
-        }
 
-        private void AddModelsToSecuredFilesDataGrid(params FileModel[] models)
-        {
+        private void AddModelsToSecuredFilesDataGrid(params FileModel[] models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFiles.AddRange(models);
             }));
-        }
 
-        private void AddModelsToSecuredFilesDataGrid(IEnumerable<FileModel> models)
-        {
+        private void AddModelsToSecuredFilesDataGrid(IEnumerable<FileModel> models) =>
             InvokeOnControl(new MethodInvoker(() => {
                 DisplaySecuredFiles.AddRange(models);
             }));
-        }
 
-        private void ClearSecuredFilesListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void ClearSecuredFilesListToolStripMenuItem_Click(object sender, EventArgs e) =>
             InvokeOnControl(new MethodInvoker(delegate
             {
                 DisplaySecuredFiles.Clear();
                 SecuredFilesGrid.Refresh();
             }));
-        }
 
         private void RemoveFileFromListButKeepSecuredToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1609,14 +1691,12 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void ClearSecuredFoldersGridToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void ClearSecuredFoldersGridToolStripMenuItem_Click(object sender, EventArgs e) =>
             InvokeOnControl(new MethodInvoker(delegate
             {
                 DisplaySecuredFolders.Clear();
                 SecuredFoldersGrid.Refresh();
             }));
-        }
 
         private void OpenExplorerHereToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1707,7 +1787,7 @@ namespace SharpEncrypt.Forms
         {
             if (inSubfolder && !AppSettings.IncludeSubfolders)
                 return;
-            TaskManager.AddTask(new ContainerizeFileTask(path, SessionPassword, ResourceManager.GetString("EncryptedFileExtension")));
+            TaskManager.AddTask(new ContainerizeFileTask(path, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
         }
 
         #endregion

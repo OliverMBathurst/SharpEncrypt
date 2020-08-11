@@ -14,17 +14,17 @@ namespace SharpEncrypt.Tasks.File_Tasks
     {
         public override TaskType TaskType => TaskType.ContainerizeFileTask;
 
-        public ContainerizeFileTask(string filePath, string password, string ext) : base(ResourceType.File, filePath)
+        public ContainerizeFileTask(string filePath, ContainerizationSettings settings) : base(ResourceType.File, filePath)
         {
             InnerTask = new Task(() =>
             {
-                if (Path.GetExtension(filePath).Equals(ext)) return;
+                if (Path.GetExtension(filePath).Equals(settings.Extension)) return;
 
-                ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), password);
+                ContainerHelper.ContainerizeFile(filePath, AesHelper.GetNewAesKey(), settings.Password);
                 var newPath = FileGeneratorHelper.GetValidFileNameForDirectory(
                     DirectoryHelper.GetDirectoryPath(filePath),
                     Path.GetFileNameWithoutExtension(filePath),
-                    ext);
+                    settings.Extension);
 
                 File.Move(filePath, newPath);
 

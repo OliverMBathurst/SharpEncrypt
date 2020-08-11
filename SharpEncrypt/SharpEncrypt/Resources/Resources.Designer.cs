@@ -1348,6 +1348,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The private key decryption password is incorrect..
+        /// </summary>
+        internal static string PrivateKeyDecryptionKeyIncorrect {
+            get {
+                return ResourceManager.GetString("PrivateKeyDecryptionKeyIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property.
         /// </summary>
         internal static string Property {
@@ -1362,6 +1371,24 @@ namespace SharpEncrypt.Resources {
         internal static string PropertyObfuscationRounds {
             get {
                 return ResourceManager.GetString("PropertyObfuscationRounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided password is not valid for the selected file..
+        /// </summary>
+        internal static string ProvidedPasswordIsInvalid {
+            get {
+                return ResourceManager.GetString("ProvidedPasswordIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will now be asked for your private key decryption password..
+        /// </summary>
+        internal static string ProvidePrivateKeyDecryptionKey {
+            get {
+                return ResourceManager.GetString("ProvidePrivateKeyDecryptionKey", resourceCulture);
             }
         }
         
@@ -1681,6 +1708,24 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .sesk.
+        /// </summary>
+        internal static string ShareableKeyExtension {
+            get {
+                return ResourceManager.GetString("ShareableKeyExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SharpEncrypt Shareable Key (*.sesk)|*.sesk.
+        /// </summary>
+        internal static string ShareableKeyFilter {
+            get {
+                return ResourceManager.GetString("ShareableKeyFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share Keys.
         /// </summary>
         internal static string ShareKeysToolStripMenuItem {
@@ -1690,7 +1735,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf)|*seotpf.
+        ///   Looks up a localized string similar to SharpEncrypt OTP Encrypted File (*.seotpf)|*.seotpf.
         /// </summary>
         internal static string SharpEncryptOTPEncryptedFile {
             get {
@@ -2010,6 +2055,15 @@ namespace SharpEncrypt.Resources {
         internal static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No private key currently exists, please generate another..
+        /// </summary>
+        internal static string UserPrivateKeyDoesNotExist {
+            get {
+                return ResourceManager.GetString("UserPrivateKeyDoesNotExist", resourceCulture);
             }
         }
         

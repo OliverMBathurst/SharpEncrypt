@@ -11,18 +11,18 @@ namespace SharpEncrypt.Tasks.Folder_Tasks
     {
         public override TaskType TaskType => TaskType.SecureFolderTask;
 
-        public SecureFolderTask(string folderPath, string password, bool includeSubFolders, string ext) : base(ResourceType.Folder, folderPath)
+        public SecureFolderTask(string folderPath, ContainerizationSettings settings, bool includeSubFolders) : base(ResourceType.Folder, folderPath)
         {
             InnerTask = new Task(() =>
             {
                 var model = new FolderModel
                 {
                     Uri = folderPath,
-                    FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderPath, password, ext).ToList()
+                    FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderPath, settings).ToList()
                 };
 
                 if (includeSubFolders)
-                    model.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderPath, password, ext).ToList();
+                    model.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderPath, settings).ToList();
 
                 Result.Value = model;
             });

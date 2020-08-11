@@ -38,6 +38,7 @@
         WriteUncontainerizedFoldersListTask,
         ReadUncontainerizedFoldersListTask,
         DecontainerizeOtherFileTask,
+        CreateShareableKeyTask,
         Undefined
     }
 }

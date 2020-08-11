@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
+using AesLibrary;
 
 namespace SharpEncrypt.Helpers
 {
@@ -25,6 +26,23 @@ namespace SharpEncrypt.Helpers
             }
 
             throw new InvalidKeyException(path);
+        }
+
+        public static RSAParameters GetParameters(string path, string password)
+        {
+            ContainerHelper.DecontainerizeFile(path, password);
+
+            RSAParameters key = default;
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                if (new BinaryFormatter().Deserialize(fs) is RSAParameters parameters)
+                {
+                    key = parameters;
+                }
+            }
+            ContainerHelper.ContainerizeFile(path, AesHelper.GetNewAesKey(), password);
+
+            return key;
         }
 
         public static IDictionary<string, RSAParameters> GetPublicKeys(string filePath)
