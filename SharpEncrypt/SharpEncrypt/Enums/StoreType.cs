@@ -1,6 +1,6 @@
 ﻿namespace SharpEncrypt.Enums
 {
-    public enum StoreType
+    internal enum StoreType
     {
         Aes,
         Otp

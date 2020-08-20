@@ -12,12 +12,19 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\Debug\ru
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\Debug\se\SharpEncrypt.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\Debug\tr\SharpEncrypt.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Controls.DriveSelectionControl.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Controls.GenericGridControl.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ActiveTasksForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.AdvancedHardDriveWipeDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.AdvancedHardDriveWipeOptionsDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.GenericGridForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.GenericTextInput.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.GenericTextViewer.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ImportPublicKeyForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.MainForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.PasswordInputDialog.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.PasswordManagerForm.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.WaitingForDriveForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Properties.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Resources.Resources.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ShowOnceDialog.resources
@@ -47,7 +54,4 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\se
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\tr\SharpEncrypt.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.ActiveTasksForm.resources
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.csprojAssemblyReference.cache
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\Debug\SharpEncrypt.Forms.GenericTextViewer.resources

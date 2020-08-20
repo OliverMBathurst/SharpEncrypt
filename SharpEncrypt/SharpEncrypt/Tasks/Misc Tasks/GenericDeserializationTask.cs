@@ -6,7 +6,7 @@ using SharpEncrypt.AbstractClasses;
 
 namespace SharpEncrypt.Tasks.Misc_Tasks
 {
-    public sealed class GenericDeserializationTask<T> : SharpEncryptTask
+    internal sealed class GenericDeserializationTask<T> : SharpEncryptTask
     {
         public GenericDeserializationTask(string path, TaskType taskType)
             : base(ResourceType.File, taskType, path)

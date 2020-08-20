@@ -29,44 +29,51 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenericGridForm));
-            this.GridView = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
+            this.OK = new System.Windows.Forms.Button();
+            this.GridControl = new SharpEncrypt.Controls.GenericGridControl();
             this.SuspendLayout();
             // 
-            // GridView
+            // OK
             // 
-            this.GridView.AllowUserToAddRows = false;
-            this.GridView.AllowUserToDeleteRows = false;
-            this.GridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridView.Location = new System.Drawing.Point(0, 0);
-            this.GridView.Name = "GridView";
-            this.GridView.ReadOnly = true;
-            this.GridView.RowHeadersVisible = false;
-            this.GridView.RowHeadersWidth = 62;
-            this.GridView.RowTemplate.Height = 28;
-            this.GridView.Size = new System.Drawing.Size(792, 458);
-            this.GridView.TabIndex = 0;
+            this.OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OK.Location = new System.Drawing.Point(699, 467);
+            this.OK.Name = "OK";
+            this.OK.Size = new System.Drawing.Size(104, 61);
+            this.OK.TabIndex = 1;
+            this.OK.Text = "OK";
+            this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.OK_Click);
+            // 
+            // GridControl
+            // 
+            this.GridControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GridControl.BackColor = System.Drawing.Color.White;
+            this.GridControl.ForeColor = System.Drawing.Color.Black;
+            this.GridControl.Location = new System.Drawing.Point(12, 12);
+            this.GridControl.Name = "GridControl";
+            this.GridControl.Size = new System.Drawing.Size(791, 446);
+            this.GridControl.TabIndex = 2;
             // 
             // GenericGridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 458);
-            this.Controls.Add(this.GridView);
+            this.ClientSize = new System.Drawing.Size(805, 530);
+            this.Controls.Add(this.GridControl);
+            this.Controls.Add(this.OK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(827, 586);
             this.Name = "GenericGridForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.Load += new System.EventHandler(this.GenericGridForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView GridView;
+        private System.Windows.Forms.Button OK;
+        private Controls.GenericGridControl GridControl;
     }
 }

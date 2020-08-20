@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SharpEncrypt.AbstractClasses
 {
-    public abstract class SharpEncryptTask : ResourceBlocker
+    internal abstract class SharpEncryptTask : ResourceBlocker
     {
         protected SharpEncryptTask(ResourceType resourceType, TaskType taskType, params string[] blockedResources) :
             base(resourceType, blockedResources)

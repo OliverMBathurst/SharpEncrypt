@@ -1,39 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Resources;
 using System.Windows.Forms;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Forms
 {
-    public partial class GenericGridForm : Form
+    internal partial class GenericGridForm : Form
     {
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
-        private readonly IEnumerable<string> Columns;
-        private readonly List<List<object>> Rows;
+        private readonly IEnumerable<ColumnModel> Columns;
+        private readonly IEnumerable<RowModel> Rows;
 
-        public GenericGridForm(IEnumerable<string> columns, List<List<object>> rows, string title = "")
+        public delegate void ExitEventHandler();
+        public event ExitEventHandler ExitRequested;
+
+        public GenericGridForm(
+            IEnumerable<ColumnModel> columns,
+            IEnumerable<RowModel> rows,
+            string title = "")
         {
             InitializeComponent();
             Columns = columns;
             Rows = rows;
 
-            Text = string.IsNullOrEmpty(title) ? ResourceManager.GetString("GridView") : title;
+            Text = string.IsNullOrEmpty(title) ? ResourceManager.GetString("GridView") ?? string.Empty : title;
+            OK.Text = ResourceManager.GetString("OK");
         }
 
-        private void GenericGridForm_Load(object sender, EventArgs e)
+        private void GenericGridForm_Load(object sender, System.EventArgs e)
         {
-
-            foreach (var column in Columns)
-                GridView.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = column });
-
-            foreach (var row in Rows)
-            {
-                var newRow = new DataGridViewRow();
-                for (var i = 0; i < row.Count; i++)
-                    newRow.Cells.Add(new DataGridViewTextBoxCell { Value = row[i] });
-                GridView.Rows.Add(newRow);
-            }
+            GridControl.AddColumns(Columns);
+            GridControl.AddRows(Rows);
+            GridControl.RefreshGrid();
         }
+
+        private void OK_Click(object sender, System.EventArgs e) => ExitRequested?.Invoke();
     }
 }

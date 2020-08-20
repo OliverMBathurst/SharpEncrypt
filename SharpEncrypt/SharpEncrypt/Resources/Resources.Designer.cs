@@ -835,7 +835,7 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate New Key Pair.
+        ///   Looks up a localized string similar to Generate A New Key Pair.
         /// </summary>
         internal static string GenerateNewKeyPairToolStripMenuItem {
             get {
@@ -939,6 +939,15 @@ namespace SharpEncrypt.Resources {
         internal static string ImportPublicKeyDialogTitle {
             get {
                 return ResourceManager.GetString("ImportPublicKeyDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import A Public Key.
+        /// </summary>
+        internal static string ImportPublicKeyToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ImportPublicKeyToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -1191,6 +1200,15 @@ namespace SharpEncrypt.Resources {
         internal static string OpenSecuredToolStripMenuItem {
             get {
                 return ResourceManager.GetString("OpenSecuredToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Someone Else&apos;s File.
+        /// </summary>
+        internal static string OpenSomeonesFileToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("OpenSomeonesFileToolStripMenuItem", resourceCulture);
             }
         }
         
@@ -1956,6 +1974,15 @@ namespace SharpEncrypt.Resources {
         internal static string TextViewer {
             get {
                 return ResourceManager.GetString("TextViewer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keys were not exported for the following files: {0}.
+        /// </summary>
+        internal static string TheFollowingKeyFilesWereNotExported {
+            get {
+                return ResourceManager.GetString("TheFollowingKeyFilesWereNotExported", resourceCulture);
             }
         }
         

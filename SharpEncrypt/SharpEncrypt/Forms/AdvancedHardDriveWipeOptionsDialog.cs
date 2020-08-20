@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt.Forms
 {
-    public partial class AdvancedHardDriveWipeOptionsDialog : Form
+    internal partial class AdvancedHardDriveWipeOptionsDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
         private readonly IList<DriveWipeTaskSettingsModel> Options = DriveWipeTaskSettingsHelper.GetOptions().ToList();

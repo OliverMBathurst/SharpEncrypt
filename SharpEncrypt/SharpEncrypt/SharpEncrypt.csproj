@@ -136,6 +136,14 @@
     <Compile Include="AbstractClasses\ResourceBlocker.cs" />
     <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\GenericGridControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\GenericGridControl.Designer.cs">
+      <DependentUpon>GenericGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\CellType.cs" />
+    <Compile Include="Enums\DataGridViewColumnType.cs" />
     <Compile Include="Enums\ResourceType.cs" />
     <Compile Include="Enums\StoreType.cs" />
     <Compile Include="Enums\TaskType.cs" />
@@ -150,6 +158,8 @@
     <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
     <Compile Include="ExtensionClasses\BindingListExtensions.cs" />
     <Compile Include="ExtensionClasses\CharExtensions.cs" />
+    <Compile Include="ExtensionClasses\DataGridViewCellCollectionExtensions.cs" />
+    <Compile Include="ExtensionClasses\DataGridViewColumnCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
     <Compile Include="ExtensionClasses\FolderModelExtensions.cs" />
@@ -175,6 +185,7 @@
     </Compile>
     <Compile Include="Helpers\DirectoryHelper.cs" />
     <Compile Include="Helpers\FileRenameHelper.cs" />
+    <Compile Include="Helpers\GridHelper.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
@@ -233,6 +244,8 @@
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BulkExportKeysTaskResult.cs" />
+    <Compile Include="Models\CellModel.cs" />
+    <Compile Include="Models\ColumnModel.cs" />
     <Compile Include="Models\ContainerizationSettings.cs" />
     <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
     <Compile Include="Models\CurrentTaskInstanceModel.cs" />
@@ -245,6 +258,8 @@
     <Compile Include="Models\FinalizableTaskResultModel.cs" />
     <Compile Include="Models\FolderModel.cs" />
     <Compile Include="Models\KeyFileStoreFileTupleModel.cs" />
+    <Compile Include="Models\PropertyModel.cs" />
+    <Compile Include="Models\RowModel.cs" />
     <Compile Include="Models\SecuredFileRenamedTaskResultModel.cs" />
     <Compile Include="Models\OpenAESPasswordStoreTaskResult.cs" />
     <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
@@ -374,6 +389,9 @@
     <Compile Include="Tasks\Test Tasks\LongRunningTask.cs" />
     <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
       <DependentUpon>DriveSelectionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\GenericGridControl.resx">
+      <DependentUpon>GenericGridControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActiveTasksForm.resx">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>

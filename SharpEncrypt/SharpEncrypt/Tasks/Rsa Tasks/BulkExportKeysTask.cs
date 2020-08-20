@@ -12,6 +12,8 @@ namespace SharpEncrypt.Tasks.Rsa_Tasks
 {
     internal sealed class BulkExportKeysTask : SharpEncryptTask
     {
+        public override TaskType TaskType => TaskType.BulkExportKeysTask;
+
         public BulkExportKeysTask(string folderPath, string sessionPassword, IEnumerable<FileModel> models, RSAParameters privateKey, string extension)
         : base(ResourceType.Folder, folderPath)
         {
@@ -43,7 +45,7 @@ namespace SharpEncrypt.Tasks.Rsa_Tasks
                     }
                 }
 
-                Result.Value = new BulkExportKeysTaskResult {KeyPath = key, NotCreated = keysNotCreated}; //todo handle result (notify user with dialog)
+                Result.Value = new BulkExportKeysTaskResult { KeyPath = key, NotCreated = keysNotCreated };
             });
         }
     }

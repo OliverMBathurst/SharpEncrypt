@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SharpEncrypt.AbstractClasses
 {
-    public abstract class ResourceBlocker
+    internal abstract class ResourceBlocker
     {
         protected ResourceBlocker(ResourceType resourceType, params string[] blockedResources)
         {

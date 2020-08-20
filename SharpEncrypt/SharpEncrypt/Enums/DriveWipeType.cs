@@ -1,6 +1,6 @@
 ﻿namespace SharpEncrypt.Enums
 {
-    public enum DriveWipeType
+    internal enum DriveWipeType
     {
         SDelete,
         Gutmann,

@@ -75,6 +75,7 @@ namespace SharpEncrypt.Forms
         private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderFilesTaskResult result);
         private delegate void TempFoldersEncryptedEventHandler(EncryptTempFoldersTaskResultModel resultModel);
         private delegate void TemporaryFoldersEncryptedEventHandler(List<FolderModel> paths);
+        private delegate void BulkExportKeysTaskCompletedEventHandler(BulkExportKeysTaskResult result);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
         private event SettingsChangeEventHandler SettingsChangeRequired;
@@ -98,6 +99,7 @@ namespace SharpEncrypt.Forms
         private event TempFoldersEncryptedEventHandler TempFoldersEncrypted;
         private event UncontainerizedFilesListReadEventHandler UncontainerizedFilesListRead;
         private event TemporaryFoldersEncryptedEventHandler TemporaryFoldersEncrypted;
+        private event BulkExportKeysTaskCompletedEventHandler BulkKeyExportCompleted;
 
         #endregion
 
@@ -164,6 +166,7 @@ namespace SharpEncrypt.Forms
             TempFoldersEncrypted += OnTempFoldersEncrypted;
             UncontainerizedFilesListRead += OnUncontainerizedFilesListRead;
             TemporaryFoldersEncrypted += FileSystemManager.OnTemporaryFoldersEncrypted;
+            BulkKeyExportCompleted += OnBulkKeyExportCompleted; 
 
             SecuredFilesGrid.DragDrop += OnSecuredFilesGridDragDrop;
             SecuredFilesGrid.DragEnter += OnSecuredFilesGridDragEnter;
@@ -379,7 +382,7 @@ namespace SharpEncrypt.Forms
         }
 
         private void LoadApplicationSettings()
-            => TaskManager.AddTask(new GenericDeserializationTask<SharpEncryptSettingsModel>(PathHelper.AppSettingsPath, 
+            => TaskManager.AddTask(new GenericDeserializationTask<SharpEncryptSettingsModel>(PathHelper.AppSettingsPath, TaskType.ReadSettingsFileTask,
                 TaskType.ReadFileExclusionListTask,
                 TaskType.ReadFolderExclusionListTask,
                 TaskType.ReadSecuredFoldersListTask,
@@ -394,10 +397,9 @@ namespace SharpEncrypt.Forms
 
         private void LoadSecuredFilesList() => TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FileModel>>(PathHelper.SecuredFilesListFile, TaskType.ReadSecuredFilesListTask));
 
-        private void LoadUncontainerizedFilesList() =>
-            TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FolderModel>>(PathHelper.UncontainerizedFoldersLoggingFilePath,
-                    TaskType.ReadUncontainerizedFoldersListTask)
-                { IsExclusive = true });
+        private void LoadUncontainerizedFilesList() 
+            => TaskManager.AddTask(new GenericDeserializationTask<IEnumerable<FolderModel>>(PathHelper.UncontainerizedFoldersLoggingFilePath,
+                    TaskType.ReadUncontainerizedFoldersListTask) { IsExclusive = true });
 
         private static void CloseApplication() => Application.Exit();
 
@@ -1044,9 +1046,26 @@ namespace SharpEncrypt.Forms
 
         private void ViewCompletedTasksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var columns = new[] { ResourceManager.GetString("TaskType"), ResourceManager.GetString("Completed") };
-            var rows = TaskManager.CompletedTasks.Select(x => new List<object> { x.Task.TaskType, x.Time.ToString(CultureInfo.CurrentCulture) }).ToList();
-            using (var completedTasksDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("CompletedTasks")))
+            var rows = TaskManager.CompletedTasks.Select(x => new RowModel 
+                {
+                    Cells = new List<CellModel>
+                    {
+                        new CellModel
+                        {
+                            CellType = CellType.TextBox,
+                            Value = x.Task.TaskType
+                        },
+                        new CellModel
+                        {
+                            Value = x.Time.ToString(CultureInfo.CurrentCulture)
+                        }
+                    }
+                }).ToList();
+
+            using (var completedTasksDialog = new GenericGridForm(
+                GridHelper.GetCompletedJobsColumnDefinitions(ResourceManager), 
+                rows, 
+                ResourceManager.GetString("CompletedTasks")))
             {
                 completedTasksDialog.ShowDialog();
             }
@@ -1088,8 +1107,12 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
+        private void OnBulkKeyExportCompleted(BulkExportKeysTaskResult result)
+            => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingKeyFilesWereNotExported") ?? "{0}",
+                    string.Join("\n", result.NotCreated)));
+
         private void OnUncontainerizedFilesListRead(IEnumerable<FolderModel> paths)
-            => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? string.Empty,
+            => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? "{0}",
                 string.Join("\n", paths)));
 
         private void OnTempFoldersEncrypted(EncryptTempFoldersTaskResultModel model)
@@ -1107,7 +1130,7 @@ namespace SharpEncrypt.Forms
             {
                 if (!model.Silent)
                 {
-                    MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? string.Empty, string.Join("\n", model.UncontainerizedFolders)));
+                    MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? "{0}", string.Join("\n", model.UncontainerizedFolders)));
                 }
                 else
                 {
@@ -1874,6 +1897,9 @@ namespace SharpEncrypt.Forms
                         if (model.ExitAfter)
                             OnExitRequested(model.Silent);
                         break;
+                    case TaskType.BulkExportKeysTask when task.Result.Value is BulkExportKeysTaskResult result:
+                        BulkKeyExportCompleted?.Invoke(result);
+                        break;
                 }
             }
         }
@@ -1893,5 +1919,10 @@ namespace SharpEncrypt.Forms
         private void RunLongRunningBlockingTaskToolStripMenuItem_Click(object sender, EventArgs e) => TaskManager.AddTask(new LongRunningTask(true));
 
         #endregion
+
+        private void OpenSomeonesFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo
+        }
     }
 }

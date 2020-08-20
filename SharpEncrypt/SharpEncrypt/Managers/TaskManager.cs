@@ -15,26 +15,26 @@ namespace SharpEncrypt.Managers
 
         #region Delegates and events
 
-        public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
-        public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
-        public delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
-        public delegate void ExceptionOccurredEventHandler(Exception exception);
-        public delegate void TaskManagerCompletedEventHandler(bool hasRemainingTasks);
-        public delegate void BlockingTasksCompletedEventHandler();
+        internal delegate void TaskCompletedEventHandler(SharpEncryptTask task);
+        internal delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
+        internal delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
+        internal delegate void ExceptionOccurredEventHandler(Exception exception);
+        internal delegate void TaskManagerCompletedEventHandler(bool hasRemainingTasks);
+        internal delegate void BlockingTasksCompletedEventHandler();
 
-        public event TaskCompletedEventHandler TaskCompleted;
-        public event TaskDequeuedEventHandler TaskDequeued;
-        public event TaskManagerCompletedEventHandler TaskManagerCompleted;
-        public event ExceptionOccurredEventHandler ExceptionOccurred;
-        public event DuplicateExclusiveTaskEventHandler DuplicateExclusiveTask;
-        public event BlockingTasksCompletedEventHandler BlockingTasksCompleted;
+        internal event TaskCompletedEventHandler TaskCompleted;
+        internal event TaskDequeuedEventHandler TaskDequeued;
+        internal event TaskManagerCompletedEventHandler TaskManagerCompleted;
+        internal event ExceptionOccurredEventHandler ExceptionOccurred;
+        internal event DuplicateExclusiveTaskEventHandler DuplicateExclusiveTask;
+        internal event BlockingTasksCompletedEventHandler BlockingTasksCompleted;
 
         #endregion
 
         #region Properties
         public bool Cancelled { get; private set; }
 
-        public ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
+        internal ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
 
         public bool HasCompletedBlockingTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks) 
                                                  || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
@@ -43,7 +43,7 @@ namespace SharpEncrypt.Managers
 
         public int WaitingListTaskCount => WaitingList.Count;
 
-        public IEnumerable<SharpEncryptTask> Tasks => TaskHandlers.SelectMany(x => x.Value.ActiveTasks);
+        internal IEnumerable<SharpEncryptTask> Tasks => TaskHandlers.SelectMany(x => x.Value.ActiveTasks);
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace SharpEncrypt.Managers
 
         #region Methods
 
-        public void AddTask(SharpEncryptTask sharpEncryptTask)
+        internal void AddTask(SharpEncryptTask sharpEncryptTask)
         {
             if (Cancelled)
             {
@@ -130,7 +130,7 @@ namespace SharpEncrypt.Managers
 
         public void SetCancellationFlag() => Cancelled = true;
 
-        public void CancelAllExisting(TaskType type)
+        internal void CancelAllExisting(TaskType type)
         {
             foreach (var taskInstance in TaskHandlers.Select(x => x.Value.CurrentTaskInstanceModel))
             {

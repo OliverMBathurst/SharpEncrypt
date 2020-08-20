@@ -1,6 +1,6 @@
 ﻿namespace SharpEncrypt.Enums
 {
-    public enum ResourceType
+    internal enum ResourceType
     {
         File,
         Folder,

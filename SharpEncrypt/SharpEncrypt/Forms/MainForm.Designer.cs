@@ -112,6 +112,7 @@ namespace SharpEncrypt.Forms
             this.ImportPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportMyPublicKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GenerateNewKeyPairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenSomeonesFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PasswordManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenPasswordManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ManagementStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -712,7 +713,7 @@ namespace SharpEncrypt.Forms
             this.DecryptFileToolStripMenuItem,
             this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem
@@ -858,7 +859,8 @@ namespace SharpEncrypt.Forms
             this.KeyManagementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ImportPublicKeyToolStripMenuItem,
             this.ExportMyPublicKeyToolStripMenuItem,
-            this.GenerateNewKeyPairToolStripMenuItem});
+            this.GenerateNewKeyPairToolStripMenuItem,
+            this.OpenSomeonesFileToolStripMenuItem});
             this.KeyManagementToolStripMenuItem.Name = "KeyManagementToolStripMenuItem";
             this.KeyManagementToolStripMenuItem.Size = new System.Drawing.Size(559, 34);
             this.KeyManagementToolStripMenuItem.Text = "Key Management";
@@ -866,23 +868,30 @@ namespace SharpEncrypt.Forms
             // ImportPublicKeyToolStripMenuItem
             // 
             this.ImportPublicKeyToolStripMenuItem.Name = "ImportPublicKeyToolStripMenuItem";
-            this.ImportPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
-            this.ImportPublicKeyToolStripMenuItem.Text = "Import Someone\'s Public Key";
+            this.ImportPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(317, 34);
+            this.ImportPublicKeyToolStripMenuItem.Text = "Import A Public Key";
             this.ImportPublicKeyToolStripMenuItem.Click += new System.EventHandler(this.ImportPublicKeyToolStripMenuItem_Click);
             // 
             // ExportMyPublicKeyToolStripMenuItem
             // 
             this.ExportMyPublicKeyToolStripMenuItem.Name = "ExportMyPublicKeyToolStripMenuItem";
-            this.ExportMyPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
+            this.ExportMyPublicKeyToolStripMenuItem.Size = new System.Drawing.Size(317, 34);
             this.ExportMyPublicKeyToolStripMenuItem.Text = "Export My Public Key";
             this.ExportMyPublicKeyToolStripMenuItem.Click += new System.EventHandler(this.ExportMyPublicKeyToolStripMenuItem_Click);
             // 
             // GenerateNewKeyPairToolStripMenuItem
             // 
             this.GenerateNewKeyPairToolStripMenuItem.Name = "GenerateNewKeyPairToolStripMenuItem";
-            this.GenerateNewKeyPairToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
-            this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate New Key Pair";
+            this.GenerateNewKeyPairToolStripMenuItem.Size = new System.Drawing.Size(317, 34);
+            this.GenerateNewKeyPairToolStripMenuItem.Text = "Generate A New Key Pair";
             this.GenerateNewKeyPairToolStripMenuItem.Click += new System.EventHandler(this.GenerateNewKeyPairToolStripMenuItem_Click);
+            // 
+            // OpenSomeonesFileToolStripMenuItem
+            // 
+            this.OpenSomeonesFileToolStripMenuItem.Name = "OpenSomeonesFileToolStripMenuItem";
+            this.OpenSomeonesFileToolStripMenuItem.Size = new System.Drawing.Size(317, 34);
+            this.OpenSomeonesFileToolStripMenuItem.Text = "Open Someone Else\'s File";
+            this.OpenSomeonesFileToolStripMenuItem.Click += new System.EventHandler(this.OpenSomeonesFileToolStripMenuItem_Click);
             // 
             // PasswordManagementToolStripMenuItem
             // 
@@ -1493,6 +1502,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem FileDecryptTemporarily;
         private System.Windows.Forms.ToolStripMenuItem FileDecryptPermanently;
+        private System.Windows.Forms.ToolStripMenuItem OpenSomeonesFileToolStripMenuItem;
     }
 }
 

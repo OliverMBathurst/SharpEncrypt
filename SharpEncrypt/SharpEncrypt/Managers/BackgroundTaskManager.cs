@@ -17,13 +17,13 @@ namespace SharpEncrypt.Managers
 
         #region Delegates and events
         public delegate void BackgroundWorkerDisabledEventHandler(Guid guid);
-        public delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
-        public delegate void TaskCompletedEventHandler(SharpEncryptTask task);
+        internal delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
+        internal delegate void TaskCompletedEventHandler(SharpEncryptTask task);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
         public delegate void CurrentTasksCompletedEventHandler();
 
-        public event TaskCompletedEventHandler TaskCompleted;
-        public event TaskDequeuedEventHandler TaskDequeued;
+        internal event TaskCompletedEventHandler TaskCompleted;
+        internal event TaskDequeuedEventHandler TaskDequeued;
         public event CurrentTasksCompletedEventHandler TasksCompleted;
         public event BackgroundWorkerDisabledEventHandler BackgroundWorkerDisabled;
         public event ExceptionOccurredEventHandler Exception;
@@ -50,9 +50,9 @@ namespace SharpEncrypt.Managers
 
         public bool Disabled { get; private set; }
 
-        public CurrentTaskInstanceModel CurrentTaskInstanceModel { get; private set; }
+        internal CurrentTaskInstanceModel CurrentTaskInstanceModel { get; private set; }
 
-        public IEnumerable<SharpEncryptTask> ActiveTasks
+        internal IEnumerable<SharpEncryptTask> ActiveTasks
         {
             get
             {
@@ -66,7 +66,7 @@ namespace SharpEncrypt.Managers
 
         #region Other methods
 
-        public void AddTask(SharpEncryptTask task) 
+        internal void AddTask(SharpEncryptTask task) 
         {
             if (Disabled)
             {

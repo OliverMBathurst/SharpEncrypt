@@ -6,6 +6,7 @@ using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 using SharpEncrypt.Controls;
+using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Forms
@@ -71,26 +72,29 @@ namespace SharpEncrypt.Forms
 
         private void ViewTasks_Click(object sender, EventArgs e)
         {
-            var columns = new List<string> { ResourceManager.GetString("Drive") };
-
             var props = typeof(DriveWipeTaskModel).GetProperties();
-            columns.AddRange(props.Select(prop => ResourceManager.GetString(prop.Name)));
-
-            var rows = new List<List<object>>();
+            var rows = new List<RowModel>();
             foreach (var kvp in Tasks)
             {
-                foreach (var value in kvp.Value)
+                foreach (var driveWipeTaskModel in kvp.Value)
                 {
-                    var row = new List<object> {
-                        kvp.Key.Name
+                    var cells = new List<CellModel> 
+                    {
+                        new CellModel
+                        {
+                            Value = kvp.Key.Name
+                        }
                     };
-                    row.AddRange(props.Select(prop => prop.GetValue(value)));
 
-                    rows.Add(row);
+                    cells.AddRange(props.Select(prop => new CellModel { Value = prop.GetValue(driveWipeTaskModel) }));
+                    rows.Add(new RowModel { Cells = cells });
                 }
             }
 
-            using (var viewTasksDialog = new GenericGridForm(columns, rows, ResourceManager.GetString("Tasks")))
+            using (var viewTasksDialog = new GenericGridForm(
+                GridHelper.GetDriveWipeColumnDefinitions(ResourceManager), 
+                rows, 
+                ResourceManager.GetString("Tasks")))
             {
                 viewTasksDialog.ShowDialog();
             }

@@ -65,5 +65,18 @@ namespace SharpEncrypt.ExtensionClasses
             foreach (DataGridViewRow row in rowCollection)
                 collection.Remove(row);
         }
+
+        public static void AddRange(this DataGridViewRowCollection collection, IEnumerable<DataGridViewRow> rows)
+        {
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+            if (rows == null)
+                throw new ArgumentNullException(nameof(rows));
+
+            foreach (var row in rows)
+            {
+                collection.Add(row);
+            }
+        }
     }
 }

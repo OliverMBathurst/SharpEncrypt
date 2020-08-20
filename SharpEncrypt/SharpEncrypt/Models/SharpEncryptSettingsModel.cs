@@ -4,7 +4,7 @@ using System;
 namespace SharpEncrypt.Models
 {
     [Serializable]
-    public sealed class SharpEncryptSettingsModel
+    internal sealed class SharpEncryptSettingsModel
     {
         public string LanguageCode { get; set; } = "en-GB";
 

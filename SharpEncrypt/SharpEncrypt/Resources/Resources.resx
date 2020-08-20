@@ -362,7 +362,7 @@
     <value>Generate Key For File</value>
   </data>
   <data name="GenerateNewKeyPairToolStripMenuItem" xml:space="preserve">
-    <value>Generate New Key Pair</value>
+    <value>Generate A New Key Pair</value>
   </data>
   <data name="GenerateNewPassword" xml:space="preserve">
     <value>Generate New Password</value>
@@ -831,5 +831,14 @@
   </data>
   <data name="ShareableKeyFilter" xml:space="preserve">
     <value>SharpEncrypt Shareable Key (*.sesk)|*.sesk</value>
+  </data>
+  <data name="TheFollowingKeyFilesWereNotExported" xml:space="preserve">
+    <value>Keys were not exported for the following files: {0}</value>
+  </data>
+  <data name="OpenSomeonesFileToolStripMenuItem" xml:space="preserve">
+    <value>Open Someone Else's File</value>
+  </data>
+  <data name="ImportPublicKeyToolStripMenuItem" xml:space="preserve">
+    <value>Import A Public Key</value>
   </data>
 </root>

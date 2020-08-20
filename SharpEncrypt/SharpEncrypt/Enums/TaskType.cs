@@ -1,9 +1,9 @@
 ﻿namespace SharpEncrypt.Enums
 {
-    public enum TaskType
+    internal enum TaskType
     {
-        WriteSettingsFileTask,
         ReadSettingsFileTask,
+        WriteSettingsFileTask,
         WriteSecuredFileListTask,
         ReadSecuredFilesListTask,
         SecureFolderTask,
@@ -39,6 +39,7 @@
         ReadUncontainerizedFoldersListTask,
         DecontainerizeOtherFileTask,
         CreateShareableKeyTask,
+        BulkExportKeysTask,
         Undefined
     }
 }
