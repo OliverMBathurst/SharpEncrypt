@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class GenericDeleteFilesTask : SharpEncryptTask
+    internal sealed class GenericDeleteFilesTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.GenericDeleteFilesTask;
 

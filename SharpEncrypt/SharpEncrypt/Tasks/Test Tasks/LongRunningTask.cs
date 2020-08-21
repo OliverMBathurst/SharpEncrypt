@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Test_Tasks
 {
-    internal sealed class LongRunningTask : SharpEncryptTask
+    internal sealed class LongRunningTask : SharpEncryptTaskModel
     {
         public LongRunningTask(bool blocking) : base(ResourceType.Undefined)
         {

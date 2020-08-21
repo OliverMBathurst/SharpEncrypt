@@ -1,7 +1,4 @@
-﻿using SharpEncrypt.AbstractClasses;
-using SharpEncrypt.Enums;
-using SharpEncrypt.Exceptions;
-using SharpEncrypt.ExtensionClasses;
+﻿using SharpEncrypt.Enums;
 using SharpEncrypt.Managers;
 using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
@@ -18,6 +15,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Microsoft.Win32;
+using SharpEncrypt.Exceptions;
+using SharpEncrypt.ExtensionClasses;
 using SharpEncrypt.Tasks.Aes_Tasks;
 using SharpEncrypt.Tasks.File_Tasks;
 using SharpEncrypt.Tasks.Folder_Tasks;
@@ -66,16 +65,16 @@ namespace SharpEncrypt.Forms
         private delegate void LogFileReadEventHandler(IEnumerable<string> lines);
         private delegate void SettingsFileReadEventHandler(SharpEncryptSettingsModel settings);
         private delegate void TaskExceptionOccurredEventHandler(Exception exception);
-        private delegate void OtpPasswordStoreKeyWrittenEventHandler(CreateOtpPasswordStoreKeyTaskResult result);
-        private delegate void OtpPasswordStoreReadEventHandler(OpenOtpPasswordStoreTaskResult result);
-        private delegate void AesPasswordStoreReadEventHandler(OpenAesPasswordStoreTaskResult result);
+        private delegate void OtpPasswordStoreKeyWrittenEventHandler(CreateOtpPasswordStoreKeyTaskResultModel resultModel);
+        private delegate void OtpPasswordStoreReadEventHandler(OpenOtpPasswordStoreTaskResultModel result);
+        private delegate void AesPasswordStoreReadEventHandler(OpenAesPasswordStoreTaskResultModel resultModel);
         private delegate void GenericTaskCompletedSuccessfullyEventHandler();
         private delegate void InactivityTaskCompletedEventHandler(int oldTimeout);
-        private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResult result);
-        private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderFilesTaskResult result);
+        private delegate void FileDecontainerizedEventHandler(DecontainerizeFileTaskResultModel resultModel);
+        private delegate void FolderDecontainerizedEventHandler(DecontainerizeFolderFilesTaskResultModel resultModel);
         private delegate void TempFoldersEncryptedEventHandler(EncryptTempFoldersTaskResultModel resultModel);
         private delegate void TemporaryFoldersEncryptedEventHandler(List<FolderModel> paths);
-        private delegate void BulkExportKeysTaskCompletedEventHandler(BulkExportKeysTaskResult result);
+        private delegate void BulkExportKeysTaskCompletedEventHandler(BulkExportKeysTaskResultModel resultModel);
 
         private event SettingsWriteEventHandler SettingsWriteRequired;
         private event SettingsChangeEventHandler SettingsChangeRequired;
@@ -237,7 +236,7 @@ namespace SharpEncrypt.Forms
                 {
                     TaskManager.AddTask(new EncryptTempFoldersTask(
                         folders, 
-                        new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
+                        new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                         AppSettings.IncludeSubfolders,
                         exitAfter, 
                         silent));
@@ -248,7 +247,7 @@ namespace SharpEncrypt.Forms
                     {
                         OnPasswordValidated(() => TaskManager.AddTask(new EncryptTempFoldersTask(
                             folders,
-                            new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
+                            new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                             AppSettings.IncludeSubfolders,
                             exitAfter, 
                             false)));
@@ -276,7 +275,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (Directory.Exists(folder))
                     {
-                        TaskManager.AddTask(new SecureFolderTask(folder, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), AppSettings.IncludeSubfolders));
+                        TaskManager.AddTask(new SecureFolderTask(folder, new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), AppSettings.IncludeSubfolders));
                     }
                 }
             });
@@ -289,7 +288,7 @@ namespace SharpEncrypt.Forms
                 {
                     if (File.Exists(filePath))
                     {
-                        TaskManager.AddTask(new ContainerizeFileTask(filePath, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
+                        TaskManager.AddTask(new ContainerizeFileTask(filePath, new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
                     }
                 }
             });
@@ -337,9 +336,9 @@ namespace SharpEncrypt.Forms
         private void OnSettingsFileRead(SharpEncryptSettingsModel settings)
         {
             AppSettings = settings;
-            if (AppSettings.LanguageCode != Constants.DefaultLanguage)
+            if (AppSettings.LanguageCode != ConstantsHelper.DefaultLanguage)
                 ChangeLanguage(AppSettings.LanguageCode);
-            if (AppSettings.InactivityTimeout != Constants.DefaultInactivityTimeout)
+            if (AppSettings.InactivityTimeout != ConstantsHelper.DefaultInactivityTimeout)
                 AddTimeoutTask(AppSettings.InactivityTimeout);
             if (!AppSettings.PasswordStartupPromptHide)
                 SetSessionPassword();
@@ -358,7 +357,7 @@ namespace SharpEncrypt.Forms
                 LoggingToolStripMenuItem.Checked = AppSettings.Logging;
                 ReencryptTemporarilyDecryptedFileOnLockLogoffToolStripMenuItem.Checked = AppSettings.ReencryptOnLock;
 
-                if (AppSettings.InactivityTimeout == Constants.DefaultInactivityTimeout)
+                if (AppSettings.InactivityTimeout == ConstantsHelper.DefaultInactivityTimeout)
                 {
                     TaskManager.CancelAllExisting(TaskType.InactivityTimeoutTask);
                 }
@@ -378,6 +377,7 @@ namespace SharpEncrypt.Forms
                 }
 
                 TestMenuShow();
+                DiskMenuShow();
             }));
         }
 
@@ -530,6 +530,9 @@ namespace SharpEncrypt.Forms
             }));
         }
 
+        [Conditional("DEBUG")]
+        private void DiskMenuShow() => InvokeOnControl(new MethodInvoker(() => WipeFreeDiskSpaceToolStripMenuItem.Enabled = true));
+
         private void InvokeOnControl(Delegate method) => Invoke(method);
 
         private OpenFileDialog GetAllFilesDialog()
@@ -648,7 +651,7 @@ namespace SharpEncrypt.Forms
             => OnPasswordValidated(() => ForEachSelectedSecuredFolder(model => 
                 TaskManager.AddTask(new DecontainerizeFolderFilesTask(
                     model, 
-                    new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
+                    new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                     AppSettings.IncludeSubfolders, 
                     true, 
                     false))));
@@ -657,7 +660,7 @@ namespace SharpEncrypt.Forms
             => OnPasswordValidated(() => ForEachSelectedSecuredFolder(model =>
                 TaskManager.AddTask(new DecontainerizeFolderFilesTask(
                     model, 
-                    new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
+                    new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension")), 
                     AppSettings.IncludeSubfolders,
                     true,
                     true))));
@@ -676,7 +679,7 @@ namespace SharpEncrypt.Forms
 
                 TaskManager.CancelAllExisting(TaskType.InactivityTimeoutTask);
                 SettingsChangeRequired?.Invoke("InactivityTimeout", genericTextInput.Result);
-                if (genericTextInput.Result != Constants.DefaultInactivityTimeout)
+                if (genericTextInput.Result != ConstantsHelper.DefaultInactivityTimeout)
                 {
                     AddTimeoutTask(genericTextInput.Result);
                 }
@@ -1053,11 +1056,11 @@ namespace SharpEncrypt.Forms
                         new CellModel
                         {
                             CellType = CellType.TextBox,
-                            Value = x.Task.TaskType
+                            InitialValue = x.Task.TaskType
                         },
                         new CellModel
                         {
-                            Value = x.Time.ToString(CultureInfo.CurrentCulture)
+                            InitialValue = x.Time.ToString(CultureInfo.CurrentCulture)
                         }
                     }
                 }).ToList();
@@ -1107,9 +1110,9 @@ namespace SharpEncrypt.Forms
 
         #region Handlers
 
-        private void OnBulkKeyExportCompleted(BulkExportKeysTaskResult result)
+        private void OnBulkKeyExportCompleted(BulkExportKeysTaskResultModel resultModel)
             => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingKeyFilesWereNotExported") ?? "{0}",
-                    string.Join("\n", result.NotCreated)));
+                    string.Join("\n", resultModel.NotCreated)));
 
         private void OnUncontainerizedFilesListRead(IEnumerable<FolderModel> paths)
             => MessageBox.Show(string.Format(ResourceManager.GetString("TheFollowingWereNotReEncrypted") ?? "{0}",
@@ -1174,23 +1177,23 @@ namespace SharpEncrypt.Forms
             }
         }
 
-        private void OnFolderDecontainerized(DecontainerizeFolderFilesTaskResult result)
+        private void OnFolderDecontainerized(DecontainerizeFolderFilesTaskResultModel resultModel)
         {
-            if (result.Temporary)
+            if (resultModel.Temporary)
             {
-                FileSystemManager.AddTempFolder(result.Model);
+                FileSystemManager.AddTempFolder(resultModel.Model);
             }
 
-            if (!result.RemoveAfter) return;
+            if (!resultModel.RemoveAfter) return;
 
             InvokeOnControl(new MethodInvoker(() =>
             {
-                DisplaySecuredFolders.Remove(result.Model);
-                SecuredFolders.Remove(result.Model);
-                ExcludedFolders.Remove(result.Model);
+                DisplaySecuredFolders.Remove(resultModel.Model);
+                SecuredFolders.Remove(resultModel.Model);
+                ExcludedFolders.Remove(resultModel.Model);
             }));
 
-            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, false, result.Model));
+            TaskManager.AddTask(new WriteSecuredFoldersListTask(PathHelper.SecuredFoldersListFile, false, resultModel.Model));
         }
 
         private void OnInactivityTaskCompleted(int oldTimeout)
@@ -1202,7 +1205,7 @@ namespace SharpEncrypt.Forms
             }
             else
             {
-                if (AppSettings.InactivityTimeout == Constants.DefaultInactivityTimeout) return;
+                if (AppSettings.InactivityTimeout == ConstantsHelper.DefaultInactivityTimeout) return;
 
                 var wait = AppSettings.InactivityTimeout - idle;
                 if (wait > 0)
@@ -1227,11 +1230,11 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private static void ApplicationLabelDoubleClicked(object sender, MouseEventArgs e) => Process.Start(Constants.ProjectUrl);
+        private static void ApplicationLabelDoubleClicked(object sender, MouseEventArgs e) => Process.Start(ConstantsHelper.ProjectUrl);
 
         private void UnhandledException(object sender, UnhandledExceptionEventArgs e) => OnException(e.ExceptionObject as Exception);
 
-        private void OnDuplicateExclusiveTaskDetected(SharpEncryptTask task)
+        private void OnDuplicateExclusiveTaskDetected(SharpEncryptTaskModel task)
         {
             InvokeOnControl(new MethodInvoker(() =>
             {
@@ -1455,21 +1458,21 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void OnOTPPasswordStoreKeyWritten(CreateOtpPasswordStoreKeyTaskResult result)
+        private void OnOTPPasswordStoreKeyWritten(CreateOtpPasswordStoreKeyTaskResultModel resultModel)
         {
-            SettingsChangeRequired?.Invoke("OtpStoreKeyFilePath", result.KeyPath);
-            if (result.OpenAfter)
+            SettingsChangeRequired?.Invoke("OtpStoreKeyFilePath", resultModel.KeyPath);
+            if (resultModel.OpenAfter)
             {
-                TaskManager.AddTask(new OpenOtpPasswordStoreTask(result.StorePath, result.KeyPath));
+                TaskManager.AddTask(new OpenOtpPasswordStoreTask(resultModel.StorePath, resultModel.KeyPath));
             }
         }
 
-        private void OnAESPasswordStoreRead(OpenAesPasswordStoreTaskResult result)
+        private void OnAESPasswordStoreRead(OpenAesPasswordStoreTaskResultModel resultModel)
             =>  OnPasswordValidated(() => 
             {
                 InvokeOnControl(new MethodInvoker(() =>
                 {
-                    using (var passwordManager = new PasswordManagerForm(result.Models))
+                    using (var passwordManager = new PasswordManagerForm(resultModel.Models))
                     {
                         if (passwordManager.ShowDialog() == DialogResult.OK)
                         {
@@ -1480,7 +1483,7 @@ namespace SharpEncrypt.Forms
                 }));
             });
 
-        private void OnOTPPasswordStoreRead(OpenOtpPasswordStoreTaskResult result)
+        private void OnOTPPasswordStoreRead(OpenOtpPasswordStoreTaskResultModel result)
         {
             InvokeOnControl(new MethodInvoker(() =>
             {
@@ -1494,11 +1497,11 @@ namespace SharpEncrypt.Forms
             }));
         }
 
-        private void OnFileDecontainerized(DecontainerizeFileTaskResult result)
+        private void OnFileDecontainerized(DecontainerizeFileTaskResultModel resultModel)
         {
-            if (result.DeleteAfter)
+            if (resultModel.DeleteAfter)
             {
-                var fileModel = SecuredFiles.FirstOrDefault(x => x.File.Equals(result.Model.File, StringComparison.Ordinal) && x.Time.Equals(result.Model.Time));
+                var fileModel = SecuredFiles.FirstOrDefault(x => x.File.Equals(resultModel.Model.File, StringComparison.Ordinal) && x.Time.Equals(resultModel.Model.Time));
                 if (fileModel == null) return;
                 InvokeOnControl(new MethodInvoker(() =>
                 {
@@ -1507,11 +1510,11 @@ namespace SharpEncrypt.Forms
                     ExcludedFiles.Remove(fileModel);
                 }));
 
-                TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, result.NewPath));
+                TaskManager.AddTask(new WriteSecuredFileListTask(PathHelper.SecuredFilesListFile, resultModel.NewPath));
             }
-            else if (result.OpenAfter)
+            else if (resultModel.OpenAfter)
             {
-                Process.Start(result.NewPath);
+                Process.Start(resultModel.NewPath);
             }
         }
 
@@ -1810,7 +1813,7 @@ namespace SharpEncrypt.Forms
         {
             if (inSubfolder && !AppSettings.IncludeSubfolders)
                 return;
-            TaskManager.AddTask(new ContainerizeFileTask(path, new ContainerizationSettings(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
+            TaskManager.AddTask(new ContainerizeFileTask(path, new ContainerizationSettingsModel(SessionPassword, ResourceManager.GetString("EncryptedFileExtension"))));
         }
 
         #endregion
@@ -1818,7 +1821,7 @@ namespace SharpEncrypt.Forms
         #region OnTaskCompleted
 
         [SuppressMessage("ReSharper", "SwitchStatementMissingSomeEnumCasesNoDefault")]
-        private void OnTaskCompleted(SharpEncryptTask task)
+        private void OnTaskCompleted(SharpEncryptTaskModel task)
         {
             if (task.Result.Exception != null && !(task.Result.Exception is OperationCanceledException))
             {
@@ -1869,25 +1872,25 @@ namespace SharpEncrypt.Forms
                     case TaskType.SecuredFileRenamedTask when task.Result.Value is SecuredFileRenamedTaskResultModel result:
                         SecuredFileRenamed?.Invoke(result);
                         break;
-                    case TaskType.CreateOtpPasswordStoreKeyTask when task.Result.Value is CreateOtpPasswordStoreKeyTaskResult result:
+                    case TaskType.CreateOtpPasswordStoreKeyTask when task.Result.Value is CreateOtpPasswordStoreKeyTaskResultModel result:
                         OtpPasswordStoreKeyWritten?.Invoke(result);
                         break;
-                    case TaskType.OpenOtpPasswordStoreTask when task.Result.Value is OpenOtpPasswordStoreTaskResult result:
+                    case TaskType.OpenOtpPasswordStoreTask when task.Result.Value is OpenOtpPasswordStoreTaskResultModel result:
                         OtpPasswordStoreRead?.Invoke(result);
                         break;
-                    case TaskType.OpenAesPasswordStoreTask when task.Result.Value is OpenAesPasswordStoreTaskResult result:
+                    case TaskType.OpenAesPasswordStoreTask when task.Result.Value is OpenAesPasswordStoreTaskResultModel result:
                         AesPasswordStoreRead?.Invoke(result);
                         break;
                     case TaskType.BulkRenameFolderTask when task.Result.Exception == null:
                         GenericTaskCompletedSuccessfully?.Invoke();
                         break;
-                    case TaskType.DecontainerizeFileTask when task.Result.Value is DecontainerizeFileTaskResult result:
+                    case TaskType.DecontainerizeFileTask when task.Result.Value is DecontainerizeFileTaskResultModel result:
                         FileDecontainerized?.Invoke(result);
                         break;
                     case TaskType.InactivityTimeoutTask when task.Result.Value is int result:
                         InactivityTaskCompleted?.Invoke(result);
                         break;
-                    case TaskType.DecontainerizeFolderFilesTask when task.Result.Value is DecontainerizeFolderFilesTaskResult result:
+                    case TaskType.DecontainerizeFolderFilesTask when task.Result.Value is DecontainerizeFolderFilesTaskResultModel result:
                         FolderDecontainerized?.Invoke(result);
                         break;
                     case TaskType.EncryptTempFoldersTask when task.Result.Value is EncryptTempFoldersTaskResultModel result:
@@ -1897,7 +1900,7 @@ namespace SharpEncrypt.Forms
                         if (model.ExitAfter)
                             OnExitRequested(model.Silent);
                         break;
-                    case TaskType.BulkExportKeysTask when task.Result.Value is BulkExportKeysTaskResult result:
+                    case TaskType.BulkExportKeysTask when task.Result.Value is BulkExportKeysTaskResultModel result:
                         BulkKeyExportCompleted?.Invoke(result);
                         break;
                 }

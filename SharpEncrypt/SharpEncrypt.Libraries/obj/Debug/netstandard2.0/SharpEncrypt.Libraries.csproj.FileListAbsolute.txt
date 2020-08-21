@@ -1,0 +1,8 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\bin\Debug\netstandard2.0\SharpEncrypt.Libraries.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\bin\Debug\netstandard2.0\SharpEncrypt.Libraries.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\bin\Debug\netstandard2.0\SharpEncrypt.Libraries.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\obj\Debug\netstandard2.0\SharpEncrypt.Libraries.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\obj\Debug\netstandard2.0\SharpEncrypt.Libraries.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\obj\Debug\netstandard2.0\SharpEncrypt.Libraries.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\obj\Debug\netstandard2.0\SharpEncrypt.Libraries.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Libraries\obj\Debug\netstandard2.0\SharpEncrypt.Libraries.pdb

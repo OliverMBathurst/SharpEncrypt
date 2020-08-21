@@ -3,14 +3,13 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using AesLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Aes_Tasks
 {
-    internal sealed class OpenAesPasswordStoreTask : SharpEncryptTask
+    internal sealed class OpenAesPasswordStoreTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.OpenAesPasswordStoreTask;
 
@@ -28,7 +27,7 @@ namespace SharpEncrypt.Tasks.Aes_Tasks
                     {
                         if (fs.Length > 0 && new BinaryFormatter().Deserialize(fs) is List<PasswordModel> models)
                         {
-                            Result.Value = new OpenAesPasswordStoreTaskResult(models);
+                            Result.Value = new OpenAesPasswordStoreTaskResultModel(models);
                         }
                         else
                         {
@@ -50,7 +49,7 @@ namespace SharpEncrypt.Tasks.Aes_Tasks
                         new BinaryFormatter().Serialize(fs, new List<PasswordModel>());
                     }
                     ContainerHelper.ContainerizeFile(path, AesHelper.GetNewAesKey(), password);
-                    Result.Value = new OpenAesPasswordStoreTaskResult(new List<PasswordModel>());
+                    Result.Value = new OpenAesPasswordStoreTaskResultModel(new List<PasswordModel>());
                     return;
                 }
             });

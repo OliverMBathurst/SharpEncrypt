@@ -1,0 +1,9 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\bin\Debug\netstandard2.0\SharpEncrypt.Enums.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\bin\Debug\netstandard2.0\SharpEncrypt.Enums.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\bin\Debug\netstandard2.0\SharpEncrypt.Enums.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.csprojAssemblyReference.cache

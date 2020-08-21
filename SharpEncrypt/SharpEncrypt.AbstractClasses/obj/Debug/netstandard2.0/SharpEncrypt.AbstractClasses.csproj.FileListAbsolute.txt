@@ -1,0 +1,4 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.AbstractClasses\obj\Debug\netstandard2.0\SharpEncrypt.AbstractClasses.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.AbstractClasses\obj\Debug\netstandard2.0\SharpEncrypt.AbstractClasses.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.AbstractClasses\obj\Debug\netstandard2.0\SharpEncrypt.AbstractClasses.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.AbstractClasses\obj\Debug\netstandard2.0\SharpEncrypt.AbstractClasses.csprojAssemblyReference.cache

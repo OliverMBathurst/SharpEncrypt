@@ -1,0 +1,269 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.1/",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.1": {},
+    ".NETStandard,Version=v2.1/": {
+      "SharpEncrypt.Helpers/1.0.0": {
+        "dependencies": {
+          "SharpEncrypt.Exceptions": "1.0.0",
+          "SharpEncrypt.Models": "1.0.0",
+          "SharpEncrypt.Resources": "1.0.0",
+          "AesLibrary": "1.0.0.0",
+          "FileGeneratorLibrary": "1.0.0.0",
+          "FileIOLibrary": "1.0.0.0",
+          "GutmannLibrary": "1.0.0.0",
+          "OtpLibrary": "1.0.0.0",
+          "SecureEraseLibrary": "1.0.0.0"
+        },
+        "runtime": {
+          "SharpEncrypt.Helpers.dll": {}
+        }
+      },
+      "SharpEncrypt.Enums/1.0.0": {
+        "runtime": {
+          "SharpEncrypt.Enums.dll": {}
+        }
+      },
+      "SharpEncrypt.Exceptions/1.0.0": {
+        "runtime": {
+          "SharpEncrypt.Exceptions.dll": {}
+        }
+      },
+      "SharpEncrypt.Models/1.0.0": {
+        "dependencies": {
+          "SharpEncrypt.Enums": "1.0.0"
+        },
+        "runtime": {
+          "SharpEncrypt.Models.dll": {}
+        }
+      },
+      "SharpEncrypt.Resources/1.0.0": {
+        "runtime": {
+          "SharpEncrypt.Resources.dll": {}
+        },
+        "resources": {
+          "br/SharpEncrypt.Resources.resources.dll": {
+            "locale": "br"
+          },
+          "de/SharpEncrypt.Resources.resources.dll": {
+            "locale": "de"
+          },
+          "es/SharpEncrypt.Resources.resources.dll": {
+            "locale": "es"
+          },
+          "fr/SharpEncrypt.Resources.resources.dll": {
+            "locale": "fr"
+          },
+          "it/SharpEncrypt.Resources.resources.dll": {
+            "locale": "it"
+          },
+          "ko/SharpEncrypt.Resources.resources.dll": {
+            "locale": "ko"
+          },
+          "nl/SharpEncrypt.Resources.resources.dll": {
+            "locale": "nl"
+          },
+          "pl/SharpEncrypt.Resources.resources.dll": {
+            "locale": "pl"
+          },
+          "ru/SharpEncrypt.Resources.resources.dll": {
+            "locale": "ru"
+          },
+          "se/SharpEncrypt.Resources.resources.dll": {
+            "locale": "se"
+          },
+          "tr/SharpEncrypt.Resources.resources.dll": {
+            "locale": "tr"
+          }
+        }
+      },
+      "AesLibrary/1.0.0.0": {
+        "runtime": {
+          "AesLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FileGeneratorLibrary/1.0.0.0": {
+        "runtime": {
+          "FileGeneratorLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FileIOLibrary/1.0.0.0": {
+        "runtime": {
+          "FileIOLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "GutmannLibrary/1.0.0.0": {
+        "runtime": {
+          "GutmannLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OtpLibrary/1.0.0.0": {
+        "runtime": {
+          "OtpLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SecureEraseLibrary/1.0.0.0": {
+        "runtime": {
+          "SecureEraseLibrary.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "System.Windows.Forms/4.0.0.0": {
+        "runtime": {
+          "System.Windows.Forms.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      },
+      "System.Security/4.0.0.0": {
+        "runtime": {
+          "System.Security.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      },
+      "System.Configuration/4.0.0.0": {
+        "runtime": {
+          "System.Configuration.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      },
+      "Accessibility/4.0.0.0": {
+        "runtime": {
+          "Accessibility.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      },
+      "System.Deployment/4.0.0.0": {
+        "runtime": {
+          "System.Deployment.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      },
+      "System.Runtime.Serialization.Formatters.Soap/4.0.0.0": {
+        "runtime": {
+          "System.Runtime.Serialization.Formatters.Soap.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.7.3062.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SharpEncrypt.Helpers/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpEncrypt.Enums/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpEncrypt.Exceptions/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpEncrypt.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpEncrypt.Resources/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AesLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FileGeneratorLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FileIOLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GutmannLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "OtpLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SecureEraseLibrary/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Windows.Forms/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Security/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Configuration/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Accessibility/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Deployment/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Runtime.Serialization.Formatters.Soap/4.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

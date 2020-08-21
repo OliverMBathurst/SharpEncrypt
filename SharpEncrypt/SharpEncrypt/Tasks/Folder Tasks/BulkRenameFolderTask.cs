@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Folder_Tasks
 {
-    internal sealed class BulkRenameFolderTask : SharpEncryptTask
+    internal sealed class BulkRenameFolderTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.BulkRenameFolderTask;
 

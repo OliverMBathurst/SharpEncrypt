@@ -1,23 +1,23 @@
-﻿using SharpEncrypt.AbstractClasses;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Managers
 {
     public sealed class TaskManager : IDisposable
     {
         private readonly ConcurrentDictionary<Guid, BackgroundTaskManager> TaskHandlers = new ConcurrentDictionary<Guid, BackgroundTaskManager>();
-        private readonly ConcurrentDictionary<SharpEncryptTask, int> WaitingList = new ConcurrentDictionary<SharpEncryptTask, int>();
+        private readonly ConcurrentDictionary<SharpEncryptTaskModel, int> WaitingList = new ConcurrentDictionary<SharpEncryptTaskModel, int>();
 
         #region Delegates and events
 
-        internal delegate void TaskCompletedEventHandler(SharpEncryptTask task);
-        internal delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
-        internal delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTask task);
+        internal delegate void TaskCompletedEventHandler(SharpEncryptTaskModel task);
+        internal delegate void TaskDequeuedEventHandler(SharpEncryptTaskModel task);
+        internal delegate void DuplicateExclusiveTaskEventHandler(SharpEncryptTaskModel task);
         internal delegate void ExceptionOccurredEventHandler(Exception exception);
         internal delegate void TaskManagerCompletedEventHandler(bool hasRemainingTasks);
         internal delegate void BlockingTasksCompletedEventHandler();
@@ -34,7 +34,7 @@ namespace SharpEncrypt.Managers
         #region Properties
         public bool Cancelled { get; private set; }
 
-        internal ConcurrentBag<(SharpEncryptTask Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTask task, DateTime time)>();
+        internal ConcurrentBag<(SharpEncryptTaskModel Task, DateTime Time)> CompletedTasks { get; } = new ConcurrentBag<(SharpEncryptTaskModel task, DateTime time)>();
 
         public bool HasCompletedBlockingTasks => TaskHandlers.All(x => x.Value.HasCompletedTasks) 
                                                  || TaskHandlers.All(x => x.Value.ActiveTasks.All(z => !z.ShouldBlockExit));
@@ -43,7 +43,7 @@ namespace SharpEncrypt.Managers
 
         public int WaitingListTaskCount => WaitingList.Count;
 
-        internal IEnumerable<SharpEncryptTask> Tasks => TaskHandlers.SelectMany(x => x.Value.ActiveTasks);
+        internal IEnumerable<SharpEncryptTaskModel> Tasks => TaskHandlers.SelectMany(x => x.Value.ActiveTasks);
 
         #endregion
 
@@ -51,9 +51,9 @@ namespace SharpEncrypt.Managers
 
         #region Event methods
 
-        private void OnTaskDequeued(SharpEncryptTask task) => TaskDequeued?.Invoke(task);
+        private void OnTaskDequeued(SharpEncryptTaskModel task) => TaskDequeued?.Invoke(task);
 
-        private void OnTaskCompleted(SharpEncryptTask task) => TaskCompleted?.Invoke(task);
+        private void OnTaskCompleted(SharpEncryptTaskModel task) => TaskCompleted?.Invoke(task);
 
         private void OnBackgroundWorkerDisabled(Guid guid) => TaskHandlers.TryRemove(guid, out _);
 
@@ -61,7 +61,7 @@ namespace SharpEncrypt.Managers
 
         #region Methods
 
-        internal void AddTask(SharpEncryptTask sharpEncryptTask)
+        internal void AddTask(SharpEncryptTaskModel sharpEncryptTask)
         {
             if (Cancelled)
             {
@@ -100,7 +100,7 @@ namespace SharpEncrypt.Managers
                 keyValuePair.Value.Dispose();
         }
 
-        private void AfterTaskCompleted(SharpEncryptTask task)
+        private void AfterTaskCompleted(SharpEncryptTaskModel task)
         {
             CompletedTasks.Add((task, DateTime.Now));
 
@@ -148,7 +148,7 @@ namespace SharpEncrypt.Managers
             }
         }
 
-        private void AddBackgroundTaskManager(SharpEncryptTask task)
+        private void AddBackgroundTaskManager(SharpEncryptTaskModel task)
         {
             using (var taskHandlerForTask = new BackgroundTaskManager())
             {
@@ -163,10 +163,10 @@ namespace SharpEncrypt.Managers
             }
         }
 
-        private bool IsBlocked(ResourceBlocker resourceBlocker) => resourceBlocker.ResourceType != ResourceType.Undefined 
-                                                                   && BlockingTasks(resourceBlocker).Any();
+        private bool IsBlocked(ResourceBlockerModel resourceBlocker) => resourceBlocker.ResourceType != ResourceType.Undefined 
+                                                                        && BlockingTasks(resourceBlocker).Any();
 
-        private IEnumerable<SharpEncryptTask> BlockingTasks(ResourceBlocker resourceBlocker)
+        private IEnumerable<SharpEncryptTaskModel> BlockingTasks(ResourceBlockerModel resourceBlocker)
             => TaskHandlers
                 .Select(x => x.Value)
                 .SelectMany(z => z.ActiveTasks)

@@ -4,13 +4,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using OtpLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Otp_Tasks
 {
-    internal sealed class OtpSavePasswordsTask : SharpEncryptTask
+    internal sealed class OtpSavePasswordsTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.OtpSavePasswordsTask;
 

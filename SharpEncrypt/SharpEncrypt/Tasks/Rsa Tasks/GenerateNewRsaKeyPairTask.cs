@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using AesLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Rsa_Tasks
 {
-    internal sealed class GenerateNewRsaKeyPairTask : SharpEncryptTask
+    internal sealed class GenerateNewRsaKeyPairTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.GenerateNewRsaKeyPairTask;
 

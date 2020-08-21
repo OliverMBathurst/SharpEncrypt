@@ -1,15 +1,14 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using FileGeneratorLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
-using SharpEncrypt.ExtensionClasses;
 using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
+using SharpEncrypt.ExtensionClasses;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class DecontainerizeFileTask : SharpEncryptTask
+    internal sealed class DecontainerizeFileTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.DecontainerizeFileTask;
 
@@ -26,7 +25,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
 
                 File.Move(model.Secured, path);
 
-                Result.Value = new DecontainerizeFileTaskResult 
+                Result.Value = new DecontainerizeFileTaskResultModel 
                 {
                     Model = model,
                     NewPath = path,
@@ -49,7 +48,7 @@ namespace SharpEncrypt.Tasks.File_Tasks
 
                 File.Move(filePath, path);
 
-                Result.Value = new DecontainerizeFileTaskResult
+                Result.Value = new DecontainerizeFileTaskResultModel
                 {
                     Model = path.ToFileModel(),
                     NewPath = path,

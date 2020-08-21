@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SharpEncrypt.Forms
 {
-    public partial class PasswordManagerForm : Form
+    internal partial class PasswordManagerForm : Form
     {
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly BindingList<PasswordModel> Models = new BindingList<PasswordModel>();

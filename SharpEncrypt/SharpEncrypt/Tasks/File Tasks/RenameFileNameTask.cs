@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class RenameFileNameTask : SharpEncryptTask
+    internal sealed class RenameFileNameTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.RenameFileTask;
 

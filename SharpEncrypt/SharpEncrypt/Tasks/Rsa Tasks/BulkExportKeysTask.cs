@@ -1,5 +1,4 @@
-﻿using SharpEncrypt.AbstractClasses;
-using SharpEncrypt.Models;
+﻿using SharpEncrypt.Models;
 using SharpEncrypt.Enums;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +9,7 @@ using SharpEncrypt.Helpers;
 
 namespace SharpEncrypt.Tasks.Rsa_Tasks
 {
-    internal sealed class BulkExportKeysTask : SharpEncryptTask
+    internal sealed class BulkExportKeysTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.BulkExportKeysTask;
 
@@ -45,7 +44,7 @@ namespace SharpEncrypt.Tasks.Rsa_Tasks
                     }
                 }
 
-                Result.Value = new BulkExportKeysTaskResult { KeyPath = key, NotCreated = keysNotCreated };
+                Result.Value = new BulkExportKeysTaskResultModel { KeyPath = key, NotCreated = keysNotCreated };
             });
         }
     }

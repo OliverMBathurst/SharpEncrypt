@@ -2,12 +2,12 @@
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Logging_Tasks
 {
-    internal sealed class LoggingTask : SharpEncryptTask
+    internal sealed class LoggingTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.LoggingTask;
 

@@ -1,13 +1,13 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using FileGeneratorLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class DecontainerizeOtherFileTask : SharpEncryptTask
+    internal sealed class DecontainerizeOtherFileTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.DecontainerizeOtherFileTask;
 

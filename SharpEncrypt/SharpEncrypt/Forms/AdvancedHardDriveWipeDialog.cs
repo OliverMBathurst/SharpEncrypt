@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
-using SharpEncrypt.Controls;
 using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 
@@ -14,7 +13,6 @@ namespace SharpEncrypt.Forms
     internal partial class AdvancedHardDriveWipeDialog : Form
     {
         private readonly ResourceManager ResourceManager = new ResourceManager(typeof(Resources.Resources));
-        private readonly DriveSelectionControl DriveSelectionControl = new DriveSelectionControl { Dock = DockStyle.Fill };
 
         public IDictionary<DriveInfo, IList<DriveWipeTaskModel>> Tasks { get; } = new Dictionary<DriveInfo, IList<DriveWipeTaskModel>>();
 
@@ -28,7 +26,10 @@ namespace SharpEncrypt.Forms
             AddTask.Text = ResourceManager.GetString("AddTask");
             ClearTasks.Text = ResourceManager.GetString("ClearTasks");
             ViewTasks.Text = ResourceManager.GetString("ViewTasks");
-            ControlsPanel.Controls.Add(DriveSelectionControl); 
+
+            DriveSelectionGrid.AddColumns(GridHelper.GetDriveSelectionColumnDefinitions(ResourceManager));
+            DriveSelectionGrid.AddRows(RowHelper.GetDriveSelectionRows());
+            DriveSelectionGrid.RefreshGrid();
         }
 
         private void Cancel_Click(object sender, EventArgs e)
@@ -45,8 +46,8 @@ namespace SharpEncrypt.Forms
 
         private void Options_Click(object sender, EventArgs e)
         {
-            var drives = DriveSelectionControl.GetSelectedDrives().ToList();
-            if (!drives.Any())
+            var selectedRows = DriveSelectionGrid.SelectedRows;
+            if (!selectedRows.Any())
             {
                 MessageBox.Show(ResourceManager.GetString("NoDrivesSelected"));
             }                
@@ -55,15 +56,18 @@ namespace SharpEncrypt.Forms
                 using (var driveWipeOptionsDialog = new AdvancedHardDriveWipeOptionsDialog())
                 {
                     if (driveWipeOptionsDialog.ShowDialog() != DialogResult.OK) return;
+
                     var task = driveWipeOptionsDialog.Task;
-                    foreach (var drive in drives)
+                    foreach (var selectedRow in selectedRows)
                     {
+                        if (!(selectedRow.DataSource is DriveInfo drive)) continue;
+
                         if (Tasks.ContainsKey(drive))
                             Tasks[drive].Add(task);
                         else
                             Tasks.Add(drive, new List<DriveWipeTaskModel> { task });
                     }
-                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNTasks") ?? string.Empty, drives.Count));
+                    MessageBox.Show(string.Format(CultureInfo.CurrentCulture, ResourceManager.GetString("AddedNTasks") ?? string.Empty, selectedRows.Count()));
                 }
             }
         }
@@ -82,11 +86,11 @@ namespace SharpEncrypt.Forms
                     {
                         new CellModel
                         {
-                            Value = kvp.Key.Name
+                            InitialValue = kvp.Key.Name
                         }
                     };
 
-                    cells.AddRange(props.Select(prop => new CellModel { Value = prop.GetValue(driveWipeTaskModel) }));
+                    cells.AddRange(props.Select(prop => new CellModel { InitialValue = prop.GetValue(driveWipeTaskModel) }));
                     rows.Add(new RowModel { Cells = cells });
                 }
             }

@@ -2,11 +2,11 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using SharpEncrypt.Enums;
-using SharpEncrypt.AbstractClasses;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Misc_Tasks
 {
-    internal sealed class GenericDeserializationTask<T> : SharpEncryptTask
+    internal sealed class GenericDeserializationTask<T> : SharpEncryptTaskModel
     {
         public GenericDeserializationTask(string path, TaskType taskType)
             : base(ResourceType.File, taskType, path)

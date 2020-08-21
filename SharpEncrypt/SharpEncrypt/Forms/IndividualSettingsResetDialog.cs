@@ -26,12 +26,11 @@ namespace SharpEncrypt.Forms
 
         private void CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == PropertyValuesGrid.Columns.Count - 1)
-            {
-                Reset(e.RowIndex);
-                RefreshGrid();
-                PropertyValuesGrid.Rows[e.RowIndex].Selected = true;
-            }
+            if (e.ColumnIndex != PropertyValuesGrid.Columns.Count - 1) return;
+
+            Reset(e.RowIndex);
+            RefreshGrid();
+            PropertyValuesGrid.Rows[e.RowIndex].Selected = true;
         }
 
         private void Cancel_Click(object sender, EventArgs e)

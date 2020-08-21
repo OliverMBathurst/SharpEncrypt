@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AesLibrary.dll" />
+    <None Remove="FileGeneratorLibrary.dll" />
+    <None Remove="FileIOLibrary.dll" />
+    <None Remove="GutmannLibrary.dll" />
+    <None Remove="OtpLibrary.dll" />
+    <None Remove="SecureEraseLibrary.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="AesLibrary.dll" />
+    <EmbeddedResource Include="FileGeneratorLibrary.dll" />
+    <EmbeddedResource Include="FileIOLibrary.dll" />
+    <EmbeddedResource Include="GutmannLibrary.dll" />
+    <EmbeddedResource Include="OtpLibrary.dll" />
+    <EmbeddedResource Include="SecureEraseLibrary.dll" />
+  </ItemGroup>
+
+</Project>

@@ -3,14 +3,13 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using OtpLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Otp_Tasks
 {
-    internal sealed class OpenOtpPasswordStoreTask : SharpEncryptTask
+    internal sealed class OpenOtpPasswordStoreTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.OpenOtpPasswordStoreTask;
 
@@ -55,7 +54,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
 
                 OtpHelper.Transform(filePath, keyFilePath);
 
-                Result.Value = new OpenOtpPasswordStoreTaskResult(models, filePath, keyFilePath);
+                Result.Value = new OpenOtpPasswordStoreTaskResultModel(models, filePath, keyFilePath);
             });
         }
     }

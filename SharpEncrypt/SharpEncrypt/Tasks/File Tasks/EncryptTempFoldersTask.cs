@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class EncryptTempFoldersTask : SharpEncryptTask
+    internal sealed class EncryptTempFoldersTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.EncryptTempFoldersTask;
 
         public override bool IsExclusive => true;
 
-        public EncryptTempFoldersTask(IReadOnlyCollection<FolderModel> models, ContainerizationSettings settings, bool includeSubFolders, bool exitAfter, bool silent) : base(ResourceType.Folder, models.Select(x => x.Uri))
+        public EncryptTempFoldersTask(IReadOnlyCollection<FolderModel> models, ContainerizationSettingsModel settingsModel, bool includeSubFolders, bool exitAfter, bool silent) : base(ResourceType.Folder, models.Select(x => x.Uri))
         {
             InnerTask = new Task(() =>
             {
@@ -42,10 +41,10 @@ namespace SharpEncrypt.Tasks.File_Tasks
 
                     try
                     {
-                        folderModel.FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderUri, settings).ToList();
+                        folderModel.FileModels = DirectoryHelper.EnumerateAndSecureFiles(folderUri, settingsModel).ToList();
 
                         if (includeSubFolders)
-                            folderModel.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderUri, settings)
+                            folderModel.SubFolders = DirectoryHelper.EnumerateAndSecureSubFolders(folderUri, settingsModel)
                                 .ToList();
 
                         containerized.Add(folderModel);

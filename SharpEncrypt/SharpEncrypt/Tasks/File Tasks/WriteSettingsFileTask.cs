@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class WriteSettingsFileTask : SharpEncryptTask
+    internal sealed class WriteSettingsFileTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.WriteSettingsFileTask;
 

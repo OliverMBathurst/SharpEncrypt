@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using SecureEraseLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Folder_Tasks
 {
-    internal sealed class ShredDirectoryTask : SharpEncryptTask
+    internal sealed class ShredDirectoryTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.ShredDirectoryTask;
 

@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using GutmannLibrary;
 using SecureEraseLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.File_Tasks
 {
-    internal sealed class SecureDeleteFileTask : SharpEncryptTask
+    internal sealed class SecureDeleteFileTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.SecureDeleteFileTask;
 

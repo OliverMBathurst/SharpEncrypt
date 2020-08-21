@@ -1,0 +1,133 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "SharpEncrypt.Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SharpEncrypt.Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharpEncrypt.Enums.dll": {}
+        }
+      },
+      "SharpEncrypt.Exceptions/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SharpEncrypt.Exceptions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharpEncrypt.Exceptions.dll": {}
+        }
+      },
+      "SharpEncrypt.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "SharpEncrypt.Enums": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SharpEncrypt.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharpEncrypt.Models.dll": {}
+        }
+      },
+      "SharpEncrypt.Resources/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/SharpEncrypt.Resources.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharpEncrypt.Resources.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SharpEncrypt.Enums/1.0.0": {
+      "type": "project",
+      "path": "../SharpEncrypt.Enums/SharpEncrypt.Enums.csproj",
+      "msbuildProject": "../SharpEncrypt.Enums/SharpEncrypt.Enums.csproj"
+    },
+    "SharpEncrypt.Exceptions/1.0.0": {
+      "type": "project",
+      "path": "../SharpEncrypt.Exceptions/SharpEncrypt.Exceptions.csproj",
+      "msbuildProject": "../SharpEncrypt.Exceptions/SharpEncrypt.Exceptions.csproj"
+    },
+    "SharpEncrypt.Models/1.0.0": {
+      "type": "project",
+      "path": "../SharpEncrypt.Models/SharpEncrypt.Models.csproj",
+      "msbuildProject": "../SharpEncrypt.Models/SharpEncrypt.Models.csproj"
+    },
+    "SharpEncrypt.Resources/1.0.0": {
+      "type": "project",
+      "path": "../SharpEncrypt.Resources/SharpEncrypt.Resources.csproj",
+      "msbuildProject": "../SharpEncrypt.Resources/SharpEncrypt.Resources.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "SharpEncrypt.Exceptions >= 1.0.0",
+      "SharpEncrypt.Models >= 1.0.0",
+      "SharpEncrypt.Resources >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Oliver\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj",
+      "projectName": "SharpEncrypt.Helpers",
+      "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj",
+      "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "projectReferences": {
+            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj": {
+              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj"
+            },
+            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj": {
+              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj"
+            },
+            "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj": {
+              "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

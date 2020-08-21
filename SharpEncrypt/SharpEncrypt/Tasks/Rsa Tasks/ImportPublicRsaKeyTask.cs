@@ -3,14 +3,14 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Rsa_Tasks
 {
-    internal sealed class ImportPublicRsaKeyTask : SharpEncryptTask
+    internal sealed class ImportPublicRsaKeyTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.ImportPublicRsaKeyTask;
 

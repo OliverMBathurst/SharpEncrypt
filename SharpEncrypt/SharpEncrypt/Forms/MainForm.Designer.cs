@@ -713,7 +713,7 @@ namespace SharpEncrypt.Forms
             this.DecryptFileToolStripMenuItem,
             this.GenerateKeyForFileToolStripMenuItem});
             this.OneTimePadToolStripMenuItem.Name = "OneTimePadToolStripMenuItem";
-            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.OneTimePadToolStripMenuItem.Size = new System.Drawing.Size(224, 34);
             this.OneTimePadToolStripMenuItem.Text = "One Time Pad";
             // 
             // SecureFileToolStripMenuItem

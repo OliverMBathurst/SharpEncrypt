@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Test_Tasks
 {
-    internal sealed class FailingTask : SharpEncryptTask
+    internal sealed class FailingTask : SharpEncryptTaskModel
     {
         public FailingTask() : base(ResourceType.Undefined)
         {

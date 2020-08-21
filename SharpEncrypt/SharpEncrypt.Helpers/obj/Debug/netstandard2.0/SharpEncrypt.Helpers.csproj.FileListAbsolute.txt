@@ -1,0 +1,4 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Helpers\obj\Debug\netstandard2.0\SharpEncrypt.Helpers.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Helpers\obj\Debug\netstandard2.0\SharpEncrypt.Helpers.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Helpers\obj\Debug\netstandard2.0\SharpEncrypt.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Helpers\obj\Debug\netstandard2.0\SharpEncrypt.Helpers.csprojAssemblyReference.cache

@@ -1,10 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.3.0.0\build\Microsoft.NetFramework.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetCore.Analyzers.3.0.0\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.3.0.0\build\Microsoft.NetCore.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\build\Microsoft.CodeQuality.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SharpEncrypt</RootNamespace>
     <AssemblyName>SharpEncrypt</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -88,83 +84,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AESLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\AESLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FileGeneratorLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\FileGeneratorLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="FileIOLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\FileIOLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="GutmannLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\GutmannLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="OTPLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\OTPLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SecureEraseLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\SecureEraseLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AbstractClasses\FinalizableTaskResult.cs" />
-    <Compile Include="AbstractClasses\ResourceBlocker.cs" />
-    <Compile Include="AbstractClasses\SharpEncryptTask.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Controls\GenericGridControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\GenericGridControl.Designer.cs">
-      <DependentUpon>GenericGridControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Enums\CellType.cs" />
-    <Compile Include="Enums\DataGridViewColumnType.cs" />
-    <Compile Include="Enums\ResourceType.cs" />
-    <Compile Include="Enums\StoreType.cs" />
-    <Compile Include="Enums\TaskType.cs" />
-    <Compile Include="Exceptions\BackgroundTaskHandlerDisabledException.cs" />
-    <Compile Include="Exceptions\CouldNotDeserializeKeyFileException.cs" />
-    <Compile Include="Exceptions\DuplicateIdentityException.cs" />
-    <Compile Include="Exceptions\FileNotSecuredException.cs" />
-    <Compile Include="Exceptions\InvalidEncryptedFileException.cs" />
-    <Compile Include="Exceptions\NoSuitableNameFoundException.cs" />
-    <Compile Include="Exceptions\OTPKeyFileNotAvailableException.cs" />
-    <Compile Include="Exceptions\OTPPasswordStoreFirstUseException.cs" />
-    <Compile Include="Exceptions\TaskManagerDisabledException.cs" />
-    <Compile Include="ExtensionClasses\BindingListExtensions.cs" />
-    <Compile Include="ExtensionClasses\CharExtensions.cs" />
-    <Compile Include="ExtensionClasses\DataGridViewCellCollectionExtensions.cs" />
-    <Compile Include="ExtensionClasses\DataGridViewColumnCollectionExtensions.cs" />
-    <Compile Include="ExtensionClasses\DataGridViewRowCollectionExtensions.cs" />
-    <Compile Include="ExtensionClasses\DataGridViewSelectedRowCollectionExtensions.cs" />
-    <Compile Include="ExtensionClasses\FolderModelExtensions.cs" />
-    <Compile Include="ExtensionClasses\ListExtensionMethods.cs" />
-    <Compile Include="ExtensionClasses\StringExtensions.cs" />
     <Compile Include="Forms\GenericTextInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,10 +102,6 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DirectoryHelper.cs" />
-    <Compile Include="Helpers\FileRenameHelper.cs" />
-    <Compile Include="Helpers\GridHelper.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
@@ -207,17 +122,6 @@
       <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Helpers\ContainerHelper.cs" />
-    <Compile Include="Controls\DriveSelectionControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\DriveSelectionControl.Designer.cs">
-      <DependentUpon>DriveSelectionControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\DriveWipeTaskSettingsHelper.cs" />
-    <Compile Include="Enums\DriveWipeType.cs" />
-    <Compile Include="Exceptions\InvalidKeyException.cs" />
-    <Compile Include="ExtensionClasses\ControlExtensions.cs" />
     <Compile Include="Managers\BackgroundTaskManager.cs" />
     <Compile Include="Forms\AdvancedHardDriveWipeDialog.cs">
       <SubType>Form</SubType>
@@ -243,28 +147,7 @@
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\BulkExportKeysTaskResult.cs" />
-    <Compile Include="Models\CellModel.cs" />
-    <Compile Include="Models\ColumnModel.cs" />
-    <Compile Include="Models\ContainerizationSettings.cs" />
-    <Compile Include="Models\CreateOTPPasswordStoreKeyTaskResult.cs" />
-    <Compile Include="Models\CurrentTaskInstanceModel.cs" />
-    <Compile Include="Models\DecontainerizeFileTaskResult.cs" />
-    <Compile Include="Models\DecontainerizeFolderFilesTaskResult.cs" />
-    <Compile Include="Models\DriveWipeTaskModel.cs" />
-    <Compile Include="Models\DriveWipeTaskSettingsModel.cs" />
-    <Compile Include="Models\FileModel.cs" />
     <Compile Include="Managers\TaskManager.cs" />
-    <Compile Include="Models\FinalizableTaskResultModel.cs" />
-    <Compile Include="Models\FolderModel.cs" />
-    <Compile Include="Models\KeyFileStoreFileTupleModel.cs" />
-    <Compile Include="Models\PropertyModel.cs" />
-    <Compile Include="Models\RowModel.cs" />
-    <Compile Include="Models\SecuredFileRenamedTaskResultModel.cs" />
-    <Compile Include="Models\OpenAESPasswordStoreTaskResult.cs" />
-    <Compile Include="Models\OpenOTPPasswordStoreTaskResult.cs" />
-    <Compile Include="Models\PasswordModel.cs" />
-    <Compile Include="Models\EncryptTempFoldersTaskResultModel.cs" />
     <Compile Include="Tasks\Aes Tasks\AesSavePasswordsTask.cs" />
     <Compile Include="Tasks\File Tasks\DecontainerizeOtherFileTask.cs" />
     <Compile Include="Tasks\File Tasks\WriteUncontainerizedFoldersListTask.cs" />
@@ -292,9 +175,6 @@
     <Compile Include="Tasks\File Tasks\WriteFileExclusionListTask.cs" />
     <Compile Include="Tasks\Logging Tasks\LoggingTask.cs" />
     <Compile Include="Tasks\Otp Tasks\OtpTransformTask.cs" />
-    <Compile Include="Models\SharpEncryptTaskResultModel.cs" />
-    <Compile Include="Helpers\PathHelper.cs" />
-    <Compile Include="Helpers\RsaKeyWriterHelper.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,70 +189,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Resources.br.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.br.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.de.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ExtensionClasses\ToolStripExtensions.cs" />
-    <Compile Include="Resources\Resources.es.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.es.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.fr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.it.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.it.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.ko.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ko.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.nl.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.nl.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.pl.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.pl.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.ru.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.se.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.se.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Resources.tr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.tr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Helpers\RsaKeyPairHelper.cs" />
-    <Compile Include="Helpers\RsaKeyReaderHelper.cs" />
-    <Compile Include="Models\SharpEncryptSettingsModel.cs" />
     <Compile Include="Forms\ShowOnceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,12 +203,6 @@
     <Compile Include="Tasks\File Tasks\WriteSettingsFileTask.cs" />
     <Compile Include="Tasks\Test Tasks\FailingTask.cs" />
     <Compile Include="Tasks\Test Tasks\LongRunningTask.cs" />
-    <EmbeddedResource Include="Controls\DriveSelectionControl.resx">
-      <DependentUpon>DriveSelectionControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\GenericGridControl.resx">
-      <DependentUpon>GenericGridControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ActiveTasksForm.resx">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -438,63 +248,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Resources\Resources.br.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.br.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.de.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.es.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.fr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.it.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.it.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.ko.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ko.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.nl.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.nl.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.pl.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.pl.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.ru.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.se.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.se.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resources.tr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.tr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShowOnceDialog.resx">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -509,37 +270,67 @@
     <AdditionalFiles Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\analyzers\dotnet\cs\Humanizer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="lib\AesLibrary.dll" />
-    <EmbeddedResource Include="lib\FileGeneratorLibrary.dll" />
-    <EmbeddedResource Include="lib\FileIOLibrary.dll" />
-    <EmbeddedResource Include="lib\GutmannLibrary.dll" />
-    <EmbeddedResource Include="lib\OtpLibrary.dll" />
-    <EmbeddedResource Include="lib\SecureEraseLibrary.dll" />
+    <ProjectReference Include="..\SharpEncrypt.Controls\SharpEncrypt.Controls.csproj">
+      <Project>{f36c0125-a30d-4ad8-8307-58c8e8766c69}</Project>
+      <Name>SharpEncrypt.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Exceptions\SharpEncrypt.Exceptions.csproj">
+      <Project>{D0959FF5-D910-42F0-856C-153633A32BD2}</Project>
+      <Name>SharpEncrypt.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.ExtensionClasses\SharpEncrypt.ExtensionClasses.csproj">
+      <Project>{7B6B0EC7-8FCD-43FA-9D11-6CBFCC6C9241}</Project>
+      <Name>SharpEncrypt.ExtensionClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Enums\SharpEncrypt.Enums.csproj">
+      <Project>{1f90d93a-cbdf-430e-a10a-2e410bc18405}</Project>
+      <Name>SharpEncrypt.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Helpers\SharpEncrypt.Helpers.csproj">
+      <Project>{c3885285-c911-44f1-b1e2-449e317d03a0}</Project>
+      <Name>SharpEncrypt.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Models\SharpEncrypt.Models.csproj">
+      <Project>{31b3a2c8-0283-4260-816e-81b89c9cf5c9}</Project>
+      <Name>SharpEncrypt.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Resources\SharpEncrypt.Resources.csproj">
+      <Project>{3f2f704a-3e74-4bec-8c22-4d637d6ef672}</Project>
+      <Name>SharpEncrypt.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AESLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\AESLibrary\bin\Release\netstandard2.0\AESLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FileGeneratorLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FileIOLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GutmannLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\GutmannLibrary\bin\Release\netstandard2.0\GutmannLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OTPLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\OTPLibrary\bin\Release\netstandard2.0\OTPLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SecureEraseLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.3.0.0\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.3.0.0\build\Microsoft.CodeQuality.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.3.0.0\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.3.0.0\build\Microsoft.NetCore.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.3.0.0\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.3.0.0\build\Microsoft.NetFramework.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.3.0.0\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
-  </Target>
 </Project>

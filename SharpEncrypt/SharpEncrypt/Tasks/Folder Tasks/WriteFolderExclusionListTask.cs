@@ -4,13 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Folder_Tasks
 {
-    internal sealed class WriteFolderExclusionListTask : SharpEncryptTask
+    internal sealed class WriteFolderExclusionListTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.WriteFolderExclusionListTask;
 

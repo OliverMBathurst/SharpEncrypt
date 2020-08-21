@@ -3,15 +3,15 @@ using System.IO;
 using System.Threading.Tasks;
 using FileGeneratorLibrary;
 using OtpLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Exceptions;
 using SharpEncrypt.ExtensionClasses;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Otp_Tasks
 {
-    internal sealed class OtpTransformTask : SharpEncryptTask
+    internal sealed class OtpTransformTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.OneTimePadTransformTask;
 

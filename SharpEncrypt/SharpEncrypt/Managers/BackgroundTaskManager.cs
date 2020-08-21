@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System;
 using System.Threading;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,12 @@ namespace SharpEncrypt.Managers
     public sealed class BackgroundTaskManager : IDisposable
     {        
         private readonly BackgroundWorker BackgroundWorker = new BackgroundWorker();
-        private readonly ConcurrentQueue<SharpEncryptTask> Tasks = new ConcurrentQueue<SharpEncryptTask>();
+        private readonly ConcurrentQueue<SharpEncryptTaskModel> Tasks = new ConcurrentQueue<SharpEncryptTaskModel>();
 
         #region Delegates and events
         public delegate void BackgroundWorkerDisabledEventHandler(Guid guid);
-        internal delegate void TaskDequeuedEventHandler(SharpEncryptTask task);
-        internal delegate void TaskCompletedEventHandler(SharpEncryptTask task);
+        internal delegate void TaskDequeuedEventHandler(SharpEncryptTaskModel task);
+        internal delegate void TaskCompletedEventHandler(SharpEncryptTaskModel task);
         public delegate void ExceptionOccurredEventHandler(Exception exception);
         public delegate void CurrentTasksCompletedEventHandler();
 
@@ -52,7 +51,7 @@ namespace SharpEncrypt.Managers
 
         internal CurrentTaskInstanceModel CurrentTaskInstanceModel { get; private set; }
 
-        internal IEnumerable<SharpEncryptTask> ActiveTasks
+        internal IEnumerable<SharpEncryptTaskModel> ActiveTasks
         {
             get
             {
@@ -66,7 +65,7 @@ namespace SharpEncrypt.Managers
 
         #region Other methods
 
-        internal void AddTask(SharpEncryptTask task) 
+        internal void AddTask(SharpEncryptTaskModel task) 
         {
             if (Disabled)
             {
@@ -137,7 +136,7 @@ namespace SharpEncrypt.Managers
                 BackgroundWorker.RunWorkerAsync();
         }
 
-        private void OnTaskCompleted(SharpEncryptTask task)
+        private void OnTaskCompleted(SharpEncryptTaskModel task)
         {
             TaskCompleted?.Invoke(task);
             if (!DisableAfterTaskCompleted) return;
@@ -145,7 +144,7 @@ namespace SharpEncrypt.Managers
             BackgroundWorkerDisabled?.Invoke(Identifier);
         }
 
-        private void OnTaskDequeued(SharpEncryptTask task) => TaskDequeued?.Invoke(task);
+        private void OnTaskDequeued(SharpEncryptTaskModel task) => TaskDequeued?.Invoke(task);
 
         private void OnCurrentTasksCompleted() => TasksCompleted?.Invoke();
 

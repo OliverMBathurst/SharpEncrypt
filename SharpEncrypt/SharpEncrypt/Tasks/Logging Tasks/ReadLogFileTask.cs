@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Logging_Tasks
 {
-    internal sealed class ReadLogFileTask : SharpEncryptTask
+    internal sealed class ReadLogFileTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.ReadLogFileTask;
 

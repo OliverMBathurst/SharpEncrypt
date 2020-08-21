@@ -1,31 +1,30 @@
-﻿using SharpEncrypt.AbstractClasses;
-using SharpEncrypt.ExtensionClasses;
-using SharpEncrypt.Managers;
+﻿using SharpEncrypt.Managers;
+using SharpEncrypt.Models;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
+using SharpEncrypt.ExtensionClasses;
 
 namespace SharpEncrypt.Forms
 {
     public partial class ActiveTasksForm : Form
     {
-        private readonly BindingList<SharpEncryptTask> ActiveTasks = new BindingList<SharpEncryptTask>();
+        private readonly BindingList<SharpEncryptTaskModel> ActiveTasks = new BindingList<SharpEncryptTaskModel>();
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly TaskManager TaskManager;
 
         public delegate void AllTasksCompletedEventHandler();
         public event AllTasksCompletedEventHandler AllTasksCompleted;
-
-
+        
         public ActiveTasksForm(TaskManager taskManager)
         {
             InitializeComponent();
             TaskManager = taskManager ?? throw new ArgumentNullException(nameof(taskManager));
         }
 
-        private void TaskCompleted(SharpEncryptTask task)
+        private void TaskCompleted(SharpEncryptTaskModel task)
         {
             ActiveTasks.Remove(task);
             ActiveTasksGridView.Refresh();

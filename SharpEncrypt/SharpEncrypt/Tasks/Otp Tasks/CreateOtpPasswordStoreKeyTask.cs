@@ -1,12 +1,11 @@
 ﻿using System.Threading.Tasks;
 using OtpLibrary;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Otp_Tasks
 {
-    internal sealed class CreateOtpPasswordStoreKeyTask : SharpEncryptTask
+    internal sealed class CreateOtpPasswordStoreKeyTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.CreateOtpPasswordStoreKeyTask;
 
@@ -17,7 +16,7 @@ namespace SharpEncrypt.Tasks.Otp_Tasks
                 OtpHelper.GenerateKey(keyPath, 1024*1024);
                 OtpHelper.Transform(storeFilePath, keyPath);
 
-                Result.Value = new CreateOtpPasswordStoreKeyTaskResult { StorePath = storeFilePath, KeyPath = keyPath, OpenAfter = open };
+                Result.Value = new CreateOtpPasswordStoreKeyTaskResultModel { StorePath = storeFilePath, KeyPath = keyPath, OpenAfter = open };
             });
         }
     }

@@ -1,12 +1,12 @@
 ﻿using System.Security.Cryptography;
 using System.Threading.Tasks;
-using SharpEncrypt.AbstractClasses;
 using SharpEncrypt.Enums;
 using SharpEncrypt.Helpers;
+using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Tasks.Rsa_Tasks
 {
-    internal sealed class CreateShareableKeyTask : SharpEncryptTask
+    internal sealed class CreateShareableKeyTask : SharpEncryptTaskModel
     {
         public override TaskType TaskType => TaskType.CreateShareableKeyTask;
 
