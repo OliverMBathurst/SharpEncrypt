@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using SharpEncrypt.Enums;
+using SharpEncrypt.Models.Result_Models;
 
 namespace SharpEncrypt.Models
 {
@@ -36,6 +37,8 @@ namespace SharpEncrypt.Models
         public virtual void Start() => InnerTask.Start();
 
         public virtual void Wait(CancellationToken token) => InnerTask.Wait(token);
+
+        public virtual Delegate AfterCompletion { get; set; }
 
         public virtual SharpEncryptTaskResultModel Result { get; set; } = new SharpEncryptTaskResultModel();
     }

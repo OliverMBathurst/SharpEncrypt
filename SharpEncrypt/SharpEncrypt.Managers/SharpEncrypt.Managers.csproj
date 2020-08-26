@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpEncrypt.Exceptions\SharpEncrypt.Exceptions.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.ExtensionClasses\SharpEncrypt.ExtensionClasses.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Helpers\SharpEncrypt.Helpers.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Models\SharpEncrypt.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -143,6 +143,7 @@ namespace SharpEncrypt.Forms
             this.AdvancedMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ForceExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.IndividualSettingsResetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetAndExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1070,6 +1071,7 @@ namespace SharpEncrypt.Forms
             // 
             // LoggingToolStripMenuItem
             // 
+            this.LoggingToolStripMenuItem.CheckOnClick = true;
             this.LoggingToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.LoggingToolStripMenuItem.Name = "LoggingToolStripMenuItem";
             this.LoggingToolStripMenuItem.Size = new System.Drawing.Size(318, 34);
@@ -1118,7 +1120,8 @@ namespace SharpEncrypt.Forms
             // 
             this.AdvancedMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ForceExitToolStripMenuItem,
-            this.IndividualSettingsResetToolStripMenuItem});
+            this.IndividualSettingsResetToolStripMenuItem,
+            this.ResetAndExitToolStripMenuItem});
             this.AdvancedMenuStrip.Name = "AdvancedMenuStrip";
             this.AdvancedMenuStrip.Size = new System.Drawing.Size(107, 29);
             this.AdvancedMenuStrip.Text = "Advanced";
@@ -1136,6 +1139,13 @@ namespace SharpEncrypt.Forms
             this.IndividualSettingsResetToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
             this.IndividualSettingsResetToolStripMenuItem.Text = "Individual Settings Reset";
             this.IndividualSettingsResetToolStripMenuItem.Click += new System.EventHandler(this.IndividualSettingsResetToolStripMenuItem_Click);
+            // 
+            // ResetAndExitToolStripMenuItem
+            // 
+            this.ResetAndExitToolStripMenuItem.Name = "ResetAndExitToolStripMenuItem";
+            this.ResetAndExitToolStripMenuItem.Size = new System.Drawing.Size(307, 34);
+            this.ResetAndExitToolStripMenuItem.Text = "Reset And Exit";
+            this.ResetAndExitToolStripMenuItem.Click += new System.EventHandler(this.ResetAndExitToolStripMenuItem_Click);
             // 
             // HelpMenuStrip
             // 
@@ -1503,6 +1513,7 @@ namespace SharpEncrypt.Forms
         private System.Windows.Forms.ToolStripMenuItem FileDecryptTemporarily;
         private System.Windows.Forms.ToolStripMenuItem FileDecryptPermanently;
         private System.Windows.Forms.ToolStripMenuItem OpenSomeonesFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetAndExitToolStripMenuItem;
     }
 }
 

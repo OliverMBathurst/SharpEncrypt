@@ -27,7 +27,7 @@ namespace SharpEncrypt.Forms
             ClearTasks.Text = ResourceManager.GetString("ClearTasks");
             ViewTasks.Text = ResourceManager.GetString("ViewTasks");
 
-            DriveSelectionGrid.AddColumns(GridHelper.GetDriveSelectionColumnDefinitions(ResourceManager));
+            DriveSelectionGrid.AddColumns(ColumnHelper.GetDriveSelectionColumnDefinitions(ResourceManager));
             DriveSelectionGrid.AddRows(RowHelper.GetDriveSelectionRows());
             DriveSelectionGrid.RefreshGrid();
         }
@@ -96,7 +96,7 @@ namespace SharpEncrypt.Forms
             }
 
             using (var viewTasksDialog = new GenericGridForm(
-                GridHelper.GetDriveWipeColumnDefinitions(ResourceManager), 
+                ColumnHelper.GetDriveWipeColumnDefinitions(ResourceManager), 
                 rows, 
                 ResourceManager.GetString("Tasks")))
             {

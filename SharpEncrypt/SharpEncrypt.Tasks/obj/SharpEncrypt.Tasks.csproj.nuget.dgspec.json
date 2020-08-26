@@ -1,0 +1,427 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Tasks\\SharpEncrypt.Tasks.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj",
+        "projectName": "SharpEncrypt.Enums",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj",
+        "projectName": "SharpEncrypt.Exceptions",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\SharpEncrypt.ExtensionClasses.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\SharpEncrypt.ExtensionClasses.csproj",
+        "projectName": "SharpEncrypt.ExtensionClasses",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\SharpEncrypt.ExtensionClasses.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj",
+        "projectName": "SharpEncrypt.Helpers",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj"
+              },
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj"
+              },
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj",
+        "projectName": "SharpEncrypt.Models",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj",
+        "projectName": "SharpEncrypt.Resources",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\SharpEncrypt.Resources.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Resources\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Tasks\\SharpEncrypt.Tasks.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Tasks\\SharpEncrypt.Tasks.csproj",
+        "projectName": "SharpEncrypt.Tasks",
+        "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Tasks\\SharpEncrypt.Tasks.csproj",
+        "packagesPath": "C:\\Users\\Oliver\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Tasks\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Oliver\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Exceptions\\SharpEncrypt.Exceptions.csproj"
+              },
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\SharpEncrypt.ExtensionClasses.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.ExtensionClasses\\SharpEncrypt.ExtensionClasses.csproj"
+              },
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Helpers\\SharpEncrypt.Helpers.csproj"
+              },
+              "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj": {
+                "projectPath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

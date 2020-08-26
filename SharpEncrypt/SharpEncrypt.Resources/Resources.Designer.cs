@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SharpEncrypt.Resources {
-    
+namespace SharpEncrypt.Resources {    
     
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -1131,6 +1130,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No public keys found..
+        /// </summary>
+        public static string NoPublicKeysFound {
+            get {
+                return ResourceManager.GetString("NoPublicKeysFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} is not a valid container..
         /// </summary>
         public static string NotAValidContainer {
@@ -1518,6 +1526,15 @@ namespace SharpEncrypt.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset And Exit.
+        /// </summary>
+        public static string ResetAndExitToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("ResetAndExitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Result.
         /// </summary>
         public static string Result {
@@ -1694,6 +1711,15 @@ namespace SharpEncrypt.Resources {
         public static string SelectKeyFile {
             get {
                 return ResourceManager.GetString("SelectKeyFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Recipient.
+        /// </summary>
+        public static string SelectRecipient {
+            get {
+                return ResourceManager.GetString("SelectRecipient", resourceCulture);
             }
         }
         

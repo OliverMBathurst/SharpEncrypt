@@ -6,14 +6,23 @@ using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Helpers
 {
-    public static class GridHelper
+    public static class ColumnHelper
     {
+        public static IEnumerable<ColumnModel> GetPublicKeySelectionColumns(ResourceManager resourceManager)
+            => new[]
+            {
+                new ColumnModel
+                {
+                    HeaderText = resourceManager.GetString("Identity"),
+                    ColumnName = resourceManager.GetString("Identity")
+                }
+            };
+
         public static IEnumerable<ColumnModel> GetPublicKeyGridColumnDefinitions(ResourceManager resourceManager)
             => new []
             {
                 new ColumnModel
                 {
-                    ColumnType = DataGridViewColumnType.TextBox,
                     ColumnName = resourceManager.GetString("Identity"),
                     HeaderText = resourceManager.GetString("Identity")
                 }
@@ -24,13 +33,11 @@ namespace SharpEncrypt.Helpers
             {
                 new ColumnModel
                 {
-                    ColumnType = DataGridViewColumnType.TextBox,
                     ColumnName = resourceManager.GetString("TaskType"),
                     HeaderText = resourceManager.GetString("TaskType")
                 },
                 new ColumnModel
                 {
-                    ColumnType = DataGridViewColumnType.TextBox,
                     ColumnName = resourceManager.GetString("Completed"),
                     HeaderText = resourceManager.GetString("Completed")
                 }
@@ -42,7 +49,6 @@ namespace SharpEncrypt.Helpers
             {
                 new ColumnModel
                 {
-                    ColumnType = DataGridViewColumnType.TextBox,
                     ColumnName = resourceManager.GetString("Drive"),
                     HeaderText = resourceManager.GetString("Drive")
                 }
@@ -53,8 +59,7 @@ namespace SharpEncrypt.Helpers
                 .Select(x => new ColumnModel
                 {
                     ColumnName = x, 
-                    HeaderText = x, 
-                    ColumnType = DataGridViewColumnType.TextBox
+                    HeaderText = x,
                 }));
 
             return columns;

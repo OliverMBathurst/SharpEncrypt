@@ -6,4 +6,3 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\De
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Enums\obj\Debug\netstandard2.0\SharpEncrypt.Enums.csprojAssemblyReference.cache

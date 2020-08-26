@@ -40,6 +40,7 @@
         DecontainerizeOtherFileTask,
         CreateShareableKeyTask,
         BulkExportKeysTask,
+        GetUserPublicKeysTask,
         UndefinedTask
     }
 }

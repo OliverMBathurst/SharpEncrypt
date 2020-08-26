@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpEncrypt.Exceptions\SharpEncrypt.Exceptions.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.ExtensionClasses\SharpEncrypt.ExtensionClasses.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Helpers\SharpEncrypt.Helpers.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Models\SharpEncrypt.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AesLibrary">
+      <HintPath>..\..\Libraries\AESLibrary\bin\Release\netstandard2.0\AESLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FileGeneratorLibrary">
+      <HintPath>..\..\Libraries\FileGeneratorLibrary\bin\Release\netstandard2.0\FileGeneratorLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="FileIOLibrary">
+      <HintPath>..\..\Libraries\FileIOLibrary\bin\Release\netstandard2.0\FileIOLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GutmannLibrary">
+      <HintPath>..\..\Libraries\GutmannLibrary\bin\Release\netstandard2.0\GutmannLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OtpLibrary">
+      <HintPath>..\..\Libraries\OTPLibrary\bin\Release\netstandard2.0\OTPLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SecureEraseLibrary">
+      <HintPath>..\..\Libraries\SecureEraseLibrary\bin\Release\netstandard2.0\SecureEraseLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

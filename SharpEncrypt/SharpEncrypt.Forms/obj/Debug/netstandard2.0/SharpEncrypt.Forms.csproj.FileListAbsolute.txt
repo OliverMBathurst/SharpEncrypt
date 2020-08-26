@@ -1,0 +1,9 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\bin\Debug\netstandard2.0\SharpEncrypt.Forms.deps.json
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\bin\Debug\netstandard2.0\SharpEncrypt.Forms.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\bin\Debug\netstandard2.0\SharpEncrypt.Forms.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Forms\obj\Debug\netstandard2.0\SharpEncrypt.Forms.csprojAssemblyReference.cache

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Resources;
 using System.Windows.Forms;
+using SharpEncrypt.Controls;
 using SharpEncrypt.Models;
 
 namespace SharpEncrypt.Forms
@@ -11,9 +12,6 @@ namespace SharpEncrypt.Forms
         private readonly ResourceManager ResourceManager = new ComponentResourceManager(typeof(Resources.Resources));
         private readonly IEnumerable<ColumnModel> Columns;
         private readonly IEnumerable<RowModel> Rows;
-
-        public delegate void ExitEventHandler();
-        public event ExitEventHandler ExitRequested;
 
         public GenericGridForm(
             IEnumerable<ColumnModel> columns,
@@ -28,6 +26,8 @@ namespace SharpEncrypt.Forms
             OK.Text = ResourceManager.GetString("OK");
         }
 
+        public GenericGridControl Grid => GridControl;
+
         private void GenericGridForm_Load(object sender, System.EventArgs e)
         {
             GridControl.AddColumns(Columns);
@@ -35,6 +35,10 @@ namespace SharpEncrypt.Forms
             GridControl.RefreshGrid();
         }
 
-        private void OK_Click(object sender, System.EventArgs e) => ExitRequested?.Invoke();
+        private void OK_Click(object sender, System.EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

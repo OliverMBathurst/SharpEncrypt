@@ -10,6 +10,31 @@ namespace SharpEncrypt.Helpers
 {
     public static class DirectoryHelper
     {
+        public static void Remove(string appPath)
+        {
+            if (appPath == null)
+                throw new ArgumentNullException(nameof(appPath));
+            if (!Directory.Exists(appPath))
+                throw new DirectoryNotFoundException(appPath);
+
+            foreach (var filePath in Directory.GetFiles(appPath))
+            {
+                File.Delete(filePath);
+            }
+
+            foreach (var subFolder in Directory.GetDirectories(appPath))
+            {
+                Remove(subFolder);
+            }
+
+            Directory.Delete(appPath);
+        }
+
+        private static void RemoveFile(string filePath)
+        {
+
+        }
+
         public static string GetDirectoryPath(string dir)
         {
             if (dir == null)

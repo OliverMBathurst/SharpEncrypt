@@ -102,7 +102,6 @@
     <Compile Include="Forms\WaitingForDriveForm.Designer.cs">
       <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Forms\ActiveTasksForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,7 +121,6 @@
       <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Managers\BackgroundTaskManager.cs" />
     <Compile Include="Forms\AdvancedHardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,34 +145,6 @@
     <Compile Include="Forms\ImportPublicKeyForm.Designer.cs">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Managers\TaskManager.cs" />
-    <Compile Include="Tasks\Aes Tasks\AesSavePasswordsTask.cs" />
-    <Compile Include="Tasks\File Tasks\DecontainerizeOtherFileTask.cs" />
-    <Compile Include="Tasks\File Tasks\WriteUncontainerizedFoldersListTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\BulkRenameFolderTask.cs" />
-    <Compile Include="Tasks\File Tasks\DecontainerizeFileTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\DecontainerizeFolderFilesTask.cs" />
-    <Compile Include="Tasks\Misc Tasks\GenericDeserializationTask.cs" />
-    <Compile Include="Tasks\Rsa Tasks\BulkExportKeysTask.cs" />
-    <Compile Include="Tasks\Rsa Tasks\CreateShareableKeyTask.cs" />
-    <Compile Include="Tasks\Rsa Tasks\GenerateNewRsaKeyPairTask.cs" />
-    <Compile Include="Tasks\Rsa Tasks\ImportPublicRsaKeyTask.cs" />
-    <Compile Include="Tasks\Misc Tasks\InactivityTimeoutTask.cs" />
-    <Compile Include="Tasks\File Tasks\EncryptTempFoldersTask.cs" />
-    <Compile Include="Tasks\File Tasks\RenameFileNameTask.cs" />
-    <Compile Include="Tasks\Otp Tasks\CreateOtpPasswordStoreKeyTask.cs" />
-    <Compile Include="Tasks\File Tasks\GenericDeleteFilesTask.cs" />
-    <Compile Include="Tasks\Aes Tasks\OpenAesPasswordStoreTask.cs" />
-    <Compile Include="Tasks\Otp Tasks\OpenOtpPasswordStoreTask.cs" />
-    <Compile Include="Tasks\Logging Tasks\ReadLogFileTask.cs" />
-    <Compile Include="Tasks\Otp Tasks\OtpSavePasswordsTask.cs" />
-    <Compile Include="Tasks\File Tasks\ContainerizeFileTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\ShredDirectoryTask.cs" />
-    <Compile Include="Tasks\File Tasks\SecuredFileRenamedTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\WriteFolderExclusionListTask.cs" />
-    <Compile Include="Tasks\File Tasks\WriteFileExclusionListTask.cs" />
-    <Compile Include="Tasks\Logging Tasks\LoggingTask.cs" />
-    <Compile Include="Tasks\Otp Tasks\OtpTransformTask.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,14 +165,6 @@
     <Compile Include="Forms\ShowOnceDialog.Designer.cs">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tasks\Otp Tasks\OtpSaveKeyOfFileTask.cs" />
-    <Compile Include="Tasks\File Tasks\SecureDeleteFileTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\SecureFolderTask.cs" />
-    <Compile Include="Tasks\File Tasks\WriteSecuredFileListTask.cs" />
-    <Compile Include="Tasks\Folder Tasks\WriteSecuredFoldersListTask.cs" />
-    <Compile Include="Tasks\File Tasks\WriteSettingsFileTask.cs" />
-    <Compile Include="Tasks\Test Tasks\FailingTask.cs" />
-    <Compile Include="Tasks\Test Tasks\LongRunningTask.cs" />
     <EmbeddedResource Include="Forms\ActiveTasksForm.resx">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,6 +255,10 @@
       <Project>{c3885285-c911-44f1-b1e2-449e317d03a0}</Project>
       <Name>SharpEncrypt.Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Managers\SharpEncrypt.Managers.csproj">
+      <Project>{09b68879-9230-4898-96c8-e89507b4fdf9}</Project>
+      <Name>SharpEncrypt.Managers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpEncrypt.Models\SharpEncrypt.Models.csproj">
       <Project>{31b3a2c8-0283-4260-816e-81b89c9cf5c9}</Project>
       <Name>SharpEncrypt.Models</Name>
@@ -300,6 +266,10 @@
     <ProjectReference Include="..\SharpEncrypt.Resources\SharpEncrypt.Resources.csproj">
       <Project>{3f2f704a-3e74-4bec-8c22-4d637d6ef672}</Project>
       <Name>SharpEncrypt.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpEncrypt.Tasks\SharpEncrypt.Tasks.csproj">
+      <Project>{786c4816-da16-442d-aa3d-d0c21993ef4e}</Project>
+      <Name>SharpEncrypt.Tasks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

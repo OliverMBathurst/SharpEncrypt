@@ -45,6 +45,12 @@ namespace SharpEncrypt.Controls
 
         public void RefreshGrid() => DataGridView.Refresh();
 
+        public bool MultiSelect
+        {
+            get => DataGridView.MultiSelect;
+            set => DataGridView.MultiSelect = value;
+        }
+
         public IEnumerable<RowModel> SelectedRows
         {
             get

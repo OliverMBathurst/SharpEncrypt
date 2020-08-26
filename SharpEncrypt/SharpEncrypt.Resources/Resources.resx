@@ -841,4 +841,13 @@
   <data name="ImportPublicKeyToolStripMenuItem" xml:space="preserve">
     <value>Import A Public Key</value>
   </data>
+  <data name="ResetAndExitToolStripMenuItem" xml:space="preserve">
+    <value>Reset And Exit</value>
+  </data>
+  <data name="SelectRecipient" xml:space="preserve">
+    <value>Select Recipient</value>
+  </data>
+  <data name="NoPublicKeysFound" xml:space="preserve">
+    <value>No public keys found.</value>
+  </data>
 </root>
