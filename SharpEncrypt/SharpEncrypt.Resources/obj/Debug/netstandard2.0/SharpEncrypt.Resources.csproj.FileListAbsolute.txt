@@ -41,4 +41,3 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Resources\ob
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Resources\obj\Debug\netstandard2.0\tr\SharpEncrypt.Resources.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Resources\obj\Debug\netstandard2.0\SharpEncrypt.Resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Resources\obj\Debug\netstandard2.0\SharpEncrypt.Resources.pdb
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Resources\obj\Debug\netstandard2.0\SharpEncrypt.Resources.csprojAssemblyReference.cache

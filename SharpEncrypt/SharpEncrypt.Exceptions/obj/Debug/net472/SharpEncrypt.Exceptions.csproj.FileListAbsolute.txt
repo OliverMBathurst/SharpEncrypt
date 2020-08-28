@@ -1,0 +1,7 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\bin\Debug\net472\SharpEncrypt.Exceptions.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\bin\Debug\net472\SharpEncrypt.Exceptions.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\net472\SharpEncrypt.Exceptions.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\net472\SharpEncrypt.Exceptions.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\net472\SharpEncrypt.Exceptions.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\net472\SharpEncrypt.Exceptions.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\net472\SharpEncrypt.Exceptions.pdb

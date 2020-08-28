@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H+cxb5bB/T/mEqzBskWcaVOkZH7caJRGwQEQeIPvE2yHzu3otaYvZozAI2kPWdfu8gOx1+38dKbYzX4IT2r44Q==",
+  "dgSpecHash": "oHZvpFvrENVGjvYB3qicjR+8F3q8hNsrxHV98Do2UvUw6tcOGQRfxKlEMbq3fmMge9OLBWlyX5W3Q3kOnXFfAw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Enums\\SharpEncrypt.Enums.csproj",
-  "expectedPackageFiles": [
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

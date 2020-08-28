@@ -1,18 +1,44 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharpEncrypt.Controls\SharpEncrypt.Controls.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Helpers\SharpEncrypt.Helpers.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Managers\SharpEncrypt.Managers.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Resources\SharpEncrypt.Resources.csproj" />
+    <ProjectReference Include="..\SharpEncrypt.Tasks\SharpEncrypt.Tasks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Windows.Forms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ActiveTasksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ActiveTasksForm.Designer.cs">
       <DependentUpon>ActiveTasksForm.cs</DependentUpon>
     </Compile>
     <Compile Update="AdvancedHardDriveWipeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AdvancedHardDriveWipeDialog.Designer.cs">
+      <DependentUpon>AdvancedHardDriveWipeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="AdvancedHardDriveWipeOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="AdvancedHardDriveWipeOptionsDialog.Designer.cs">
       <DependentUpon>AdvancedHardDriveWipeOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="GenericGridForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="GenericGridForm.Designer.cs">
       <DependentUpon>GenericGridForm.cs</DependentUpon>
@@ -20,10 +46,28 @@
     <Compile Update="GenericTextInput.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="GenericTextInput.Designer.cs">
+      <DependentUpon>GenericTextInput.cs</DependentUpon>
+    </Compile>
+    <Compile Update="GenericTextViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="GenericTextViewer.Designer.cs">
       <DependentUpon>GenericTextViewer.cs</DependentUpon>
     </Compile>
     <Compile Update="ImportPublicKeyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ImportPublicKeyForm.Designer.cs">
+      <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IndividualSettingsResetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="IndividualSettingsResetDialog.Designer.cs">
+      <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.Designer.cs">
@@ -44,20 +88,51 @@
     <Compile Update="ShowOnceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ShowOnceDialog.Designer.cs">
+      <DependentUpon>ShowOnceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WaitingForDriveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WaitingForDriveForm.Designer.cs">
+      <DependentUpon>WaitingForDriveForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="ActiveTasksForm.resx">
+      <DependentUpon>ActiveTasksForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="AdvancedHardDriveWipeDialog.resx">
       <DependentUpon>AdvancedHardDriveWipeDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="AdvancedHardDriveWipeOptionsDialog.resx">
+      <DependentUpon>AdvancedHardDriveWipeOptionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GenericGridForm.resx">
+      <DependentUpon>GenericGridForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="GenericTextInput.resx">
       <DependentUpon>GenericTextInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GenericTextViewer.resx">
+      <DependentUpon>GenericTextViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="ImportPublicKeyForm.resx">
       <DependentUpon>ImportPublicKeyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="IndividualSettingsResetDialog.resx">
       <DependentUpon>IndividualSettingsResetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PasswordInputDialog.resx">
+      <DependentUpon>PasswordInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PasswordManagerForm.resx">
+      <DependentUpon>PasswordManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="ShowOnceDialog.resx">
       <DependentUpon>ShowOnceDialog.cs</DependentUpon>

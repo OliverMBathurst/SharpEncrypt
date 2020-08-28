@@ -4,7 +4,7 @@
     ".NETFramework,Version=v4.7.2": {
       "SharpEncrypt.Enums/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETFramework,Version=v4.7.2",
         "compile": {
           "bin/placeholder/SharpEncrypt.Enums.dll": {}
         },
@@ -14,7 +14,7 @@
       },
       "SharpEncrypt.Exceptions/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETFramework,Version=v4.7.2",
         "compile": {
           "bin/placeholder/SharpEncrypt.Exceptions.dll": {}
         },
@@ -24,7 +24,7 @@
       },
       "SharpEncrypt.Models/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETFramework,Version=v4.7.2",
         "dependencies": {
           "SharpEncrypt.Enums": "1.0.0"
         },
@@ -37,7 +37,7 @@
       },
       "SharpEncrypt.Resources/1.0.0": {
         "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
+        "framework": ".NETFramework,Version=v4.7.2",
         "compile": {
           "bin/placeholder/SharpEncrypt.Resources.dll": {}
         },

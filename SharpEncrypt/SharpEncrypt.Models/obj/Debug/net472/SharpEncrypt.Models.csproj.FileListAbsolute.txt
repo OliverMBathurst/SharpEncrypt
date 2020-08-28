@@ -1,0 +1,11 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\bin\Debug\net472\SharpEncrypt.Models.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\bin\Debug\net472\SharpEncrypt.Models.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\bin\Debug\net472\SharpEncrypt.Enums.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\bin\Debug\net472\SharpEncrypt.Enums.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Models\obj\Debug\net472\SharpEncrypt.Models.pdb

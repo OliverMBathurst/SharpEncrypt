@@ -13,7 +13,7 @@ namespace SharpEncrypt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            using (var mainForm = new Forms.MainForm())
+            using (var mainForm = new SharpEncrypt.Forms.MainForm())
             {
                 Application.Run(mainForm);
             }                

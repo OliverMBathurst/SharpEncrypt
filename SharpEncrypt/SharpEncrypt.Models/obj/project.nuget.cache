@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r54Tp3hvYj5wyWZI27/hvYujoV9FXE+1vBZlKojIQdnyjNPlzBpN2KRfZivUyoUmnUoUZDqe+h3lJYSJelc7wQ==",
+  "dgSpecHash": "/fBaHEOwoY57MLiHv1I/Rz9PtDowx5exeJXVA5zRe6MFtigTHBX8JtB+Q98strpgbR/nWgTr7cUWz3FXgXX04A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Models\\SharpEncrypt.Models.csproj",
-  "expectedPackageFiles": [
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -10,6 +10,7 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\Exceptions\obj\Debug\nets
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\bin\Debug\netstandard2.0\SharpEncrypt.Exceptions.deps.json
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\bin\Debug\netstandard2.0\SharpEncrypt.Exceptions.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\bin\Debug\netstandard2.0\SharpEncrypt.Exceptions.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\netstandard2.0\SharpEncrypt.Exceptions.csprojAssemblyReference.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\netstandard2.0\SharpEncrypt.Exceptions.AssemblyInfoInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\netstandard2.0\SharpEncrypt.Exceptions.AssemblyInfo.cs
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.Exceptions\obj\Debug\netstandard2.0\SharpEncrypt.Exceptions.csproj.CoreCompileInputs.cache

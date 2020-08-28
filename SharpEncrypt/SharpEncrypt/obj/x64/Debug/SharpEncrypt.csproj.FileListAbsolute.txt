@@ -1,20 +1,3 @@
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csprojAssemblyReference.cache
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.ActiveTasksForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.AdvancedHardDriveWipeDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.AdvancedHardDriveWipeOptionsDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.GenericGridForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.GenericTextInput.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.GenericTextViewer.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.ImportPublicKeyForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.IndividualSettingsResetDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.MainForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.PasswordInputDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.PasswordManagerForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.WaitingForDriveForm.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Properties.Resources.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Forms.ShowOnceDialog.resources
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csproj.GenerateResource.cache
-C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\AESLibrary.dll
@@ -27,6 +10,7 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debu
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Enums.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Exceptions.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.ExtensionClasses.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Forms.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Helpers.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Managers.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Models.dll
@@ -36,6 +20,7 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debu
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Exceptions.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.ExtensionClasses.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Enums.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Forms.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Helpers.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Managers.pdb
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\SharpEncrypt.Models.pdb
@@ -58,6 +43,10 @@ C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debu
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\ru\SharpEncrypt.Resources.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\se\SharpEncrypt.Resources.resources.dll
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\bin\x64\Debug\tr\SharpEncrypt.Resources.resources.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.Properties.Resources.resources
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csproj.GenerateResource.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csproj.CoreCompileInputs.cache
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.csproj.CopyComplete
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.exe
 C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt\obj\x64\Debug\SharpEncrypt.pdb

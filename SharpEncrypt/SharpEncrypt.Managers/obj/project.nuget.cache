@@ -1,14 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h68nuF9FPkwaTOXVzhFNGKdUWhS4IaglhE/n2xWX2VbVN2LoVfgEPFojbMgxW1Mp3bU3Hc0q95hLboVG6dXvyw==",
+  "dgSpecHash": "qvDDE280QDoHpBaWERjoiQNmerUg6cNuhRDoGimd65liE4mYL+P4iu7Uf8MFtVseIb3wqEqIxg9gYyvS8ndZaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Oliver\\source\\repos\\SharpEncrypt\\SharpEncrypt\\SharpEncrypt.Managers\\SharpEncrypt.Managers.csproj",
-  "expectedPackageFiles": [
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\Oliver\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\Oliver\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
-    "C:\\Users\\Oliver\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

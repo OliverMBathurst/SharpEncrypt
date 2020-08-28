@@ -1,0 +1,13 @@
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.ExtensionClasses.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.ExtensionClasses.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.Enums.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.Models.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.Models.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\bin\Release\net472\SharpEncrypt.Enums.pdb
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.csprojAssemblyReference.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.AssemblyInfoInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.AssemblyInfo.cs
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.csproj.CoreCompileInputs.cache
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.csproj.CopyComplete
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.dll
+C:\Users\Oliver\source\repos\SharpEncrypt\SharpEncrypt\SharpEncrypt.ExtensionClasses\obj\Release\net472\SharpEncrypt.ExtensionClasses.pdb
